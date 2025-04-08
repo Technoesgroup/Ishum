@@ -5,6 +5,7 @@ import img1 from "../../images/image 10.svg";
 import img2 from "../../images/image 10.svg";
 import img3 from "../../images/image 10.svg";
 import img4 from "../../images/image 10.svg";
+import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 
 const products = [
   {
@@ -63,16 +64,16 @@ const Collection = () => {
 
 
   
-        <div className="banner-card">
-          <img src={img_b1} alt=""   className="bannner-card-img"/>
-          <div className="banner-content">
-          <h2 className="banner-title">Jashn-E-Rang</h2>
-          <p className="banner-text">
+        <div className="Ishum-banner-card">
+          <img src={img_b1} alt=""   className="Ishum-bannner-card-img"/>
+          <div className="Ishum-banner-content">
+          <h2 className="Ishum-banner-title">Jashn-E-Rang</h2>
+          <p className="Ishum-banner-text">
             Bringing together the brightest shades of life in one breathtaking collection.
           </p>
-          <button className="banner-button">Explore</button>
+          <button className="Ishum-banner-button">Explore</button>
           </div>
-          <p  className="jashn-paragraph">Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.</p>
+          <p  className="Ishum-jashn-paragraph">Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection. <TrendingFlatIcon /></p>
         </div>
       </div>
     </div>

@@ -49,7 +49,7 @@
   font-weight: bold;
 }
 
-.banner-card {
+.Ishum-banner-card {
   position: relative;
   flex: 1;
   display: flex;
@@ -58,30 +58,37 @@
   align-items: center;
   background-color: white;
   text-align: center;
+  grid-column: span 2; 
 }
 
-.bannner-card-img{
+.Ishum-bannner-card-img{
   width: 100%;
   height: 90%;
   object-fit: cover;
 }
 
-.jashn-paragraph{
+.Ishum-jashn-paragraph{
   padding: 5px 0;
-  font-size: 1.4rem;
+  text-align: left;
+  display: flex;
+  font-size: 1rem;
 }
 
-.banner-title {
+/* .TrendingFlatIcon{
+  width: 120px !important;
+} */
+
+.Ishum-banner-title {
   font-size: 24px;
   font-weight: bold;
 }
 
-.banner-text {
+.Ishum-banner-text {
   color: gray;
   margin-top: 8px;
 }
 
-.banner-button {
+.Ishum-banner-button {
   margin-top: 16px;
   background-color: black;
   color: white;
@@ -91,11 +98,11 @@
   cursor: pointer;
 }
 
-.banner-content{
+.Ishum-banner-content{
   position: absolute;
 }
 
-.banner-button:hover {
+.Ishum-banner-button:hover {
   background-color: #333;
 }
 
@@ -119,28 +126,28 @@
     gap: 10px;
   }
 
-  .banner-card {
+  .Ishum-banner-card {
     order: -1;
     grid-column: span 2; /* Banner will take full width of 2 cards */
     height: auto;
     padding: 10px 0;
   }
 
-  .bannner-card-img {
+  .Ishum-bannner-card-img {
     height: auto;
     max-height: 280px; /* Banner will look larger */
     object-fit: cover;
   }
 
-  .banner-title {
+  .Ishum-banner-title {
     font-size: 20px;
   }
 
-  .banner-text {
+  .Ishum-banner-text {
     font-size: 14px;
   }
 
-  .banner-button {
+  .Ishum-banner-button {
     font-size: 14px;
     padding: 8px 20px;
   }
@@ -159,7 +166,7 @@
   }
 
   
-.jashn-paragraph{
+.Ishum-jashn-paragraph{
   padding: 5px 0;
   font-size: 0.9rem;
 }

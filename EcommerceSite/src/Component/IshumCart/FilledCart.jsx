@@ -47,12 +47,12 @@ const CartItem = ({ image, title, price, size, color, quantity, onIncrease, onDe
       <div className="Cartitem-cart-item-details">
         <div  className="Cartitem-details-tile-price">
           <h2>{title}</h2>
-          <p>Rs. {price}</p>
+          <p  className="ishum-Price-cart">Rs. {price}</p>
            <p className="Tax-include">Tax included. Shipping Calculated at Checkout.</p>
         </div>
 
    <div className="SizeCartItem-plus-minus-Icons">
-   <div className="SizeCartItem">   <p>Size: {size} | Color: {color}</p></div>
+   <div className="SizeCartItem">   <p  className="Ishum-Size-icon">Size: {size} | Color: {color}</p></div>
         <div className="Cartitem-quantity-control">
         <RemoveOutlinedIcon className="Cartitem-cursor-pointer" onClick={onDecrease} />
        

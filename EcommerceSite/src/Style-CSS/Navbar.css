@@ -314,6 +314,7 @@
 }
 
 .mobile-search-icon{
+  cursor: pointer;
   display: block !important;
   font-size: 2rem !important;
   color: gray;
@@ -350,7 +351,7 @@
     position:absolute;
     display: flex;
     right: -92vw !important;
-    gap: 14px !important;
+    gap: 10px !important;
   }
 
   

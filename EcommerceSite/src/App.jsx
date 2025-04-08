@@ -13,6 +13,8 @@ import Shipping from './Component/IshumCart/ShippingCartCom1';
 import Collection from './Component/Ishum-AdminPanel/CollectionPanel';
 import Review from './Component/ReviewCustomer/ReviewCustomer';
 import Tale from './Component/Tale/Tale';
+import SearchBar from './Component/Landing/SearchMobileView/SearchMobile';
+import MobileLogin from './Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
       <Route path="/collection"  element={<Collection />}></Route>
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>
+      <Route path="/Search-Bar"  element={<SearchBar />}></Route>
+      <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
      </Routes>
      <Footer />
      </Router>
