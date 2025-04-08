@@ -41,11 +41,7 @@
     letter-spacing: 2px;
     font-weight: bold;
   }
-  
-  .Cartitem-cart-item p {
-    font-size: 1.2rem;
-    color: #555;
-  }
+
   
   .Cartitem-quantity-control {
     display: flex;
@@ -102,7 +98,7 @@
   }
 
   .Tax-include{
-    font-size: 0.9rem !important;
+    font-size: 0.9rem;
     margin: 10px 0;
   }
 
@@ -256,4 +252,136 @@
 /* Show checkmark when checked */
 .Cart-Check-box input[type="checkbox"]:checked::after {
     opacity: 1;
+}
+
+
+@media(max-width:768px){
+
+  .SimilarProduct-text{
+    display: none;
+  }
+  .SimilarItems-products-grid{
+    display: none;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .Cartitem-cart-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 30px;
+  }
+
+  .Cartitem-cart-item h2{
+    line-height: 1.3;
+  }
+
+  .Cartitem-cart-items,
+  .Cartitem-order-summary {
+    width: 100%;
+  }
+
+  .Cartitem-cart-item {
+    flex-direction: row; /* keep it row */
+    align-items: start;
+    justify-content: space-between;
+    padding: 12px;
+  }
+
+  .Cartitem-cart-item img {
+    width: 120px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .Cartitem-cart-item-details {
+    flex-grow: 1;
+    margin-left: 12px;
+    margin-right: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .Cartitem-cart-item h2 {
+    font-size: 1rem;
+    margin: 0 0 8px 0;
+  }
+
+  .Cartitem-cart-item p {
+    font-size: 0.6rem;
+    color: #555;
+    margin: 6px 0;
+  }
+
+  .Ishum-Size-icon{
+    font-size: 1rem !important;
+  }
+
+  .ishum-Price-cart{
+    font-size: 1.2rem !important;
+  }
+
+  .Cartitem-quantity-control {
+    width: 50% !important;
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    gap: 10px;
+  }
+
+  .Cartitem-MyOderAllpara-btn button,
+  .Proceed-Checkout {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .Proceed-Checkout {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+    margin-top: 20px;
+  }
+
+  .Original-Discount-Price {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 1rem;
+  }
+
+  .LocalMall-Buy-Now-button {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .SimilarItems-products-grid {
+    display: none; /* Already done, keeping it */
+  }
+
+  .SimilarProduct-text {
+    display: none;
+  }
+
+  .SimilarItems-buy-button {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .Cart-Check-box input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  .SizeCartItem-plus-minus-Icons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Cartitem-cursor-pointer{
+    margin-left: 10px;
+    font-size: 1rem !important;
+  }
 }

@@ -190,3 +190,101 @@
     align-items: center;
     gap: 10px; /* Adds a 5px gap between input and label */
   }
+
+
+  @media (max-width: 768px) {
+    .shipping-container {
+      padding: 30px 5vw;
+    }
+  
+    .shipping-step-indicators {
+      gap: 10px;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+  
+    .shipping-title {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+  
+    .shipping-form-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  
+    .shipping-form-grid input {
+      width: 100%;
+    }
+  
+    .ShippingData-RightSide {
+      max-width: 100%;
+      gap: 16px;
+    }
+  
+    .Content-of-Shipping {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    /* .Shipping-icon-line-btw {
+      flex-direction: column;
+    } */
+  
+    .line-btw {
+      margin-left:2px;
+      width: 50px;
+      height: 2px;
+    }
+  
+    .Address-shipping {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+
+    .shipping-step-indicators .icons-of-shipping{
+      font-size: 2rem;
+    } 
+  
+    .Address-shipping::after {
+      left: 0;
+      width: 100%;
+    }
+  
+    .Address-shipping span {
+      width: 100%;
+    }
+  
+    .radio-home-other-address {
+      gap: 10px;
+    }
+  
+    .Coupon-Code input {
+      width: 70%;
+    }
+  
+    .Shipping-dropdown-icon {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    .shipping-continue-button {
+      font-size: 1rem;
+      padding: 10px;
+    }
+
+    .Address-shipping-h3 h3{
+      text-align: left;
+    }
+
+    .Coupon-Code h3{
+      text-align: left;
+    }
+
+    .shipping-checkbox-container  h3{
+      text-align: left;
+    }
+  }
+  

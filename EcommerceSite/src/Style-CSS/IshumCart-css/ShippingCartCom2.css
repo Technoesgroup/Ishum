@@ -114,3 +114,76 @@
   font-weight: 400;
   font-size: 1.2rem;
 }
+
+@media (max-width: 768px) {
+  .Payment-overlay-content {
+    width: 80vw;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 20vw;
+  }
+
+  .Payment-shipping-step-indicators {
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .Payment-Shipping-icon-line-btw {
+    gap: 8px;
+  }
+
+  .Payment-line-btw {
+    margin-left:2px;
+      width: 50px;
+      height: 2px;
+  }
+
+  .Payment-shipping-title {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 16px 0;
+  }
+
+  .Payment-process {
+    gap: 26px;
+  }
+
+  .Payment-prices {
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .Payment-prices h2,
+  .Payment-prices h3 {
+    font-size: 0.95rem;
+  }
+
+  .agree-terms-condition {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .agree-terms-condition h3 {
+    font-size: 0.85rem;
+  }
+
+  .place-order-button {
+    padding: 10px 14px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  .Steps-2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .close-button {
+    top: 8px;
+    right: 8px;
+    font-size: 18px;
+  }
+}

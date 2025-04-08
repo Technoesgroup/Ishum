@@ -22,7 +22,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 import "../Style-CSS/Navbar.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
   const [showB2BModal, setShowB2BModal] = useState(false);
@@ -32,8 +32,29 @@ export default function Navbar() {
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleSearchClick = () => {
+    navigate('/Search-Bar');
+  };
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth >= 768);
+    };
+  
+    handleResize(); // Check on initial load
+    window.addEventListener("resize", handleResize);
+  
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
 
   return (
     <nav className='Ishum-navbars'>
@@ -52,8 +73,14 @@ export default function Navbar() {
 
         <div className="Ishum-right-icons">
         <div  className='ishum-rightside-main-icon'>
-        <PersonIcon className="Ishum-icon" onClick={() => setShowB2UModal(true)} />
-        <SearchIcon   className='mobile-search-icon'/>
+          <PersonIcon className="Ishum-icon" onClick={() => {
+    if (isMobile) {
+      navigate("/Login-mobile-profile"); // 👉 Replace with your mobile route
+    } else {
+      setShowB2UModal(true); // Existing modal logic for desktop
+    }
+  }} />
+          <SearchIcon   className='mobile-search-icon'   onClick={handleSearchClick}/>
           <ShoppingCartIcon className="Ishum-icon"  onClick={() => navigate("/Cart")} />
           <MenuIcon className="Ishum-menu-icon  profile-menu-icon"
           onClick={() => setIsOpen(!isOpen)}
