@@ -1,0 +1,239 @@
+/* Footer.css */
+
+@import url('../Style-CSS/Poppins-Font.css');
+.footer-container {
+    background-color: #f8f8f8;
+    padding: 3.4vw 7vw;
+    font-family: Arial, sans-serif;
+  }
+  
+  .footer-content {
+    margin: auto;
+  }
+
+  .footer-brand-links{
+    display: flex;
+  }
+  
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding-bottom: 2vw;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .Emailsection-brand{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .newsletter-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+  }
+  
+  .footer-logo {
+    width: 8.5vw;
+  }
+  
+  .newsletter-input {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid rgb(166, 166, 166);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .email-input {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    width: 400px;
+    outline: none;
+  }
+
+  .newsletter-section-h4 h4{
+    color: #777;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  
+  .newsletter-input .subscribe-button {
+    color: rgb(30, 29, 29);
+    border: none;
+    font-size: 2.2rem;
+    cursor: pointer;
+  }
+  
+  .brand-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    text-align: left;
+  }
+  .brand-section-p{
+    line-height: 3;
+  
+  }
+  
+  .brand-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .brand-tagline,
+  .brand-address,
+  .brand-contact,
+  .brand-phone {
+    color: rgb(148, 148, 148);
+    font-size: 14px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    margin: 30px 0;
+  }
+  
+  .footer-links h3 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links li {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #777;
+    cursor: pointer;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .footer-terms span {
+    margin: 0 10px;
+    font-size: 14px;
+    color: #777;
+    cursor: pointer;
+  }
+  
+  .footer-social svg {
+    font-size: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .footer-social svg:hover {
+    color: #000;
+  }
+
+
+  @media (max-width: 768px) {
+    .footer-container {
+        padding: 6vw 5vw;
+        text-align: center;
+    }
+
+    .footer-top {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo {
+        width: 30vw;
+        margin-bottom: 16px;
+    }
+
+    .Emailsection-brand {
+        align-items: center;
+    }
+
+    .newsletter-section {
+        align-items: center;
+        width: 100%;
+    }
+
+    .newsletter-input {
+        width: 100%;
+        justify-content: center;
+        border-bottom: 2px solid #aaa;
+    }
+
+    .email-input {
+        width: 70%;
+        padding: 8px;
+        font-size: 1rem;
+    }
+
+    .brand-section {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-links h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .footer-links ul {
+        padding: 0;
+    }
+
+    .footer-links li {
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .footer-social {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 12px;
+    }
+
+    .footer-social svg {
+        font-size: 1.5rem;
+    }
+
+    .newsletter-section-h4 h4{
+      color: #1b1b1b;
+      margin-top: 20px;
+    }
+}

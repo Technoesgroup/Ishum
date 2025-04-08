@@ -1,0 +1,83 @@
+.Collection-admin-panel {
+    width: 80%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+.Collection-admin-panel h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+.Collection-add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Collection-add-form input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.Collection-add-form button {
+    background:goldenrod;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.Collection-add-form button:hover {
+    background:rgb(207, 157, 30);
+}
+
+.Collection-admin-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.Collection-admin-panel table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.Collection-admin-panel table th {
+    background: #f4f4f4;
+}
+
+.Collection-admin-panel table img {
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+}
+
+.Collection-admin-panel button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.Collection-admin-panel button:hover {
+    background: rgb(193, 146, 27);
+    color: white;
+}
+
+
+.image-collection{
+    width: 60px;
+    height: 60px;
+}

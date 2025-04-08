@@ -1,0 +1,125 @@
+.B-TO-B-register-container {
+    display: flex;
+    width: 100%;
+    max-width: 1050px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    height: auto;
+    background: white;
+  }
+  
+  .B-TO-B-image-section {
+    flex: 1;
+    min-height: 34vw;
+    min-width: 24vw;
+    background: url("../../images/bda79cba3ca7497d7b63d48726c87d7c.png") center/cover no-repeat;
+  }
+  
+  .B-TO-B-form-section {
+    min-width: 40vw;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .B-TO-B-header {
+    display: flex;
+    justify-content: end;
+    gap: 30px;
+    margin-right: 50px;
+    margin-bottom: 40px;
+    align-items: start;
+    font-size: 14px;
+  }
+
+  .B-TO-B-header span{
+    font-size: 1.1rem;
+  }
+  
+  .B-TO-B-login-btn {
+    background: #b38b5e;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .B-TO-B-close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .REGISTER-B2B-h2 {
+    font-size: 22px;
+    margin-bottom: 45px;
+  }
+  
+  .B-TO-B-input-group {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+  }
+  
+  .B-TO-B-input-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .B-TO-B-input-field label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .B-TO-B-input-field input {
+    border: none;
+    border-bottom: 2px solid #aaa;
+    padding: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus {
+    border-bottom: 2px solid #b38b5e;
+  }
+  
+  .full-width {
+    margin-top: 10px;
+  }
+  
+  .B-TO-B-submit-btn {
+    background: #b38b5e;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    width: 30%;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 55px;
+  }
+  
+  .submit-btn:hover {
+    background: #967a4d;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .register-container {
+      flex-direction: column;
+    }
+  
+    .image-section {
+      height: 250px;
+    }
+  
+    .input-group {
+      flex-direction: column;
+    }
+  }
+  

@@ -1,0 +1,192 @@
+@import url('../Poppins-Font.css');
+
+.shipping-container {
+    margin: auto;
+    padding: 60px 7vw;
+    background: #fff;
+    margin-bottom: 40px;
+  }
+  
+  .shipping-step-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 24px;
+    margin-bottom: 60px;
+  }
+  
+  .shipping-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+  
+  .shipping-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  
+  .shipping-checkbox-container {
+    margin-top: 10px;
+  }
+  
+  .shipping-continue-button {
+    width: 100%;
+    background: #c59d5f;
+    color: white;
+    padding: 12px;
+    border-radius: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border: none;
+    transition: background 0.3s ease;
+  }
+
+  .shipping-form-grid input{
+    padding: 10px;
+    width: 400px;
+    border: none;
+    border-bottom: 1px solid rgb(205, 205, 205);
+    outline: none; /* Removes the black outline on click */
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .shipping-input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 30px; /* Space for icon */
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .shipping-input:focus {
+    border-bottom: 2px solid #c59d5f; /* Highlight bottom border on focus */
+  }
+  
+  .shipping-continue-button:hover {
+    background: #a07d47;
+  }
+
+  .input-wrapper{
+    position: relative;
+  }
+
+  .Shipping-dropdown-icon{
+    right: 2px;
+    position: absolute;
+  }
+
+  .ShippingData-RightSide{
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+ }
+  
+  .Content-of-Shipping{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+  }
+
+  .line-btw{
+    width: 250px;
+    height: 2px;
+    margin-left: 15px;
+    background: repeating-linear-gradient(90deg, #ccc, #ccc 15px, transparent 15px, transparent 40px);
+
+  }
+
+  .Shipping-icon-line-btw{
+    display: flex;
+    align-items: center;
+  }
+
+  .Shipping-icon-line-btw .icons-of-shipping{
+    font-size: 3.4rem;
+    color:#a07d47;
+  }
+
+  .Address-shipping{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   gap: 10px;
+   position: relative;
+   padding-bottom: 10px;
+  }
+
+  .Address-shipping::after {
+    content: "";
+    position: absolute;
+    left: 15px; /* Adjust to align with the radio button */
+    top: 100%;
+    height: 2px; /* Adjust height of the line */
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    background-color: #dbdbdb;
+  }
+
+  .Address-shipping-h3 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  
+  .Address-shipping-h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #dfdfdf;
+  }
+
+  .Address-shipping span{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .Address-shipping h4{
+    color: rgb(71, 71, 71);
+    font-size: 1rem;
+  }
+
+  .Address-shipping span p{
+    color: gray;
+    font-size: 0.9rem;
+  }
+
+  .Address-shipping:last-child::after {
+    display: none; /* Removes line after the last option */
+  }
+
+  .radio-home-other-address{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    margin-bottom: 10px;
+  }
+
+  .Coupon-Code input{
+  margin-top: 10px;
+  width: 90%;
+  padding: 14px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(229, 229, 229);
+  }
+
+  .shipping-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds a 5px gap between input and label */
+  }

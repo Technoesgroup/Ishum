@@ -1,0 +1,158 @@
+@import url('../Poppins-Font.css');
+.LandingCom-3-collection-container {
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 4vw 60px;
+  }
+  
+  .LandingCom-3-collection-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .LandingCom-3-dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .LandingCom-3-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
+  
+  .LandingCom-3-dot.active {
+    background-color: #555;
+  }
+  
+  .LandingCom-3-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 40px;
+  }
+  
+  .LandingCom-3-collection-item {
+    position: relative;
+  }
+  
+  .LandingCom-3-collection-image {
+    width: 100%;
+    height: 26vw;
+    object-fit: contain;
+  }
+  
+  .LandingCom-3-collection-info {
+  margin-top: 20px;
+    text-align: center;
+  }
+  
+  .LandingCom-3-collection-name {
+    font-size: 1.1rem;
+    padding: 0.5vw;
+    font-weight: bold;
+  }
+  
+  .LandingCom-3-underline {
+    width: 60px;
+    height: 2px;
+    background-color: red;
+    margin: 5px auto;
+  }
+  
+  .LandingCom-3-view-more {
+    color: red;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .LandingCom-3-plus-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid gray;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .LandingCom-3-view-all-button {
+    margin-top: 2.6vw;
+    border: none;
+    padding: 1.2vw 2.6vw;
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+
+  @media (max-width: 768px) {
+    .LandingCom-3-collection-container {
+      padding: 4vw 20px;
+    }
+  
+    .LandingCom-3-collection-title {
+      font-size: 1.3rem;
+    }
+  
+    .LandingCom-3-dots-container {
+      gap: 3px;
+      margin-bottom: 15px;
+    }
+  
+    .LandingCom-3-dot {
+      width: 6px;
+      height: 6px;
+    }
+  
+    .LandingCom-3-collection-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 0 20px;
+    }
+  
+    .LandingCom-3-collection-image {
+      height: 40vw; /* Mobile pe images ke height ko adjust kiya */
+    }
+  
+    .LandingCom-3-collection-info {
+      margin-top: 15px;
+    }
+  
+    .LandingCom-3-collection-name {
+      font-size: 1rem;
+      padding: 1vw;
+    }
+  
+    .LandingCom-3-underline {
+      width: 50px;
+      height: 2px;
+    }
+  
+    .LandingCom-3-view-more {
+      font-size: 0.85rem;
+    }
+  
+    .LandingCom-3-plus-button {
+      width: 25px;
+      height: 25px;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1rem;
+    }
+  
+    .LandingCom-3-view-all-button {
+      margin-top: 4vw;
+      padding: 2.4vw 3vw;
+      font-size: 0.9rem;
+    }
+  }
+  

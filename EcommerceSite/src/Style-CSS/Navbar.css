@@ -1,0 +1,455 @@
+@import url('../Style-CSS/Poppins-Font.css');
+
+
+.Ishum-navbars {
+  display: flex;
+  flex-direction: column;
+  z-index: 1100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.235);
+  position: sticky;
+  top: 0;
+}
+
+.Ishum-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1.6rem 100px;
+}
+
+.Ishum-social-icons {
+  display: flex;
+  gap: 1vw;
+  color: gray;
+}
+
+.Ishum-social-icons .socialicon {
+  font-size: 2rem !important;
+  cursor: pointer;
+
+}
+
+.Ishum-social-icons .socialicon:hover {
+  color: goldenrod;
+}
+
+.Ishum-logo-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Ishum-logo {
+  height: 5rem;
+}
+
+.Ishum-nav-links {
+  display: flex;
+  padding: 1rem 100px;
+  align-items: center;
+  color: gray;
+  background-color: white;
+}
+
+.nav-link {
+  height: 1px;
+  color: rgba(204, 204, 204, 0.447);
+  background-color: rgb(215, 215, 215);
+  width: 100%;
+}
+
+.Ishum-nav-links a {
+  color: gray;
+  font-size: 1rem;
+}
+
+.Ishum-nav-links a:hover {
+  color: goldenrod;
+}
+
+.Ishum-right-icons .Ishum-menu-icon {
+  font-size: 2.2rem !important;
+}
+
+.Ishum-right-icons .Ishum-icon {
+  color: gray;
+  cursor: pointer;
+  font-size: 2rem !important;
+}
+
+.BUSINESS-TO-BUSINESS {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  background-color: #BC8F49;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: transparent;
+}
+
+.close-btn {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2.3rem;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.RegisterUser-close-btn {
+  color: white;
+  position: absolute;
+  top: 10px;
+  padding: 0 8px;
+  border-radius: 50%;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 20;
+  background-color: black;
+}
+
+
+.Ishum-right-icons {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ishum-rightside-main-icon{
+  display: flex;
+  gap: 16px !important;
+}
+
+.Ishum-search-bar {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+
+
+.Ishum-menu-icon {
+  font-size: 20px;
+  color: gray;
+  cursor: pointer;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+.Profile-dropdown-menu {
+  position: absolute;
+  left: -110px;
+  top: 50px;
+  width: 250px;
+  height: auto;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.Profile-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Profile-menu-item :link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+}
+
+.Profile-menu-item:hover {
+  background: #f0f0f0;
+}
+
+.logout {
+  color: red;
+  background: #ffeded;
+}
+
+.logout:hover {
+  background: #ffcccc;
+}
+
+.email-name-profile {
+  font-size: 0.8rem;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.menuopen-icon{
+  display: none !important;
+}
+
+.mobile-search-icon{
+  display: none !important;
+}
+
+
+
+
+/* Dropdown Container Styles */
+.RECOMMENDATION,
+.discover {
+  cursor: pointer;
+  padding: 10px;
+  font-weight: 400;
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.RECOMMENDATION:hover,
+.discover:hover {
+  color: #c89b3c;
+}
+
+/* Dropdown Menu Common */
+.Ishum-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  gap: 40px;
+  z-index: 999;
+  min-width: 300px;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+/* For Discover dropdown */
+.ishum-discover-dropdown {
+  flex-direction: column;
+  padding: 10px 20px;
+  gap: 10px;
+  min-width: 200px;
+}
+
+/* Section Headings */
+.RECOMMENDATION-dropdown-li h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* Section Containers */
+.RECOMMENDATION-dropdown-li {
+  display: flex;
+  gap: 20%;
+  width: 30vw;
+  /* flex-direction: column; */
+}
+
+/* Individual Links */
+.Ishum-dropdown-menu li {
+  list-style: none;
+  margin: 5px 0;
+}
+
+.Ishum-dropdown-menu li a {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.Ishum-dropdown-menu li a:hover {
+  color: #c89b3c;
+}
+
+
+@media (max-width: 768px) {
+
+.menuopen-icon{
+  display: block !important;
+}
+
+.profile-menu-icon{
+  display: none !important;
+}
+
+.mobile-search-icon{
+  display: block !important;
+  font-size: 2rem !important;
+  color: gray;
+}
+
+
+  .Ishum-navbar {
+    padding: 3.5rem 1rem !important;
+    position: relative;
+  }
+
+  .Ishum-menu-icon {
+    display: none;
+  }
+
+  .Ishum-social-icons{
+    display: none;
+  }
+
+  .Ishum-right-icons .menuopen-icon{
+    font-size: 2.3rem !important;
+    left: 15px;
+  }
+
+  .menuopen-icon{
+    position:absolute !important;
+  }
+
+  .Ishum-menu-icon{
+    font-size: 1.9rem !important;
+  }
+
+  .ishum-rightside-main-icon{
+    position:absolute;
+    display: flex;
+    right: -92vw !important;
+    gap: 14px !important;
+  }
+
+  
+.Ishum-logo {
+  margin-right: 20px;
+  height: 4.5rem;
+}
+
+  .closemenu-icon {
+    position: absolute !important;
+    z-index: 1900;
+    top:-30px ;
+   left: 10px;
+  }
+
+  .Ishum-nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    background-color: white;
+    flex-direction: column;
+    padding: 4rem 1rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    border-top-right-radius:75px;
+  }
+
+  .Ishum-nav-links.active {
+    transform: translateX(0);
+  }
+
+  .Ishum-nav-links a,
+  .Ishum-nav-links .dropdown,
+  .Ishum-nav-links button {
+    padding: 12px 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Keep your dropdown styles as is or modify for vertical layout inside sidebar */
+  .Ishum-dropdown-menu {
+    box-shadow: none !important;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 10px;
+    width: 70%;
+  }
+
+  .Ishum-dropdown-menu li{
+   list-style: none;
+   padding: 0;
+  }
+
+  .ishum-discover-dropdown li :link{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid gray;
+  }
+
+  .RECOMMENDATION-dropdown-li li{
+    border-bottom: 1px solid gray;
+  }
+
+  .RECOMMENDATION-dropdown-li,
+  .SALE,
+  .Occasion {
+  display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 100%;
+  }
+
+
+  .RECOMMENDATION-dropdown-li{
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .nav-link{
+ display: none;
+}
+}
+
+
+@media (max-width: 768px) {
+  .search-bar {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .Ishum-nav-links {
+    display: flex;
+    gap: 24px;
+    color: #444;
+    font-weight: 500;
+  }
+}
+
+
