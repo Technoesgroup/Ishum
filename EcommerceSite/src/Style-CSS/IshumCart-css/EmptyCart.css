@@ -1,0 +1,30 @@
+@import url('../Poppins-Font.css');
+
+.EmptyCart-Container{
+    padding: 4vw;
+}
+
+.EmptyCart-Content{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.EmptyCart-Content h2{
+   font-size: 2.5rem;
+   margin: 30px 0;
+}
+
+.EmptyCart-Content p{
+  margin: 30px 0;
+}
+
+.Start-Shopping{
+    font-size: 1.5rem;
+    padding: 15px  30px;
+    border-radius: 12px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

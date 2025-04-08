@@ -1,0 +1,259 @@
+/* ShoppingCart.css */
+@import url('../Poppins-Font.css');
+.Cartitem-cart-container {
+    display: flex;
+    gap: 10%;
+    padding: 24px  6vw;
+  }
+  
+  .Cartitem-cart-items {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .Cartitem-cart-item {
+    display: flex;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Cartitem-cart-item img {
+    width: 250px;
+    height: 280px;
+    border-radius: 8px;
+  }
+  
+  .Cartitem-cart-item-details {
+    flex-grow: 1;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .Cartitem-cart-item h2 {
+    font-size: 1.3rem;
+    line-height: 2;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  
+  .Cartitem-cart-item p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .Cartitem-quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid #cfcfcf;
+    padding: 8px;
+    border-radius: 12px;
+  }
+  
+  .Cartitem-quantity-control svg {
+    cursor: pointer;
+  }
+  
+  .Cartitem-order-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 33%;   
+  }
+  
+  .Cartitem-similar-product-card {
+    width: 70%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 8px;
+    align-items: start;
+  }
+  
+  .Cartitem-similar-product-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+  }
+  
+ .Cartitem-MyOderAllpara-btn button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .SizeCartItem-plus-minus-Icons{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .SizeCartItem p{
+   color: rgb(151, 151, 151) !important;
+  }
+
+  .Tax-include{
+    font-size: 0.9rem !important;
+    margin: 10px 0;
+  }
+
+  .Cartitem-details-tile-price p{
+     font-size: 1.7rem;
+     margin-top: 20px;
+  }
+
+  .TotalAmount-Content{
+    display: flex;
+    padding: 30px;
+    border-radius: 12px;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 0  10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .ProductPrice-Content{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .Proceed-Checkout{
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 24px;
+    background-color: #000;
+    color: white;
+  }
+
+
+  .SimilarItems-products-grid {
+    width: 70%;
+    height: auto;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  
+  .SimilarItems-product-card {
+    width: 100%;
+    height: 80%;
+    text-align: center;
+    background: #fff;
+  }
+  
+  .SimilarItems-product-image {
+    width: 100%;
+    height: 90%;
+  }
+  
+  .SimilarItems-product-details {
+    margin-top: 10px;
+  }
+  
+  .SimilarItems-product-name {
+    font-size:0.9rem;
+    color: goldenrod;
+    font-weight: bold;
+  }
+  
+  .SimilarItems-product-original-price {
+    text-decoration: line-through;
+    color: gray;
+  }
+  
+  .SimilarItems-product-price {
+    color: gray;
+    font-weight: bold;
+  }
+  .LocalMallIcon{
+    background-color: transparent;
+    padding: 7px;
+    border: 1px solid  goldenrod;
+    border-radius: 50%;
+    color: goldenrod;
+  }
+
+  .LocalMall-Buy-Now-button{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .Original-Discount-Price{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    padding: 10px  0;
+    font-size: 1.2rem;
+  }
+  
+  
+  .Discount-off{
+    color: #007D0A !important;
+    font-size: 0.9rem !important;
+    font-weight: 700;
+  }
+  .SimilarItems-buy-button {
+    margin-top: 10px;
+    padding: 8px 14px;
+    border: 1px solid  goldenrod;
+    background-color:transparent;
+    cursor: pointer;
+    width: 200px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+  .SimilarProduct-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px; 
+   }
+
+
+   .Cart-Check-box input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    appearance: none; /* Removes default styles */
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Change background to goldenrod and show checkmark */
+.Cart-Check-box input[type="checkbox"]:checked {
+    background-color: goldenrod;
+    border-color: goldenrod;
+}
+
+/* Create the white right checkmark */
+.Cart-Check-box input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 21px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(43deg);
+    opacity: 0; /* Hide by default */
+}
+
+/* Show checkmark when checked */
+.Cart-Check-box input[type="checkbox"]:checked::after {
+    opacity: 1;
+}

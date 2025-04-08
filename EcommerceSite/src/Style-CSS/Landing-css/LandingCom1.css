@@ -1,0 +1,259 @@
+@import url('../Poppins-Font.css');
+.Home-container-box {
+    position: relative;
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* overflow: hidden; */
+    margin-top: -1vw;
+  }
+  
+  .header-banner{
+     position: relative;
+     font-family: 'PoppinsMedium';
+    padding: 10px 0;
+    background-color: #4AAFF7;
+    color: white;
+    text-align: center;
+  }
+  
+  .scroll-wrapper{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    justify-content: space-between;
+  }
+  
+  .hero-slider {
+    width: 100%;
+    height: 50vw; /* Ensures slider takes the container's full height */
+  }
+  
+  .hero-slider .slick-slide {
+    height: 50vw; 
+  }
+  
+  
+   .hero-slider .slick-slide img {
+    width: 100%;
+    height: 50vw; 
+    object-fit: cover; /* Keeps image proportions */
+    /* position: relative; */
+  }
+  
+  
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .hero-img-wrapper {
+    position: relative;
+  }
+  
+  .hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.235); /* Adjust opacity to control darkness */
+    z-index: 1;
+  }
+  
+  .hero-img-wrapper .hero-img {
+    z-index: 0; /* Ensure the image is beneath the hero-img */
+  }
+  
+  
+  .hero-contents {
+    position: absolute;
+    top: 45%;
+    text-align: left;
+    left: 7.5%;
+    z-index: 5;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(35, 34, 34, 0.502); /* Add shadow to text for better readability */
+  }
+  
+  .hero-contents h1 {
+    margin-left: 8px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 800;
+    font-size: 3.1rem;
+    margin-bottom: 20px;
+    word-spacing: 2px;
+    letter-spacing: 3px;
+    /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); */
+  }
+  
+  .HomeC1-front-button {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 23px;
+    background-color:transparent;
+    color: #ffffff;
+    border: 4px  solid  darkblue;
+    border-radius: 5px;
+    text-shadow: 0 0 8px black;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transition: background-color 0.5s ease-in-out; /* Background color animation */
+  }
+  
+  
+  .HomeC1-front-button:hover {
+   background-color: darkblue;
+    color: white;
+  }
+  
+  .change-col {
+    font-family: 'PoppinsBold';
+    color: #ffffff;;
+  }
+  
+  .Admission-text-size {
+   font-family: 'PoppinsSemiBold';
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  
+  .front-button .MuiSvgIcon-root {
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  
+  
+  .slick-dots {
+    bottom: 20px;
+  }
+
+
+  .custom-arrow {
+    width: 2.5vw;
+    height: 2.6vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 17;
+    background: rgb(247, 247, 247);
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 2vw;
+  }
+  
+  .prev-arrow {
+    left: 20px;
+  }
+  
+  .next-arrow {
+    right: 20px;
+  }
+
+  .custom-arrow .Right-icon{
+    font-size: 2.6vw !important;
+    mix-blend-mode:multiply;
+    color: black !important;
+  }
+
+  .custom-arrow .Left-icon{
+    font-size: 2.6vw !important;
+    color:black!important;
+  }
+  
+  .custom-arrow:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  
+  @media (max-width: 768px) {
+    .hero-contents h1 {
+      margin-top: 80px;
+      font-size: 1.6rem;
+    }
+  
+    .Home-container-box {
+      position: relative;
+      width: 100%;
+      height: 500px; 
+    }
+  
+  
+    .hero-slider {
+      width: 100%;
+      height: 500px; /* Ensures slider takes the container's full height */
+    }
+    
+    .hero-slider .slick-slide {
+      height: 500px; 
+    }
+    
+    
+     .hero-slider .slick-slide img {
+      width: 100%;
+      height: 500px; 
+      object-fit: cover; /* Keeps image proportions */
+      position: relative;
+    }
+  
+    .hero-contents {
+      margin-top: -60px;
+      position: absolute;
+      text-align: left;
+      z-index: 5;
+      justify-content: left;
+      align-items: start;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(101, 101, 101, 0.502);
+    }
+  
+    .HomeC1-front-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 20px;
+      background-color: #ffffff;
+      color: #2C3192;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+  
+  
+  /* Wrapper for the scrolling texts */
+  .scroll-wrapper {
+    display: flex;
+    animation: scroll-text 10s linear infinite;
+  }
+  
+  .header-banner{
+    display: none;
+  }
+  
+  
+  /* Keyframes for scrolling effect */
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(40%); /* Start off-screen */
+    }
+    100% {
+      transform: translateX(-100%); /* Move completely off-screen */
+    }
+  }
+  
+  
+  @media (max-width: 480px){
+    .header-banner{
+      display: none;
+    }
+  }
