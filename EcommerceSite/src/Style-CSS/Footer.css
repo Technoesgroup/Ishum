@@ -2,7 +2,7 @@
 
 @import url('../Style-CSS/Poppins-Font.css');
 .footer-container {
-    background-color: #f8f8f8;
+    background-color:white;
     padding: 3.4vw 7vw;
     font-family: Arial, sans-serif;
   }
@@ -107,6 +107,7 @@
   }
   
   .footer-links h3 {
+    text-align: left;
     font-size: 16px;
     font-weight: bold;
   }
