@@ -46,7 +46,7 @@
 
 .Ishum-nav-links {
   display: flex;
-  padding: 1rem 100px;
+  padding: 1rem 6vw;
   align-items: center;
   color: gray;
   background-color: white;
@@ -61,7 +61,8 @@
 
 .Ishum-nav-links a {
   color: gray;
-  font-size: 1rem;
+  font-size: 1vw;
+  border: none !important;
 }
 
 .Ishum-nav-links a:hover {
@@ -234,6 +235,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 5px;
+  font-size: 1vw;
   position: relative;
   transition: all 0.3s ease;
 }
@@ -264,7 +266,7 @@
   flex-direction: column;
   padding: 10px 20px;
   gap: 10px;
-  min-width: 200px;
+  min-width: 15vw;
 }
 
 /* Section Headings */
