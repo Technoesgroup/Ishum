@@ -445,10 +445,18 @@
     box-shadow: none !important;
     flex-direction: column;
     background: #ffffff;
-    padding: 10px;
-    width: 70%;
+    padding: 0  10px;
+    min-width: 150px;
+    border: none;
   }
 
+  .RECOMMENDATION-dropdown-li h2{
+    margin-bottom: 0;
+  }
+
+  .RECOMMENDATION-dropdown-li li {
+    font-size: 0.8rem;
+  }
   .Ishum-dropdown-menu li{
    list-style: none;
    padding: 0;
@@ -469,7 +477,6 @@
   .Occasion {
   display: flex;
    flex-direction: column;
-   gap: 10px;
    width: 100%;
   }
 

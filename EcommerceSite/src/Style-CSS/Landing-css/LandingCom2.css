@@ -1,4 +1,5 @@
 @import url('../Poppins-Font.css');
+
 .LandingCom-2-collection-container {
   background-color: #EEEBE4;
   text-align: center;
@@ -11,17 +12,15 @@
   margin-bottom: 10px;
 }
 
-
-.ishum-contents-MainHeading{
+.ishum-contents-MainHeading {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 18px 0 30px 0;
 }
 
-
-.ishum-contents-Com2-UnderLine{
- width: 30vw;
+.ishum-contents-Com2-UnderLine {
+  width: 30vw;
 }
 
 .LandingCom-2-collection-grid {
@@ -33,6 +32,7 @@
 
 .LandingCom-2-collection-item {
   position: relative;
+  max-width: 100%;
 }
 
 .LandingCom-2-collection-image {
@@ -42,7 +42,7 @@
 }
 
 .LandingCom-2-collection-info {
-margin-top: 20px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -87,34 +87,33 @@ margin-top: 20px;
   cursor: pointer;
 }
 
-
+/* Responsive Design */
 @media (max-width: 768px) {
   .LandingCom-2-collection-container {
-    padding: 4vw 20px;
+    padding: 5vw 5vw;
   }
 
   .LandingCom-2-collection-title {
     font-size: 1.3rem;
   }
 
-  .LandingCom-2-dots-container {
-    gap: 3px;
-    margin-bottom: 15px;
+  .ishum-contents-MainHeading {
+    margin: 12px 0 20px 0;
   }
 
-  .LandingCom-2-dot {
-    width: 6px;
-    height: 6px;
+  .ishum-contents-Com2-UnderLine {
+    width: 100vw;
   }
 
   .LandingCom-2-collection-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 0 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 10px;
   }
 
   .LandingCom-2-collection-image {
-    height: 40vw; /* Adjusting height for mobile */
+    height: 45vw;
   }
 
   .LandingCom-2-collection-info {
@@ -127,7 +126,7 @@ margin-top: 20px;
   }
 
   .LandingCom-2-underline {
-    width: 50px;
+    width: 45px;
     height: 2px;
   }
 
@@ -136,16 +135,33 @@ margin-top: 20px;
   }
 
   .LandingCom-2-plus-button {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
     bottom: 10px;
     right: 10px;
     font-size: 1rem;
   }
 
   .LandingCom-2-view-all-button {
-    margin-top: 4vw;
-    padding: 1.5vw 3vw;
+    width: 80%;
+    margin-top: 5vw;
+    padding: 3vw 6vw;
     font-size: 0.9rem;
   }
 }
+
+@media (max-width: 480px) {
+  .LandingCom-2-collection-title {
+    font-size: 1.15rem;
+  }
+
+  .LandingCom-2-view-all-button {
+    width: 80%;
+    font-size: 0.85rem;
+  }
+
+  .LandingCom-2-collection-name {
+    font-size: 0.95rem;
+  }
+}
+
