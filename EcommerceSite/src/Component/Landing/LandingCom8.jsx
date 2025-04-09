@@ -50,15 +50,15 @@ const products = [
 const Collection = () => {
   return (
     <div className="collection-container">
-      <h2 className="collection-title">JASHN E RANG COLLECTION</h2>
+      <h2 className="collection-title">Unveil Riwayat</h2>
 
       <div className="collection-grid">
       {products.map((product, index) => (
   <div key={index} className="product-card">
     <img src={product.imageUrl} alt={product.name} />
     <p className="product-name">{product.name}</p>
-    <p className="product-price">{product.price}</p>
-    <p className="product-discount">{product.discountPrice}</p>
+    <div className="All-price-with-discount">   <p className="product-price">{product.price}</p>
+    <p className="product-discount">{product.discountPrice}</p></div>
   </div>
 ))}
 

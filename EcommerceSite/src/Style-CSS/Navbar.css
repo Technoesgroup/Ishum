@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: #EEEBE4;
   padding: 1.6rem 100px;
 }
 
@@ -34,6 +34,37 @@
   color: goldenrod;
 }
 
+.ishum-nav-li-serachbar{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  background-color: #EEEBE4;
+}
+
+
+.Ishum-nav-search-wrapper {
+  position: relative;
+  background-color: #EEEBE4;
+}
+
+.Ishum-nav-search-input {
+  width: 65%;
+  border-radius: 5px;
+  background-color: #EEEBE4;
+  padding: 0.8vw 3vw 0.8vw 3vw;
+  border: 1px solid #afafaf;
+}
+
+.Ishum-nav-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: gray;
+}
+
+
 .Ishum-logo-container {
   position: absolute;
   left: 50%;
@@ -46,7 +77,7 @@
 
 .Ishum-nav-links {
   display: flex;
-  padding: 1rem 6vw;
+  padding: 1vw 6vw;
   align-items: center;
   color: gray;
   background-color: white;
@@ -55,7 +86,7 @@
 .nav-link {
   height: 1px;
   color: rgba(204, 204, 204, 0.447);
-  background-color: rgb(215, 215, 215);
+  background-color:rgba(133, 133, 133, 0.783);
   width: 100%;
 }
 
@@ -76,12 +107,13 @@
 .Ishum-right-icons .Ishum-icon {
   color: gray;
   cursor: pointer;
-  font-size: 2rem !important;
+  font-size: 2.2rem;
 }
 
 .BUSINESS-TO-BUSINESS {
-  padding: 10px;
+  padding: 0.9vw;
   border: none;
+  font-size: 0.8vw;
   border-radius: 4px;
   color: white;
   background-color: #BC8F49;
@@ -165,12 +197,13 @@
   position: absolute;
   left: -110px;
   top: 50px;
-  width: 250px;
+  width: auto;
   height: auto;
-  background: white;
+  background: #EEEBE4;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 16px;
+  z-index: 98;
 }
 
 .Profile-menu-list {
@@ -250,7 +283,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: #EEEBE4;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
@@ -259,6 +292,7 @@
   min-width: 300px;
   border-radius: 8px;
   transition: opacity 0.3s ease;
+  border: 2px solid gray;
 }
 
 /* For Discover dropdown */
@@ -373,7 +407,7 @@
     left: 0;
     height: 100%;
     width: 300px;
-    background-color: white;
+    background-color: #EEEBE4;
     flex-direction: column;
     padding: 4rem 1rem;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -449,7 +483,8 @@
 @media (min-width: 768px) {
   .Ishum-nav-links {
     display: flex;
-    gap: 24px;
+    gap: 1vw;
+    background-color: #EEEBE4;
     color: #444;
     font-weight: 500;
   }

@@ -88,10 +88,10 @@ export default function Bestsellers() {
               <h3>STORE / BESTSELLERS</h3>
               <h2>73 PRODUCTS</h2>
 
-              <div>
-                <div className="SearchBar-icon"><SearchIcon /></div>
-                <div className="bestseller-Search-Input-bar"><input type="text" className="bestSeller-Search-product" placeholder="Search" /></div>
-              </div>
+              <div className="Ishum-bestSeller-search-wrapper">
+        <input type="text" placeholder="Search" className="Ishum-bestSeller-search-input" />
+        <SearchIcon className="Ishum-bestSeller-search-icon" />
+      </div>
 
             </div>
 
