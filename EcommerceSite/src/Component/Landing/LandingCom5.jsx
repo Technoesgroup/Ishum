@@ -1,6 +1,7 @@
 import React from "react";
-import GalleryC1 from '../../images/3bef9cdd8d336f92b3c37bdf3b94050d.jpeg';
+import GalleryC1 from '../../images/Chewwing.jpeg';
 import "../../Style-CSS/Landing-css/LandingCom5.css"
+
 
 function Leaders(){
     return(
