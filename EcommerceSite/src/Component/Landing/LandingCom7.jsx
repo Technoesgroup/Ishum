@@ -50,15 +50,15 @@ const products = [
 const Collection = () => {
   return (
     <div className="collection-container">
-      <h2 className="collection-title">JASHN E RANG COLLECTION</h2>
+      <h2 className="collection-title">Noor Edit : Elegant velvet suits with rich embroidery</h2>
 
       <div className="collection-grid">
       {products.map((product, index) => (
   <div key={index} className="product-card">
     <img src={product.imageUrl} alt={product.name} />
     <p className="product-name">{product.name}</p>
-    <p className="product-price">{product.price}</p>
-    <p className="product-discount">{product.discountPrice}</p>
+    <div className="All-price-with-discount">   <p className="product-price">{product.price}</p>
+    <p className="product-discount">{product.discountPrice}</p></div>
   </div>
 ))}
 
@@ -74,7 +74,7 @@ const Collection = () => {
           <button className="Ishum-banner-button">Explore</button>
           </div>
 
-          <p  className="Ishum-jashn-paragraph">Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.<TrendingFlatIcon   className="TrendingFlatIcon"/></p>
+          <p  className="Ishum-jashn-paragraph">Every stitch tells a story, with delicate motifs and embellishments creating a perfect blend of tradition and modernity.<TrendingFlatIcon   className="TrendingFlatIcon"/></p>
         </div>
       </div>
     </div>

@@ -1,14 +1,13 @@
 @import url('../Poppins-Font.css');
 
 .Com9-new-arrivals-container {
-    padding: 74px 7vw;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+    padding: 40px 7vw;
+    background-color: #EEEBE4;
   }
   
   .Com9-section-title {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
     font-weight: bold;
     color: gray;
     margin-bottom: 26px;
@@ -46,7 +45,7 @@
   .Com9-product-card {
     display: flex;
     align-items: center;
-    background: white;
+    background: #EEEBE4;
     padding: 16px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

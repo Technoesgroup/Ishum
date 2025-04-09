@@ -57,8 +57,8 @@ const Collection = () => {
   <div key={index} className="product-card">
     <img src={product.imageUrl} alt={product.name} />
     <p className="product-name">{product.name}</p>
-    <p className="product-price">{product.price}</p>
-    <p className="product-discount">{product.discountPrice}</p>
+ <div className="All-price-with-discount">   <p className="product-price">{product.price}</p>
+ <p className="product-discount">{product.discountPrice}</p></div>
   </div>
 ))}
 

@@ -1,8 +1,7 @@
-import FacebookIcon from '@mui/icons-material/Facebook';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../images/Ishum Logo 1.svg';
 import PersonIcon from '@mui/icons-material/Person';
@@ -19,6 +18,7 @@ import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSha
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'; // Different menu icon
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 
 import "../Style-CSS/Navbar.css";
@@ -60,8 +60,8 @@ export default function Navbar() {
     <nav className='Ishum-navbars'>
       <div className="Ishum-navbar">
         <div className="Ishum-social-icons">
-          <TwitterIcon className='socialicon' />
-          <FacebookIcon className='socialicon' />
+          <XIcon className='socialicon' />
+          <FacebookOutlinedIcon className='socialicon' />
           <InstagramIcon className='socialicon' />
           <YouTubeIcon className='socialicon' />
         </div>
@@ -81,8 +81,8 @@ export default function Navbar() {
     }
   }} />
           <SearchIcon   className='mobile-search-icon'   onClick={handleSearchClick}/>
-          <ShoppingCartIcon className="Ishum-icon"  onClick={() => navigate("/Cart")} />
-          <MenuIcon className="Ishum-menu-icon  profile-menu-icon"
+          <ShoppingCartOutlinedIcon className="Ishum-icon"  onClick={() => navigate("/Cart")} />
+          <MenuIcon className="Ishum-icon  profile-menu-icon"
           onClick={() => setIsOpen(!isOpen)}
           onMouseEnter={() => setIsOpen(true)}
           />
@@ -132,7 +132,9 @@ export default function Navbar() {
       <div className='nav-link'></div>
 
      
-      <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
+    <div  className='ishum-nav-li-serachbar'>
+
+    <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
           <Link to="/store">STORE</Link>
           <Link to="/bestsellers">BESTSELLERS</Link>
           <Link to="/exclusive">ISHUM'S EXCLUSIVE</Link>
@@ -174,9 +176,15 @@ export default function Navbar() {
           <button onClick={() => setShowB2BModal(true)} className="BUSINESS-TO-BUSINESS">
             BUSINESS TO BUSINESS
           </button>
+
         </div>
-        <div className='ishum-search-bar'></div>
+        <div className="Ishum-nav-search-wrapper">
+        <input type="text" placeholder="Search" className="Ishum-nav-search-input" />
+        <SearchIcon className="Ishum-nav-search-icon" />
+      </div>
   
+
+    </div>
   
       
       {showB2BModal && (
