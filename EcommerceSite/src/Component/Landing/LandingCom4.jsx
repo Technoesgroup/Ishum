@@ -4,6 +4,7 @@ import img1 from '../../images/Col-3.svg'
 import img2 from '../../images/Col-4.svg'
 import img3 from '../../images/Col-2.svg'
 import img4 from '../../images/Col-1.svg'
+import UnderLine from '../../images/Undertextline.png';
 
 const collections = [
   { title: "Floral Top With tulip Pants", image:img1 },
@@ -15,12 +16,11 @@ const collections = [
 const CollectionSection = () => {
   return (
     <div className="LandingCom-4-collection-container">
-      <h2 className="LandingCom-4-collection-title">DEFINE CO-ORD SETS</h2>
-      <div className="LandingCom-4-dots-container">
-        <span className="LandingCom-4-dot active"></span>
-        <span className="LandingCom-4-dot"></span>
-        <span className="LandingCom-4-dot"></span>
-      </div>
+       <div className="ishum-contents-MainHeading">
+                  <h2 className="ishum-content-title">DEFINE CO-ORD SETS</h2>
+                  <img className="ishum-contents-Com4-UnderLine" src={UnderLine} alt="" />
+                </div>
+  
       <div className="LandingCom-4-collection-grid">
         {collections.map((col, index) => (
           <div key={index} className="LandingCom-4-collection-item">

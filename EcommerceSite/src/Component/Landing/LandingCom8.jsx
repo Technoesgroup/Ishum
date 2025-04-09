@@ -6,6 +6,7 @@ import img2 from "../../images/image 10.svg";
 import img3 from "../../images/image 10.svg";
 import img4 from "../../images/image 10.svg";
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
+import UnderLine from '../../images/Undertextline.png';
 
 const products = [
   {
@@ -50,7 +51,10 @@ const products = [
 const Collection = () => {
   return (
     <div className="collection-container">
-      <h2 className="collection-title">Unveil Riwayat</h2>
+       <div className="ishum-content-MainHeading">
+                  <h2 className="ishum-content-Com6-title">BESTSELLERS OF ISHUM</h2>
+                  <img className="ishum-content-UnderLine" src={UnderLine} alt="" />
+                </div>
 
       <div className="collection-grid">
       {products.map((product, index) => (

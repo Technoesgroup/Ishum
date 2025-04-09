@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../Style-CSS/Landing-css/LandingCom2.css";
 import axios from "axios";
+import UnderLine from '../../images/Undertextline.png';
 
 const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
@@ -20,12 +21,11 @@ const CollectionSection = () => {
 
   return (
     <div className="LandingCom-2-collection-container">
-      <h2 className="LandingCom-2-collection-title">SHOP BY COLLECTION</h2>
-      <div className="LandingCom-2-dots-container">
-        <span className="LandingCom-2-dot active"></span>
-        <span className="LandingCom-2-dot"></span>
-        <span className="LandingCom-2-dot"></span>
-      </div>
+    <div className="ishum-contents-MainHeading">
+            <h2 className="ishum-content-title">SHOP BY COLLECTION</h2>
+            <img className="ishum-contents-Com2-UnderLine" src={UnderLine} alt="" />
+          </div>
+   
       <div className="LandingCom-2-collection-grid">
         {collections.map((col, index) => (
           <div key={index} className="LandingCom-2-collection-item">
