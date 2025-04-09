@@ -84,65 +84,84 @@
   }
   
 
-  @media (max-width: 768px) {
-    .LandingCom-3-collection-container {
-      padding: 4vw 20px;
-    }
-  
-    .LandingCom-3-collection-title {
-      font-size: 1.3rem;
-    }
-  
-    .LandingCom-3-dots-container {
-      gap: 3px;
-      margin-bottom: 15px;
-    }
-  
-    .LandingCom-3-dot {
-      width: 6px;
-      height: 6px;
-    }
-  
-    .LandingCom-3-collection-grid {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      padding: 0 20px;
-    }
-  
-    .LandingCom-3-collection-image {
-      height: 40vw; /* Mobile pe images ke height ko adjust kiya */
-    }
-  
-    .LandingCom-3-collection-info {
-      margin-top: 15px;
-    }
-  
-    .LandingCom-3-collection-name {
-      font-size: 1rem;
-      padding: 1vw;
-    }
-  
-    .LandingCom-3-underline {
-      width: 50px;
-      height: 2px;
-    }
-  
-    .LandingCom-3-view-more {
-      font-size: 0.85rem;
-    }
-  
-    .LandingCom-3-plus-button {
-      width: 25px;
-      height: 25px;
-      bottom: 10px;
-      right: 10px;
-      font-size: 1rem;
-    }
-  
-    .LandingCom-3-view-all-button {
-      margin-top: 4vw;
-      padding: 2.4vw 3vw;
-      font-size: 0.9rem;
-    }
+/* Responsive Design */
+@media (max-width: 768px) {
+  .LandingCom-3-collection-container {
+    padding: 5vw 5vw;
   }
-  
+
+  .LandingCom-3-collection-title {
+    font-size: 1.3rem;
+  }
+
+  .ishum-contents-MainHeading {
+    margin: 12px 0 20px 0;
+  }
+
+  .ishum-contents-Com3-UnderLine {
+    width: 100vw;
+  }
+
+  .LandingCom-3-collection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .LandingCom-3-collection-image {
+    height: 45vw;
+  }
+
+  .LandingCom-3-collection-info {
+    margin-top: 15px;
+  }
+
+  .LandingCom-3-collection-name {
+    font-size: 1rem;
+    padding: 1vw;
+  }
+
+  .LandingCom-3-underline {
+    width: 45px;
+    height: 2px;
+  }
+
+  .LandingCom-3-view-more {
+    font-size: 0.85rem;
+  }
+
+  .LandingCom-3-plus-button {
+    width: 24px;
+    height: 24px;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1rem;
+  }
+
+  .LandingCom-3-view-all-button {
+    margin-top: 5vw;
+    padding: 3vw 6vw;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .LandingCom-3-collection-title {
+    font-size: 1.15rem;
+  }
+
+  /* .LandingCom-2-collection-image {
+    height: 50vw;
+  } */
+
+  .LandingCom-3-view-all-button {
+    width: 80%;
+    font-size: 0.85rem;
+  }
+
+  .LandingCom-3-collection-name {
+    font-size: 0.95rem;
+  }
+}
+
