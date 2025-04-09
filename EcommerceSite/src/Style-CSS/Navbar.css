@@ -354,6 +354,11 @@
   color: gray;
 }
 
+.RECOMMENDATION,
+.discover{
+  font-size: 1.2rem;
+}
+
 
   .Ishum-navbar {
     padding: 3.5rem 1rem !important;
@@ -422,13 +427,19 @@
   }
 
   .Ishum-nav-links a,
-  .Ishum-nav-links .dropdown,
-  .Ishum-nav-links button {
+  .Ishum-nav-links .dropdown {
+    font-size: 1.2rem;
     padding: 12px 0;
     width: 100%;
     text-align: left;
   }
 
+  .Ishum-nav-links button {
+    font-size: 0.9rem;
+    padding: 10px 5px;
+    width: 70%;
+    margin: 10px 90px 0 0;
+  }
   /* Keep your dropdown styles as is or modify for vertical layout inside sidebar */
   .Ishum-dropdown-menu {
     box-shadow: none !important;
@@ -477,6 +488,10 @@
 @media (max-width: 768px) {
   .search-bar {
     display: block;
+  }
+
+  .Ishum-nav-search-wrapper{
+    display: none;
   }
 }
 
