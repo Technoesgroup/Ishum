@@ -4,6 +4,8 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const Collection = require("./models/CollectionSchema1");
 const CollectionSchema2 = require("./models/CollectionSchema2");
+const userRouter = require("./router/userLoginrouter");
+const ProductRouter = require("./router/Productrouter");
 const path = require("path");
 
 const app = express();
@@ -31,6 +33,16 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+
+app.use("/api/user", userRouter); 
+app.use("/api/products", ProductRouter); 
+ 
+
+
+
+
+
 
 
 // Route to get collections
@@ -91,101 +103,5 @@ app.post("/collectionsSec", upload.single("image"), async (req, res) => {
         res.status(500).json({ message: "Failed to add collection" });
     }
 });
-
-
-
-// User Registration
-app.post("/register", async (req, res) => {
-    const { name, email, password, role } = req.body;
-    
-    try {
-        let user = await User.findOne({ email });
-        if (user) return res.status(400).json({ message: "User already exists" });
-        
-        const hashedPassword = await bcrypt.hash(password, 10);
-        user = new User({ name, email, password: hashedPassword, role });
-        await user.save();
-        
-        res.status(201).json({ message: "User registered successfully" });
-    } catch (error) {
-        res.status(500).json({ message: "Server Error" });
-    }
-});
-
-// User Login
-app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    
-    try {
-        const user = await User.findOne({ email });
-        if (!user) return res.status(400).json({ message: "Invalid Credentials" });
-        
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ message: "Invalid Credentials" });
-        
-        const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
-        res.json({ token, role: user.role });
-    } catch (error) {
-        res.status(500).json({ message: "Server Error" });
-    }
-});
-
-
-// app.post("/AddCards", upload.single("image"), async (req, res) => {
-//     try {
-//         const { name, description, category, price } = req.body;
-//         const imagePath = req.file ? `/uploads/${req.file.filename}` : "";
-
-//         const newProduct = new Product({ name, description, category, price, image: imagePath });
-//         await newProduct.save();
-
-//         res.json({ success: true, message: "Product added successfully!" });
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: "Internal Server Error" });
-//     }
-// });
-
-
-
-
-// app.get("/GetCards", async (req, res) => {
-//     try {
-//         const products = await Product.find();
-//         res.json({ success: true, data: products });
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: "Internal Server Error" });
-//     }
-// });
-
-// // API to Delete Product
-// app.delete("/DeleteCard/:id", async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const result = await Product.findByIdAndDelete(id);
-        
-//         if (!result) {
-//             return res.status(404).json({ success: false, message: "Product not found" });
-//         }
-
-//         res.json({ success: true, message: "Product deleted successfully!" });
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: "Internal Server Error" });
-//     }
-// });
-
-
-
-// // API to Edit Product
-// app.put("/EditCard/:id", async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const { name, description, category, price } = req.body;
-
-//         const updatedProduct = await Product.findByIdAndUpdate(id, { name, description, category, price }, { new: true });
-//         res.json({ success: true, data: updatedProduct });
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: "Internal Server Error" });
-//     }
-// });
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

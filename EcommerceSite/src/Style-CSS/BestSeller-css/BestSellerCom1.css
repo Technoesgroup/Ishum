@@ -65,11 +65,11 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   
   .bestsellers-size-button {
-    padding:  16px 18px;
+    padding:  0.9vw;
     border: 1px solid #8f8f8f;
     cursor: pointer;
     background: #EEEBE4;
@@ -215,25 +215,25 @@
   }
   .Category-content h2{
      color: goldenrod;
-     font-size: 2vw;
+     font-size: 1.8vw;
      font-weight: 400;
   }
 
   .SubCategory-content h2{
     color: goldenrod;
-    font-size: 2vw;
+    font-size: 1.8vw;
      font-weight: 400;
   }
 
   .Availability-content h2{
     color: goldenrod;
-    font-size: 2vw;
+    font-size: 1.8vw;
     font-weight: 400;
   }
 
   .Color-content h2{
     color: goldenrod;
-    font-size: 2vw;
+    font-size: 1.8vw;
      font-weight: 400;
   }
   
