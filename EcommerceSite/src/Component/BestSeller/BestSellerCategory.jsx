@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import '../../Style-CSS/BestSeller-css/BestSellerCom1.css';
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export default function BestSellerFilters({ openDropdown, handleToggle, selected, handleSelection }) {
   return (
-<>
+    <>
       {/* Category */}
       <div className="Category-content" onClick={() => handleToggle("category")}>
         <h2>
@@ -12,15 +12,16 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
         </h2>
         {openDropdown === "category" && (
           <ul className="Catergories-dropdown">
-            {["Silver", "Alumu", "Jahak", "Firet"].map((item) => (
-              <li key={item} onClick={() => handleSelection("category", item)}>
+            {["Day Wear", "Occasional Wear", "Party Wear"].map((item, index) => (
+              <li key={item}>
                 <input
                   type="radio"
+                  id={`category-${index}`}
                   name="category"
                   checked={selected["category"] === item}
                   onChange={() => handleSelection("category", item)}
                 />
-                {item}
+                <label htmlFor={`category-${index}`}>{item}</label>
               </li>
             ))}
           </ul>
@@ -34,15 +35,16 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
         </h2>
         {openDropdown === "subcategory" && (
           <ul className="Catergories-dropdown">
-            {["Silver", "Alumu", "Jahak", "Firet"].map((item) => (
-              <li key={item} onClick={() => handleSelection("subcategory", item)}>
+            {["Anarkali", "Co-ord sets", "Dress", "Fusion wear", "Sharara Suits", "Indo Western"].map((item, index) => (
+              <li key={item}>
                 <input
                   type="radio"
+                  id={`subcategory-${index}`}
                   name="subcategory"
                   checked={selected["subcategory"] === item}
                   onChange={() => handleSelection("subcategory", item)}
                 />
-                {item}
+                <label htmlFor={`subcategory-${index}`}>{item}</label>
               </li>
             ))}
           </ul>
@@ -56,20 +58,21 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
         </h2>
         {openDropdown === "availability" && (
           <ul className="Catergories-dropdown">
-            {["In Stock", "Out of Stock"].map((item) => (
-              <li key={item} onClick={() => handleSelection("availability", item)}>
+            {["In Stock", "Out of Stock"].map((item, index) => (
+              <li key={item}>
                 <input
                   type="radio"
+                  id={`availability-${index}`}
                   name="availability"
                   checked={selected["availability"] === item}
                   onChange={() => handleSelection("availability", item)}
                 />
-                {item}
+                <label htmlFor={`availability-${index}`}>{item}</label>
               </li>
             ))}
           </ul>
         )}
       </div>
-      </>
+    </>
   );
 }

@@ -162,6 +162,16 @@
     padding: 8px 20px;
   }
 
+  .ishum-content-Com6-title{
+    font-size: 1.4rem;
+  }
+
+
+  
+.ishum-content-UnderLine{
+  width: 75vw;
+}
+
   /* Products will appear below banner in a 2-column layout */
   .product-card {
     padding: 8px;

@@ -11,6 +11,7 @@ import Cart from './Component/IshumCart/EmptyCart';
 import MyOrder from './Component/MyOrder/MyOrder';
 import Shipping from './Component/IshumCart/ShippingCartCom1';
 import Collection from './Component/Ishum-AdminPanel/CollectionPanel';
+import Product from './Component/Ishum-AdminPanel/ProductPanel-1';
 import Review from './Component/ReviewCustomer/ReviewCustomer';
 import Tale from './Component/Tale/Tale';
 import SearchBar from './Component/Landing/SearchMobileView/SearchMobile';
@@ -31,6 +32,7 @@ function App() {
       <Route path="/MyOrder"  element={<MyOrder />}></Route>
       <Route path="/Shipping"  element={<Shipping />}></Route>
       <Route path="/collection"  element={<Collection />}></Route>
+      <Route path="/product"  element={<Product />}></Route>
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>
       <Route path="/Search-Bar"  element={<SearchBar />}></Route>
