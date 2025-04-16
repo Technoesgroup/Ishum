@@ -21,7 +21,7 @@ const CollectionSection = () => {
 
   return (
     <div className="LandingCom-2-collection-container">
-    <div className="ishum-contents-MainHeading">
+    <div className="ishumCom-2-contents-MainHeading">
             <h2 className="ishum-content-title">SHOP BY COLLECTION</h2>
             <img className="ishum-contents-Com2-UnderLine" src={UnderLine} alt="" />
           </div>

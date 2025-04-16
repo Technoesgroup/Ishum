@@ -9,6 +9,9 @@
 
   .ishum-contents-MainHeading{
     display: flex;
+    color: #4B3D1A;
+    font-family: 'PoppinsSemibold';
+    font-size: 1.1rem;
     flex-direction: column;
     align-items: center;
     margin: 18px 0 30px 0;
@@ -42,42 +45,32 @@
   }
   
   .LandingCom-3-collection-name {
+    color: #4B3D1A;
+    font-family: 'PoppinsRegular';
     font-size: 1.1rem;
     padding: 0.5vw;
-    font-weight: bold;
   }
   
   .LandingCom-3-underline {
     width: 60px;
     height: 2px;
-    background-color: red;
+    background-color: #4B3D1A;
     margin: 5px auto;
   }
   
   .LandingCom-3-view-more {
-    color: red;
+    font-family: 'PoppinsRegular';
+    color: #4B3D1A;
     font-size: 0.9rem;
-    cursor: pointer;
-  }
-  
-  .LandingCom-3-plus-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    border: 1px solid gray;
-    font-size: 1.2rem;
-    font-weight: bold;
     cursor: pointer;
   }
   
   .LandingCom-3-view-all-button {
     margin-top: 2.6vw;
     border: none;
+    font-family: 'PoppinsRegular';
     padding: 1.2vw 2.6vw;
-    background-color: black;
+    background-color: #4B3D1A;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -95,11 +88,12 @@
   }
 
   .ishum-contents-MainHeading {
+    font-size: 0.9rem;
     margin: 12px 0 20px 0;
   }
 
   .ishum-contents-Com3-UnderLine {
-    width: 100vw;
+    width: 100%;
   }
 
   .LandingCom-3-collection-grid {

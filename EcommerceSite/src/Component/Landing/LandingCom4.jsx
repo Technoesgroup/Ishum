@@ -32,7 +32,7 @@ const CollectionSection = () => {
           </div>
         ))}
       </div>
-      <button className="LandingCom-3-view-all-button">SEE EXCLUSIVES</button>
+      <button className="LandingCom-4-view-all-button">SEE EXCLUSIVES</button>
     </div>
   );
 };

@@ -4,12 +4,12 @@ import image1 from '../../images/Undertextline.png';
 
 const Legacy = ()=>{
     return(
-        <div  className="">
-           <div  className="">
+        <div  className="ishum-legacy-container">
+           <div  className="ishum-legacy-content">
            <h1>Legacy</h1>
            <img src={image1} alt="" />
            </div>
-            <h2  className="">The Legacy of B. R. Kapoor & Sons: A Timeless Tradition in Ethnic Wear</h2>
+            <h2  >The Legacy of B. R. Kapoor & Sons: A Timeless Tradition in Ethnic Wear</h2>
             <p>
             In the heart of Chandni Chowk, where the soul of Indian craftsmanship thrives, began the extraordinary journey of B. R. Kapoor & Sons—a name synonymous with heritage, innovation, and artistry in ethnic fashion. Founded by Mr. B. R. Kapoor, a visionary ahead of his time, the brand revolutionized the way India embraced traditional wear. He was the first to introduce the concept of selling a complete three-piece suit in a single package—a breakthrough that redefined convenience and elegance for generations to come.
             </p>

@@ -25,8 +25,9 @@
 }
 
 .product-name {
+  font-family: 'PoppinsRegular';
   font-size: 1.1rem;
-  color: gray;
+  color: #4B3D1A;
   margin-top: 15px;
 }
 
@@ -58,11 +59,13 @@
   object-fit: cover;
 }
 
-.ishum-content-MainHeading{
+.ishumCom6-content-MainHeading{
    display: flex;
+   font-family: 'PoppinsSemibold';
    flex-direction: column;
    align-items: center;
-   margin: 18px 0 30px 0;
+   color: #4B3D1A;
+   margin: 60px 0 30px 0;
 }
 
 
@@ -71,16 +74,18 @@
 }
 
 .ishum-content-Com6-title{
-  font-size: 1.8rem;
+  font-size: 1.9rem;
+  letter-spacing: 1.5px;
 }
 
 .Ishum-jashn-paragraph{
-  padding: 5px 0;
+  padding: 8px 0;
   text-align: left;
   font-weight: 500;
   display: flex;
-  color: gray;
-  font-size: 1.3rem;
+  font-family: 'PoppinsRegular';
+  color: #4B3D1A;
+  font-size: 1.2rem;
 }
 
 .All-price-with-discount{
@@ -88,28 +93,20 @@
   gap: 30px;
 }
 
-.Ishum-banner-title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.Ishum-banner-text {
-  color: gray;
-  margin-top: 8px;
-}
-
 .Ishum-banner-button {
-  margin-top: 16px;
-  background-color: black;
+  background-color:  #4B3D1A;
   color: white;
   padding: 10px 24px;
   border: none;
+  font-size: 1.2rem;
+  letter-spacing: 1.8px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .Ishum-banner-content{
   position: absolute;
+  bottom: 120px;
 }
 
 .Ishum-banner-button:hover {
@@ -169,10 +166,9 @@
 
   
 .ishum-content-UnderLine{
-  width: 75vw;
+  width: 100%;
 }
 
-  /* Products will appear below banner in a 2-column layout */
   .product-card {
     padding: 8px;
   }

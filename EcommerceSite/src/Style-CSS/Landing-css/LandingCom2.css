@@ -12,8 +12,11 @@
   margin-bottom: 10px;
 }
 
-.ishum-contents-MainHeading {
+.ishumCom-2-contents-MainHeading {
   display: flex;
+  color: #4B3D1A;
+  font-family: 'PoppinsSemibold';
+  font-size: 1.2rem;
   flex-direction: column;
   align-items: center;
   margin: 18px 0 30px 0;
@@ -47,6 +50,7 @@
 }
 
 .LandingCom-2-collection-name {
+  font-family: 'PoppinsRegular';
   font-size: 1.1rem;
   padding: 0.5vw;
   font-weight: bold;
@@ -55,33 +59,23 @@
 .LandingCom-2-underline {
   width: 60px;
   height: 2px;
-  background-color: red;
+  background-color: #4B3D1A;
   margin: 5px auto;
 }
 
 .LandingCom-2-view-more {
-  color: red;
+  font-family: 'PoppinsRegular';
+  color:#4B3D1A;
   font-size: 0.9rem;
   cursor: pointer;
 }
 
-.LandingCom-2-plus-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  border: 1px solid gray;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 .LandingCom-2-view-all-button {
+  font-family: 'PoppinsRegular';
   margin-top: 2.6vw;
   padding: 1.2vw 2.6vw;
-  background-color: black;
+  background-color: #4B3D1A;
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -97,7 +91,8 @@
     font-size: 1.3rem;
   }
 
-  .ishum-contents-MainHeading {
+  .ishumCom-2-contents-MainHeading {
+    font-size: 1rem;
     margin: 12px 0 20px 0;
   }
 

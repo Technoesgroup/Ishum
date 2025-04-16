@@ -145,16 +145,16 @@ export default function Navbar() {
         <span  className='RECOMMENDATION-dropdown-li'>
         <span className='Occasion'>
         <h2>Occasion</h2>
-        <li><Link to="/Legacy ">Eid</Link></li>
-        <li><Link to="/Tale">Diwali</Link></li>
-        <li><Link to="/B2B-Policy">Karwa Chauth</Link></li>
+        <li><Link to="/Leg ">Eid</Link></li>
+        <li><Link to="/Tag">Diwali</Link></li>
+        <li><Link to="/B2B-P">Karwa Chauth</Link></li>
         </span>
 
         <span  className='SALE'>
           <h2>SALE</h2>
-          <li><Link to="/Legacy ">Upto 35% Off On Gulzaar Collection</Link></li>
-          <li><Link to="/Tale">Upto 20% Off On Jashn e Rang Collection</Link></li>
-          <li><Link to="/B2B-Policy">Diwali Offers</Link></li>
+          <li><Link to="/Lega ">Upto 35% Off On Gulzaar Collection</Link></li>
+          <li><Link to="/Ta">Upto 20% Off On Jashn e Rang Collection</Link></li>
+          <li><Link to="/B2B">Diwali Offers</Link></li>
         </span>
 
         </span>
@@ -165,7 +165,7 @@ export default function Navbar() {
           <div className='discover'>  DISCOVER <KeyboardArrowDownSharpIcon /></div> 
           {isDiscoverOpen && (
             <ul className="Ishum-dropdown-menu  ishum-discover-dropdown">
-               <li><Link to="/Legacy ">Legacy </Link></li>
+               <li><Link to="/Legacy">Legacy</Link></li>
               <li><Link to="/Tale">Our Tale</Link></li>
               <li><Link to="/B2B-Policy">B2B Policy</Link></li>
             </ul>

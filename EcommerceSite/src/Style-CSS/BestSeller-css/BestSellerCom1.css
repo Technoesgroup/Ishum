@@ -496,13 +496,13 @@
   }
   
   .pagination button.active {
-    background-color:goldenrod;
+  background-color:  #BC8F49;;
     color: white;
   }
   
   .pagination button:disabled {
     color: white;
-    background-color: goldenrod;
+    background-color:  #BC8F49;;
     cursor: not-allowed;
   }
   
