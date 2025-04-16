@@ -1,7 +1,7 @@
 .review-section {
     text-align: center;
     padding: 30px 6vw;
-    background-color: #f9f9f9;
+    background-color: #EEEBE4;
   }
 
   .review-section h2{
@@ -32,7 +32,7 @@
   }
   
   .review-card {
-    background: #fff;
+    background-color: #EEEBE4;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding:20px;
@@ -121,6 +121,7 @@
   }
   
   .review-text-content h3{
+    display: flex;
     font-size: 1.3rem;
     font-weight: 500;
     text-align: left;
@@ -198,7 +199,7 @@
 }
 
 .review-modal {
-  background: white;
+  background-color: #EEEBE4;
   border-radius: 10px;
   width: 750px;
   text-align: center;

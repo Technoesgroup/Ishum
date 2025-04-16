@@ -9,7 +9,7 @@ body {
   .Facilities-header {
     text-align: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #EEEBE4;
   }
   
   .Facilities-header h2 {
@@ -32,6 +32,7 @@ body {
   }
   
   .LabPage-app-container {
+    background-color: #EEEBE4;
     display: flex;
     flex-direction: column;
     gap: 40px;

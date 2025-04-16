@@ -62,14 +62,15 @@
   }
 
   .newsletter-section-h4 h4{
-    color: #777;
+    color:  #4B3D1A;
     letter-spacing: 1px;
     line-height: 1.4;
     font-weight: 500;
   }
   
   .newsletter-input .subscribe-button {
-    color: rgb(30, 29, 29);
+    font-family: 'PoppinsRegular';
+    color:#4B3D1A;
     border: none;
     font-size: 2.2rem;
     cursor: pointer;
@@ -83,11 +84,14 @@
     text-align: left;
   }
   .brand-section-p{
+    font-family: 'PoppinsRegular';
+    color:  #4B3D1A;
     line-height: 3;
   
   }
   
   .brand-title {
+    color:  #4B3D1A;
     font-size: 24px;
     font-weight: bold;
   }
@@ -96,7 +100,7 @@
   .brand-address,
   .brand-contact,
   .brand-phone {
-    color: rgb(148, 148, 148);
+    color:  #4B3D1A;
     font-size: 14px;
   }
   
@@ -108,6 +112,8 @@
   }
   
   .footer-links h3 {
+    font-family: 'PoppinsSemibold';
+    color: #4B3D1A;
     text-align: left;
     font-size: 16px;
     font-weight: bold;
@@ -120,8 +126,9 @@
   
   .footer-links li {
     margin-top: 18px;
+    font-family: 'PoppinsRegular';
     font-size: 14px;
-    color: #777;
+    color:  #4B3D1A;
     cursor: pointer;
   }
   
@@ -132,19 +139,26 @@
     padding-top: 20px;
     border-top: 1px solid #ddd;
   }
+
+  .footer-bottom p{
+    font-family: 'PoppinsRegular';
+    color: #4B3D1A;
+  }
   
   .footer-terms span {
+    font-family: 'PoppinsRegular';
     margin: 0 10px;
     font-size: 14px;
-    color: #777;
+    color:  #4B3D1A;
     cursor: pointer;
   }
   
   .footer-social svg {
+    font-family: 'PoppinsRegular';
     font-size: 20px;
     margin-left: 20px;
     cursor: pointer;
-    color: #333;
+    color:#4B3D1A;
     transition: color 0.3s;
   }
   
@@ -205,6 +219,7 @@
     }
 
     .footer-links h3 {
+      text-align: left;
         font-size: 1rem;
         margin-bottom: 8px;
     }
@@ -214,6 +229,7 @@
     }
 
     .footer-links li {
+      text-align: left;
         font-size: 0.9rem;
     }
 

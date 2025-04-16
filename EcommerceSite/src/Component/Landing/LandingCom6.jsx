@@ -51,7 +51,7 @@ const products = [
 const Collection = () => {
   return (
     <div className="collection-container">
-     <div className="ishum-content-MainHeading">
+     <div className="ishumCom6-content-MainHeading">
                 <h2 className="ishum-content-Com6-title">BESTSELLERS OF ISHUM</h2>
                 <img className="ishum-content-UnderLine" src={UnderLine} alt=""  />
               </div>
@@ -71,10 +71,6 @@ const Collection = () => {
         <div className="Ishum-banner-card">
           <img src={img_b1} alt=""   className="Ishum-bannner-card-img"/>
           <div className="Ishum-banner-content">
-          <h2 className="Ishum-banner-title">Jashn-E-Rang</h2>
-          <p className="Ishum-banner-text">
-            Bringing together the brightest shades of life in one breathtaking collection.
-          </p>
           <button className="Ishum-banner-button">Explore</button>
           </div>
           <p  className="Ishum-jashn-paragraph">Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.<TrendingFlatIcon /></p>

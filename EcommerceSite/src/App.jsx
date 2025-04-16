@@ -14,6 +14,7 @@ import Collection from './Component/Ishum-AdminPanel/CollectionPanel';
 import Product from './Component/Ishum-AdminPanel/ProductPanel-1';
 import Review from './Component/ReviewCustomer/ReviewCustomer';
 import Tale from './Component/Tale/Tale';
+import Legacy from './Component/Legacy/Legacy';
 import SearchBar from './Component/Landing/SearchMobileView/SearchMobile';
 import MobileLogin from './Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
 
@@ -35,6 +36,7 @@ function App() {
       <Route path="/product"  element={<Product />}></Route>
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>
+      <Route path="/Legacy"  element={<Legacy />}></Route>
       <Route path="/Search-Bar"  element={<SearchBar />}></Route>
       <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
      </Routes>
