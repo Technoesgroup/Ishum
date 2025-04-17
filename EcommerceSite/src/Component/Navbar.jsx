@@ -113,7 +113,7 @@ export default function Navbar() {
              <Link   to={"/MyOrder"}><ShoppingBagIcon />My Order</Link> 
               </li>
             <li className="Profile-menu-item">
-              <Link  to={"/MyOrder"}> <PermIdentityOutlinedIcon />My Profile</Link>
+              <Link  to={"/Profile"}> <PermIdentityOutlinedIcon />My Profile</Link>
             </li>
             <li className="Profile-menu-item">
               <Link  to={"/MyOrder"}> <EmailIcon /> Support</Link>

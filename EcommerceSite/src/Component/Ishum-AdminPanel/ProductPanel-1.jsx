@@ -3,9 +3,11 @@ import "../../Style-CSS/Ishum-AdminPanel/ProductAdminPanel.css";
 
 const AddProduct = () => {
   const [form, setForm] = useState({
+    name:"",
     category: "",
     subcategory: "",
     color: "",
+    discount:"",
     price: "",
     description: "",
     size: [],
@@ -50,10 +52,12 @@ const AddProduct = () => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("name", form.name);
     formData.append("category", form.category);
     formData.append("subcategory", form.subcategory);
     formData.append("color", form.color);
     formData.append("price", form.price);
+    formData.append("discount", form.discount);
     formData.append("description", form.description);
     form.size.forEach((s) => formData.append("size[]", s));
     formData.append("image", image);
@@ -68,10 +72,12 @@ const AddProduct = () => {
     alert(data.message);
     if (data.success) {
       setForm({
+        name:"",
         category: "",
         subcategory: "",
         color: "",
         price: "",
+        discount:"",
         description: "",
         size: [],
         availability: "true",
@@ -128,11 +134,18 @@ const AddProduct = () => {
           <option value="#D3D3D3">Light Grey</option>
         </select>
 
+        <label>Name</label>
+        <input name="name" value={form.name} onChange={handleChange} required />
+
         <label>Image:</label>
         <input type="file" accept="image/*" onChange={handleImage} required />
         {preview && <img src={preview} alt="preview" className="image-preview" />}
 
-        <label>Price:</label>
+        
+        <label>Without Discount Price</label>
+        <input type="number" name="discount" value={form.discount} onChange={handleChange} required />
+
+        <label>Original Price:</label>
         <input type="number" name="price" value={form.price} onChange={handleChange} required />
 
         <label>Description:</label>

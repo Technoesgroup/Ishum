@@ -11,7 +11,7 @@
     text-align: center;
     font-size: 2.4vw;
     font-weight: 500;
-    color: goldenrod;
+    color: #4B3D1A;
     letter-spacing: 1.4px;
   }
   
@@ -100,8 +100,8 @@
   }
   
   .bestsellers-product-name {
-    font-size: 16px;
-    color: goldenrod;
+    font-size: 1.2rem;
+    color: #4B3D1A;
     font-weight: bold;
   }
   
@@ -132,7 +132,7 @@
      font-size: 1vw;
      font-weight: 500;
      text-align: left;
-     color: goldenrod;
+     color: #4B3D1A;
   }
 
   .store-bestseller h2{
@@ -158,17 +158,20 @@
   }
 
   .bestseller-boxes-1 button{
+    background-color: #EEEBE4;
     padding: 0.9vw;
     font-size: 1vw;
   }
 
   .bestseller-boxes-2 button{
+    background-color: #EEEBE4;
     padding: 0.9vw;
     width: 10vw;
     font-size: 1vw;
   }
 
   .bestseller-boxes-3 button{
+    background-color: #EEEBE4;
     padding: 0.9vw;
     width: 10vw;
     font-size: 1vw;
@@ -214,25 +217,25 @@
     margin-top: 3rem;
   }
   .Category-content h2{
-     color: goldenrod;
+     color: #4B3D1A;
      font-size: 1.8vw;
      font-weight: 400;
   }
 
   .SubCategory-content h2{
-    color: goldenrod;
+    color: #4B3D1A;
     font-size: 1.8vw;
      font-weight: 400;
   }
 
   .Availability-content h2{
-    color: goldenrod;
+    color: #4B3D1A;
     font-size: 1.8vw;
     font-weight: 400;
   }
 
   .Color-content h2{
-    color: goldenrod;
+    color: #4B3D1A;
     font-size: 1.8vw;
      font-weight: 400;
   }
@@ -411,7 +414,7 @@
     padding: 7px;
     border: 1px solid  goldenrod;
     border-radius: 50%;
-    color: goldenrod;
+    color: #4B3D1A;
   }
 
   .LocalMall-Buy-Now-button{
@@ -470,9 +473,6 @@
     cursor: pointer;
   }
   
-
-
-
   .pagination {
     display: flex;
     justify-content: center;
