@@ -2,14 +2,16 @@ const Product = require("../models/ProductSchema");
 
 const addProduct = async (req, res) => {
   try {
-    const { category, subcategory, color, price, description, size, availability } = req.body;
+    const { name,category, subcategory, color,  discount, price, description, size, availability } = req.body;
     const image = req.file?.filename || "";
 
     const product = new Product({
+      name,
       category,
       subcategory,
       color,
       image,
+      discount,
       price,
       description,
       size,

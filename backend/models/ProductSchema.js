@@ -2,6 +2,10 @@
 const  mongoose  = require("mongoose");
 
 const productSchema = new mongoose.Schema({
+  name:{
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     enum: ["Day Wear", "Occasional Wear", "Party Wear"],
@@ -17,6 +21,10 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   price: {
+    type: Number,
+    required: true,
+  },
+  discount:{
     type: Number,
     required: true,
   },

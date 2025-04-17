@@ -1,0 +1,21 @@
+.User-profile-sidebar {
+    width: 320px;
+    border-right: 1px solid #eee;
+    padding: 20px;
+  }
+  
+  .User-profile-sidebar-item {
+    padding: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #555;
+    transition: 0.3s;
+  }
+  
+  .User-profile-sidebar-item:hover,
+  .User-profile-sidebar-item.active {
+    color: #000;
+    font-weight: bold;
+  }
+  

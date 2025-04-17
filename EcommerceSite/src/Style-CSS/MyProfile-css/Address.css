@@ -1,0 +1,45 @@
+.user-profile-two-card{
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+}
+
+.Home-card{
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 4px gray;
+}
+
+.Home-icons-text{
+    display: flex;
+}
+
+.Home-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Home-icons-text h2{
+     font-size: 0.8rem;
+}
+.Home-content p{
+    font-size: 0.8rem;
+}
+
+.Office-card{
+    display: flex;
+}
+
+.HomeIcon{
+    font-size: 2.5rem;
+    margin-right: 10px;
+}
+
+.profile-Edit{
+    font-size: 1.1rem;
+    cursor: pointer;
+}
