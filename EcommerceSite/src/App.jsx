@@ -26,6 +26,13 @@ import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 
 
 
+import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
+import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
+import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
+import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
+
+
+
 function App() {
 
   return (
@@ -53,6 +60,11 @@ function App() {
       <Route path="/Ishum-Exclusive-Rangrez"  element={<RANGREZ />}></Route>
       <Route path="/Ishum-Exclusive-Noor-Edits"  element={<NOOREDITS />}></Route>
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
+      
+      <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
+      <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>
+      <Route path="/Ishum-Bestseller-Cordsets"  element={<CORDSETS />}></Route>
+      <Route path="/Ishum-Bestseller-Anarkali"  element={<ANARKALIS />}></Route>
 
      </Routes>
      <Footer />
