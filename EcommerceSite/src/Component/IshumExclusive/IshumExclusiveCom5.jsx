@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ExclusiveNavigation from '../IshumExclusive/IshumExclusiveBtn';
+
 import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import UnderLine from '../../images/Undertextline.png';
@@ -37,7 +38,7 @@ export default function Bestsellers() {
     <>
       <div className="bestsellers-container">
         <div className="bestseller-MainHeading">
-          <h2 className="bestsellers-title">JASH-E-RANG COLLECTION</h2>
+          <h2 className="bestsellers-title">UNVEIL RIWAYAT</h2>
           <img className="UnderLine" src={UnderLine} alt="" />
         </div>
 
@@ -107,13 +108,3 @@ export default function Bestsellers() {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-

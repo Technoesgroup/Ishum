@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import Comp1 from "../Component/IshumExclusive/IshumExclusiveCom1";
 import Comp2 from "../Component/IshumExclusive/IshumExclusive";
 
+
+
+
 const Exclusive = () => {
 
   const fadeInUp = {
@@ -20,43 +23,7 @@ const Exclusive = () => {
           <Comp2 />
         </motion.div>
 
-        {/* <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp2 />
-        </motion.div>
-
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp3 />
-        </motion.div>
-
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp4 />
-        </motion.div>
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp5 />
-        </motion.div>
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp6 />
-        </motion.div>
-
-
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp9 />
-        </motion.div>
-        
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp7 />
-        </motion.div>
-
-        
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp8 />
-        </motion.div> */}
-
+     
       </div>
   );
 };

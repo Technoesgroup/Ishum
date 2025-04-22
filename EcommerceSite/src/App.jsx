@@ -19,6 +19,11 @@ import SearchBar from './Component/Landing/SearchMobileView/SearchMobile';
 import MobileLogin from './Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
 import UserAccount from './Pages/MyProfilePage';
 import IshumExclusive from './Pages/IshumExclusivePage';
+import GULZAAR from './Component/IshumExclusive/IshumExclusiveCom2';
+import RANGREZ from './Component/IshumExclusive/IshumExclusiveCom3';
+import UNVEILRIWAYAT from './Component/IshumExclusive/IshumExclusiveCom5';
+import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
+
 
 
 function App() {
@@ -43,6 +48,12 @@ function App() {
       <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
       <Route path="/Profile"  element={<UserAccount />}></Route>
       <Route path="/Ishum-Exclusive"  element={<IshumExclusive />}></Route>
+
+      <Route path="/Ishum-Exclusive-Gulzar"  element={<GULZAAR />}></Route>
+      <Route path="/Ishum-Exclusive-Rangrez"  element={<RANGREZ />}></Route>
+      <Route path="/Ishum-Exclusive-Noor-Edits"  element={<NOOREDITS />}></Route>
+      <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
+
      </Routes>
      <Footer />
      </Router>
