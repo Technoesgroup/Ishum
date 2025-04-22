@@ -52,7 +52,7 @@ const Collection = () => {
   return (
     <div className="collection-container">
        <div className="ishumCom6-content-MainHeading">
-                  <h2 className="ishum-content-Com6-title">BESTSELLERS OF ISHUM</h2>
+                  <h2 className="ishum-content-Com6-title">Unveil Riwayat</h2>
                   <img className="ishum-content-UnderLine" src={UnderLine} alt="" />
                 </div>
 

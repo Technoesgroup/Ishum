@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../../Style-CSS/BestSeller-css/BestSellerCom1.css';
+import '../../Style-CSS/BestSeller-css/BestSellerColor.css';
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { colors } from "../BestSeller/ColorSection";
 
@@ -12,7 +12,7 @@ export default function ColorSection({ openDropdown, handleToggle, selected, han
 
   return (
     <div className="Color-content" onClick={() => handleToggle("color")}>
-      <h2>
+      <h2 className="Category-content-All-h2">
         Color <KeyboardArrowRightIcon />
       </h2>
       {openDropdown === "color" && (

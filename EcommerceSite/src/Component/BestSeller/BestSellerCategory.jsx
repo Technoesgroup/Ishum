@@ -7,7 +7,7 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
     <>
       {/* Category */}
       <div className="Category-content" onClick={() => handleToggle("category")}>
-        <h2>
+        <h2   className="Category-content-All-h2">
           Category <KeyboardArrowRightIcon />
         </h2>
         {openDropdown === "category" && (
@@ -30,7 +30,7 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
 
       {/* Sub Category */}
       <div className="SubCategory-content" onClick={() => handleToggle("subcategory")}>
-        <h2>
+        <h2   className="Category-content-All-h2">
           Sub Category <KeyboardArrowRightIcon />
         </h2>
         {openDropdown === "subcategory" && (
@@ -53,7 +53,7 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
 
       {/* Availability */}
       <div className="Availability-content" onClick={() => handleToggle("availability")}>
-        <h2>
+        <h2  className="Category-content-All-h2">
           Availability <KeyboardArrowRightIcon />
         </h2>
         {openDropdown === "availability" && (
