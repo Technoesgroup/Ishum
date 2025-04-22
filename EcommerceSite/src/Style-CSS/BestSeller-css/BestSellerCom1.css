@@ -4,12 +4,11 @@
 .bestsellers-container {
   width: auto;
     padding: 4vw;
-    font-family: Arial, sans-serif;
   }
   
   .bestsellers-title {
     text-align: center;
-    font-size: 2.4vw;
+    font-size: 2.1vw;
     font-weight: 500;
     color: #4B3D1A;
     letter-spacing: 1.4px;
@@ -69,59 +68,13 @@
   }
   
   .bestsellers-size-button {
+    font-family: 'PoppinsRegular';
     padding:  0.9vw;
     border: 1px solid #8f8f8f;
     cursor: pointer;
     background: #EEEBE4;
   }
   
-  .bestsellers-products-grid {
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3vw;
-    margin-left: 4vw;
-  }
-  
-  .bestsellers-product-card {
-    max-width: 20vw;
-    width: 100%;
-    text-align: center;
-    background: #EEEBE4;
-  }
-  
-  .bestsellers-product-image {
-    width: 100%;
-    height: auto;
-  }
-  
-  .bestsellers-product-details {
-    margin-top: 10px;
-  }
-  
-  .bestsellers-product-name {
-    font-size: 1.2rem;
-    color: #4B3D1A;
-    font-weight: bold;
-  }
-  
-  .bestsellers-product-original-price {
-    text-decoration: line-through;
-    color: gray;
-  }
-  
-  .bestsellers-product-price {
-    color: gray;
-    font-weight: bold;
-  }
-
-  .Bestseller-content-product{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-
    .store-bestseller{
     display: flex;
     flex-direction: column;
@@ -129,6 +82,7 @@
   }
 
   .store-bestseller h3{
+    font-family: 'PoppinsRegular';
      font-size: 1vw;
      font-weight: 500;
      text-align: left;
@@ -136,6 +90,7 @@
   }
 
   .store-bestseller h2{
+    font-family: 'PoppinsRegular';
     margin: 10px 0;
     color: rgb(200, 20, 20);
     font-size: 2vw;
@@ -150,6 +105,7 @@
   }
 
   .bestseller-boxes-1{
+    font-family: 'PoppinsRegular';
   display: flex;
   position: relative;
   flex-direction: column;
@@ -157,24 +113,24 @@
   background-color: #EEEBE4;
   }
 
-  .bestseller-boxes-1 button{
+  .for-all-boxes-btn  button{
+    font-family: 'PoppinsRegular';
     background-color: #EEEBE4;
+    border: 1px solid #9f967f;
+    cursor: pointer;
     padding: 0.9vw;
-    font-size: 1vw;
+    font-size: 0.9rem;
   }
 
   .bestseller-boxes-2 button{
-    background-color: #EEEBE4;
     padding: 0.9vw;
     width: 10vw;
-    font-size: 1vw;
+
   }
 
   .bestseller-boxes-3 button{
-    background-color: #EEEBE4;
     padding: 0.9vw;
     width: 10vw;
-    font-size: 1vw;
   }
 
   .bestseller-boxes-2{
@@ -198,17 +154,6 @@
   }
 
 
-  .bestsellers-buy-button {
-    margin-top: 10px;
-    padding: 10px 24px;
-    border: 1px solid  goldenrod;
-    background-color:transparent;
-    cursor: pointer;
-    width: 200px;
-    font-weight: bold;
-    border-radius: 5px;
-  }
-
   .Category-section{
     display: flex;
     flex-direction: column;
@@ -217,29 +162,18 @@
     margin-top: 3rem;
   }
   .Category-content h2{
+    font-family: 'PoppinsRegular';
      color: #4B3D1A;
      font-size: 1.8vw;
      font-weight: 400;
   }
 
-  .SubCategory-content h2{
+  .Category-content-All-h2{
+    font-family: 'PoppinsRegular';
     color: #4B3D1A;
     font-size: 1.8vw;
      font-weight: 400;
   }
-
-  .Availability-content h2{
-    color: #4B3D1A;
-    font-size: 1.8vw;
-    font-weight: 400;
-  }
-
-  .Color-content h2{
-    color: #4B3D1A;
-    font-size: 1.8vw;
-     font-weight: 400;
-  }
-  
 
   .two-input-minimax{
     display: flex;
@@ -357,37 +291,8 @@
     background-color: #555;
   }
 
- 
-.Ishum-bestSeller-search-wrapper {
-  position: relative;
-  background-color: #EEEBE4;
-}
-
-.Ishum-bestSeller-search-input {
-  width: 65%;
-  border-radius: 5px;
-  background-color: #EEEBE4;
-  padding: 0.8vw 3vw 0.8vw 3vw;
-  border: 1px solid #afafaf;
-}
-
-.Ishum-bestSeller-search-icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: gray;
-}
-
-  
-
-
   .AllPrice-of-bestseller p{
      font-size: 1.5rem;
-  }
-
-  .AllSize-of-bestseller{
-    font-size: 1.5rem;
   }
 
   .firstparagraph{
@@ -408,101 +313,3 @@
   .UnderLine{
     width: 42vw;
   }
-
-  .LocalMallIcon{
-    background-color: transparent;
-    padding: 7px;
-    border: 1px solid  goldenrod;
-    border-radius: 50%;
-    color: #4B3D1A;
-  }
-
-  .LocalMall-Buy-Now-button{
-    display: flex;
-    align-items: center;
-    gap: 30px;
-  }
-
-  .Original-Discount-Price{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    justify-content: center;
-    /* margin-left: 30px; */
-    padding: 10px  0;
-    font-size: 1.2rem;
-  }
-
-  .Discount-off{
-    color: #007D0A !important;
-    font-size: 0.9rem !important;
-    font-weight: 700;
-  }
-
- 
-
-
-  .bestSeller-Color-Container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .bestSeller-Color-hover-box {
-    background-color: #ffa500;
-    padding: 10px 20px;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .bestSeller-color-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    background-color: black;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .bestSeller-color-circle {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 60px;
-    gap: 15px;
-  }
-  
-  .pagination button {
-    background-color: #EEEBE4;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size:1.3rem;
-    border-radius: 24px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .pagination button:hover {
-    background-color: #d0d0d0;
-  }
-  
-  .pagination button.active {
-  background-color:  #BC8F49;;
-    color: white;
-  }
-  
-  .pagination button:disabled {
-    color: white;
-    background-color:  #BC8F49;;
-    cursor: not-allowed;
-  }
-  

@@ -1,65 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useFilter } from "../../Component/Context-API/Fillter-Context";
-import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
+import "../../Style-CSS/BestSeller-css/BestSellerProduct.css";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import axios from "axios";
-import {colors} from "../BestSeller/ColorSection"
+import { colors } from "../BestSeller/ColorSection";
 
 const PRODUCTS_PER_PAGE = 6;
 
-export default function ProductList() {
+export default function ProductList({ queryParam = "isBestseller=true" }) {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { selected } = useFilter();
 
   useEffect(() => {
-
-    console.log("Current selected filters:", selected);
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/products/get-product");
-        setProducts(res.data.products); // ✅ fix applied here
-
-        console.log("Filtered Products:", filteredProducts);
-        console.log("Displayed Products:", displayedProducts);
-
+        const res = await axios.get(`http://localhost:4000/api/products/get-product?${queryParam}`);
+        setProducts(res.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
       }
     };
     fetchProducts();
-  }, []);
-  
+  }, [queryParam]);
 
-  // Apply filters
   const filteredProducts = Array.isArray(products)
-  ? products.filter((product) => {
-      const sizeMatch = selected.size ? product.size.includes(selected.size) : true;
-      const tagMatch = selected.tag ? product.tag === selected.tag : true;
-      const categoryMatch = selected.category ? product.category === selected.category : true;
-      const subcategoryMatch = selected.subcategory ? product.subcategory === selected.subcategory : true;
-      const colorHex = colors.find((c) => c.name === selected.color)?.hex;
-      console.log("Selected color name:", selected.color);
-      console.log("Expected hex:", colorHex);
-      console.log("Product color:", product.color);
-      
-      const colorMatch = selected.color
-        ? product.color === colorHex
-        : true;
-      
-    
-      const availableMatch = selected.availability
-      ? product.availability === (selected.availability === "InStock")
-      : true;
-
-      const matchResult = sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch;
-      console.log("Match result:", matchResult, product);
-      return matchResult;
-    })
-  : [];
-
-
-
+    ? products.filter((product) => {
+        const sizeMatch = selected.size ? product.size.includes(selected.size) : true;
+        const tagMatch = selected.tag ? product.tag === selected.tag : true;
+        const categoryMatch = selected.category ? product.category === selected.category : true;
+        const subcategoryMatch = selected.subcategory ? product.subcategory === selected.subcategory : true;
+        const colorHex = colors.find((c) => c.name === selected.color)?.hex;
+        const colorMatch = selected.color ? product.color === colorHex : true;
+        const availableMatch = selected.availability
+          ? product.availability === (selected.availability === "InStock")
+          : true;
+        return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch;
+      })
+    : [];
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
@@ -117,3 +95,4 @@ export default function ProductList() {
     </div>
   );
 }
+

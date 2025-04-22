@@ -1,1 +1,32 @@
 @import url('../Poppins-Font.css');
+
+.bestSeller-Color-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .bestSeller-Color-hover-box {
+    background-color: #ffa500;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .bestSeller-color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .bestSeller-color-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+  }

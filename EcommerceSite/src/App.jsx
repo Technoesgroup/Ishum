@@ -18,6 +18,7 @@ import Legacy from './Component/Legacy/Legacy';
 import SearchBar from './Component/Landing/SearchMobileView/SearchMobile';
 import MobileLogin from './Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
 import UserAccount from './Pages/MyProfilePage';
+import IshumExclusive from './Pages/IshumExclusivePage';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Route path="/Search-Bar"  element={<SearchBar />}></Route>
       <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
       <Route path="/Profile"  element={<UserAccount />}></Route>
+      <Route path="/Ishum-Exclusive"  element={<IshumExclusive />}></Route>
      </Routes>
      <Footer />
      </Router>

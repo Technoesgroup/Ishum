@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import UnderLine from '../../images/Undertextline.png';
-import ProductList from './BestSelllerProduct';
-import ColorList from './BestSellerColor';
-import CategoryList from './BestSellerCategory';
-import Banner from './BestSellerBanner';
-import { useFilter } from "../../Component/Context-API/Fillter-Context";
+import ProductList from '../../Component/BestSeller/BestSelllerProduct';
+import ColorList from '../BestSeller/BestSellerColor';
+import CategoryList from '../BestSeller/BestSellerCategory';
+import Banner from '../BestSeller/BestSellerBanner';
+import { useFilter } from "../Context-API/Fillter-Context";
 
 export default function Bestsellers() {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -36,7 +36,7 @@ export default function Bestsellers() {
     <>
       <div className="bestsellers-container">
         <div className="bestseller-MainHeading">
-          <h2 className="bestsellers-title">BESTSELLERS OF ISHUM</h2>
+          <h2 className="bestsellers-title">JASH-E-RANG COLLECTION</h2>
           <img className="UnderLine" src={UnderLine} alt="" />
         </div>
 
@@ -91,18 +91,18 @@ export default function Bestsellers() {
             <div className="Allproduct-Boxes">
               <div className="store-bestseller">
                 <h3>STORE / BESTSELLERS</h3>
-                <h2>73 PRODUCTS</h2>
+                <h2>59 PRODUCTS</h2>
               </div>
 
               <div className="bestseller-boxes">
                 <div className="bestseller-boxes-1  for-all-boxes-btn">
-                  <button onClick={() => handleSelection("tag", "Exclusive")}>EXCLUSIVE</button>
+                  <button onClick={() => handleSelection("tag", "Exclusive")}>JASHN E RANG</button>
                   <button className="btn-sort" onClick={handleToggleSortDropdown}>
                     SORT - LOW TO HIGH <KeyboardArrowRightIcon className="Sort-Right-icon" />
                   </button>
                   {openSortDropdown && (
                     <ul className="SortPrice-dropdown">
-                      {["100 to 500", "1000 to 2000", "3000", "10000", "50000 to 60000"].map((range) => (
+                      {[ "1000 to 2000", "3000", "10000", "50000 to 60000"].map((range) => (
                         <li key={range} onClick={() => handleSelectSortOption(range)}>
                           <input
                             type="radio"
@@ -117,18 +117,18 @@ export default function Bestsellers() {
                   )}
                 </div>
                 <div className="bestseller-boxes-2  for-all-boxes-btn">
-                  <button onClick={() => handleSelection("tag", "Co-OrdSets")}>CO-ORDSETS</button>
-                  <button onClick={() => handleSelection("tag", "Suits")}>SUITS</button>
+                  <button onClick={() => handleSelection("tag", "Co-OrdSets")}>GULZAAR</button>
+                  <button onClick={() => handleSelection("tag", "Suits")}>RANGREZ</button>
                 </div>
                 <div className="bestseller-boxes-3 for-all-boxes-btn">
-                  <button onClick={() => handleSelection("tag", "Anarkali")}>ANARKALIS</button>
-                  <button onClick={() => handleSelection("tag", "Dhoti")}>DHOTI</button>
+                  <button onClick={() => handleSelection("tag", "Anarkali")}>UNVEIL RIWAYAT</button>
+                  <button onClick={() => handleSelection("tag", "Dhoti")}>NOOR EDITS</button>
                 </div>
               </div>
             </div>
 
             {/* product */}
-            <ProductList queryParam="isBestseller=true"/>
+            <ProductList queryParam="isExclusive=true" />
           </div>
         </div>
       </div>
@@ -136,3 +136,13 @@ export default function Bestsellers() {
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+

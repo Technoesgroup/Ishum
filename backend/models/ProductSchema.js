@@ -1,4 +1,3 @@
-// models/Product.js
 const  mongoose  = require("mongoose");
 
 const productSchema = new mongoose.Schema({
@@ -34,12 +33,31 @@ const productSchema = new mongoose.Schema({
   },
   size: {
     type: [String],
-    enum: ["X", "L", "XL", "M"],
+    enum: ["XS","X", "L", "XL", "M"],
     required: true,
   },
   color: {
     type: String,
     required: true,
+  },
+
+  collectionName:{
+    type:String,
+    enum: ["GulZaar", "Rangrez", "Noor Edits", "Rajwada riwaz", "Eid", "Karwa chauth", "Jashn E Rang", "Unveli Riwayat", "Co-ord sets","Diwali", "Anarkali", "sharara"],
+    required: true,
+
+  },
+
+  isBestseller:{
+    type: Boolean,
+  },
+
+  isExclusive:{
+    type: Boolean,
+  },
+
+  isIshumStore:{
+    type:Boolean,
   },
 
   availability: {

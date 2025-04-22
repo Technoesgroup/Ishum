@@ -2,7 +2,7 @@ const Product = require("../models/ProductSchema");
 
 const addProduct = async (req, res) => {
   try {
-    const { name,category, subcategory, color,  discount, price, description, size, availability } = req.body;
+    const { name, category, subcategory, color, discount, price, description, size, availability, collectionName, isBestseller, isExclusive,  isIshumStore } = req.body;
     const image = req.file?.filename || "";
 
     const product = new Product({
@@ -15,8 +15,13 @@ const addProduct = async (req, res) => {
       price,
       description,
       size,
-      availability: availability === "true" || availability === true // string ya boolean dono handle ho
+      availability: availability === "true" || availability === true, 
+      collectionName,
+      isBestseller: isBestseller === "true" || isBestseller === true,
+      isExclusive: isExclusive === "true" || isExclusive === true,
+      isIshumStore: isIshumStore === "true" ||  isIshumStore === true,
     });
+    
 
     await product.save();
     res.status(201).json({ success: true, message: "Product added successfully", product });
@@ -31,7 +36,10 @@ const getProducts = async (req, res) => {
   try {
     // Query se filters mil rahe honge (e.g., ?category=Suits&color=Red)
     const filters = {};
-
+    if (req.query.isBestseller) filters.isBestseller = req.query.isBestseller === "true";
+    if (req.query.isExclusive) filters.isExclusive = req.query.isExclusive === "true";
+    if (req.query.isIshumStore) filters.isIshumStore = req.query.isIshumStore === "true";
+    if (req.query.collectionName) filters.collectionName = req.query.collectionName;    
     if (req.query.category) filters.category = req.query.category;
     if (req.query.subcategory) filters.subcategory = req.query.subcategory;
     if (req.query.color) filters.color = req.query.color;
@@ -50,7 +58,7 @@ const getProducts = async (req, res) => {
     console.error("Error in getProducts:", error);
     res.status(500).json({ success: false, message: "Failed to fetch products", error });
   }
-};
+}; 
 
 module.exports = {
   addProduct,

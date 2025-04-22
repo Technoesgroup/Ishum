@@ -3,16 +3,21 @@ import "../../Style-CSS/Ishum-AdminPanel/ProductAdminPanel.css";
 
 const AddProduct = () => {
   const [form, setForm] = useState({
-    name:"",
+    name: "",
     category: "",
     subcategory: "",
     color: "",
-    discount:"",
+    discount: "",
     price: "",
     description: "",
     size: [],
-    availability: "true", 
+    availability: "true",
+    collectionName: "", 
+    isBestseller: false, 
+    isExclusive: false, 
+    isIshumStore:false, 
   });
+
 
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -48,10 +53,14 @@ const AddProduct = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {  
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("collectionName", form.collectionName);
+    formData.append("isBestseller", form.isBestseller);
+    formData.append("isExclusive", form.isExclusive);
+    formData.append("isIshumStore", form.isIshumStore);
     formData.append("name", form.name);
     formData.append("category", form.category);
     formData.append("subcategory", form.subcategory);
@@ -61,7 +70,7 @@ const AddProduct = () => {
     formData.append("description", form.description);
     form.size.forEach((s) => formData.append("size[]", s));
     formData.append("image", image);
-    formData.append("availability", form.availability); 
+    formData.append("availability", form.availability);
 
     const res = await fetch("http://localhost:4000/api/products/add", {
       method: "POST",
@@ -72,16 +81,20 @@ const AddProduct = () => {
     alert(data.message);
     if (data.success) {
       setForm({
-        name:"",
+        name: "",
         category: "",
         subcategory: "",
         color: "",
+        discount: "",
         price: "",
-        discount:"",
         description: "",
         size: [],
         availability: "true",
-      });
+        collectionName: "",
+        isBestseller: false,
+        isExclusive: false,
+        isIshumStore:false,
+      });      
       setImage(null);
       setPreview(null);
     }
@@ -91,6 +104,62 @@ const AddProduct = () => {
     <div className="add-product-container">
       <h2>Add Product</h2>
       <form onSubmit={handleSubmit}>
+
+        <label>Collection Names:</label>
+        <select name="collectionName" value={form.collectionName} onChange={handleChange} required>
+          <option value="">Select Collection</option>
+          <option value="GulZaar">GulZaar</option>
+          <option value="Rangrez">Rangrez</option>
+          <option value="Noor Edits">Noor Edits</option>
+          <option value="Rajwada riwaz">Rajwada riwaz</option>
+          <option value="Eid">Eid</option>
+          <option value="Karwa chauth">Karwa chauth</option>
+          <option value="Jashn E Rang">Jashn E Rang</option>
+          <option value="Unveli Riwayat">Unveli Riwayat</option>
+          <option value="Co-ord sets">Co-ord sets</option>
+          <option value="Diwali">Diwali</option>
+          <option value="Anarkali">Anarkali</option>
+          <option value="sharara">sharara</option>
+        </select>
+
+        <label>
+          <input
+            type="checkbox"
+            name="isBestseller"
+            checked={form.isBestseller}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, isBestseller: e.target.checked }))
+            }
+          />
+          Mark as Bestseller
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="isExclusive"
+            checked={form.isExclusive}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, isExclusive: e.target.checked }))
+            }
+          />
+          Mark as Exclusive
+        </label>
+
+
+        <label>
+          <input
+            type="checkbox"
+            name="isIshumStore"
+            checked={form.isIshumStore}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, isIshumStore: e.target.checked }))
+            }
+          />
+          Mark as isIshumStore
+        </label>
+
+
         <label>Category:</label>
         <select name="category" value={form.category} onChange={handleChange} required>
           <option value="">Select Category</option>
@@ -141,7 +210,7 @@ const AddProduct = () => {
         <input type="file" accept="image/*" onChange={handleImage} required />
         {preview && <img src={preview} alt="preview" className="image-preview" />}
 
-        
+
         <label>Without Discount Price</label>
         <input type="number" name="discount" value={form.discount} onChange={handleChange} required />
 
@@ -153,6 +222,7 @@ const AddProduct = () => {
 
         <label>Size:</label>
         <div className="sizes-container">
+          <label><input type="checkbox" value="XS" onChange={handleCheckbox} checked={form.size.includes("XS")} /> XS</label>
           <label><input type="checkbox" value="X" onChange={handleCheckbox} checked={form.size.includes("X")} /> X</label>
           <label><input type="checkbox" value="L" onChange={handleCheckbox} checked={form.size.includes("L")} /> L</label>
           <label><input type="checkbox" value="XL" onChange={handleCheckbox} checked={form.size.includes("XL")} /> XL</label>

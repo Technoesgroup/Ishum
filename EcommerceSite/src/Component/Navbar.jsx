@@ -135,9 +135,9 @@ export default function Navbar() {
     <div  className='ishum-nav-li-serachbar'>
 
     <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
-          <Link to="/store">STORE</Link>
+          <Link to="/">STORE</Link>
           <Link to="/bestsellers">BESTSELLERS</Link>
-          <Link to="/exclusive">ISHUM'S EXCLUSIVE</Link>
+          <Link to="/Ishum-Exclusive">ISHUM'S EXCLUSIVE</Link>
           <div className="dropdown" onMouseEnter={() => setIsRecommendationOpen(true)} onMouseLeave={() => setIsRecommendationOpen(false)}>
           <div  className='RECOMMENDATION'>ISHUM'S RECOMMENDATION <KeyboardArrowDownSharpIcon /></div>
           {isRecommendationOpen && (
