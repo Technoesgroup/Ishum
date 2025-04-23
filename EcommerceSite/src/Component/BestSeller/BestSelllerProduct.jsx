@@ -4,6 +4,7 @@ import "../../Style-CSS/BestSeller-css/BestSellerProduct.css";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import axios from "axios";
 import { colors } from "../BestSeller/ColorSection";
+import { useNavigate } from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 6;
 
@@ -11,6 +12,8 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { selected } = useFilter();
+  const navigate = useNavigate();
+  const userId = "123456"; // Replace with dynamic user ID
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -49,6 +52,22 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     }
   };
 
+  // Function to add product to cart
+  const handleAddToCart = async (product) => {
+    try {
+      const res = await axios.post("http://localhost:4000/api/cart/addtocart", {
+        userId,
+        productId: product._id,
+        quantity: 1,
+        size: product.size[0], // Default size selection
+        color: product.color,  // Selected color
+      });
+      alert("Product added to cart!");
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+    }
+  };
+
   return (
     <div>
       <div className="bestsellers-products-grid">
@@ -66,8 +85,10 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
                 <p className="bestsellers-product-price">₹{product.price}</p>
               </div>
               <div className="LocalMall-Buy-Now-button">
-                <LocalMallIcon className="LocalMallIcon" />
-                <button className="bestsellers-buy-button">Buy Now</button>
+                <LocalMallIcon className="LocalMallIcon" onClick={() => handleAddToCart(product)} />
+                <button className="bestsellers-buy-button" onClick={() => handleAddToCart(product)}>
+                  Buy Now
+                </button>
               </div>
             </div>
           </div>
@@ -95,4 +116,5 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     </div>
   );
 }
+
 

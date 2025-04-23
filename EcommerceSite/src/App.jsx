@@ -7,7 +7,6 @@ import './App.css'
 import Footer from './Component/Footer';
 import Login from "./Component/B-TO-C-Login/LoginUser"; 
 import BestSeller from "./Component/BestSeller/BestSellerCom1"; 
-import Cart from './Component/IshumCart/EmptyCart';
 import MyOrder from './Component/MyOrder/MyOrder';
 import Shipping from './Component/IshumCart/ShippingCartCom1';
 import Collection from './Component/Ishum-AdminPanel/CollectionPanel';
@@ -26,10 +25,10 @@ import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 
 
 
-import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
-import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
-import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
-import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
+// import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
+// import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
+// import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
+// import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
 
 
 
@@ -42,8 +41,7 @@ function App() {
      <Route path="/"  element={<Home />}></Route>
       <Route path="/login"  element={<Login />}></Route>
       <Route path="/bestsellers"  element={<BestSeller />}></Route>
-      <Route path="/AddCart"  element={<FilledCart />}></Route>
-      <Route path="/Cart"  element={<Cart />}></Route>
+      <Route path="/Cart"  element={<FilledCart />}></Route>
       <Route path="/MyOrder"  element={<MyOrder />}></Route>
       <Route path="/Shipping"  element={<Shipping />}></Route>
       <Route path="/collection"  element={<Collection />}></Route>
@@ -55,16 +53,15 @@ function App() {
       <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
       <Route path="/Profile"  element={<UserAccount />}></Route>
       <Route path="/Ishum-Exclusive"  element={<IshumExclusive />}></Route>
-
       <Route path="/Ishum-Exclusive-Gulzar"  element={<GULZAAR />}></Route>
       <Route path="/Ishum-Exclusive-Rangrez"  element={<RANGREZ />}></Route>
       <Route path="/Ishum-Exclusive-Noor-Edits"  element={<NOOREDITS />}></Route>
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
       
-      <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
+      {/* <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
       <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>
       <Route path="/Ishum-Bestseller-Cordsets"  element={<CORDSETS />}></Route>
-      <Route path="/Ishum-Bestseller-Anarkali"  element={<ANARKALIS />}></Route>
+      <Route path="/Ishum-Bestseller-Anarkali"  element={<ANARKALIS />}></Route> */}
 
      </Routes>
      <Footer />

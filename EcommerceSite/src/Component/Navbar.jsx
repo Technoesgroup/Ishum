@@ -19,10 +19,10 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen'; // Different menu icon
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
-
+import { useCart } from "../ContextApiCart/CartContextApi";
 import "../Style-CSS/Navbar.css";
 import { useEffect, useState } from 'react';
+import Badge from "@mui/material/Badge";
 
 export default function Navbar() {
   const [showB2BModal, setShowB2BModal] = useState(false);
@@ -35,6 +35,9 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
+
+  const { cartItems } = useCart();
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleSearchClick = () => {
     navigate('/Search-Bar');
@@ -81,7 +84,12 @@ export default function Navbar() {
     }
   }} />
           <SearchIcon   className='mobile-search-icon'   onClick={handleSearchClick}/>
-          <ShoppingCartOutlinedIcon className="Ishum-icon"  onClick={() => navigate("/Cart")} />
+          <Badge badgeContent={totalItems} color="error">
+      <ShoppingCartOutlinedIcon
+        className="Ishum-icon"
+        onClick={() => navigate("/Cart")}
+      />
+    </Badge>
           <MenuIcon className="Ishum-icon  profile-menu-icon"
           onClick={() => setIsOpen(!isOpen)}
           onMouseEnter={() => setIsOpen(true)}
