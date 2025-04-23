@@ -98,13 +98,30 @@
   }
 
   .Tax-include{
+    font-family: 'PoppinsRegular';
     font-size: 0.9rem;
     margin: 10px 0;
   }
 
+  
+  .ishum-Price-cart{
+    font-family: 'PoppinsRegular';
+    font-size: 1.7rem !important;
+  }
+
   .Cartitem-details-tile-price p{
-     font-size: 1.7rem;
+     font-size: 0.9rem;
+     font-family: 'PoppinsRegular';
      margin-top: 20px;
+  }
+
+  .Cartitem-details-tile-price  h2{
+  font-size: 1.5rem;
+  font-family: 'PoppinsRegular';
+  }
+
+  .Ishum-Size-paragraph{
+    font-size: 1.3rem;
   }
 
   .TotalAmount-Content{
@@ -132,15 +149,16 @@
 
 
   .SimilarItems-products-grid {
-    width: 70%;
+    width: 65%;
     height: auto;
     display: grid;
+    gap: 20px;
     grid-template-rows: repeat(3, 1fr);
   }
   
   .SimilarItems-product-card {
     width: 100%;
-    height: 80%;
+    height: 75%;
     text-align: center;
     background: #EEEBE4;
   }
@@ -155,19 +173,22 @@
   }
   
   .SimilarItems-product-name {
-    font-size:0.9rem;
+    font-size:1.2rem;
+    font-family: 'PoppinsRegular';
     color: goldenrod;
-    font-weight: bold;
   }
   
   .SimilarItems-product-original-price {
+    font-size: 1rem;
     text-decoration: line-through;
     color: gray;
+    font-family: 'PoppinsRegular';
   }
   
   .SimilarItems-product-price {
     color: gray;
-    font-weight: bold;
+    font-family: 'PoppinsRegular';
+    font-size: 1rem;
   }
   .LocalMallIcon{
     background-color: transparent;
@@ -189,7 +210,7 @@
     gap: 20px;
     justify-content: center;
     padding: 10px  0;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   
   
@@ -216,6 +237,13 @@
     margin-bottom: 20px; 
    }
 
+
+   .Cart-Check-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+   }
 
    .Cart-Check-box input[type="checkbox"] {
     width: 30px;
@@ -254,6 +282,17 @@
     opacity: 1;
 }
 
+
+.Cart-Check-box .Cartproduct-remove-button{
+  border: none;
+  color: red;
+  cursor: pointer;
+  background-color:#EEEBE4 ;
+}
+
+.Cart-deleteicon{
+  font-size: 2.6rem !important;
+}
 
 @media(max-width:768px){
 
@@ -316,7 +355,7 @@
     margin: 6px 0;
   }
 
-  .Ishum-Size-icon{
+  .Ishum-Size-paragraph{
     font-size: 1rem !important;
   }
 

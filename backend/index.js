@@ -6,6 +6,7 @@ const Collection = require("./models/CollectionSchema1");
 const CollectionSchema2 = require("./models/CollectionSchema2");
 const userRouter = require("./router/userLoginrouter");
 const ProductRouter = require("./router/Productrouter");
+const cartRouter = require("./router/Cartrouter");
 const path = require("path");
 
 const app = express();
@@ -37,6 +38,7 @@ const upload = multer({ storage: storage });
 
 app.use("/api/user", userRouter); 
 app.use("/api/products", ProductRouter); 
+app.use("/api/cart", cartRouter); 
  
 
 
