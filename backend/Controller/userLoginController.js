@@ -66,13 +66,12 @@ const registerUser = async (req, res) => {
   }
 };
 
-// 🔸 VERIFY (Step 2 - Validate OTP & Register user)
 const verifyOtp = async (req, res) => {
-  const { phone, otp } = req.body;
+  const { phone, otp, mode, name, email } = req.body;
 
   try {
-    if (!phone || !otp) {
-      return res.status(400).json({ success: false, message: "Phone and OTP required" });
+    if (!phone || !otp || !mode) {
+      return res.status(400).json({ success: false, message: "Phone, OTP and Mode required" });
     }
 
     const userData = OTP_STORE[phone];
@@ -84,25 +83,50 @@ const verifyOtp = async (req, res) => {
       return res.status(400).json({ success: false, message: "Incorrect OTP" });
     }
 
-    const newUser = new userModel({
-      name: userData.name,
-      email: userData.email,
-      phone: phone,
-      isVerified: true
-    });
+    if (mode === "register") {
+      // 🔥 Registration Flow
+      if (!name || !email) {
+        return res.status(400).json({ success: false, message: "Name and Email required for registration" });
+      }
 
-    await newUser.save();
+      const existingUser = await userModel.findOne({ phone });
+      if (existingUser) {
+        return res.status(400).json({ success: false, message: "User already exists, please login." });
+      }
 
-    delete OTP_STORE[phone]; // Clear OTP data
+      const newUser = new userModel({
+        name,
+        email,
+        phone,
+        isVerified: true,
+      });
 
-    const token = createToken(newUser._id);
-    res.status(200).json({ success: true, message: "User registered", token });
+      await newUser.save();
+
+      delete OTP_STORE[phone];
+      const token = createToken(newUser._id);
+      res.status(200).json({ success: true, message: "User registered successfully", token });
+
+    } else if (mode === "login") {
+      // 🔥 Login Flow
+      const existingUser = await userModel.findOne({ phone });
+      if (!existingUser) {
+        return res.status(400).json({ success: false, message: "User not found, please register first." });
+      }
+
+      delete OTP_STORE[phone];
+      const token = createToken(existingUser._id);
+      res.status(200).json({ success: true, message: "Login successful", token });
+    } else {
+      res.status(400).json({ success: false, message: "Invalid mode" });
+    }
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: "Verification failed", error: err.message });
   }
 };
+
 
 // 🔁 RESEND OTP
 const resendOtp = async (req, res) => {
@@ -130,7 +154,7 @@ const resendOtp = async (req, res) => {
   }
 };
 
-// 🌟 OPTIONAL: Use this in future to directly send OTP without name/email
+// OPTIONAL: Use this in future to directly send OTP without name/email
 const sendOtp = async (req, res) => {
   const { phone } = req.body;
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../ContextApiCart/LoginContextApi"; 
 import "./OtpVerification.css";
 import GoogleIcon from '@mui/icons-material/Google';
 
-const OtpVerification = ({ onBack, phone }) => {
+const OtpVerification = ({ onBack, phone , mode}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
+  const { setIsLoggedIn } = useAuth();
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -44,7 +46,13 @@ const OtpVerification = ({ onBack, phone }) => {
       const response = await fetch("http://localhost:4000/api/user/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: normalizePhone(phone), otp: enteredOtp }),
+        
+        body: JSON.stringify({ 
+          phone: normalizePhone(phone),
+          otp: enteredOtp,
+          mode: mode    // ✅ Use dynamic mode
+        }),
+        
       });
 
       const data = await response.json();
@@ -52,6 +60,7 @@ const OtpVerification = ({ onBack, phone }) => {
       if (data.success) {
         alert("OTP Verified ✅");
         localStorage.setItem("token", data.token);
+        setIsLoggedIn(true); 
         // Navigate or close modal here
       } else {
         alert(data.message);

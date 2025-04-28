@@ -7,6 +7,9 @@ const CollectionSchema2 = require("./models/CollectionSchema2");
 const userRouter = require("./router/userLoginrouter");
 const ProductRouter = require("./router/Productrouter");
 const cartRouter = require("./router/Cartrouter");
+const shippingRoutes = require("./router/Shippingrouter");
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
 const path = require("path");
 
 const app = express();
@@ -19,6 +22,11 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/uploads", express.static("uploads"));
 
+
+const razorpay = new Razorpay({
+    key_id: "rzp_test_Tg2EHa9WfYqYt0",           // Replace with your Razorpay key_id
+    key_secret: "FXqRgaBmdvJDjVzN28PAlgGl",   // Replace with your Razorpay key_secret
+});
 
 // Database Connection
 mongoose.connect(MONGO_URI)
@@ -39,11 +47,43 @@ const upload = multer({ storage: storage });
 app.use("/api/user", userRouter); 
 app.use("/api/products", ProductRouter); 
 app.use("/api/cart", cartRouter); 
- 
+app.use("/api/shipping", shippingRoutes);
 
 
 
+// Create order
+app.post("/create-order", async (req, res) => {
+    const { amount, currency = "INR", receipt = "receipt#1" } = req.body;
 
+    try {
+        const options = {
+            amount: amount * 100, // amount in paisa
+            currency,
+            receipt,
+        };
+
+        const order = await razorpay.orders.create(options);
+        res.json(order);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+// Verify payment
+app.post("/verify-payment", (req, res) => {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSignature = crypto.createHmac("sha256", "FXqRgaBmdvJDjVzN28PAlgGl")
+        .update(body.toString())
+        .digest("hex");
+
+    if (expectedSignature === razorpay_signature) {
+        res.json({ status: "success", message: "Payment verified successfully" });
+    } else {
+        res.status(400).json({ status: "fail", message: "Invalid signature" });
+    }
+});
 
 
 
