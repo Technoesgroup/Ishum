@@ -119,7 +119,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
             </p>
           </>
         ) : (
-          <OtpVerification phone={phone} onBack={() => setShowOtpStep(false)} />
+          <OtpVerification phone={phone} mode="register" onBack={() => setShowOtpStep(false)} />
         )}
       </div>
 

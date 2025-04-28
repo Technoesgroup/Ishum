@@ -3,7 +3,7 @@
 .shipping-container {
     margin: auto;
     padding: 60px 7vw;
-    background: #fff;
+    background: #EEEBE4;
     margin-bottom: 40px;
   }
   
@@ -47,17 +47,20 @@
   .shipping-form-grid input{
     padding: 10px;
     width: 400px;
+    background-color:  #EEEBE4;
     border: none;
-    border-bottom: 1px solid rgb(205, 205, 205);
+    border-bottom: 1px solid rgb(150, 150, 150);
     outline: none; /* Removes the black outline on click */
     transition: border-color 0.3s ease-in-out;
   }
 
   .shipping-input {
     width: 100%;
+    background-color: #EEEBE4;
+    font-size: 20px;
     padding: 10px;
     padding-right: 30px; /* Space for icon */
-    border: 1px solid #e4e4e4;
+    border-bottom: 1px solid gray;
     border-radius: 5px;
     outline: none;
   }
@@ -133,9 +136,22 @@
   }
 
   .Address-shipping-h3 {
+    text-align: left !important;
     position: relative;
     width: 100%;
     padding-bottom: 10px;
+  }
+
+  .Address-shipping-h3 h3{
+    text-align: left !important;
+  }
+
+  .Coupon-Code h3{
+    text-align: left;
+  }
+
+  .shipping-checkbox-container h3{
+    text-align: left;
   }
   
   .Address-shipping-h3::after {

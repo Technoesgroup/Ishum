@@ -23,8 +23,11 @@ import { useCart } from "../ContextApiCart/CartContextApi";
 import "../Style-CSS/Navbar.css";
 import { useEffect, useState } from 'react';
 import Badge from "@mui/material/Badge";
+import { useAuth } from '../ContextApiCart/LoginContextApi';
 
 export default function Navbar() {
+  const { setIsLoggedIn } = useAuth(); 
+  const { isLoggedIn } = useAuth();
   const [showB2BModal, setShowB2BModal] = useState(false);
   const [showB2UModal, setShowB2UModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -41,6 +44,12 @@ export default function Navbar() {
 
   const handleSearchClick = () => {
     navigate('/Search-Bar');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");   // token hata do
+    setIsLoggedIn(false);               // login false kar do
+    navigate("/");                      // homepage ya login page redirect
   };
 
 
@@ -73,18 +82,25 @@ export default function Navbar() {
         <div className="Ishum-logo-container">
           <img src={logo} alt="Ishum Logo" className="Ishum-logo" />
         </div>
-
         <div className="Ishum-right-icons">
         <div  className='ishum-rightside-main-icon'>
-          <PersonIcon className="Ishum-icon" onClick={() => {
-    if (isMobile) {
-      navigate("/Login-mobile-profile"); // 👉 Replace with your mobile route
-    } else {
-      setShowB2UModal(true); // Existing modal logic for desktop
-    }
-  }} />
-          <SearchIcon   className='mobile-search-icon'   onClick={handleSearchClick}/>
-          <Badge badgeContent={totalItems} color="error">
+  
+  {!isLoggedIn && (
+  <PersonIcon
+    className="Ishum-icon"
+    onClick={() => {
+      if (isMobile) {
+        navigate("/Login-mobile-profile");
+      } else {
+        setShowB2UModal(true);
+      }
+    }}
+  />
+)}
+
+
+    <SearchIcon   className='mobile-search-icon'   onClick={handleSearchClick}/>
+      <Badge badgeContent={totalItems} color="error">
       <ShoppingCartOutlinedIcon
         className="Ishum-icon"
         onClick={() => navigate("/Cart")}
@@ -101,8 +117,7 @@ export default function Navbar() {
             <MenuOpenIcon className="Ishum-menu-icon  menuopen-icon" onClick={() => setIsMenuOpen(true)} />
           )}
 
-        
-      {isOpen && (
+{isLoggedIn && isOpen && (
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -126,8 +141,8 @@ export default function Navbar() {
             <li className="Profile-menu-item">
               <Link  to={"/MyOrder"}> <EmailIcon /> Support</Link>
             </li>
-            <li className="Profile-menu-item logout">
-              <Link  to={"/MyOrder"}> <LogoutOutlinedIcon /> Logout</Link>
+            <li className="Profile-menu-item logout"   onClick={handleLogout}>
+              <Link  to={"/"}> <LogoutOutlinedIcon  /> Logout</Link>
             </li>
           </ul>
         </motion.div>
