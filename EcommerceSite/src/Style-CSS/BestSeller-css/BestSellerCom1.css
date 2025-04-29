@@ -27,9 +27,10 @@
   }
   
   .bestsellers-filters h3 {
+    font-family: 'PoppinsLight';
     margin-bottom: 3.5vw;
-    font-weight: 300 !important;
-    font-size: 2.2vw;
+    font-weight: 100 !important;
+    font-size: 2vw;
     text-align: left;
     color: rgb(76, 76, 76);
   }
@@ -82,9 +83,9 @@
   }
 
   .store-bestseller h3{
-    font-family: 'PoppinsRegular';
+    font-family: 'PoppinsLight';
      font-size: 1vw;
-     font-weight: 500;
+     font-weight: 100;
      text-align: left;
      color: #4B3D1A;
   }

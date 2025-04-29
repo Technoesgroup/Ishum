@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // 👈 Import useNavigate
 import "../../Style-CSS/Landing-css/LandingCom2.css";
 import axios from "axios";
 import UnderLine from '../../images/Undertextline.png';
 
 const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
+  const navigate = useNavigate(); // 👈 Initialize navigate
 
   useEffect(() => {
     fetchCollections();
@@ -21,11 +23,11 @@ const CollectionSection = () => {
 
   return (
     <div className="LandingCom-2-collection-container">
-    <div className="ishumCom-2-contents-MainHeading">
-            <h2 className="ishum-content-title">SHOP BY COLLECTION</h2>
-            <img className="ishum-contents-Com2-UnderLine" src={UnderLine} alt="" />
-          </div>
-   
+      <div className="ishumCom-2-contents-MainHeading">
+        <h2 className="ishum-content-title">SHOP BY COLLECTION</h2>
+        <img className="ishum-contents-Com2-UnderLine" src={UnderLine} alt="" />
+      </div>
+
       <div className="LandingCom-2-collection-grid">
         {collections.map((col, index) => (
           <div key={index} className="LandingCom-2-collection-item">
@@ -41,10 +43,15 @@ const CollectionSection = () => {
           </div>
         ))}
       </div>
-      <button className="LandingCom-2-view-all-button">VIEW ALL COLLECTIONS</button>
+
+      <button 
+        className="LandingCom-2-view-all-button" 
+        onClick={() => navigate('/Collection')} // 👈 Navigate to route
+      >
+        VIEW ALL COLLECTIONS
+      </button>
     </div>
   );
 };
 
 export default CollectionSection;
-

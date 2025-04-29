@@ -7,7 +7,7 @@
   z-index: 1100;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.235);
   position: sticky;
-  top: 0;
+  top: 26px;
 }
 
 .Ishum-navbar {
@@ -21,17 +21,25 @@
 .Ishum-social-icons {
   display: flex;
   gap: 1vw;
-  color: #4B3D1A;
+  color: white;
 }
 
 .Ishum-social-icons .socialicon {
-  font-size: 2rem !important;
+  font-size: 0.8rem; /* slightly larger for clarity */
   cursor: pointer;
-
+  padding: 3px; /* better spacing inside circle */
+  background-color: #4b3d1a;
+  border-radius: 50%;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .Ishum-social-icons .socialicon:hover {
-  color: goldenrod;
+  background-color: #3a2f14;
+  transform: scale(1.05);
 }
 
 .ishum-nav-li-serachbar{
@@ -39,6 +47,8 @@
   width: 100%;
   flex-direction: row;
   align-items: center;
+  /* justify-content: space-evenly; */
+  gap: 12%;
   background-color: #EEEBE4;
 }
 
@@ -72,7 +82,7 @@
 }
 
 .Ishum-logo {
-  height: 5rem;
+  height: 4rem;
 }
 
 .Ishum-nav-links {
@@ -93,7 +103,7 @@
 .Ishum-nav-links a {
   color:#4B3D1A;
   font-family: "PoppinsRegular";
-  font-size: 1vw;
+  font-size: 0.8vw;
   border: none !important;
 }
 
@@ -108,14 +118,46 @@
 .Ishum-right-icons .Ishum-icon {
   color: #4B3D1A;
   cursor: pointer;
-  font-size: 2.2rem;
+  font-size: 1.5rem;
+}
+.info-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  padding: 8px 0;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+ gap: 20%;
 }
 
+.info-links {
+  display: flex;
+  justify-content: center;
+  padding: 2px 4vw;
+  gap: 2rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: #6f3f36; /* rich brown tone */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.info-links span {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.info-links span:hover {
+  color: #a75e4d;
+}
 .BUSINESS-TO-BUSINESS {
-  padding: 0.9vw;
+  padding: 0.5vw;
   border: none;
   font-family: "PoppinsRegular";
-  font-size: 0.8vw;
+  font-size: 0.6vw;
   border-radius: 4px;
   color: white;
   cursor: pointer;
@@ -180,7 +222,7 @@
 .Ishum-search-bar {
   display: none;
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 5px;
   border-radius: 8px;
 }
 
@@ -270,9 +312,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
+  gap: 2px;
   font-family: "PoppinsRegular";
-  font-size: 1vw;
+  font-size: 0.8vw;
   position: relative;
   transition: all 0.3s ease;
 }
@@ -515,4 +557,33 @@
   }
 }
 
+.info-header {
+ 
+  top: 0;
+  width: 100%;
+  background-color: #EEEBE4;
+  z-index: 1100;
+  padding: 6px 0;
+ border-bottom: solid 1px rgba(0, 0, 0, 0.063);
+}
+
+.info-links {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: #6f3f36;
+  margin-left: 2rem;
+}
+
+.info-links span {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.info-links span:hover {
+  color: #a75e4d;
+}
 
