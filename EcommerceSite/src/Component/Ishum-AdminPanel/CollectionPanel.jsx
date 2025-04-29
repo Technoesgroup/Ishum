@@ -18,7 +18,7 @@ const AdminPanel = () => {
     // Fetch collections from API 1
     const fetchCollections1 = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/collections");
+            const response = await axios.get("http://localhost:4000/api/get-collections");
             setCollections1(response.data);
         } catch (error) {
             console.error("Error fetching collections", error);
@@ -28,7 +28,7 @@ const AdminPanel = () => {
     // Fetch collections from API 2
     const fetchCollections2 = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/collectionsSec");
+            const response = await axios.get("http://localhost:4000/api/get-collectionsSec");
             setCollections2(response.data);
         } catch (error) {
             console.error("Error fetching collections", error);

@@ -2,15 +2,52 @@ const Product = require("../models/ProductSchema");
 
 const addProduct = async (req, res) => {
   try {
-    const { name, category, subcategory, color, discount, price, description, size, availability, collectionName, isBestseller, isExclusive,  isIshumStore } = req.body;
-    const image = req.file?.filename || "";
+    const { 
+      name, 
+      category, 
+      subcategory, 
+      color, 
+      discount, 
+      price, 
+      description, 
+      size, 
+      availability, 
+      collectionName, 
+      isBestseller, 
+      isExclusive, 
+      isIshumStore 
+    } = req.body;
 
+    // Main image
+    const image = req.files?.['image']?.[0]?.filename || "";
+
+    // Thumbnails
+    const thumbnails = req.files?.['thumbnails']?.map(file => file.filename) || [];
+
+    // Color Images
+    const colorImages = [];
+    const uploadedColorImages = req.files?.['colorImages'] || [];
+    const colorNames = req.body?.['colorNames'];
+
+    for (let i = 0; i < uploadedColorImages.length; i++) {
+      const file = uploadedColorImages[i];
+      const colorName = Array.isArray(colorNames) ? colorNames[i] : colorNames;
+
+      if (file && colorName) {
+        colorImages.push({
+          image: file.filename,
+          colorName: colorName,
+        });
+      }
+    }
+
+    // Save to DB
     const product = new Product({
       name,
       category,
       subcategory,
       color,
-      image,
+      image, // ✅ Corrected here
       discount,
       price,
       description,
@@ -19,23 +56,26 @@ const addProduct = async (req, res) => {
       collectionName,
       isBestseller: isBestseller === "true" || isBestseller === true,
       isExclusive: isExclusive === "true" || isExclusive === true,
-      isIshumStore: isIshumStore === "true" ||  isIshumStore === true,
+      isIshumStore: isIshumStore === "true" || isIshumStore === true,
+      thumbnails,
+      colorImages
     });
-    
 
     await product.save();
     res.status(201).json({ success: true, message: "Product added successfully", product });
+
   } catch (error) {
-    console.error("Error in addProduct:", error);
-    res.status(500).json({ success: false, message: "Failed to add product", error });
+    console.error("Error in addProduct:", error.message);
+    console.error(error.stack);
+    res.status(500).json({ success: false, message: "Failed to add product", error: error.message });
   }
 };
 
 
 const getProducts = async (req, res) => {
   try {
-    // Query se filters mil rahe honge (e.g., ?category=Suits&color=Red)
     const filters = {};
+
     if (req.query.isBestseller) filters.isBestseller = req.query.isBestseller === "true";
     if (req.query.isExclusive) filters.isExclusive = req.query.isExclusive === "true";
     if (req.query.isIshumStore) filters.isIshumStore = req.query.isIshumStore === "true";
@@ -53,15 +93,19 @@ const getProducts = async (req, res) => {
     }
 
     const products = await Product.find(filters);
+
     res.status(200).json({ success: true, products });
+
   } catch (error) {
     console.error("Error in getProducts:", error);
     res.status(500).json({ success: false, message: "Failed to fetch products", error });
   }
-}; 
+};
 
 module.exports = {
   addProduct,
   getProducts,
 };
+
+
 
