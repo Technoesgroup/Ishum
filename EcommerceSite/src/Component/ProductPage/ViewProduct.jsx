@@ -1,57 +1,62 @@
 import React, { useState } from "react";
-import "./ProductPage.css";
-import ProductImg from '../../images/Col-3.svg'
-import Thumbnailimg1 from  '../../images/Col-3.svg';
-import Thumbnailimg2 from '../../images/Col-3.svg'
-import Thumbnailimg3 from '../../images/Col-3.svg'
-import Thumbnailimg4 from '../../images/Col-3.svg'
-import Thumbnailimg5 from '../../images/Col-3.svg'
-import Color1 from '../../images/Col-3.svg'
-import Color2 from '../../images/Col-3.svg'
-import Color3 from '../../images/Col-3.svg'
-
-const thumbnails = [
-  Thumbnailimg1,
-  Thumbnailimg2,
-  Thumbnailimg3,
-  Thumbnailimg4,
-  Thumbnailimg5,
-];
-
-const colors = [
-  { colorName: "WHITE", img: Color1},
-  { colorName: "PINK", img: Color2 },
-  { colorName: "PINK", img: Color3 },
-];
-
-const sizes = [36, 30, 28, 26, 24];
+import "../../Style-CSS/ProductPage/ViewProduct.css";
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 
 const ProductPage = () => {
+  const { selectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
   const [quantity, setQuantity] = useState(1);
+  const [mainImage, setMainImage] = useState("");
+
+  if (!selectedProduct) {
+    return <div>Loading Product...</div>;
+  }
+
+  const sizes = [36, 30, 28, 26, 24];
+  const thumbnails = selectedProduct.images || [selectedProduct.image];
+  const colors = selectedProduct.colors || [{ name: "Default", img: selectedProduct.image }];
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
   };
 
+  const handleQuantityIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleQuantityDecrease = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
   return (
     <div className="product-page">
       <div className="product-gallery">
-        <div className="thumbnail-list">
+        <div className="thumbnail-images">
           {thumbnails.map((thumb, idx) => (
-            <img key={idx} src={thumb} alt={`Thumbnail ${idx}`} className="thumbnail-img" />
+            <img
+              key={idx}
+              src={`http://localhost:4000/uploads/${thumb}`}
+              alt={`Thumbnail ${idx}`}
+              onClick={() => setMainImage(thumb)}
+              className="thumbnail-img"
+            />
           ))}
         </div>
+
         <div className="main-image">
-          <img src={ProductImg} alt="Main Product" />
+          <img
+            src={`http://localhost:4000/uploads/${mainImage || selectedProduct.image}`}
+            alt={selectedProduct.name}
+          />
         </div>
       </div>
 
       <div className="product-details">
-        <h1>Riwayat - Luxurious Red Viscose Crepe Suit in Multicolor</h1>
+        <h1 className="product-title">{selectedProduct.name}</h1>
+
         <div className="price-section">
-          <span className="new-price">Rs. 11,199.00</span>
-          <span className="old-price">Rs. 15,199.00</span>
+          <span className="new-price">₹{selectedProduct.price}</span>
+          <span className="old-price">₹{selectedProduct.discount}</span>
         </div>
 
         <p className="tax-info">Tax included. Shipping calculated at checkout.</p>
@@ -73,14 +78,20 @@ const ProductPage = () => {
 
         <div className="color-section">
           <h4>Color</h4>
-          <div className="color-options">
+          <div className="color-buttons">
             {colors.map((color, idx) => (
               <div className="color-box" key={idx}>
-                <img src={color.img} alt={color.colorName} />
-                <p>{color.colorName}</p>
+                <img src={`http://localhost:4000/uploads/${color.img}`} alt={color.name} />
+                <p>{color.name}</p>
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="quantity-section">
+          <button className="quantity-btn" onClick={handleQuantityDecrease}>-</button>
+          <div className="quantity-value">{quantity}</div>
+          <button className="quantity-btn" onClick={handleQuantityIncrease}>+</button>
         </div>
 
         <button className="add-to-cart-btn">Add to Cart</button>
@@ -90,3 +101,5 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+
+

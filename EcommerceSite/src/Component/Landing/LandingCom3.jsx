@@ -12,7 +12,7 @@ const CollectionSection = () => {
 
   const fetchCollections = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/collectionsSec");
+      const response = await axios.get("http://localhost:4000/api/get-collectionsSec");
       setCollections(response.data);
     } catch (error) {
       console.error("Error fetching collections", error);
