@@ -22,6 +22,7 @@ import GULZAAR from './Component/IshumExclusive/IshumExclusiveCom2';
 import RANGREZ from './Component/IshumExclusive/IshumExclusiveCom3';
 import UNVEILRIWAYAT from './Component/IshumExclusive/IshumExclusiveCom5';
 import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
+import COLLECTION from './Pages/Collection';
 
 
 
@@ -44,7 +45,7 @@ function App() {
       <Route path="/Cart"  element={<FilledCart />}></Route>
       <Route path="/MyOrder"  element={<MyOrder />}></Route>
       <Route path="/Shipping"  element={<Shipping />}></Route>
-      <Route path="/collection"  element={<Collection />}></Route>
+      <Route path="/addcollection"  element={<Collection />}></Route>
       <Route path="/product"  element={<Product />}></Route>
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>
@@ -57,7 +58,8 @@ function App() {
       <Route path="/Ishum-Exclusive-Rangrez"  element={<RANGREZ />}></Route>
       <Route path="/Ishum-Exclusive-Noor-Edits"  element={<NOOREDITS />}></Route>
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
-      
+      <Route path="/Collection" element={<COLLECTION />}></Route>
+    
       {/* <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
       <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>
       <Route path="/Ishum-Bestseller-Cordsets"  element={<CORDSETS />}></Route>
