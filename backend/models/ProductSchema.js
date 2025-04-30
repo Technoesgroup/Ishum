@@ -1,7 +1,7 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-  name:{
+  name: {
     type: String,
     required: true,
   },
@@ -19,11 +19,33 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  thumbnails: {
+    type: [String],
+  },
+  
+  colorImages: {
+    type: [
+      {
+        image: { type: String, required: true }, // Image ka naam
+        colorName: { type: String, required: true }, // Us image ka color naam
+      }
+    ],
+    validate: {
+      validator: function (arr) {
+        return arr.length <= 4; // Maximum 4 allowed
+      },
+      message: "You can upload maximum 4 color images",
+    },
+    default: [],
+  },
+  
+
   price: {
     type: Number,
     required: true,
   },
-  discount:{
+  discount: {
     type: Number,
     required: true,
   },
@@ -33,38 +55,31 @@ const productSchema = new mongoose.Schema({
   },
   size: {
     type: [String],
-    enum: ["XS","X", "L", "XL", "M"],
+    enum: ['XS', 'S', 'M', 'L', 'XL','X'],
     required: true,
   },
   color: {
     type: String,
     required: true,
   },
-
-  collectionName:{
-    type:String,
-    enum: ["GulZaar", "Rangrez", "Noor Edits", "Rajwada riwaz", "Eid", "Karwa chauth", "Jashn E Rang", "Unveli Riwayat", "Co-ord sets","Diwali", "Anarkali", "sharara"],
+  collectionName: {
+    type: String,
+    enum: ["GulZaar", "Rangrez", "Noor Edits", "Rajwada riwaz", "Eid", "Karwa chauth", "Jashn E Rang", "Unveli Riwayat", "Co-ord sets", "Diwali", "Anarkali", "sharara"],
     required: true,
-
   },
-
-  isBestseller:{
+  isBestseller: {
     type: Boolean,
   },
-
-  isExclusive:{
+  isExclusive: {
     type: Boolean,
   },
-
-  isIshumStore:{
-    type:Boolean,
+  isIshumStore: {
+    type: Boolean,
   },
-
   availability: {
     type: Boolean,
-    default: true, // Optional: default available
+    default: true,
   },
-
 }, { timestamps: true });
 
 const Product = mongoose.models.Product || mongoose.model("Product", productSchema);

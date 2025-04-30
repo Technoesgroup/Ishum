@@ -23,6 +23,7 @@ import { useCart } from "../ContextApiCart/CartContextApi";
 import "../Style-CSS/Navbar.css";
 import { useEffect, useState } from 'react';
 import Badge from "@mui/material/Badge";
+import SearchBar from "./SearchBar/SearchBar";
 import { useAuth } from '../ContextApiCart/LoginContextApi';
 
 export default function Navbar() {
@@ -193,6 +194,9 @@ export default function Navbar() {
           <SearchIcon className="Ishum-nav-search-icon" />
         </div>
       </div>
+    
+    <SearchBar />
+  
 
       {/* MODALS */}
       {showB2BModal && (
