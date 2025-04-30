@@ -12,9 +12,9 @@ const ProductPage = () => {
     return <div>Loading Product...</div>;
   }
 
-  const sizes = [36, 30, 28, 26, 24];
-  const thumbnails = selectedProduct.images || [selectedProduct.image];
-  const colors = selectedProduct.colors || [{ name: "Default", img: selectedProduct.image }];
+  const sizes = selectedProduct.size || [36, 30, 28, 26, 24];
+  const thumbnails = selectedProduct.thumbnails?.slice(0, 4) || [];
+  const colorImages = selectedProduct.colorImages?.slice(0, 4) || [];
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
@@ -77,16 +77,22 @@ const ProductPage = () => {
         </div>
 
         <div className="color-section">
-          <h4>Color</h4>
-          <div className="color-buttons">
-            {colors.map((color, idx) => (
-              <div className="color-box" key={idx}>
-                <img src={`http://localhost:4000/uploads/${color.img}`} alt={color.name} />
-                <p>{color.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+  <h4>Color</h4>
+  <div className="color-buttons">
+  {selectedProduct.colorImages?.slice(0, 4).map((color, idx) => (
+  <div className="color-box" key={idx}>
+    <img
+      src={`http://localhost:4000/uploads/${color.image}`}
+      alt={color.colorName}
+      className="color-img"
+    />
+    <p>{color.colorName}</p>
+  </div>
+))}
+
+  </div>
+</div>
+
 
         <div className="quantity-section">
           <button className="quantity-btn" onClick={handleQuantityDecrease}>-</button>

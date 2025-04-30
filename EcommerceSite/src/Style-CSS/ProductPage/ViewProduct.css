@@ -1,7 +1,9 @@
+@import url('../Poppins-Font.css');
+
 .product-page {
     display: flex;
     gap: 40px;
-    padding: 40px;
+    padding: 60px  6vw;
     flex-wrap: wrap;
   }
   
@@ -31,8 +33,8 @@
   }
   
   .main-image img {
-    width: 400px;
-    height: 500px;
+    width: 430px;
+    height: auto;
     object-fit: cover;
     border: 1px solid #eee;
     border-radius: 8px;
@@ -43,6 +45,7 @@
   }
   
   .product-title {
+    font-family: 'PoppinsRegular';
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -56,12 +59,14 @@
   }
   
   .new-price {
+    font-family: 'PoppinsRegular';
     font-size: 24px;
-    color: #cc0000;
+    color:#333;
     font-weight: bold;
   }
   
   .old-price {
+    font-family: 'PoppinsRegular';
     font-size: 18px;
     color: gray;
     text-decoration: line-through;
@@ -75,6 +80,7 @@
   
   .size-section h4,
   .color-section h4 {
+    font-family: 'PoppinsRegular';
     margin-bottom: 10px;
     font-size: 18px;
   }

@@ -47,7 +47,7 @@ const addProduct = async (req, res) => {
       category,
       subcategory,
       color,
-      image, // ✅ Corrected here
+      image, 
       discount,
       price,
       description,
