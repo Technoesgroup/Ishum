@@ -12,65 +12,83 @@ const AddProduct = () => {
     description: "",
     size: [],
     availability: "true",
-    collectionName: "", 
-    isBestseller: false, 
-    isExclusive: false, 
-    isIshumStore:false, 
+    collectionName: "",
+    isBestseller: false,
+    isExclusive: false,
+    isIshumStore: false,
   });
 
-
-  const [image, setImage] = useState(null);
+  const [mainImage, setMainImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [colorImages, setColorImages] = useState([]);
+  const [thumbnailImages, setThumbnailImages] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCheckbox = (e) => {
     const { value, checked } = e.target;
-    if (checked) {
-      setForm((prev) => ({
-        ...prev,
-        size: [...prev.size, value],
-      }));
-    } else {
-      setForm((prev) => ({
-        ...prev,
-        size: prev.size.filter((s) => s !== value),
-      }));
-    }
+    setForm((prev) => ({
+      ...prev,
+      size: checked ? [...prev.size, value] : prev.size.filter((s) => s !== value),
+    }));
   };
 
   const handleImage = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(file);
+      setMainImage(file);
       setPreview(URL.createObjectURL(file));
     }
   };
 
-  const handleSubmit = async (e) => {  
+  const handleColorImageChange = (index, type, value) => {
+    const updated = [...colorImages];
+    updated[index] = { ...updated[index], [type]: value };
+    setColorImages(updated);
+  };
+
+  const addColorImage = () => {
+    if (colorImages.length < 4) {
+      setColorImages([...colorImages, { image: null, colorName: "" }]);
+    }
+  };
+
+  const handleThumbnailChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length + thumbnailImages.length <= 4) {
+      setThumbnailImages([...thumbnailImages, ...files]);
+    } else {
+      alert("Max 4 thumbnail images allowed.");
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("collectionName", form.collectionName);
-    formData.append("isBestseller", form.isBestseller);
-    formData.append("isExclusive", form.isExclusive);
-    formData.append("isIshumStore", form.isIshumStore);
-    formData.append("name", form.name);
-    formData.append("category", form.category);
-    formData.append("subcategory", form.subcategory);
-    formData.append("color", form.color);
-    formData.append("price", form.price);
-    formData.append("discount", form.discount);
-    formData.append("description", form.description);
-    form.size.forEach((s) => formData.append("size[]", s));
-    formData.append("image", image);
-    formData.append("availability", form.availability);
+    Object.entries(form).forEach(([key, val]) => {
+      if (Array.isArray(val)) {
+        val.forEach((item) => formData.append(`${key}[]`, item));
+      } else {
+        formData.append(key, val);
+      }
+    });
+    
+    formData.append("image", mainImage);
+
+    console.log("Main image:", mainImage);
+    
+    colorImages.forEach((ci, index) => {
+      formData.append("colorImages", ci.image);       // just the image
+      formData.append("colorNames", ci.colorName);    // just the name
+    });
+    thumbnailImages.forEach((thumb) => {
+      if (thumb) formData.append("thumbnails", thumb);
+    });
+    
 
     const res = await fetch("http://localhost:4000/api/products/add", {
       method: "POST",
@@ -79,6 +97,7 @@ const AddProduct = () => {
 
     const data = await res.json();
     alert(data.message);
+
     if (data.success) {
       setForm({
         name: "",
@@ -93,10 +112,12 @@ const AddProduct = () => {
         collectionName: "",
         isBestseller: false,
         isExclusive: false,
-        isIshumStore:false,
-      });      
-      setImage(null);
+        isIshumStore: false,
+      });
+      setMainImage(null);
       setPreview(null);
+      setColorImages([]);
+      setThumbnailImages([]);
     }
   };
 
@@ -104,6 +125,7 @@ const AddProduct = () => {
     <div className="add-product-container">
       <h2>Add Product</h2>
       <form onSubmit={handleSubmit}>
+        {/* ... existing inputs ... */}
 
         <label>Collection Names:</label>
         <select name="collectionName" value={form.collectionName} onChange={handleChange} required>
@@ -206,11 +228,6 @@ const AddProduct = () => {
         <label>Name</label>
         <input name="name" value={form.name} onChange={handleChange} required />
 
-        <label>Image:</label>
-        <input type="file" accept="image/*" onChange={handleImage} required />
-        {preview && <img src={preview} alt="preview" className="image-preview" />}
-
-
         <label>Without Discount Price</label>
         <input type="number" name="discount" value={form.discount} onChange={handleChange} required />
 
@@ -235,6 +252,68 @@ const AddProduct = () => {
           <option value="false">Not Available</option>
         </select>
 
+        <label>Main Image:</label>
+        <input type="file" accept="image/*" onChange={handleImage} required />
+        {preview && <img src={preview} alt="preview" className="image-preview" />}
+
+        <label>Color Images (Max 4):</label>
+        {colorImages.map((ci, index) => (
+          <div key={index}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                handleColorImageChange(index, "image", e.target.files[0])
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Color Name"
+              value={ci.colorName}
+              onChange={(e) =>
+                handleColorImageChange(index, "colorName", e.target.value)
+              }
+              required
+            />
+          </div>
+        ))}
+        {colorImages.length < 4 && (
+          <button type="button" onClick={addColorImage}>
+            + Add Color Image
+          </button>
+        )}
+
+<label>Thumbnails (Exactly 4):</label>
+{[0, 1, 2, 3].map((i) => (
+  <input
+    key={i}
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const updated = [...thumbnailImages];
+      updated[i] = e.target.files[0];
+      setThumbnailImages(updated);
+    }}
+    required
+  />
+))}
+
+<div className="thumbnail-preview">
+  {thumbnailImages.map(
+    (img, idx) =>
+      img && (
+        <img
+          key={idx}
+          src={URL.createObjectURL(img)}
+          alt={`thumb-${idx}`}
+          className="image-preview"
+        />
+      )
+  )}
+</div>
+
+
         <button type="submit">Add Product</button>
       </form>
     </div>
@@ -242,4 +321,5 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
 

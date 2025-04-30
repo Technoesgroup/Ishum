@@ -1,36 +1,44 @@
+// src/pages/Collection/Collection.jsx
 import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom6.css";
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useProduct } from "../../ContextApiCart/ProductContextApi";  // context import
 
 import img_b1 from '../../images/image 27.svg';
 import UnderLine from '../../images/Undertextline.png';
 
 const Collection = () => {
   const [products, setProducts] = useState([]);
-  const collectionName = "Jashn E Rang";  // You can make this dynamic based on user selection
+  const collectionName = "Jashn E Rang";
+  const navigate = useNavigate();
+  const { setSelectedProduct } = useProduct();  // context se setter
 
   useEffect(() => {
     const fetchIshumProducts = async () => {
       try {
-        // Constructing the query with collectionName and other filters if needed
         const res = await axios.get(`http://localhost:4000/api/products/get-product`, {
           params: {
             isIshumStore: true,
             collectionName: collectionName,
           }
         });
-        setProducts(res.data.products); 
+        setProducts(res.data.products);
       } catch (error) {
         console.error("Error fetching Ishum Store products:", error);
       }
     };
 
     fetchIshumProducts();
-  }, [collectionName]);  // You can change collectionName based on user interaction or context
+  }, [collectionName]);
 
-  // Limit the number of products to 5
   const limitedProducts = products.slice(0, 6);
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);    // context me product save
+    navigate("/product");           // product page pe jao
+  };
 
   return (
     <div className="collection-container">
@@ -41,7 +49,12 @@ const Collection = () => {
 
       <div className="collection-grid">
         {limitedProducts.map((product) => (
-          <div key={product._id} className="product-card">
+          <div
+            key={product._id}
+            className="product-card"
+            onClick={() => handleProductClick(product)}
+            style={{ cursor: "pointer" }}
+          >
             <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.name} />
             <p className="product-name">{product.name}</p>
             <div className="All-price-with-discount">
