@@ -37,7 +37,7 @@ const Collection = () => {
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);    // context me product save
-    navigate("/product");           // product page pe jao
+    navigate("/Viewproduct");           // product page pe jao
   };
 
   return (
