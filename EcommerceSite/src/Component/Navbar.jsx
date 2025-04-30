@@ -25,6 +25,9 @@ import { useEffect, useState } from 'react';
 import Badge from "@mui/material/Badge";
 import SearchBar from "./SearchBar/SearchBar";
 import { useAuth } from '../ContextApiCart/LoginContextApi';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+
 
 export default function Navbar() {
   const { setIsLoggedIn } = useAuth(); 
@@ -67,11 +70,10 @@ export default function Navbar() {
       {/* TOP FIXED HEADER */}
       <div className="info-header">
         <div className="info-links">
-          <span>DOWNLOAD THE APP</span>
+          <span>WISHLIST</span>
           <span>SIZE CHART</span>
           <span>SHIPPING & DELIVERY</span>
           <span>TRACK YOUR ORDER</span>
-          <span>CUSTOMER REVIEWS</span>
           <span>RETURNS</span>
           <span>CONTACT US</span>
           <span>FAQ's</span>
@@ -95,7 +97,7 @@ export default function Navbar() {
         <div className="Ishum-right-icons">
           <div className='ishum-rightside-main-icon'>
             {!isLoggedIn && (
-              <PersonIcon
+              <PermIdentityOutlinedIcon
                 className="Ishum-icon"
                 onClick={() => {
                   if (isMobile) {
@@ -108,12 +110,13 @@ export default function Navbar() {
             )}
             <SearchIcon className='mobile-search-icon' onClick={handleSearchClick} />
             <Badge badgeContent={totalItems} color="error">
-              <ShoppingCartOutlinedIcon
-                className="Ishum-icon"
+              <LocalMallOutlinedIcon
+                className=" Ishum-iconbag"
+
                 onClick={() => navigate("/Cart")}
               />
             </Badge>
-            <MenuIcon className="Ishum-icon profile-menu-icon"
+            <ListOutlinedIcon className="Ishum-icon profile-menu-icon"
               onClick={() => setIsOpen(!isOpen)}
               onMouseEnter={() => setIsOpen(true)}
             />
@@ -133,7 +136,7 @@ export default function Navbar() {
             >
               <ul className="Profile-menu-list">
                 <li className="Profile-menu-item">
-                  <Link><PersonIcon />
+                  <Link><PermIdentityOutlinedIcon />
                     <div className='Name-ProfileContent'>
                       <p>Harsh Rajput</p>
                       <p className='email-name-profile'>harshrajput30411@gmail.com</p>
