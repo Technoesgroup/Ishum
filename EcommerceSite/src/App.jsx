@@ -48,7 +48,6 @@ function App() {
       <Route path="/Shipping"  element={<Shipping />}></Route>
       <Route path="/addcollection"  element={<Collection />}></Route>
       <Route path="/product"  element={<Product />}></Route>
-      <Route path="/collection"  element={<Collection />}></Route>
       <Route path="/addproduct"  element={<Product />}></Route>
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>

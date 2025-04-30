@@ -2,9 +2,7 @@ import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../images/Ishum Logo 1.svg';
-import PersonIcon from '@mui/icons-material/Person';
 import { Link, useNavigate } from "react-router-dom";
 import RegBusiness from './B-TO-B-Login/RegisterBusiness';
 import Login from '../Component/B-TO-C-Login/LoginUser'
@@ -18,7 +16,6 @@ import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSha
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useCart } from "../ContextApiCart/CartContextApi";
 import "../Style-CSS/Navbar.css";
 import { useEffect, useState } from 'react';
@@ -68,8 +65,8 @@ export default function Navbar() {
     <nav className='Ishum-navbars'>
       
       {/* TOP FIXED HEADER */}
-      <div className="info-header">
-        <div className="info-links">
+      <div className="info-top-header">
+        <div className="info-top-links">
           <span>WISHLIST</span>
           <span>SIZE CHART</span>
           <span>SHIPPING & DELIVERY</span>
@@ -88,13 +85,13 @@ export default function Navbar() {
 
       {/* SOCIAL ICON + LOGO + PROFILE MENU */}
       <div className="Ishum-navbar">
-        
-
         <div className="Ishum-logo-container">
           <img src={logo} alt="Ishum Logo" className="Ishum-logo" />
         </div>
 
+
         <div className="Ishum-right-icons">
+       <div> <SearchBar /></div>
           <div className='ishum-rightside-main-icon'>
             {!isLoggedIn && (
               <PermIdentityOutlinedIcon
@@ -193,7 +190,6 @@ export default function Navbar() {
           <button onClick={() => setShowB2BModal(true)} className="BUSINESS-TO-BUSINESS">BUSINESS TO BUSINESS</button>
         </div>
             
-    <SearchBar />
       </div>
 
   
