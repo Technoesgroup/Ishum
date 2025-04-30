@@ -23,6 +23,7 @@ import RANGREZ from './Component/IshumExclusive/IshumExclusiveCom3';
 import UNVEILRIWAYAT from './Component/IshumExclusive/IshumExclusiveCom5';
 import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 import COLLECTION from './Pages/Collection';
+import ViewProduct from './Component/ProductPage/ViewProduct';
 
 
 
@@ -62,7 +63,7 @@ function App() {
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
       <Route path="/Collection" element={<COLLECTION />}></Route>
     
-      <Route path="/product" element={<ViewProduct />} />
+      <Route path="/Viewproduct" element={<ViewProduct />} />
       
       {/* <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
       <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>

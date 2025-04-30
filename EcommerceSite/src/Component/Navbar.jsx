@@ -189,13 +189,10 @@ export default function Navbar() {
           <Link to="/review">REVIEW</Link>
           <button onClick={() => setShowB2BModal(true)} className="BUSINESS-TO-BUSINESS">BUSINESS TO BUSINESS</button>
         </div>
-        <div className="Ishum-nav-search-wrapper">
-          <input type="text" placeholder="Search" className="Ishum-nav-search-input" />
-          <SearchIcon className="Ishum-nav-search-icon" />
-        </div>
-      </div>
-    
+            
     <SearchBar />
+      </div>
+
   
 
       {/* MODALS */}
