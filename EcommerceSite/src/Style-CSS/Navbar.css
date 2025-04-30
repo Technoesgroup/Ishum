@@ -49,8 +49,9 @@
 }
 
 .Ishum-nav-search-input {
-  width: 65%;
+  width: 74%;
   border-radius: 5px;
+  outline: none;
   background-color: #EEEBE4;
   padding: 0.8vw 3vw 0.8vw 3vw;
   border: 1px solid #afafaf;
