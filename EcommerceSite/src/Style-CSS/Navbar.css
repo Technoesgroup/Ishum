@@ -47,15 +47,13 @@
   width: 100%;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-evenly; */
-  gap: 12%;
   background-color: #EEEBE4;
 }
 
 
 .Ishum-nav-search-wrapper {
   position: relative;
-  top:-70px;
+  top:0;
   background-color: #EEEBE4;
 }
 
