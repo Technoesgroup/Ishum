@@ -122,6 +122,11 @@
   cursor: pointer;
   font-size: 1.5rem;
 }
+.Ishum-right-icons .Ishum-iconbag{
+  font-size: 1.4rem;
+  color: #4B3D1A;
+  cursor: pointer;
+}
 .info-header {
   position: fixed;
   top: 0;
