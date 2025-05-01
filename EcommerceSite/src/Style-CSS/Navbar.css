@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #EEEBE4;
-  padding: 1.6rem 100px;
+  padding: 2.1rem 100px  0  100px;
 }
 
 .Ishum-logo-container {
@@ -90,12 +90,12 @@
 
 .Ishum-logo-container {
   position: absolute;
-  left: 50%;
+  left: 49%;
   transform: translateX(-50%);
 }
 
 .Ishum-logo {
-  height: 4rem;
+  height: 5rem;
 }
 
 .Ishum-nav-links {
@@ -151,12 +151,12 @@
   top: 0;
   width: 100%;
   background-color: #EEEBE4;
-  z-index: 1000;
+  z-index: 600;
   padding: 0.5vw 0;
   display: flex;
   justify-items: center;
   align-items: center;
- gap: 20%;
+ gap: 28.8%;
  box-shadow: 0 2px 2px rgba(106, 106, 106, 0.043);
 }
 
@@ -204,6 +204,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
@@ -407,6 +408,14 @@
 
 @media (max-width: 768px) {
 
+  .info-top-header{
+    display: none;
+  }
+
+  .Ishum-navbars{
+    top: 0;
+  }
+
 .menuopen-icon{
   display: block !important;
 }
@@ -455,9 +464,7 @@
   }
 
   .ishum-rightside-main-icon{
-    position:absolute;
     display: flex;
-    right: -92vw !important;
     gap: 10px !important;
   }
 
@@ -469,9 +476,9 @@
 
   .closemenu-icon {
     position: absolute !important;
-    z-index: 1900;
-    top:-30px ;
-   left: 10px;
+    z-index: 2900;
+    top:15px ;
+   left: 13px;
   }
 
   .Ishum-nav-links {

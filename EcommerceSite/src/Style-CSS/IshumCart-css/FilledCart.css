@@ -3,7 +3,7 @@
 .Cartitem-cart-container {
     display: flex;
     gap: 10%;
-    padding: 24px  6vw;
+    padding: 4vw  6vw;
   }
   
   .Cartitem-cart-items {
@@ -145,6 +145,7 @@
     border-radius: 24px;
     background-color: #000;
     color: white;
+    cursor: pointer;
   }
 
 

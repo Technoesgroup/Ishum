@@ -26,6 +26,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     };
     fetchProducts();
   }, [queryParam]);
+  
 
   const filteredProducts = Array.isArray(products)
     ? products.filter((product) => {
@@ -38,7 +39,17 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
         const availableMatch = selected.availability
           ? product.availability === (selected.availability === "InStock")
           : true;
-        return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch;
+          
+          const collectionMatch = selected.collection
+          ? product.collectionName?.toLowerCase().replace(/\s+/g, "").includes(
+              selected.collection.toLowerCase().replace(/\s+/g, "").split(" ")[0]
+            )
+          : true;
+  
+        // Debugging the comparison
+        console.log(`Checking collection for product: ${product.collectionName}, Selected collection: ${selected.collection}`);
+
+        return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch && collectionMatch;
       })
     : [];
 

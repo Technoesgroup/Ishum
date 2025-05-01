@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import "../../Style-CSS/ProductPage/ViewProduct.css";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProductPage = () => {
   const { selectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
+  const [selectedColor, setSelectedColor] = useState(""); // new
+  const navigate = useNavigate();
+
+  const userId = "123456"; // Replace with actual logged-in user ID
 
   if (!selectedProduct) {
     return <div>Loading Product...</div>;
@@ -27,6 +33,28 @@ const ProductPage = () => {
   const handleQuantityDecrease = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color.colorName);
+    setMainImage(color.image);
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      const res = await axios.post("http://localhost:4000/api/cart/addtocart", {
+        userId: "123456", // Replace with actual user ID if available
+        productId: selectedProduct._id,
+        quantity,
+        size: selectedSize,
+        color: selectedProduct.selectedColor || "", // or selected color if you manage color selection
+      });
+  
+      console.log("Added to cart:", res.data);
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+    }
+  };
+  
 
   return (
     <div className="product-page">
@@ -77,22 +105,20 @@ const ProductPage = () => {
         </div>
 
         <div className="color-section">
-  <h4>Color</h4>
-  <div className="color-buttons">
-  {selectedProduct.colorImages?.slice(0, 4).map((color, idx) => (
-  <div className="color-box" key={idx}>
-    <img
-      src={`http://localhost:4000/uploads/${color.image}`}
-      alt={color.colorName}
-      className="color-img"
-    />
-    <p>{color.colorName}</p>
-  </div>
-))}
-
-  </div>
-</div>
-
+          <h4>Color</h4>
+          <div className="color-buttons">
+            {colorImages.map((color, idx) => (
+              <div className="color-box" key={idx} onClick={() => handleColorSelect(color)}>
+                <img
+                  src={`http://localhost:4000/uploads/${color.image}`}
+                  alt={color.colorName}
+                  className="color-img"
+                />
+                <p>{color.colorName}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="quantity-section">
           <button className="quantity-btn" onClick={handleQuantityDecrease}>-</button>
@@ -100,12 +126,15 @@ const ProductPage = () => {
           <button className="quantity-btn" onClick={handleQuantityIncrease}>+</button>
         </div>
 
-        <button className="add-to-cart-btn">Add to Cart</button>
+        <button className="add-to-cart-btn" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
 };
 
 export default ProductPage;
+
 
 

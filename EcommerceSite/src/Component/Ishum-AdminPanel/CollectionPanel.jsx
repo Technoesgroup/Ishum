@@ -64,7 +64,7 @@ const AdminPanel = () => {
         Object.keys(formData1).forEach((key) => form.append(key, formData1[key]));
 
         try {
-            await axios.post("http://localhost:4000/collections", form);
+            await axios.post("http://localhost:4000/api/add-collections", form);
             toast.success("Collection 1 added successfully");
             fetchCollections1();
             setFormData1({ title: "", image: null });
@@ -81,7 +81,7 @@ const AdminPanel = () => {
         Object.keys(formData2).forEach((key) => form.append(key, formData2[key]));
 
         try {
-            await axios.post("http://localhost:4000/collectionsSec", form);
+            await axios.post("http://localhost:4000/api/add-collectionsSec", form);
             toast.success("Collection 2 added successfully");
             fetchCollections2();
             setFormData2({ title: "", image: null });

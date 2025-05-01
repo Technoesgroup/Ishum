@@ -64,7 +64,7 @@ const productSchema = new mongoose.Schema({
   },
   collectionName: {
     type: String,
-    enum: ["GulZaar", "Rangrez", "Noor Edits", "Rajwada riwaz", "Eid", "Karwa chauth", "Jashn E Rang", "Unveli Riwayat", "Co-ord sets", "Diwali", "Anarkali", "sharara"],
+    enum: ["GULZAAR COLLECTION", "RANGREZ COLLECTION", "NOOR EDITS", "RAJWADA RIWAZ", "Eid", "Karwa chauth", "Jashn E Rang", "Unveli Riwayat", "Co-ord sets", "DIWALI SPECIAL", "ANARKALI", "SHARARA SUITS"],
     required: true,
   },
   isBestseller: {
