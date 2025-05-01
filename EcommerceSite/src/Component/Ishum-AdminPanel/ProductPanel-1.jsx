@@ -130,18 +130,18 @@ const AddProduct = () => {
         <label>Collection Names:</label>
         <select name="collectionName" value={form.collectionName} onChange={handleChange} required>
           <option value="">Select Collection</option>
-          <option value="GulZaar">GulZaar</option>
-          <option value="Rangrez">Rangrez</option>
-          <option value="Noor Edits">Noor Edits</option>
-          <option value="Rajwada riwaz">Rajwada riwaz</option>
+          <option value="GULZAAR COLLECTION">GulZaar COLLECTION</option>
+          <option value="RANGREZ COLLECTION">RANGREZ COLLECTION</option>
+          <option value="NOOR EDITS">Noor Edits</option>
+          <option value="RAJWADA RIWAZ">Rajwada riwaz</option>
           <option value="Eid">Eid</option>
           <option value="Karwa chauth">Karwa chauth</option>
           <option value="Jashn E Rang">Jashn E Rang</option>
           <option value="Unveli Riwayat">Unveli Riwayat</option>
           <option value="Co-ord sets">Co-ord sets</option>
-          <option value="Diwali">Diwali</option>
-          <option value="Anarkali">Anarkali</option>
-          <option value="sharara">sharara</option>
+          <option value="DIWALI SPECIAL">Diwali</option>
+          <option value="ANARKALI">Anarkali</option>
+          <option value="SHARARA SUITS">sharara</option>
         </select>
 
         <label>
@@ -196,7 +196,7 @@ const AddProduct = () => {
           <option value="Anarkali">Anarkali</option>
           <option value="Sharara Suits">Sharara Suits</option>
           <option value="Indo Western">Indo Western</option>
-          <option value="Fusion wear">Fusion wear</option>
+          <option value="Fashion wear">Fusion wear</option>
           <option value="Dress">Dress</option>
           <option value="Co-ord sets">Co-ord sets</option>
         </select>

@@ -24,6 +24,8 @@ import SearchBar from "./SearchBar/SearchBar";
 import { useAuth } from '../ContextApiCart/LoginContextApi';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+import MobileProfile from '../Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
+
 
 
 export default function Navbar() {
@@ -37,6 +39,8 @@ export default function Navbar() {
   const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showMobileLoginModal, setShowMobileLoginModal] = useState(false);
+
 
   const navigate = useNavigate();
   const { cartItems } = useCart();
@@ -54,12 +58,13 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 768); // Set isMobile to true if window width is <= 768px
     };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    handleResize(); // Initialize the isMobile state based on current window size
+    window.addEventListener("resize", handleResize); // Update on window resize
+    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
   }, []);
+  
 
   return (
     <nav className='Ishum-navbars'>
@@ -94,16 +99,17 @@ export default function Navbar() {
        <div> <SearchBar /></div>
           <div className='ishum-rightside-main-icon'>
             {!isLoggedIn && (
-              <PermIdentityOutlinedIcon
-                className="Ishum-icon"
-                onClick={() => {
-                  if (isMobile) {
-                    navigate("/Login-mobile-profile");
-                  } else {
-                    setShowB2UModal(true);
-                  }
-                }}
-              />
+             <PermIdentityOutlinedIcon
+             className="Ishum-icon"
+             onClick={() => {
+               if (isMobile) {
+                 setShowMobileLoginModal(true); // instead of navigate
+               } else {
+                 setShowB2UModal(true);
+               }
+             }}
+           />
+           
             )}
             <SearchIcon className='mobile-search-icon' onClick={handleSearchClick} />
             <Badge badgeContent={totalItems} color="error">
@@ -218,6 +224,12 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+{isMobile && showMobileLoginModal && (
+  <MobileProfile onClose={() => setShowMobileLoginModal(false)} />
+)}
+
+
     </nav>
   );
 }

@@ -10,7 +10,13 @@ export const FilterProvider = ({ children }) => {
     size: null,
     color: null,
     tag: null, // for EXCLUSIVE, DHOTI, etc.
+    collection: null,
   });
+
+  const normalize = (str) => str?.toLowerCase().trim(); 
+
+
+
 
   useEffect(() => {
     fetch("http://localhost:4000/api/products/get-product")
@@ -24,7 +30,13 @@ export const FilterProvider = ({ children }) => {
   
 
   useEffect(() => {
+
+    console.log("Selected Collection:", selected.collection);
+    console.log("All Products:", products);
+
     let filtered = [...products];
+
+
 
     if (selected.category) {
       filtered = filtered.filter(
@@ -45,6 +57,25 @@ export const FilterProvider = ({ children }) => {
         item.tags?.includes(selected.tag.toLowerCase())
       );
     }
+   
+  // Collection filter
+  if (selected.collection) {
+    console.log("Filtering by collection:", selected.collection);
+
+    // filtered = filtered.filter((item) => {
+    //   // Debugging the item collectionName and selected.collection comparison
+    //   console.log(
+    //     `Comparing: '${normalize(item.collectionName)}' === '${normalize(selected.collection)}'`
+    //   );
+    //   return normalize(item.collectionName) === normalize(selected.collection);  // Normalized comparison
+
+
+      filtered = filtered.filter((item) => {
+        return normalize(item.collectionName).includes(normalize(selected.collection));
+    });
+  }
+    
+    
 
     setFilteredProducts(filtered);
   }, [selected, products]);

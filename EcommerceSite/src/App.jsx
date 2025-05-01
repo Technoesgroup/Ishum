@@ -24,6 +24,7 @@ import UNVEILRIWAYAT from './Component/IshumExclusive/IshumExclusiveCom5';
 import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 import COLLECTION from './Pages/Collection';
 import ViewProduct from './Component/ProductPage/ViewProduct';
+import CollectionPage from "./Component/Collection/CollectionCom3";
 
 
 
@@ -61,6 +62,7 @@ function App() {
       <Route path="/Ishum-Exclusive-Noor-Edits"  element={<NOOREDITS />}></Route>
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
       <Route path="/Collection" element={<COLLECTION />}></Route>
+      <Route path="/co-page/:title" element={<CollectionPage />} />
     
       <Route path="/Viewproduct" element={<ViewProduct />} />
       

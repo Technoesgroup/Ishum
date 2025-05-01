@@ -30,17 +30,23 @@ const CollectionSection = () => {
 
       <div className="LandingCom-2-collection-grid">
         {collections.map((col, index) => (
-          <div key={index} className="LandingCom-2-collection-item">
-            <img 
-              src={`http://localhost:4000${col.image}`} 
-              alt={col.title} 
-              className="LandingCom-2-collection-image" 
-            />
-            <div className="LandingCom-2-collection-info">
-              <p className="LandingCom-2-collection-name">{col.title}</p>
-              <p className="LandingCom-2-view-more">VIEW MORE →</p>
-            </div>
-          </div>
+         <div
+         key={index}
+         className="LandingCom-2-collection-item"
+         onClick={() => navigate(`/co-page/${col.title}`, { state: { collectionName: col.title } })}
+         // 👈 navigate to collection page with id
+         style={{ cursor: "pointer" }}
+       >
+         <img
+           src={`http://localhost:4000${col.image}`}
+           alt={col.title}
+           className="LandingCom-2-collection-image"
+         />
+         <div className="LandingCom-2-collection-info">
+           <p className="LandingCom-2-collection-name">{col.title}</p>
+           <p className="LandingCom-2-view-more">VIEW MORE →</p>
+         </div>
+       </div>
         ))}
       </div>
 
