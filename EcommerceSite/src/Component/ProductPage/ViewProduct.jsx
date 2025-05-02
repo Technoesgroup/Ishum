@@ -3,8 +3,11 @@ import "../../Style-CSS/ProductPage/ViewProduct.css";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../ContextApiCart/LoginContextApi";
+
 
 const ProductPage = () => {
+  const { user } = useAuth();
   const { selectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
   const [quantity, setQuantity] = useState(1);
@@ -38,13 +41,18 @@ const ProductPage = () => {
   };
 
   const handleAddToCart = async () => {
+    if (!user || !user._id) {
+      alert("Please log in to add items to your cart.");
+      return;
+    }
+  
     try {
       const res = await axios.post("http://localhost:4000/api/cart/addtocart", {
-        userId: "123456", // Replace with actual user ID if available
+        userId: user._id,
         productId: selectedProduct._id,
         quantity,
         size: selectedSize,
-        color: selectedProduct.selectedColor || "", // or selected color if you manage color selection
+        color: selectedColor || "", // ✅ Use selected color state
       });
   
       console.log("Added to cart:", res.data);
@@ -52,6 +60,7 @@ const ProductPage = () => {
       console.error("Error adding to cart:", err);
     }
   };
+  
   
 
   return (
