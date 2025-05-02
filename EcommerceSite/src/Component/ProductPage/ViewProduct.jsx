@@ -12,8 +12,6 @@ const ProductPage = () => {
   const [selectedColor, setSelectedColor] = useState(""); // new
   const navigate = useNavigate();
 
-  const userId = "123456"; // Replace with actual logged-in user ID
-
   if (!selectedProduct) {
     return <div>Loading Product...</div>;
   }

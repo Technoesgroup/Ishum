@@ -78,18 +78,22 @@ const AdminPanel = () => {
     const handleSubmit2 = async (event) => {
         event.preventDefault();
         const form = new FormData();
-        Object.keys(formData2).forEach((key) => form.append(key, formData2[key]));
-
+        form.append("title", formData2.title);
+        form.append("image", formData2.image);
+      
         try {
-            await axios.post("http://localhost:4000/api/add-collectionsSec", form);
-            toast.success("Collection 2 added successfully");
-            fetchCollections2();
-            setFormData2({ title: "", image: null });
+          await axios.post("http://localhost:4000/api/add-collectionsSec", form, {
+            headers: { "Content-Type": "multipart/form-data" }
+          });
+          toast.success("Collection 2 added successfully");
+          fetchCollections2();
+          setFormData2({ title: "", image: null });
         } catch (error) {
-            console.error(error);
-            toast.error("Failed to add Collection 2");
+          console.error(error);
+          toast.error("Failed to add Collection 2");
         }
-    };
+      };
+      
 
     return (
         <div className="Collection-admin-panel">

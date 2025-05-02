@@ -6,19 +6,24 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Importing useAuth hook
 
 export default function ShippingCartCom2({ onClose }) {
+    const { user } = useAuth(); // Get user from context
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
-    const userId = "123456";
     const [activeStep, setActiveStep] = useState("wallet");
 
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/api/cart/${userId}`);
+                if (!user || !user._id) {
+                    alert("User not found. Please log in.");
+                    return;
+                }
+                const res = await axios.get(`http://localhost:4000/api/cart/${user._id}`);
                 setCart(res.data);
-                console.log(res.data)
+                console.log(res.data);
             } catch (err) {
                 console.error("Error fetching cart for shipping page", err);
             } finally {
@@ -27,7 +32,7 @@ export default function ShippingCartCom2({ onClose }) {
         };
 
         fetchCart();
-    }, []);
+    }, [user]); // Dependency array includes user to refetch if user changes
 
     if (loading) return <div>Loading...</div>;
     if (!cart?.cartItems || cart.cartItems.length === 0) {
@@ -76,9 +81,9 @@ export default function ShippingCartCom2({ onClose }) {
                 }
             },
             prefill: {
-                name: "Ishum",
-                email: "harsh@example.com",
-                contact: "8130299443",
+                name: user?.name || "Ishum",  // Fallback to "Ishum" if user name is not available
+                email: user?.email || "harsh@example.com",  // Fallback to default email if not available
+                contact: user?.phone || "8130299443",  // Fallback to default phone if not available
             },
             theme: {
                 color: "#3399cc",
