@@ -124,6 +124,8 @@ export default function Bestsellers() {
                   <button onClick={() => handleSelection("tag", "Anarkali")}>ANARKALIS</button>
                   <button onClick={() => handleSelection("tag", "Dhoti")}>DHOTI</button>
                 </div>
+
+                <div  className="bestsellerFillter-button"><button  className="Filtter-button">Fillter</button></div>
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 const CollectionSchema2 = require("../models/CollectionSchema2");
 
+
 exports.getCollectionsSec = async (req, res) => {
     try {
         const collections = await CollectionSchema2.find();
@@ -9,20 +10,24 @@ exports.getCollectionsSec = async (req, res) => {
     }
 };
 
+// controllers/collectionController.js
+
 exports.addCollectionSec = async (req, res) => {
     try {
-        if (!req.file || !req.body.title) {
-            return res.status(400).json({ message: "Title and Image are required" });
-        }
 
-        const newCollection = new CollectionSchema2({
-            title: req.body.title,
-            image: `/uploads/${req.file.filename}` // Store relative path
-        });
+        // console.log("BODY:", req.body);
+        // console.log("FILE:", req.file);
 
+        const { title } = req.body;
+        const imagePath = "/uploads/" + req.file.filename;
+
+        const newCollection = new CollectionSchema2({ title, image: imagePath });
         await newCollection.save();
-        res.status(201).json({ message: "Collection added successfully" });
+
+        res.status(201).json({ message: "Collection 2 added successfully", newCollection });
     } catch (error) {
-        res.status(500).json({ message: "Failed to add collection" });
+        console.error("Error in addCollectionSec:", error);
+        res.status(500).json({ message: "Failed to add Collection 2" });
     }
 };
+

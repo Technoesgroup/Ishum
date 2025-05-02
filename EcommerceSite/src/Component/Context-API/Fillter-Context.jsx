@@ -62,12 +62,6 @@ export const FilterProvider = ({ children }) => {
   if (selected.collection) {
     console.log("Filtering by collection:", selected.collection);
 
-    // filtered = filtered.filter((item) => {
-    //   // Debugging the item collectionName and selected.collection comparison
-    //   console.log(
-    //     `Comparing: '${normalize(item.collectionName)}' === '${normalize(selected.collection)}'`
-    //   );
-    //   return normalize(item.collectionName) === normalize(selected.collection);  // Normalized comparison
 
 
       filtered = filtered.filter((item) => {

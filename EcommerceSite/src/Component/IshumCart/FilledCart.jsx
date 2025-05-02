@@ -8,11 +8,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import EmptyCart from './EmptyCart';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useCart } from "../../ContextApiCart/CartContextApi";
 
 const CartItem = ({ id, image, title, price, size, color, quantity, onIncrease, onDecrease, onRemove }) => (
   <div className="Cartitem-cart-item">
- <img  src={`http://localhost:4000/uploads/${image}`}
-      alt={title}/>
+    <img src={`http://localhost:4000/uploads/${image}`} alt={title} />
     <div className="Cartitem-cart-item-details">
       <div className="Cartitem-details-tile-price">
         <h2>{title}</h2>
@@ -32,24 +32,28 @@ const CartItem = ({ id, image, title, price, size, color, quantity, onIncrease, 
     </div>
     <div className="Cart-Check-box">
       <input type="checkbox" />
-      <button className="Cartproduct-remove-button" onClick={onRemove}><DeleteForeverIcon  className="Cart-deleteicon" /></button>
+      <button className="Cartproduct-remove-button" onClick={onRemove}><DeleteForeverIcon className="Cart-deleteicon" /></button>
     </div>
   </div>
 );
 
 const Cartitem = () => {
   const navigate = useNavigate();
-  const userId = "123456"; // Replace with dynamic user ID
+  const { userId } = useCart();
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log("User ID from Context:", userId);
+
   useEffect(() => {
+    if (!userId) return; // If userId is not available, don't fetch cart
+
     const fetchCart = async () => {
       try {
         const res = await axios.get(`http://localhost:4000/api/cart/${userId}`);
         console.log("Backend Cart Data:", res.data);
-        setCartItems(res.data.cartItems);
+        setCartItems(res.data.cartItems || []); // Ensure cartItems are updated properly
       } catch (err) {
         console.error("Error fetching cart:", err);
       } finally {
@@ -68,7 +72,7 @@ const Cartitem = () => {
 
     fetchCart();
     fetchSimilarProducts();
-  }, []);
+  }, [userId]); // Add userId as dependency, so whenever it changes, data is fetched again
 
   const handleAddToCart = async (product) => {
     try {
@@ -173,3 +177,4 @@ const Cartitem = () => {
 };
 
 export default Cartitem;
+
