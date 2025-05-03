@@ -31,8 +31,8 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
 
-    console.log("Selected Collection:", selected.collection);
-    console.log("All Products:", products);
+    // console.log("Selected Collection:", selected.collection);
+    // console.log("All Products:", products);
 
     let filtered = [...products];
 
@@ -60,17 +60,12 @@ export const FilterProvider = ({ children }) => {
    
   // Collection filter
   if (selected.collection) {
-    console.log("Filtering by collection:", selected.collection);
-
-
-
+    // console.log("Filtering by collection:", selected.collection);
       filtered = filtered.filter((item) => {
         return normalize(item.collectionName).includes(normalize(selected.collection));
     });
   }
-    
-    
-
+  
     setFilteredProducts(filtered);
   }, [selected, products]);
 

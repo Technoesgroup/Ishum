@@ -14,20 +14,47 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { selected } = useFilter();
   const navigate = useNavigate();
-  const { user } = useAuth(); // ✅ getting user from context
-  const userId = user?._id;   // ✅ dynamic userId
+  const { user } = useAuth(); 
+  const userId = user?._id;   
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/products/get-product?${queryParam}`);
+        let query = `${queryParam}`; // base query
+  
+        if (selected.collection) {
+          query += `&collection=${selected.collection}`;
+        }
+        if (selected.size) {
+          query += `&size=${selected.size}`;
+        }
+        if (selected.color) {
+          const colorHex = colors.find((c) => c.name === selected.color)?.hex;
+          query += `&color=${colorHex}`;
+        }
+        if (selected.category) {
+          query += `&category=${selected.category}`;
+        }
+        if (selected.subcategory) {
+          query += `&subcategory=${selected.subcategory}`;
+        }
+        if (selected.tag) {
+          query += `&tag=${selected.tag}`;
+        }
+        if (selected.availability) {
+          query += `&availability=${selected.availability === "InStock"}`;
+        }
+  
+        const res = await axios.get(`http://localhost:4000/api/products/get-product?${query}`);
         setProducts(res.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
       }
     };
+  
     fetchProducts();
-  }, [queryParam]);
+  }, [queryParam, selected]);
+  
   
   const filteredProducts = Array.isArray(products)
     ? products.filter((product) => {
