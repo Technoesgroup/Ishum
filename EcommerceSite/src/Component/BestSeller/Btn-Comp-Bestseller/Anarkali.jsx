@@ -46,7 +46,7 @@ export default function Bestsellers() {
             </div>
 
             {/* product */}
-            <ProductList queryParam="isExclusive=true" />
+            <ProductList queryParam="isBestseller=true" />
           </div>
         </div>
       </div>
