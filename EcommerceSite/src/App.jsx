@@ -28,10 +28,10 @@ import CollectionPage from "./Component/Collection/CollectionCom3";
 
 
 
-// import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
-// import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
-// import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
-// import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
+import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
+import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
+import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
+import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
 
 
 
@@ -63,21 +63,18 @@ function App() {
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
       <Route path="/Collection" element={<COLLECTION />}></Route>
       <Route path="/co-page/:title" element={<CollectionPage />} />
-    
       <Route path="/Viewproduct" element={<ViewProduct />} />
-      
-      {/* <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
-      <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>
-      <Route path="/Ishum-Bestseller-Cordsets"  element={<CORDSETS />}></Route>
-      <Route path="/Ishum-Bestseller-Anarkali"  element={<ANARKALIS />}></Route> */}
-
+      <Route path="/bestsellers-DHOTI"  element={<DHOTI />}></Route>
+      <Route path="/bestsellers-SUITS"  element={<SUITS />}></Route>
+      <Route path="/bestsellers-CO-ORDSETS"  element={<CORDSETS />}></Route>
+      <Route path="/bestsellers-ANARKALIS"  element={<ANARKALIS />}></Route>
      </Routes>
      <Footer />
      </Router>
-   
-       
-  
   )
 }
 
 export default App
+
+
+
