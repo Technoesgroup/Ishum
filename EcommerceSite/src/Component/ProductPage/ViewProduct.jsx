@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Style-CSS/ProductPage/ViewProduct.css";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
@@ -8,12 +8,21 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 
 const ProductPage = () => {
   const { user } = useAuth();
-  const { selectedProduct } = useProduct();
+  const { selectedProduct, setSelectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
   const [selectedColor, setSelectedColor] = useState(""); // new
   const navigate = useNavigate();
+
+
+  
+  useEffect(() => {
+    const storedProduct = localStorage.getItem("selectedProduct");
+    if (storedProduct) {
+      setSelectedProduct(JSON.parse(storedProduct));
+    }
+  }, []); // ✅ empty dependency => run only once on first load
 
   if (!selectedProduct) {
     return <div>Loading Product...</div>;
@@ -22,6 +31,9 @@ const ProductPage = () => {
   const sizes = selectedProduct.size || [36, 30, 28, 26, 24];
   const thumbnails = selectedProduct.thumbnails?.slice(0, 4) || [];
   const colorImages = selectedProduct.colorImages?.slice(0, 4) || [];
+  
+  
+  
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);

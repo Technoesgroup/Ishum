@@ -23,11 +23,12 @@ import RANGREZ from './Component/IshumExclusive/IshumExclusiveCom3';
 import UNVEILRIWAYAT from './Component/IshumExclusive/IshumExclusiveCom5';
 import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 import COLLECTION from './Pages/Collection';
-import ViewProduct from './Component/ProductPage/ViewProduct';
+import ViewProduct from './Pages/ViewProduct-Review';
 import CollectionPage from "./Component/Collection/CollectionCom3";
 
 
-
+import OrderConformation from "./Component/MyOrder/OrderConformation";
+import OrderTracking from "./Component/MyOrder/OrderTracking";
 import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
 import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
 import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
@@ -68,6 +69,8 @@ function App() {
       <Route path="/bestsellers-SUITS"  element={<SUITS />}></Route>
       <Route path="/bestsellers-CO-ORDSETS"  element={<CORDSETS />}></Route>
       <Route path="/bestsellers-ANARKALIS"  element={<ANARKALIS />}></Route>
+      <Route path="/OrderConformation"  element={<OrderConformation />}></Route>
+      <Route path="/OrderTracking"  element={<OrderTracking />}></Route>
      </Routes>
      <Footer />
      </Router>

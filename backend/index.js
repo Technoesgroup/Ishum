@@ -12,6 +12,7 @@ const crypto = require("crypto");
 const path = require("path");
 const app = express();
 const PORT = 4000;
+const orderRoutes = require('./router/OrderRoutes');
 const MONGO_URI = "mongodb+srv://harshrajput30411:IshumDatabasebyHarsh@ishum.tlzws.mongodb.net/?retryWrites=true&w=majority&appName=Ishum";
 
 
@@ -40,6 +41,7 @@ app.use("/api", collectionSecRoutes);
 app.use("/api/products", ProductRouter); 
 app.use("/api/cart", cartRouter); 
 app.use("/api/shipping", shippingRoutes);
+app.use('/api/orders', orderRoutes);
 
 
 

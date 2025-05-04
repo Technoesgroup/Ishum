@@ -1,0 +1,98 @@
+.order-card {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 1px solid #e0e0e0;
+    padding: 60px 0;
+    margin: 10px auto;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    background-color: #EEEBE4;;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .order-header {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .order-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .order-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex: 1;
+  }
+  
+  .order-product-title {
+    font-size: 18px;
+    margin: 0 0 5px;
+  }
+  
+  .order-product-subtitle,
+  .order-product-seller {
+    color: gray;
+    font-size: 14px;
+    margin: 2px 0;
+  }
+  
+  .order-product-price {
+    font-size: 20px;
+    color: #000;
+    margin-top: 10px;
+  }
+  
+  .order-status {
+    margin-top: 0;
+  }
+  
+  .status-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+  }
+  
+  .status-icon {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .confirmed .status-icon {
+    color: green;
+  }
+  
+  .cancelled .status-icon {
+    color: red;
+  }
+  
+  .order-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .btn-cn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .continue {
+    background-color: #4caf50;
+    color: white;
+  }
+  

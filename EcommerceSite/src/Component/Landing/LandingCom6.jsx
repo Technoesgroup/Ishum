@@ -36,7 +36,8 @@ const Collection = () => {
   const limitedProducts = products.slice(0, 6);
 
   const handleProductClick = (product) => {
-    setSelectedProduct(product);    // context me product save
+    setSelectedProduct(product);  
+    localStorage.setItem("selectedProduct", JSON.stringify(product));  // context me product save
     navigate("/Viewproduct");           // product page pe jao
   };
 
