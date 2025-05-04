@@ -52,47 +52,72 @@ export default function ShippingCartCom2({ onClose }) {
             document.body.appendChild(script);
         });
 
-    const handlePayment = async () => {
-        await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-
-        const { data: order } = await axios.post("http://localhost:4000/create-order", {
-            amount: totalPrice,
-        });
-
-        const options = {
-            key: "rzp_test_Tg2EHa9WfYqYt0", // Replace with your Razorpay Key ID
-            amount: order.amount,
-            currency: order.currency,
-            name: "My Store",
-            description: "Test Transaction",
-            order_id: order.id,
-            handler: async function (response) {
-                const verifyRes = await axios.post("http://localhost:4000/verify-payment", {
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_signature: response.razorpay_signature,
-                });
-
-                if (verifyRes.data.status === "success") {
-                    alert("✅ Payment successful and verified!");
-                    onClose(); // Optional: close the modal after payment
-                } else {
-                    alert("❌ Payment failed or verification error.");
-                }
-            },
-            prefill: {
-                name: user?.name || "Ishum",  // Fallback to "Ishum" if user name is not available
-                email: user?.email || "harsh@example.com",  // Fallback to default email if not available
-                contact: user?.phone || "8130299443",  // Fallback to default phone if not available
-            },
-            theme: {
-                color: "#3399cc",
-            },
+        const handlePayment = async () => {
+            await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+        
+            const { data: order } = await axios.post("http://localhost:4000/create-order", {
+                amount: totalPrice,
+            });
+        
+            const options = {
+                key: "rzp_test_Tg2EHa9WfYqYt0", // Replace with your Razorpay Key ID
+                amount: order.amount,
+                currency: order.currency,
+                name: "My Store",
+                description: "Test Transaction",
+                order_id: order.id,
+                handler: async function (response) {
+                    try {
+                        const verifyRes = await axios.post("http://localhost:4000/verify-payment", {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                        });
+        
+                        if (verifyRes.data.status === "success") {
+                            // ✅ Save order in backend
+                            await axios.post("http://localhost:4000/api/orders/", {
+                                userId: user._id,
+                                cartItems: cart.cartItems,
+                                totalAmount: totalPrice,
+                                shippingInfo: {
+                                    address: "Dummy Address", // Later take from user input
+                                    city: "Dummy City",
+                                    pincode: "000000",
+                                    phone: user.phone,
+                                },
+                                paymentInfo: {
+                                    orderId: response.razorpay_order_id,
+                                    paymentId: response.razorpay_payment_id,
+                                    signature: response.razorpay_signature,
+                                    status: "Paid"
+                                }
+                            });
+        
+                            alert("✅ Payment successful and order saved!");
+                            onClose();
+                        } else {
+                            alert("❌ Payment verification failed.");
+                        }
+                    } catch (error) {
+                        console.error("Error saving order:", error);
+                        alert("❌ Something went wrong while saving your order.");
+                    }
+                },
+                prefill: {
+                    name: user?.name || "Ishum",
+                    email: user?.email || "harsh@example.com",
+                    contact: user?.phone || "8130299443",
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+            };
+        
+            const rzp = new window.Razorpay(options);
+            rzp.open();
         };
-
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-    };
+    
 
     return (
         <div className="Payment-overlay">
