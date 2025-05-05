@@ -3,10 +3,11 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import "./OtpVerification.css";
 import GoogleIcon from '@mui/icons-material/Google';
 
-const OtpVerification = ({ onBack, phone , mode}) => {
+const OtpVerification = ({ phone, name, email, mode, onBack}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setUser } = useAuth();
+
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -36,32 +37,39 @@ const OtpVerification = ({ onBack, phone , mode}) => {
 
   const handleVerify = async () => {
     const enteredOtp = otp.join("");
-
+  
     if (enteredOtp.length < 4) {
       alert("Please enter 4-digit OTP");
       return;
     }
-
+  
     try {
       const response = await fetch("http://localhost:4000/api/user/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        
         body: JSON.stringify({ 
           phone: normalizePhone(phone),
           otp: enteredOtp,
-          mode: mode    // ✅ Use dynamic mode
+          name,
+          email,
+          mode
         }),
-        
       });
-
+  
       const data = await response.json();
-
+  
       if (data.success) {
         alert("OTP Verified ✅");
+  
         localStorage.setItem("token", data.token);
-        setIsLoggedIn(true); 
-        // Navigate or close modal here
+        localStorage.setItem("user", JSON.stringify(data.user)); // 🟡 Add this
+  
+        setUser(data.user);  
+        console.log("User from response:", data.user); // 👀 Is _id present?
+       // ✅ Store in context
+        setIsLoggedIn(true);        // ✅ Mark user as logged in
+  
+        // Close modal or navigate...
       } else {
         alert(data.message);
       }
@@ -70,6 +78,7 @@ const OtpVerification = ({ onBack, phone , mode}) => {
       alert("Verification failed");
     }
   };
+  
 
   return (
     <div className="otp-verification-container">

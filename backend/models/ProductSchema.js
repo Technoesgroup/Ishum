@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   },
   subcategory: {
     type: String,
-    enum: ["Anarkali", "Sharara Suits", "Indo Western", "Fusion wear", "Dress", "Co-ord sets"],
+    enum: ["Anarkali", "Sharara Suits", "Indo Western", "Fashion wear", "Dress", "Co-ord sets"],
     required: true,
   },
   image: {
@@ -55,7 +55,7 @@ const productSchema = new mongoose.Schema({
   },
   size: {
     type: [String],
-    enum: ['XS', 'S', 'M', 'L', 'XL','X'],
+    enum: ['38', '40', '42', '44',],
     required: true,
   },
   color: {

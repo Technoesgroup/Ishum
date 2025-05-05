@@ -23,15 +23,16 @@ import RANGREZ from './Component/IshumExclusive/IshumExclusiveCom3';
 import UNVEILRIWAYAT from './Component/IshumExclusive/IshumExclusiveCom5';
 import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 import COLLECTION from './Pages/Collection';
-import ViewProduct from './Component/ProductPage/ViewProduct';
+import ViewProduct from './Pages/ViewProduct-Review';
 import CollectionPage from "./Component/Collection/CollectionCom3";
 import OnlineOrders from "./Pages/Admin/OnlineOrders"
 
-
-// import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
-// import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
-// import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
-// import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
+import OrderConformation from "./Component/MyOrder/OrderConformation";
+import OrderTracking from "./Component/MyOrder/OrderTracking";
+import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
+import SUITS from './Component/BestSeller/Btn-Comp-Bestseller/Suits';
+import ANARKALIS from './Component/BestSeller/Btn-Comp-Bestseller/Anarkali';
+import CORDSETS from './Component/BestSeller/Btn-Comp-Bestseller/Co-ordset';
 
 
 
@@ -63,7 +64,6 @@ function App() {
       <Route path="/Ishum-Exclusive-Unveil-Riwayat"  element={<UNVEILRIWAYAT />}></Route>
       <Route path="/Collection" element={<COLLECTION />}></Route>
       <Route path="/co-page/:title" element={<CollectionPage />} />
-    
       <Route path="/Viewproduct" element={<ViewProduct />} />
       <Route path="/Admin/online-orders" element={<OnlineOrders />} />
 
@@ -76,10 +76,10 @@ function App() {
      </Routes>
      <Footer />
      </Router>
-   
-       
-  
   )
 }
 
 export default App
+
+
+

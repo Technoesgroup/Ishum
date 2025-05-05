@@ -101,6 +101,7 @@
   .bestseller-boxes{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1.5vw;
     margin-bottom: 2vw;
   }
@@ -122,6 +123,7 @@
     padding: 0.9vw;
     font-size: 0.9rem;
   }
+
 
   .bestseller-boxes-2 button{
     padding: 0.9vw;
@@ -292,6 +294,10 @@
     background-color: #555;
   }
 
+  .bestsellerFillter-button{
+    display: none;
+  }
+
   .AllPrice-of-bestseller p{
      font-size: 1.5rem;
   }
@@ -314,3 +320,72 @@
   .UnderLine{
     width: 42vw;
   }
+
+   @media(max-width:768px){
+    .for-all-boxes-btn {
+      flex: 1 1 calc(60% - 30px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+   .btn-sort{
+    margin-bottom: 10px;
+   }
+    
+    .Allproduct-Boxes{
+      flex-direction: column;
+    }
+
+    .bestseller-boxes{
+      position: relative;
+        flex-wrap: wrap;
+         align-items: end;
+    }
+    
+    .bestseller-boxes-3 button{
+      width: 50%;
+    }
+
+    .bestseller-boxes-2 button{
+      width: 50%;
+    }
+
+    .bestsellers-filters{
+      display: none;
+    }
+    
+    .store-bestseller{
+      align-items: center;
+    }
+
+    .store-bestseller h3{
+      display: none;
+    }
+
+    .store-bestseller h2{
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .bestsellers-title{
+      font-size: 1.6rem;
+    }
+
+    .bestsellerFillter-button{
+      position: absolute;
+      display: block;
+      top: 120px;
+      right: 20px;
+    }
+
+    .Filtter-button{
+      font-size: 1rem;
+      padding: 0.8rem 1.8rem;
+      background-color:#EEEBE4 ;
+      border: none;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.21);
+    }
+   }
+
+ 

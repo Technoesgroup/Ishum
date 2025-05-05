@@ -1,0 +1,145 @@
+/* RatingsReviews.css */
+
+.ratings-container {
+   width: auto;
+    margin: 40px auto;
+    padding: 0  7vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:#EEEBE4;
+    border-radius: 16px;
+  }
+  
+  .ratings-container h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #222;
+  }
+  
+  .main-rating {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .average-rating h1 {
+    font-size: 48px;
+    color: #2e7d32;
+    margin: 0;
+  }
+  
+  .average-rating span {
+    font-size: 40px;
+    color: gold;
+  }
+  
+  .average-rating p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 8px;
+  }
+  
+  .rating-bars {
+    flex: 1;
+    max-width: 650px;
+  }
+  
+  .bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    gap: 10px;
+    color: #333;
+  }
+  
+  .bar span:first-child {
+    width: 30px;
+  }
+  
+  .bar .progress {
+    flex: 1;
+    height: 8px;
+    background-color: #d0f0c0;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .bar .progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8px;
+    background-color: #4caf50;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .bar .progress.red::after {
+    background-color: #e53935;
+  }
+  
+  .category-ratings {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin: 30px 0;
+  }
+  
+  .circle-rating {
+    width: 90px;
+    height: 90px;
+    border: 5px solid #4caf50;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #222;
+    background-color: #f9fff9;
+    transition: transform 0.3s ease;
+  }
+  
+  .circle-rating span {
+    font-size: 20px;
+  }
+  
+  .circle-rating:hover {
+    transform: scale(1.05);
+  }
+  
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .image-gallery img,
+  .image-gallery .more-images {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .image-gallery img:hover,
+  .image-gallery .more-images:hover {
+    transform: scale(1.05);
+  }
+  
+  .more-images {
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  

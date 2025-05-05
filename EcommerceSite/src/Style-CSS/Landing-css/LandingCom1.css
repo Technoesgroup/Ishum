@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: center;
     /* overflow: hidden; */
-    margin-top: -2vw;
+    margin-top:0;
   }
   
   .scroll-wrapper{
@@ -19,17 +19,17 @@
   
   .hero-slider {
     width: 100%;
-    height: 50vw; /* Ensures slider takes the container's full height */
+    height: 40vw; /* Ensures slider takes the container's full height */
   }
   
   .hero-slider .slick-slide {
-    height: 50vw; 
+    height: 40vw; 
   }
   
   
    .hero-slider .slick-slide img {
     width: 100%;
-    height: 50vw; 
+    height: 40vw; 
     object-fit: cover; /* Keeps image proportions */
     /* position: relative; */
   }

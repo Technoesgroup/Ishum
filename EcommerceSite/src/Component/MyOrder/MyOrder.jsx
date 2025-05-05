@@ -1,39 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios"; // Import axios for HTTP requests
 import "../MyOrder/MyOrder.css";
-import img1  from '../../images/Col-2.svg';
-
-const orders = [
-  {
-    id: 1524,
-    name: "Gulzaar - Dark Purple Multicolor Printed Velvet Suit Set With Potli and Dupatta",
-    size: 36,
-    image:img1,
-    color: "Purple",
-    quantity: 2,
-    date: "13/05/2021",
-    trackingNumber: "IK287368838",
-    subtotal: 1000,
-    status: "Pending",
-  },
-  {
-    id: 1525,
-    name: "Gulzaar - Dark Purple Multicolor Printed Velvet Suit Set With Potli and Dupatta",
-    size: 38,
-    image:img1,
-    color: "Red",
-    quantity: 1,
-    date: "15/05/2021",
-    trackingNumber: "IK287368839",
-    subtotal: 1200,
-    status: "Delivered",
-  },
-];
+import img1 from '../../images/Col-2.svg'; // You can still use static images as fallback
 
 const OrderList = () => {
+  const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("Pending");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch orders from the backend
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/orders"); // Make sure this API endpoint is correct
+        setOrders(response.data); // Set the orders from the backend
+      } catch (err) {
+        console.error("Error fetching orders:", err);
+        setError("Failed to fetch orders");
+      } finally {
+        setLoading(false); // Hide loading state
+      }
+    };
+
+    fetchOrders();
+  }, []); // Empty array means this will run once when the component mounts
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading state while fetching data
+  }
+
+  if (error) {
+    return <div>{error}</div>; // Display error message if fetching fails
+  }
 
   return (
-    <div className="order-container">
+    <div className="order-container-c-p-d">
       <div className="tabs">
         {["Pending", "Delivered", "Cancelled"].map((status) => (
           <button
@@ -45,21 +47,23 @@ const OrderList = () => {
           </button>
         ))}
       </div>
-      
+
       {orders.filter(order => order.status === filter).map((order) => (
-        <div key={order.id} className="order-card">
+        <div key={order._id} className="order-c-p-d-card"> {/* Use _id instead of id */}
           <div className="order-image">
-            <img src={order.image} alt="" className="order-images"/>
+            <img src={order.items[0]?.image || img1} alt={order.items[0]?.title} className="order-images"/>
           </div>
           <div className="order-details">
-            <h2 className="order-title">Order #{order.id}</h2>
-            <p className="Ordername">{order.name}</p>
-            <p  className="Order-Size-Color">Size: {order.size} | Color: {order.color} | Quantity: {order.quantity}</p>
+            <h2 className="order-title">Order #{order._id}</h2> {/* Use _id for order ID */}
+            <p className="Ordername">{order.items[0]?.title}</p>
+            <p className="Order-Size-Color">
+              Size: {order.items[0]?.size} | Color: {order.items[0]?.color} | Quantity: {order.items[0]?.quantity}
+            </p>
           </div>
           <div className="order-summary">
-            <p>{order.date}</p>
-            <p>Tracking number: <strong>{order.trackingNumber}</strong></p>
-            <p>Subtotal: <strong>Rs.{order.subtotal}</strong></p>
+            <p>{new Date(order.createdAt).toLocaleDateString()}</p> {/* Display order date */}
+            <p>Tracking number: <strong>{order.trackingNumber || "N/A"}</strong></p>
+            <p>Subtotal: <strong>Rs.{order.amount}</strong></p> {/* Display total amount */}
             <p className="order-status">{order.status.toUpperCase()}</p>
             <button className="details-button">Details</button>
           </div>
@@ -70,3 +74,4 @@ const OrderList = () => {
 };
 
 export default OrderList;
+

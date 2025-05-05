@@ -4,9 +4,9 @@ import Slider from "react-slick";
 import "../../Style-CSS/Landing-css/LandingCom1.css";
 import "slick-carousel/slick/slick.css";  
 import "slick-carousel/slick/slick-theme.css";
-import heroImg1 from "../../images/Img-1.png";
-import heroImg2 from "../../images/img-2.png";
-import heroImg3 from "../../images/img-3.png";
+import heroImg1 from "../../images/Banner1.png";
+import heroImg2 from "../../images/Banner4.png";
+import heroImg3 from "../../images/Banner9.png";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 

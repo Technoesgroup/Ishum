@@ -6,19 +6,26 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Importing useAuth hook
+import { useNavigate } from "react-router-dom";
 
 export default function ShippingCartCom2({ onClose }) {
+    const navigate = useNavigate(); 
+    const { user } = useAuth(); // Get user from context
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
-    const userId = "123456";
     const [activeStep, setActiveStep] = useState("wallet");
 
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/api/cart/${userId}`);
+                if (!user || !user._id) {
+                    alert("User not found. Please log in.");
+                    return;
+                }
+                const res = await axios.get(`http://localhost:4000/api/cart/${user._id}`);
                 setCart(res.data);
-                console.log(res.data)
+                console.log(res.data);
             } catch (err) {
                 console.error("Error fetching cart for shipping page", err);
             } finally {
@@ -27,7 +34,7 @@ export default function ShippingCartCom2({ onClose }) {
         };
 
         fetchCart();
-    }, []);
+    }, [user]); // Dependency array includes user to refetch if user changes
 
     if (loading) return <div>Loading...</div>;
     if (!cart?.cartItems || cart.cartItems.length === 0) {
@@ -47,47 +54,75 @@ export default function ShippingCartCom2({ onClose }) {
             document.body.appendChild(script);
         });
 
-    const handlePayment = async () => {
-        await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+        const handlePayment = async () => {
+            await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+        
+            const { data: order } = await axios.post("http://localhost:4000/create-order", {
+                amount: totalPrice,
+            });
+        
+            const options = {
+                key: "rzp_test_Tg2EHa9WfYqYt0", // Replace with your Razorpay Key ID
+                amount: order.amount,
+                currency: order.currency,
+                name: "My Store",
+                description: "Test Transaction",
+                order_id: order.id,
+                handler: async function (response) {
+                    try {
+                        const verifyRes = await axios.post("http://localhost:4000/verify-payment", {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                        });
+        
+                        if (verifyRes.data.status === "success") {
+                            // ✅ Save order in backend
+                            await axios.post("http://localhost:4000/api/orders/", {
+                                userId: user._id,
+                                cartItems: cart.cartItems,
+                                totalAmount: totalPrice,
+                                shippingInfo: {
+                                    address: "Dummy Address", // Later take from user input
+                                    city: "Dummy City",
+                                    pincode: "000000",
+                                    phone: user.phone,
+                                },
+                                paymentInfo: {
+                                    orderId: response.razorpay_order_id,
+                                    paymentId: response.razorpay_payment_id,
+                                    signature: response.razorpay_signature,
+                                    status: "Paid"
+                                }
+                            });
+        
+                            alert("✅ Payment successful and order saved!");
+                            localStorage.setItem("orderConfirmed", "true");
+                            navigate("/OrderConformation");
 
-        const { data: order } = await axios.post("http://localhost:4000/create-order", {
-            amount: totalPrice,
-        });
-
-        const options = {
-            key: "rzp_test_Tg2EHa9WfYqYt0", // Replace with your Razorpay Key ID
-            amount: order.amount,
-            currency: order.currency,
-            name: "My Store",
-            description: "Test Transaction",
-            order_id: order.id,
-            handler: async function (response) {
-                const verifyRes = await axios.post("http://localhost:4000/verify-payment", {
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_signature: response.razorpay_signature,
-                });
-
-                if (verifyRes.data.status === "success") {
-                    alert("✅ Payment successful and verified!");
-                    onClose(); // Optional: close the modal after payment
-                } else {
-                    alert("❌ Payment failed or verification error.");
-                }
-            },
-            prefill: {
-                name: "Ishum",
-                email: "harsh@example.com",
-                contact: "8130299443",
-            },
-            theme: {
-                color: "#3399cc",
-            },
+                            onClose();
+                        } else {
+                            alert("❌ Payment verification failed.");
+                        }
+                    } catch (error) {
+                        console.error("Error saving order:", error);
+                        alert("❌ Something went wrong while saving your order.");
+                    }
+                },
+                prefill: {
+                    name: user?.name || "Ishum",
+                    email: user?.email || "harsh@example.com",
+                    contact: user?.phone || "8130299443",
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+            };
+        
+            const rzp = new window.Razorpay(options);
+            rzp.open();
         };
-
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-    };
+    
 
     return (
         <div className="Payment-overlay">

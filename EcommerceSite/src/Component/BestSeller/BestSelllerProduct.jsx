@@ -5,6 +5,7 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import axios from "axios";
 import { colors } from "../BestSeller/ColorSection";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../ContextApiCart/LoginContextApi"; // ✅ added
 
 const PRODUCTS_PER_PAGE = 6;
 
@@ -13,21 +14,48 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { selected } = useFilter();
   const navigate = useNavigate();
-  const userId = "123456"; // Replace with dynamic user ID
+  const { user } = useAuth(); 
+  const userId = user?._id;   
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/products/get-product?${queryParam}`);
+        let query = `${queryParam}`; // base query
+  
+        if (selected.collection) {
+          query += `&collection=${selected.collection}`;
+        }
+        if (selected.size) {
+          query += `&size=${selected.size}`;
+        }
+        if (selected.color) {
+          const colorHex = colors.find((c) => c.name === selected.color)?.hex;
+          query += `&color=${colorHex}`;
+        }
+        if (selected.category) {
+          query += `&category=${selected.category}`;
+        }
+        if (selected.subcategory) {
+          query += `&subcategory=${selected.subcategory}`;
+        }
+        if (selected.tag) {
+          query += `&tag=${selected.tag}`;
+        }
+        if (selected.availability) {
+          query += `&availability=${selected.availability === "InStock"}`;
+        }
+  
+        const res = await axios.get(`http://localhost:4000/api/products/get-product?${query}`);
         setProducts(res.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
       }
     };
-    fetchProducts();
-  }, [queryParam]);
   
-
+    fetchProducts();
+  }, [queryParam, selected]);
+  
+  
   const filteredProducts = Array.isArray(products)
     ? products.filter((product) => {
         const sizeMatch = selected.size ? product.size.includes(selected.size) : true;
@@ -39,15 +67,12 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
         const availableMatch = selected.availability
           ? product.availability === (selected.availability === "InStock")
           : true;
-          
-          const collectionMatch = selected.collection
+
+        const collectionMatch = selected.collection
           ? product.collectionName?.toLowerCase().replace(/\s+/g, "").includes(
               selected.collection.toLowerCase().replace(/\s+/g, "").split(" ")[0]
             )
           : true;
-  
-        // Debugging the comparison
-        console.log(`Checking collection for product: ${product.collectionName}, Selected collection: ${selected.collection}`);
 
         return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch && collectionMatch;
       })
@@ -63,15 +88,19 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     }
   };
 
-  // Function to add product to cart
   const handleAddToCart = async (product) => {
+    if (!userId) {
+      alert("Please login to add products to your cart.");
+      return;
+    }
+
     try {
       const res = await axios.post("http://localhost:4000/api/cart/addtocart", {
         userId,
         productId: product._id,
         quantity: 1,
-        size: product.size[0], // Default size selection
-        color: product.color,  // Selected color
+        size: product.size[0], 
+        color: product.color,
       });
       alert("Product added to cart!");
     } catch (err) {
@@ -127,5 +156,4 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     </div>
   );
 }
-
 
