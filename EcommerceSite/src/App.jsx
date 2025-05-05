@@ -25,7 +25,7 @@ import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 import COLLECTION from './Pages/Collection';
 import ViewProduct from './Component/ProductPage/ViewProduct';
 import CollectionPage from "./Component/Collection/CollectionCom3";
-
+import OnlineOrders from "./Pages/Admin/OnlineOrders"
 
 
 // import DHOTI from './Component/BestSeller/Btn-Comp-Bestseller/Dhoti';
@@ -65,6 +65,8 @@ function App() {
       <Route path="/co-page/:title" element={<CollectionPage />} />
     
       <Route path="/Viewproduct" element={<ViewProduct />} />
+      <Route path="/Admin/online-orders" element={<OnlineOrders />} />
+
       
       {/* <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
       <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>
