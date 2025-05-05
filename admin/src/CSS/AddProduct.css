@@ -1,0 +1,128 @@
+
+.add-product-container {
+  margin-left: 260px; /* Adjust according to your sidebar width */
+  padding-top: 100px; /* Adjust according to your header height */
+  padding: 2rem;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1; /* Make sure it's above background but below overlays */
+}
+
+.add-product-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #222;
+}
+
+.form-columns {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-column {
+  flex: 1;
+  min-width: 400px;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  background: #fff;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.dropzone:hover {
+  border-color: #888;
+}
+
+.dropzone p {
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.dropzone::before {
+  content: '+';
+  font-size: 2rem;
+  color: #888;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.preview-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+}
+
+.preview-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.color-variant {
+  margin-bottom: 1.5rem;
+}
+
+.color-variant input {
+  margin-bottom: 0.5rem;
+}
+
+.save-btn {
+  background-color: #4a90e2;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #357abd;
+}
