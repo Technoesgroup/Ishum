@@ -4,9 +4,9 @@ import Slider from "react-slick";
 import "../../Style-CSS/Landing-css/LandingCom1.css";
 import "slick-carousel/slick/slick.css";  
 import "slick-carousel/slick/slick-theme.css";
-import heroImg1 from "../../images/Exclusive-Banner.svg";
-import heroImg2 from "../../images/Anarkali_Suits_banner_1_x800.png";
-import heroImg3 from "../../images/Gillori_blog_banner_3.png";
+import heroImg1 from "../../images/Banner1.png";
+import heroImg2 from "../../images/Banner8.png";
+import heroImg3 from "../../images/Banner6.png";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 

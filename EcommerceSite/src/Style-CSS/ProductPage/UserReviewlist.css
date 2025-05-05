@@ -1,0 +1,7 @@
+.Review-list-user{
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 6vw;
+}

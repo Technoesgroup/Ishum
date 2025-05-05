@@ -6,6 +6,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ShippingCartCom2 from "./ShippingCartCom2";
+import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Import useAuth to get the user
 
 const indianStates = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
@@ -17,6 +18,7 @@ const indianStates = [
 ];
 
 export default function ShippingStep() {
+  const { user } = useAuth(); // Getting the user from context
   const [activeStep, setActiveStep] = useState("location");
   const [showOverlay, setShowOverlay] = useState(false);
   const [formData, setFormData] = useState({
@@ -43,9 +45,14 @@ export default function ShippingStep() {
   };
 
   const handleContinue = async () => {
+    if (!user || !user._id) {
+      alert("User not found. Please login again.");
+      return;
+    }
+
     try {
-      const userId = "123456"; // 👈 Replace with actual userId (from auth or props)
-      const payload = { ...formData, userId };
+      // Include userId in the payload to be sent to the backend
+      const payload = { ...formData, userId: user._id };
 
       await axios.post("http://localhost:4000/api/shipping", payload);
 
@@ -158,4 +165,5 @@ export default function ShippingStep() {
     </div>
   );
 }
+
 

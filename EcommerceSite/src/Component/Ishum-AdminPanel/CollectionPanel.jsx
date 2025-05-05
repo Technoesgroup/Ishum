@@ -58,7 +58,6 @@ const AdminPanel = () => {
     };
 
 
-
     return (
         <div className="Collection-admin-panel">
             <h2>Collection List - 1</h2>

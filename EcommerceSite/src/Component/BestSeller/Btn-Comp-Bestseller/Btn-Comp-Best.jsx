@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-export default function ExclusiveNavigation({ showSort = true }) {
+export default function BestSellerNavigation({ showSort = true }) {
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function ExclusiveNavigation({ showSort = true }) {
   return (
     <div className="bestseller-boxes">
       <div className="bestseller-boxes-1 for-all-boxes-btn">
-        <button  onClick={() => handleNavigate("/Ishum-Exclusive")}>JASHN E RANG</button>
+        <button  onClick={() => handleNavigate("/Ishum-Exclusive")}>EXCLUSIVE</button>
         {showSort && (
           <button className="btn-sort" onClick={handleToggleSortDropdown}>
             SORT - LOW TO HIGH <KeyboardArrowRightIcon className="Sort-Right-icon" />
@@ -48,12 +48,12 @@ export default function ExclusiveNavigation({ showSort = true }) {
         )}
       </div>
       <div className="bestseller-boxes-2 for-all-boxes-btn">
-        <button onClick={() => handleNavigate("/Ishum-Exclusive-Gulzar")}>GULZAAR</button>
-        <button onClick={() => handleNavigate("/Ishum-Exclusive-Rangrez")}>RANGREZ</button>
+        <button onClick={() => handleNavigate("/bestsellers-CO-ORDSETS")}>CO-ORDSETS</button>
+        <button onClick={() => handleNavigate("/bestsellers-SUITS")}>SUITS</button>
       </div>
       <div className="bestseller-boxes-3 for-all-boxes-btn">
-        <button onClick={() => handleNavigate("/Ishum-Exclusive-Unveil-Riwayat")}>UNVEIL RIWAYAT</button>
-        <button onClick={() => handleNavigate("/Ishum-Exclusive-Noor-Edits")}>NOOR EDITS</button>
+        <button onClick={() => handleNavigate("/bestsellers-ANARKALIS")}>ANARKALIS</button>
+        <button onClick={() => handleNavigate("/bestsellers-DHOTI")}>DHOTI</button>
       </div>
     </div>
   );
