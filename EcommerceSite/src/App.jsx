@@ -25,7 +25,7 @@ import NOOREDITS from './Component/IshumExclusive/IshumExclusiveCom4';
 import COLLECTION from './Pages/Collection';
 import ViewProduct from './Pages/ViewProduct-Review';
 import CollectionPage from "./Component/Collection/CollectionCom3";
-
+import OnlineOrders from "./Pages/Admin/OnlineOrders"
 
 import OrderConformation from "./Component/MyOrder/OrderConformation";
 import OrderTracking from "./Component/MyOrder/OrderTracking";
@@ -65,12 +65,14 @@ function App() {
       <Route path="/Collection" element={<COLLECTION />}></Route>
       <Route path="/co-page/:title" element={<CollectionPage />} />
       <Route path="/Viewproduct" element={<ViewProduct />} />
-      <Route path="/bestsellers-DHOTI"  element={<DHOTI />}></Route>
-      <Route path="/bestsellers-SUITS"  element={<SUITS />}></Route>
-      <Route path="/bestsellers-CO-ORDSETS"  element={<CORDSETS />}></Route>
-      <Route path="/bestsellers-ANARKALIS"  element={<ANARKALIS />}></Route>
-      <Route path="/OrderConformation"  element={<OrderConformation />}></Route>
-      <Route path="/OrderTracking"  element={<OrderTracking />}></Route>
+      <Route path="/Admin/online-orders" element={<OnlineOrders />} />
+
+      
+      {/* <Route path="/Ishum-Bestseller-Dhoti"  element={<DHOTI />}></Route>
+      <Route path="/Ishum-Bestseller-Suits"  element={<SUITS />}></Route>
+      <Route path="/Ishum-Bestseller-Cordsets"  element={<CORDSETS />}></Route>
+      <Route path="/Ishum-Bestseller-Anarkali"  element={<ANARKALIS />}></Route> */}
+
      </Routes>
      <Footer />
      </Router>
