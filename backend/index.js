@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const collectionRoutes = require("./router/collectionRoutes");
-const collectionSecRoutes = require("./router/collectionSecRoutes");
 const userRouter = require("./router/userLoginrouter");
 const ProductRouter = require("./router/Productrouter");
 const cartRouter = require("./router/Cartrouter");
@@ -14,6 +13,7 @@ const app = express();
 const PORT = 4000;
 const orderRoutes = require('./router/OrderRoutes');
 const MONGO_URI = "mongodb+srv://harshrajput30411:IshumDatabasebyHarsh@ishum.tlzws.mongodb.net/?retryWrites=true&w=majority&appName=Ishum";
+
 
 
 app.use(cors());
@@ -37,7 +37,6 @@ mongoose.connect(MONGO_URI)
 
 app.use("/api/user", userRouter); 
 app.use("/api", collectionRoutes);
-app.use("/api", collectionSecRoutes);
 app.use("/api/products", ProductRouter); 
 app.use("/api/cart", cartRouter); 
 app.use("/api/shipping", shippingRoutes);
