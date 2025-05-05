@@ -1,30 +1,30 @@
-.order-card {
+.orderTracking-card {
     width: auto;
     display: flex;
     flex-direction: column;
     gap: 30px;
     border: 1px solid #e0e0e0;
-    padding: 60px 0;
-    margin: 10px auto;
+    padding: 60px  7vw; 
+    margin: auto;
     border-radius: 8px;
     font-family: Arial, sans-serif;
     background-color: #EEEBE4;;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   }
   
-  .order-header {
+  .orderTracking-header {
     display: flex;
     gap: 20px;
   }
   
   .order-image {
     width: 150px;
-    height: 150px;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
   }
   
-  .order-info {
+  .orderTracking-info {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -49,7 +49,7 @@
     margin-top: 10px;
   }
   
-  .order-status {
+  .orderTracking-status {
     margin-top: 0;
   }
   
@@ -72,10 +72,10 @@
     color: red;
   }
   
-  .order-actions {
+  .orderTracking-actions {
     margin-top: 20px;
     display: flex;
-    gap: 15px;
+    justify-content: space-around;
   }
   
   .btn-cn {
@@ -86,13 +86,68 @@
     cursor: pointer;
   }
   
-  .cancel {
+  .cancel-btn{
     background-color: #f44336;
     color: white;
+   border: none;
+   font-size: 1rem;
+   padding: 1vw  2vw;
+   cursor: pointer;
+   border-radius: 8px;
+  }
+
+  .continue-shopping-btn{
+    background-color: #4B3D1A;
+    color: white;
+   border: none;
+   font-size: 1rem;
+   padding: 1vw ;
+   cursor: pointer;
+   border-radius: 8px;
+  }
+
+  .productimage-trackingOrder{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .AllOrders-track{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
   
-  .continue {
-    background-color: #4caf50;
-    color: white;
+
+  .tracking-steps {
+    margin-top: 1rem;
+    border-left: 3px dashed #ccc;
+    padding-right: 0;
+  }
+  
+  .step {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .step .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+    font-size: 27px;
+    right: 10px;
+position: relative;
+  }
+  
+  .step.active {
+    color: green;
+  }
+  
+  .step.pending {
+    color: #aaa;
+  }
+  
+  .step.cancelled {
+    color: red;
   }
   

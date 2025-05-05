@@ -1,7 +1,6 @@
 const Order = require('../models/Ordermodel');
 
 exports.createOrder = async (req, res) => {
-  console.log("📦 Order create API hit: ", req.body);
 
   try {
     const { userId, cartItems, totalAmount, paymentInfo } = req.body;
@@ -24,6 +23,29 @@ exports.createOrder = async (req, res) => {
 };
 
 
+// Controller/OrderController.js
+
+exports.getUserLatestOrder = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const latestOrder = await Order.findOne({ userId })
+      .sort({ createdAt: -1 }); // Get latest one
+
+    if (!latestOrder) {
+      return res.status(404).json({ message: 'No orders found' });
+    }
+
+    res.json(latestOrder);
+  } catch (err) {
+    console.error("Error fetching latest user order:", err);
+    res.status(500).json({ message: 'Failed to fetch latest user order' });
+  }
+};
+
+
+
+
 // Get all delivered orders count
 exports.getDeliveredOrdersCount = async (req, res) => {
   try {
@@ -43,3 +65,28 @@ exports.getAllOrders = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch orders' });
   }
 };
+
+
+
+// Cancel Order (just update status)
+exports.cancelOrder = async (req, res) => {
+  try {
+    const orderId = req.params.orderId;
+
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { status: 'cancelled' },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.json({ success: true, message: "Order cancelled", order: updatedOrder });
+  } catch (err) {
+    console.error("Error cancelling order:", err);
+    res.status(500).json({ success: false, message: "Failed to cancel order" });
+  }
+};
+

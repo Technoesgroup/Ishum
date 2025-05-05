@@ -38,7 +38,7 @@ const CollectionSection = () => {
          style={{ cursor: "pointer" }}
        >
          <img
-           src={`http://localhost:4000${col.image}`}
+            src={`http://localhost:4000${encodeURI(col.image)}`}
            alt={col.title}
            className="LandingCom-2-collection-image"
          />
