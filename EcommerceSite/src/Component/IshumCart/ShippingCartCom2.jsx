@@ -7,8 +7,10 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Importing useAuth hook
+import { useNavigate } from "react-router-dom";
 
 export default function ShippingCartCom2({ onClose }) {
+    const navigate = useNavigate(); 
     const { user } = useAuth(); // Get user from context
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -95,6 +97,9 @@ export default function ShippingCartCom2({ onClose }) {
                             });
         
                             alert("✅ Payment successful and order saved!");
+                            localStorage.setItem("orderConfirmed", "true");
+                            navigate("/OrderConformation");
+
                             onClose();
                         } else {
                             alert("❌ Payment verification failed.");

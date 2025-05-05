@@ -196,7 +196,7 @@ const AddProduct = () => {
           <option value="Anarkali">Anarkali</option>
           <option value="Sharara Suits">Sharara Suits</option>
           <option value="Indo Western">Indo Western</option>
-          <option value="Fashion wear">Fusion wear</option>
+          <option value="Fashion wear">Fashion wear</option>
           <option value="Dress">Dress</option>
           <option value="Co-ord sets">Co-ord sets</option>
         </select>
@@ -239,11 +239,10 @@ const AddProduct = () => {
 
         <label>Size:</label>
         <div className="sizes-container">
-          <label><input type="checkbox" value="XS" onChange={handleCheckbox} checked={form.size.includes("XS")} /> XS</label>
-          <label><input type="checkbox" value="X" onChange={handleCheckbox} checked={form.size.includes("X")} /> X</label>
-          <label><input type="checkbox" value="L" onChange={handleCheckbox} checked={form.size.includes("L")} /> L</label>
-          <label><input type="checkbox" value="XL" onChange={handleCheckbox} checked={form.size.includes("XL")} /> XL</label>
-          <label><input type="checkbox" value="M" onChange={handleCheckbox} checked={form.size.includes("M")} /> M</label>
+          <label><input type="checkbox" value="38" onChange={handleCheckbox} checked={form.size.includes("38")} /> 38</label>
+          <label><input type="checkbox" value="40" onChange={handleCheckbox} checked={form.size.includes("40")} /> 40</label>
+          <label><input type="checkbox" value="42" onChange={handleCheckbox} checked={form.size.includes("42")} /> 42</label>
+          <label><input type="checkbox" value="44" onChange={handleCheckbox} checked={form.size.includes("44")} /> 44</label>
         </div>
 
         <label>Availability:</label>

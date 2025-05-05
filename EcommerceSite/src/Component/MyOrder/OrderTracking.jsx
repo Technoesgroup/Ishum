@@ -1,53 +1,119 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useAuth } from "../../ContextApiCart/LoginContextApi";
+import { useNavigate } from "react-router-dom";
 import "./OrderTracking.css";
 
-const OrderCard = () => {
+const OrderTracking = () => {
+  const { user } = useAuth();
+  const [order, setOrder] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?._id) {
+      axios
+        .get(`http://localhost:4000/api/orders/user/${user._id}/latest`)
+        .then((res) => setOrder(res.data))
+        .catch((err) => console.error("Order fetch error:", err));
+    }
+  }, [user]);
+
+  const handleCancelOrder = async () => {
+    if (!order?._id) return;
+  
+    const confirmCancel = window.confirm("Are you sure you want to cancel this order?");
+    if (!confirmCancel) return;
+  
+    try {
+      const res = await axios.put(`http://localhost:4000/api/orders/cancel/${order._id}`);
+      alert("Order cancelled successfully");
+      setOrder(res.data.order); // Update the UI with new status
+    } catch (err) {
+      console.error("Error cancelling order:", err);
+      alert("Failed to cancel order");
+    }
+  };
+  
+
+  if (!order) return <p>No order found.</p>;
+
   return (
-    <div className="order-card">
-      <div className="order-header">
-        <img
-          src="https://m.media-amazon.com/images/I/71RS4Y9bHEL._SX679_.jpg"
-          alt="Smartwatch"
-          className="order-image"
-        />
-        <div className="order-info">
-          <h2 className="order-product-title">
-            Noise Colorfit Icon 2 1.8'' Display with Bluetooth Calling, AI Voice
-            Assistant Smartwatch
-          </h2>
-          <p className="order-product-subtitle">1.8, Jet Black</p>
-          <p className="order-product-seller">Seller: TBL Online</p>
-          <h3 className="order-product-price">₹1,018</h3>
+    <div className="orderTracking-container">
+      <div className="orderTracking-card">
+
+        <p><strong>Ordered On:</strong> {new Date(order.createdAt).toLocaleString()}</p>
+
+<div  className="productimage-trackingOrder">
+<div  className="AllOrders-track">
+{order.items.map((item, index) => (
+          <div key={index} className="orderTracking-header">
+            <img
+              src={`http://localhost:4000/uploads/${item.image}`}
+              alt={item.title}
+              className="order-image"
+            />
+            <div className="orderTracking-info">
+              <h2 className="order-product-title">{item.title}</h2>
+              <p className="order-product-subtitle">
+                {item.color}, {item.size}
+              </p>
+              <p className="order-product-seller">Qty: {item.quantity}</p>
+              <h3 className="order-product-price">₹{item.price}</h3>
+            </div>
+          </div>
+        ))}
+</div>
+
+<div className="tracking-steps">
+  {["confirmed", "shipped", "out_for_delivery", "delivered"].map((step, i) => {
+    const statusMap = {
+      confirmed: "Order Confirmed",
+      shipped: "Shipped",
+      out_for_delivery: "Out For Delivery",
+      delivered: "Delivered"
+    };
+
+    const isActive = order.status === step || ["shipped", "out_for_delivery", "delivered"].includes(step) && (
+      ["shipped", "out_for_delivery", "delivered"].indexOf(order.status) >= ["shipped", "out_for_delivery", "delivered"].indexOf(step)
+    );
+
+    if (order.status === "cancelled" && step !== "confirmed") return null;
+
+    return (
+      <div key={step} className={`step ${isActive ? "active" : "pending"}`}>
+        <span className="icon">{isActive ? "✔" : "○"}</span>
+        <div>
+          <div><strong>{statusMap[step]}</strong></div>
+          {step === "confirmed" && (
+            <div>Your order has been placed, {new Date(order.createdAt).toDateString()}</div>
+          )}
         </div>
       </div>
+    );
+  })}
 
-      <div className="order-status">
-        <div className="status-item confirmed">
-          <span className="status-icon">✔</span>
-          <span>Order Confirmed, Today, May 04</span>
-        </div>
-
-        <div className="status-item cancelled">
-          <span className="status-icon">.</span>
-          <span>Out for Delivery</span>
-        </div>
-        <div className="status-item cancelled">
-          <span className="status-icon">.</span>
-          <span>Cancelled, Today, May 04</span>
-        </div>
-
-        <div className="status-item cancelled">
-          <span className="status-icon">.</span>
-          <span>Delivery, Today By time</span>
-        </div>
+  {order.status === "cancelled" && (
+    <div className="step cancelled">
+      <span className="icon">✖</span>
+      <div>
+        <div><strong>Order Cancelled</strong></div>
+        <div>Your order was cancelled by you.</div>
       </div>
+    </div>
+  )}
+</div>
 
-      <div className="order-actions">
-        <button className="btn-cn cancel">Cancel Order</button>
-        <button className="btn-cn continue">Continue Shopping</button>
+</div>
+
+        {/* Buttons */}
+        <div className="orderTracking-actions">
+          <button className="cancel-btn" onClick={handleCancelOrder}>Cancel Order</button>
+          <button className="continue-shopping-btn" onClick={() => navigate("/")}>Continue Shopping</button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default OrderCard;
+export default OrderTracking;
+
