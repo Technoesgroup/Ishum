@@ -6,6 +6,7 @@ import axios from "axios";
 import { colors } from "../BestSeller/ColorSection";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi"; // ✅ added
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 
 const PRODUCTS_PER_PAGE = 6;
 
@@ -14,6 +15,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { selected } = useFilter();
   const navigate = useNavigate();
+    const { setSelectedProduct } = useProduct();
   const { user } = useAuth(); 
   const userId = user?._id;   
 
@@ -54,6 +56,14 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   
     fetchProducts();
   }, [queryParam, selected]);
+
+
+   // ✅ product click handler
+   const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/Viewproduct");
+  };
   
   
   const filteredProducts = Array.isArray(products)
@@ -112,7 +122,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     <div>
       <div className="bestsellers-products-grid">
         {displayedProducts.map((product) => (
-          <div key={product._id} className="bestsellers-product-card">
+          <div key={product._id} className="bestsellers-product-card"     onClick={() => handleProductClick(product)}>
             <img
               src={`http://localhost:4000/uploads/${product.image}`}
               alt={product.name}

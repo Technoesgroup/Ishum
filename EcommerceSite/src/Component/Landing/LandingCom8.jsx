@@ -4,10 +4,17 @@ import img_b1 from '../../images/image 27.svg';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import UnderLine from '../../images/Undertextline.png';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useProduct } from "../../ContextApiCart/ProductContextApi"; // ✅ context import
 
 const Collection = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const collectionName = "Unveli Riwayat";
+  const navigate = useNavigate();
+
+  const { setSelectedProduct } = useProduct(); // ✅ context setter
 
   useEffect(() => {
     const fetchRiwayatProducts = async () => {
@@ -19,14 +26,24 @@ const Collection = () => {
           }
         });
         const fetchedProducts = res.data.products || [];
-        setProducts(fetchedProducts.slice(0, 6)); // Show only first 5
+        setProducts(fetchedProducts.slice(0, 6)); // Limit to 6 products
       } catch (error) {
         console.error("Error fetching Unveil Riwayat products:", error);
+        setError("Failed to load products. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchRiwayatProducts();
-  }, []);
+  }, [collectionName]);
+
+  // ✅ product click handler
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/Viewproduct");
+  };
 
   return (
     <div className="collection-container">
@@ -35,29 +52,53 @@ const Collection = () => {
         <img className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
       </div>
 
-      <div className="collection-grid">
-        {products.map((product, index) => (
-          <div key={index} className="product-card">
-            <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.name} />
-            <p className="product-name">{product.name}</p>
-            <div className="All-price-with-discount">
-              <p className="product-price">₹{product.price}</p>
-              <p className="product-discount">₹{product.discount}</p>
-            </div>
-          </div>
-        ))}
-
-        <div className="Ishum-banner-card">
-          <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
-          <div className="Ishum-banner-content">
-            <button className="Ishum-banner-button">Explore</button>
-          </div>
-          <p className="Ishum-jashn-paragraph">
-            Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.
-            <TrendingFlatIcon />
-          </p>
+      {loading ? (
+        <div className="loading-indicator">
+          <p>Loading products...</p>
         </div>
-      </div>
+      ) : error ? (
+        <div className="error-message">
+          <p>{error}</p>
+        </div>
+      ) : (
+        <div className="collection-grid">
+          {products.map((product, index) => (
+            <div
+              key={index}
+              className="product-card"
+              onClick={() => handleProductClick(product)} // ✅ onClick added
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={`http://localhost:4000/uploads/${product.image}`}
+                alt={product.name}
+                onError={(e) => (e.target.src = "/fallback-image.png")}
+              />
+              <p className="product-name">{product.name}</p>
+              <div className="All-price-with-discount">
+                <p className="product-price">₹{product.price - product.discount}</p>
+                <p className="product-discount"><s>₹{product.price}</s></p>
+              </div>
+            </div>
+          ))}
+
+          <div className="Ishum-banner-card">
+            <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
+            <div className="Ishum-banner-content">
+              <button
+                className="Ishum-banner-button"
+                onClick={() => navigate("/all-products?collection=Unveli Riwayat")}
+              >
+                Explore
+              </button>
+            </div>
+            <p className="Ishum-jashn-paragraph">
+              Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.
+              <TrendingFlatIcon />
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
