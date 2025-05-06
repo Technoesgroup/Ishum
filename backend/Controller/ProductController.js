@@ -29,9 +29,13 @@ const addProduct = async (req, res) => {
     const uploadedColorImages = req.files?.['colorImages'] || [];
     const colorNames = req.body?.['colorNames'] || [];
 
-    if (!Array.isArray(colorNames) && uploadedColorImages.length > 1) {
-      return res.status(400).json({ success: false, message: "Multiple colorImages uploaded but only one colorName provided." });
+    if (Array.isArray(colorNames) && colorNames.length !== uploadedColorImages.length) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Color names aur images ka count match nahi kar raha" 
+      });
     }
+    
     
     for (let i = 0; i < uploadedColorImages.length; i++) {
       const file = uploadedColorImages[i];
