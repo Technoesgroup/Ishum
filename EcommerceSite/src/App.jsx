@@ -10,7 +10,6 @@ import BestSeller from "./Component/BestSeller/BestSellerCom1";
 import MyOrder from './Component/MyOrder/MyOrder';
 import Shipping from './Component/IshumCart/ShippingCartCom1';
 import Collection from './Component/Ishum-AdminPanel/CollectionPanel';
-import Product from './Component/Ishum-AdminPanel/ProductPanel-1';
 import Review from './Component/ReviewCustomer/ReviewCustomer';
 import Tale from './Component/Tale/Tale';
 import Legacy from './Component/Legacy/Legacy';
@@ -50,7 +49,7 @@ function App() {
       <Route path="/Shipping"  element={<Shipping />}></Route>
       <Route path="/addcollection"  element={<Collection />}></Route>
       <Route path="/product"  element={<Product />}></Route>
-      <Route path="/addproduct"  element={<Product />}></Route>
+   
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>
       <Route path="/Legacy"  element={<Legacy />}></Route>

@@ -27,12 +27,16 @@ const addProduct = async (req, res) => {
     // Color Images
     const colorImages = [];
     const uploadedColorImages = req.files?.['colorImages'] || [];
-    const colorNames = req.body?.['colorNames'];
+    const colorNames = req.body?.['colorNames'] || [];
 
+    if (!Array.isArray(colorNames) && uploadedColorImages.length > 1) {
+      return res.status(400).json({ success: false, message: "Multiple colorImages uploaded but only one colorName provided." });
+    }
+    
     for (let i = 0; i < uploadedColorImages.length; i++) {
       const file = uploadedColorImages[i];
       const colorName = Array.isArray(colorNames) ? colorNames[i] : colorNames;
-
+    
       if (file && colorName) {
         colorImages.push({
           image: file.filename,
@@ -40,6 +44,7 @@ const addProduct = async (req, res) => {
         });
       }
     }
+    
 
     // Save to DB
     const product = new Product({

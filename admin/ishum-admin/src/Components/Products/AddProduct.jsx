@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import '../../CSS/AddProduct.css';
 
 const AddProduct = () => {
-  const [collections] = useState(['Sawariya', 'Rangrez', 'Gulzaar']);
+  const [collections, setCollections] = useState([]);
   const [selectedCollection, setSelectedCollection] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -16,14 +16,26 @@ const AddProduct = () => {
   const [discount, setDiscount] = useState('');
   const [sizes, setSizes] = useState([]);
   const [tags, setTags] = useState([]);
+  const [color, setColor] = useState('');
+  const sizeOptions = [38, 40, 42, 44]; 
 
-  const sizeOptions = ['38', '40', '42', '44'];
   const tagOptions = ['Bestseller', 'Exclusive', 'Is store'];
-  const categoryOptions = ['Festive wear', 'Occasion wear', 'Day Wear'];
+  const categoryOptions = ['Day Wear', 'Occasional Wear', 'Party Wear'];
   const subcategoryOptions = [
-    'Anarkali', 'Sharara Suits', 'Indo Western', 'Fusion wear',
-    'Coord-sets', 'Kaftans', 'Dhoti Suits', 'Suits', 'Dress'
+    'Anarkali', 'Sharara Suits', 'Indo Western', 'Fashion wear',
+    'Dress', 'Co-ord sets'
   ];
+
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/get-collections")
+      .then(res => res.json())
+      .then(data => setCollections(data))
+      .catch(err => {
+        console.error("Error fetching collections:", err);
+        alert("Failed to load collections");
+      });
+  }, []);
 
   const onDropMainImage = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -67,54 +79,66 @@ const AddProduct = () => {
   };
 
   const toggleSize = (size) => {
-    setSizes(prev => prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]);
+    const sizeStr = String(size); // Convert size to string
+    setSizes(prev => prev.includes(sizeStr)
+      ? prev.filter(s => s !== sizeStr)
+      : [...prev, sizeStr]); // Ensure string values are added or removed
   };
+  
 
   const toggleTag = (tag) => {
     setTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
   };
 
   const handleSave = async () => {
+    // Ensure all sizes are strings and valid
+    const validSizes = ['38', '40', '42', '44'];  // Valid size values
+    const sizesAsStrings = sizes
+    .map(size => String(size).trim()) // Convert sizes to string
+    .filter(size => validSizes.includes(size));  // Filter out invalid sizes
+  
+// Ensure this is an array of strings
+  
+  
     const formData = new FormData();
-
-    formData.append('collection', selectedCollection);
-    formData.append('title', title);
+    formData.append('collectionName', selectedCollection);
+    formData.append('name', title);
     formData.append('description', description);
     formData.append('category', category);
     formData.append('subcategory', subcategory);
     formData.append('price', price);
     formData.append('discount', discount);
-    formData.append('sizes', JSON.stringify(sizes));
-    formData.append('tags', JSON.stringify(tags));
-    formData.append('createdAt', new Date().toISOString());
-
-    if (mainImageFile) {
-      formData.append('mainImage', mainImageFile);
-    }
-
-    thumbnailFiles.forEach((file, index) => {
-      formData.append('thumbnails', file, `thumb-${index}.jpg`);
+    sizesAsStrings.forEach(size => {
+      formData.append('size', size);
     });
-
-    formData.append('colorVariants', JSON.stringify(
-      colorVariants.map(variant => ({ colorName: variant.colorName }))
-    ));
-
-    for (let i = 0; i < colorVariants.length; i++) {
-      const images = colorVariants[i].images || [];
-      for (let j = 0; j < images.length; j++) {
-        formData.append(`colorImages_${i}`, images[j], `color-${i}-${j}.jpg`);
-      }
+    formData.append('color', color);
+    formData.append('isBestseller', tags.includes('Bestseller'));
+    formData.append('isExclusive', tags.includes('Exclusive'));
+    formData.append('isIshumStore', tags.includes('Is store'));
+  
+    if (mainImageFile) {
+      formData.append('image', mainImageFile);
     }
-
+  
+    thumbnailFiles.forEach((file) => {
+      formData.append('thumbnails', file);
+    });
+  
+    colorVariants.forEach((variant) => {
+      variant.images.forEach((file) => {
+        formData.append('colorImages', JSON.stringify({ image: file, colorName: variant.colorName }));
+      });
+    });
+    
+  
     try {
       const response = await fetch("http://localhost:4000/api/products/add", {
         method: "POST",
         body: formData
       });
-
+  
       if (!response.ok) throw new Error("Failed to save product");
-
+  
       const result = await response.json();
       console.log('Server response:', result);
       alert('Product saved successfully!');
@@ -123,6 +147,9 @@ const AddProduct = () => {
       alert('Error saving product. Check console for details.');
     }
   };
+  
+  
+  
 
   return (
     <div className="add-product-container">
@@ -131,11 +158,14 @@ const AddProduct = () => {
 
         <div className="form-column">
           <div className="form-group">
-            <label>Collection:</label>
-            <select value={selectedCollection} onChange={e => setSelectedCollection(e.target.value)}>
-              <option value="">Select Collection</option>
-              {collections.map(col => <option key={col}>{col}</option>)}
-            </select>
+          <label>Collection:</label>
+<select value={selectedCollection} onChange={e => setSelectedCollection(e.target.value)}>
+  <option value="">Select Collection</option>
+  {collections.map(col => (
+    <option key={col._id} value={col._id}>{col.title}</option>
+  ))}
+</select>
+
           </div>
 
           <div className="form-group">
@@ -175,13 +205,18 @@ const AddProduct = () => {
           </div>
 
           <div className="form-group">
-            <label>Sizes Available:</label>
-            {sizeOptions.map(size => (
-              <label key={size}>
-                <input type="checkbox" checked={sizes.includes(size)} onChange={() => toggleSize(size)} />
-                {size}
-              </label>
-            ))}
+          <label>Sizes Available:</label>
+          {sizeOptions.map(size => (
+  <label key={size}>
+    <input
+      type="checkbox"
+      checked={sizes.includes(String(size))} // ✅ Compare with string
+      onChange={() => toggleSize(size)}
+    />
+    {size}
+  </label>
+))}
+
           </div>
 
           <div className="form-group">
@@ -192,6 +227,11 @@ const AddProduct = () => {
                 {tag}
               </label>
             ))}
+          </div>
+
+          <div className="form-group">
+            <label>Product Color:</label>
+            <input type="text" value={color} onChange={e => setColor(e.target.value)} placeholder="e.g. Pink, Blue" />
           </div>
         </div>
 
@@ -244,3 +284,4 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
