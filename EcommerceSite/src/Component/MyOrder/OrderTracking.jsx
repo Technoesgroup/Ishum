@@ -27,7 +27,7 @@ const OrderTracking = () => {
     try {
       const res = await axios.put(`http://localhost:4000/api/orders/cancel/${order._id}`);
       alert("Order cancelled successfully");
-      setOrder(res.data.order); // Update the UI with new status
+      setOrder(res.data.order);
     } catch (err) {
       console.error("Error cancelling order:", err);
       alert("Failed to cancel order");
