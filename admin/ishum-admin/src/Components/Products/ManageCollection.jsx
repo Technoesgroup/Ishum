@@ -1,42 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../../CSS/ManageCollection.css';
 
-const initialCollections = [
-  { name: 'Rangrez', createdAt: new Date() },
-  { name: 'Noor', createdAt: new Date() },
-  { name: 'Gulzzar', createdAt: new Date() },
-  { name: 'Rajwada Riwaz', createdAt: new Date() },
-];
-
 const ManageCollection = () => {
-  const [collections, setCollections] = useState(initialCollections);
+  const [collections, setCollections] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newCollection, setNewCollection] = useState('');
+  const [imageFile, setImageFile] = useState(null);
 
-  const handleAddCollection = () => {
-    if (!newCollection.trim()) return;
 
-    const exists = collections.some(
-      (c) => c.name.toLowerCase() === newCollection.toLowerCase()
-    );
-    if (exists) {
-      alert('Collection already exists');
+    useEffect(() => {
+      const fetchCollections = async () => {
+        try {
+          const res = await axios.get("http://localhost:4000/api/get-collections");
+          setCollections(res.data); // Make sure API returns array of { title, image, createdAt }
+        } catch (err) {
+          console.error("Error fetching collections:", err);
+        }
+      };
+  
+      fetchCollections();
+    }, []);
+
+
+    
+  const handleAddCollection = async () => {
+    if (!newCollection.trim() || !imageFile) {
+      alert("Collection name and image are required");
       return;
     }
 
-    const updated = [
-      ...collections,
-      { name: newCollection, createdAt: new Date() },
-    ];
-    setCollections(updated);
-    setNewCollection('');
-    setShowModal(false);
+    const formData = new FormData();
+    formData.append("title", newCollection);
+    formData.append("image", imageFile);
+
+    try {
+      const res = await axios.post("http://localhost:4000/api/add-collections", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      setCollections(prev => [...prev, res.data]); // Assuming backend returns the new collection
+      setNewCollection('');
+      setImageFile(null);
+      setShowModal(false);
+    } catch (error) {
+      console.error("Error adding collection:", error);
+      alert("Error adding collection");
+    }
   };
 
   const handleDelete = (name) => {
     const confirmDelete = window.confirm(`Delete "${name}" collection?`);
     if (confirmDelete) {
-      setCollections(collections.filter((c) => c.name !== name));
+      setCollections(collections.filter((c) => c.title !== name));
     }
   };
 
@@ -51,14 +69,17 @@ const ManageCollection = () => {
         {collections.map((collection, index) => (
           <div className="collection-item" key={index}>
             <div>
-              <strong>{collection.name}</strong>
-              <div className="timestamp">
-                Created: {collection.createdAt.toLocaleString()}
-              </div>
+            <strong>{collection.title || "No Title"}</strong>
+{collection.image && (
+  <img
+    src={`http://localhost:4000${collection.image}`}
+    alt={collection.title}
+    style={{ width: "80px", marginTop: "8px" }}
+  />
+)}
+
             </div>
-            <button onClick={() => handleDelete(collection.name)}>
-              Remove
-            </button>
+            <button onClick={() => handleDelete(collection.title)}>Remove</button>
           </div>
         ))}
       </div>
@@ -72,6 +93,11 @@ const ManageCollection = () => {
               placeholder="Collection Name"
               value={newCollection}
               onChange={(e) => setNewCollection(e.target.value)}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files[0])}
             />
             <div className="modal-actions">
               <button onClick={handleAddCollection}>Save</button>
