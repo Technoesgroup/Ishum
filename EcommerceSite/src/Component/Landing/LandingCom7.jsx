@@ -5,13 +5,16 @@ import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import UnderLine from '../../images/Undertextline.png';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useProduct } from "../../ContextApiCart/ProductContextApi"; // ✅ context import
 
 const Collection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);  // Added error state
+  const [error, setError] = useState(null);
   const collectionName = "NOOR";
   const navigate = useNavigate();
+
+  const { setSelectedProduct } = useProduct(); // ✅ context setter
 
   useEffect(() => {
     const fetchNoorEditProducts = async () => {
@@ -26,7 +29,7 @@ const Collection = () => {
         setProducts(fetchedProducts.slice(0, 6)); // Limit to 6 products
       } catch (error) {
         console.error("Error fetching Noor Edit products:", error);
-        setError("Failed to load products. Please try again later.");  // Set error state
+        setError("Failed to load products. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -34,6 +37,13 @@ const Collection = () => {
 
     fetchNoorEditProducts();
   }, [collectionName]);
+
+  // ✅ product click handler
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/Viewproduct");
+  };
 
   return (
     <div className="collection-container">
@@ -46,20 +56,25 @@ const Collection = () => {
 
       {loading ? (
         <div className="loading-indicator">
-          <p>Loading products...</p> {/* You can replace this with a spinner for better UX */}
+          <p>Loading products...</p>
         </div>
       ) : error ? (
         <div className="error-message">
-          <p>{error}</p> {/* Display error message */}
+          <p>{error}</p>
         </div>
       ) : (
         <div className="collection-grid">
           {products.map((product, index) => (
-            <div key={index} className="product-card">
+            <div
+              key={index}
+              className="product-card"
+              onClick={() => handleProductClick(product)} // ✅ onClick added
+              style={{ cursor: "pointer" }}
+            >
               <img
                 src={`http://localhost:4000/uploads/${product.image}`}
                 alt={product.name}
-                onError={(e) => (e.target.src = "/fallback-image.png")} 
+                onError={(e) => (e.target.src = "/fallback-image.png")}
               />
               <p className="product-name">{product.name}</p>
               <div className="All-price-with-discount">
@@ -96,5 +111,6 @@ const Collection = () => {
 };
 
 export default Collection;
+
 
 
