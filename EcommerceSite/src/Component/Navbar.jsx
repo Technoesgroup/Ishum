@@ -91,7 +91,7 @@ export default function Navbar() {
       {/* SOCIAL ICON + LOGO + PROFILE MENU */}
       <div className="Ishum-navbar">
         <div className="Ishum-logo-container">
-          <img src={logo} alt="Ishum Logo" className="Ishum-logo" />
+          <img src={logo} alt="Ishum Logo" className="Ishum-logo"     />
         </div>
 
 

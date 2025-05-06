@@ -23,23 +23,22 @@ const productSchema = new mongoose.Schema({
   thumbnails: {
     type: [String],
   },
-  
-  colorImages: {
-    type: [
-      {
-        image: { type: String, required: true }, // Image ka naam
-        colorName: { type: String, required: true }, // Us image ka color naam
-      }
-    ],
-    validate: {
-      validator: function (arr) {
-        return arr.length <= 4; // Maximum 4 allowed
-      },
-      message: "You can upload maximum 4 color images",
+colorImages: {
+  type: [
+    {
+      image: { type: String, required: true },
+      colorName: { type: String, required: true },
+    }
+  ],
+  validate: {
+    validator: function (arr) {
+      return arr.length <= 20; // ya jitna tu max chaahe
     },
-    default: [],
+    message: "You can upload maximum 20 color images",
   },
-  
+  default: [],
+},
+ 
 
   price: {
     type: Number,
@@ -55,7 +54,7 @@ const productSchema = new mongoose.Schema({
   },
   size: {
     type: [String],
-    enum: ['38', '40', '42', '44',],
+    enum: ['40','38','42', '44',],
     required: true,
   },
   color: {

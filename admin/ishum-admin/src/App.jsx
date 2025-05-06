@@ -6,7 +6,7 @@ import Sidebar from './Components/Basics/Sidebar';
 import Header from './Components/Basics/Header';
 import './CSS/Styles.css';
 import ManageCollection from './Components/Products/ManageCollection';
-import AddProduct from './Components/Products/AddProduct'; // 👈 Import the new component
+import AddProduct from './Components/Products/AddProduct'; 
 
 
 const App = () => {
