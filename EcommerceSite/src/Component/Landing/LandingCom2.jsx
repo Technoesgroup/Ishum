@@ -11,15 +11,17 @@ const CollectionSection = () => {
   useEffect(() => {
     fetchCollections();
   }, []);
-
+  
   const fetchCollections = async () => {
     try {
       const response = await axios.get("http://localhost:4000/api/get-collections");
-      setCollections(response.data);
+      // Only take first 4 collections
+      setCollections(response.data.slice(0, 4));
     } catch (error) {
       console.error("Error fetching collections", error);
     }
   };
+  
 
   return (
     <div className="LandingCom-2-collection-container">
