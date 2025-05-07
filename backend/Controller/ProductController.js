@@ -107,7 +107,6 @@ const getProducts = async (req, res) => {
         filters.collectionName = null; 
       }
     }
-    
 
     if (req.query.minPrice && req.query.maxPrice) {
       filters.price = {
