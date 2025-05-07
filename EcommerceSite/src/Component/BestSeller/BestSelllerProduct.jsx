@@ -17,15 +17,17 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const navigate = useNavigate();
     const { setSelectedProduct } = useProduct();
   const { user } = useAuth(); 
-  const userId = user?._id;   
+  const userId = user?._id; 
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let query = `${queryParam}`; // base query
+        let query = `?${queryParam}`; // Start with default query
   
+        // Dynamically add selected filters to the query string
         if (selected.collection) {
-          query += `&collection=${selected.collection}`;
+          query += `&collectionName=${selected.collection}`; 
         }
         if (selected.size) {
           query += `&size=${selected.size}`;
@@ -47,7 +49,9 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
           query += `&availability=${selected.availability === "InStock"}`;
         }
   
-        const res = await axios.get(`http://localhost:4000/api/products/get-product?${query}`);
+        console.log("Fetching with query:", `http://localhost:4000/api/products/get-product${query}`);
+        const res = await axios.get(`http://localhost:4000/api/products/get-product${query}`);
+   
         setProducts(res.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -56,7 +60,6 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   
     fetchProducts();
   }, [queryParam, selected]);
-
 
    // ✅ product click handler
    const handleProductClick = (product) => {
@@ -77,12 +80,13 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
         const availableMatch = selected.availability
           ? product.availability === (selected.availability === "InStock")
           : true;
-
-        const collectionMatch = selected.collection
-          ? product.collectionName?.toLowerCase().replace(/\s+/g, "").includes(
-              selected.collection.toLowerCase().replace(/\s+/g, "").split(" ")[0]
-            )
-          : true;
+          const collectionMatch = selected.collection
+          ? product.collectionName?.title
+              ?.toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(selected.collection.toLowerCase().replace(/\s+/g, "").split(" ")[0])
+          : true;        
+        
 
         return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch && collectionMatch;
       })
