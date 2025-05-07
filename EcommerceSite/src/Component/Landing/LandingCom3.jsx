@@ -8,18 +8,22 @@ const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate(); // ✅ Initialize navigate
 
+  
   useEffect(() => {
     fetchCollections();
   }, []);
-
+  
   const fetchCollections = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/get-collectionsSec");
-      setCollections(response.data);
+      const response = await axios.get("http://localhost:4000/api/get-collections");
+      // Skip the first 4 and take remaining
+      setCollections(response.data.slice(4));
     } catch (error) {
       console.error("Error fetching collections", error);
     }
   };
+  
+  
 
   return (
     <div className="LandingCom-3-collection-container">

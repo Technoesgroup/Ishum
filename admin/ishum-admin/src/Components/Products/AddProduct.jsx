@@ -126,9 +126,11 @@ const AddProduct = () => {
   
     colorVariants.forEach((variant) => {
       variant.images.forEach((file) => {
-        formData.append('colorImages', JSON.stringify({ image: file, colorName: variant.colorName }));
+        formData.append('colorImages', file); // image files
+        formData.append('colorNames', variant.colorName); // corresponding colorName
       });
     });
+    
     
   
     try {

@@ -1,4 +1,5 @@
 const Product = require("../models/ProductSchema");
+const Collection = require("../models/CollectionSchema1");
 
 const addProduct = async (req, res) => {
   try {
@@ -29,9 +30,13 @@ const addProduct = async (req, res) => {
     const uploadedColorImages = req.files?.['colorImages'] || [];
     const colorNames = req.body?.['colorNames'] || [];
 
-    if (!Array.isArray(colorNames) && uploadedColorImages.length > 1) {
-      return res.status(400).json({ success: false, message: "Multiple colorImages uploaded but only one colorName provided." });
+    if (Array.isArray(colorNames) && colorNames.length !== uploadedColorImages.length) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Color names aur images ka count match nahi kar raha" 
+      });
     }
+    
     
     for (let i = 0; i < uploadedColorImages.length; i++) {
       const file = uploadedColorImages[i];
@@ -84,11 +89,24 @@ const getProducts = async (req, res) => {
     if (req.query.isBestseller) filters.isBestseller = req.query.isBestseller === "true";
     if (req.query.isExclusive) filters.isExclusive = req.query.isExclusive === "true";
     if (req.query.isIshumStore) filters.isIshumStore = req.query.isIshumStore === "true";
-    if (req.query.collectionName) filters.collectionName = req.query.collectionName;    
     if (req.query.category) filters.category = req.query.category;
     if (req.query.subcategory) filters.subcategory = req.query.subcategory;
     if (req.query.color) filters.color = req.query.color;
     if (req.query.availability) filters.availability = req.query.availability === "true";
+
+    // Handle collectionName if it's a reference
+    if (req.query.collectionName) {
+      const collection = await Collection.findOne({
+        title: { $regex: new RegExp(`^${req.query.collectionName}$`, 'i') },
+      });
+    
+      if (collection) {
+        filters.collectionName = collection._id;
+      } else {
+        return res.status(404).json({ success: false, message: "Collection not found" });
+      }
+    }
+    
 
     if (req.query.minPrice && req.query.maxPrice) {
       filters.price = {
@@ -97,15 +115,15 @@ const getProducts = async (req, res) => {
       };
     }
 
-    const products = await Product.find(filters);
+    const products = await Product.find(filters).populate("collectionName");
 
     res.status(200).json({ success: true, products });
-
   } catch (error) {
     console.error("Error in getProducts:", error);
     res.status(500).json({ success: false, message: "Failed to fetch products", error });
   }
 };
+
 
 module.exports = {
   addProduct,
