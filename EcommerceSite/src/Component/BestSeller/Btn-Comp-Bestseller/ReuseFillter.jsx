@@ -24,7 +24,7 @@ const FilterSection = ({ selected, handleSelection, openDropdown, handleToggle }
       <div className="AllSize-of-bestseller">
         <p className="firstparagraph">Size <KeyboardArrowRightIcon /></p>
         <div className="bestsellers-size-options">
-          {["XS", "S", "M", "L", "XL"].map((size) => (
+          {["38", "40", "42", "44",].map((size) => (
             <button
               key={size}
               className={`bestsellers-size-button ${selected.size === size ? "active" : ""}`}

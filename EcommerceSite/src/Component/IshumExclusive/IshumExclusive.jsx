@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ExclusiveNavigation from '../IshumExclusive/IshumExclusiveBtn';
+// import ExclusiveNavigation from '../IshumExclusive/IshumExclusiveBtn';
 import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import UnderLine from '../../images/Undertextline.png';
@@ -57,7 +57,7 @@ export default function Bestsellers() {
             <div className="AllSize-of-bestseller">
               <p className="firstparagraph">Size  <KeyboardArrowRightIcon /></p>
               <div className="bestsellers-size-options">
-                {["XS", "S", "M", "L", "XL"].map((size) => (
+                {["38", "40", "42", "44",].map((size) => (
                   <button
                     key={size}
                     className={`bestsellers-size-button ${selected.size === size ? "active" : ""}`}
@@ -94,7 +94,7 @@ export default function Bestsellers() {
                 <h3>STORE / BESTSELLERS</h3>
                 <h2>59 PRODUCTS</h2>
               </div>
-              <ExclusiveNavigation showSort={true} />
+              {/* <ExclusiveNavigation showSort={true} /> */}
 
             </div>
 
