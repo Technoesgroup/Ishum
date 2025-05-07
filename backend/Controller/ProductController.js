@@ -25,7 +25,7 @@ const addProduct = async (req, res) => {
     // Thumbnails
     const thumbnails = req.files?.['thumbnails']?.map(file => file.filename) || [];
 
-    // Color Images
+  
     const colorImages = [];
     const uploadedColorImages = req.files?.['colorImages'] || [];
     const colorNames = req.body?.['colorNames'] || [];
