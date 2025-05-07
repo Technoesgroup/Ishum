@@ -42,12 +42,6 @@ export default function Bestsellers() {
                 <h3>STORE / BESTSELLERS</h3>
                 <h2>73 PRODUCTS</h2>
               </div>
-
-            {/* <Sellerfillterbtn
-                selected={selected}
-                handleSelection={handleSelection}
-                openDropdown={openDropdown}
-                handleToggle={handleToggle} /> */}
             
             </div>
 
