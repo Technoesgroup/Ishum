@@ -95,15 +95,16 @@ const getProducts = async (req, res) => {
     if (req.query.availability) filters.availability = req.query.availability === "true";
 
     // Handle collectionName if it's a reference
+    console.log("fillteer  of  get product:", filters)
     if (req.query.collectionName) {
       const collection = await Collection.findOne({
         title: { $regex: new RegExp(`^${req.query.collectionName}$`, 'i') },
       });
     
       if (collection) {
-         filters.collectionName = req.query.collection;
+        filters.collectionName = collection._id;
       } else {
-        return res.status(404).json({ success: false, message: "Collection not found" });
+        filters.collectionName = null; 
       }
     }
     
@@ -114,6 +115,7 @@ const getProducts = async (req, res) => {
         $lte: parseInt(req.query.maxPrice),
       };
     }
+
 
     const products = await Product.find(filters).populate("collectionName");
 

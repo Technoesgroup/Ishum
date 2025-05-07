@@ -16,8 +16,6 @@ export const FilterProvider = ({ children }) => {
   const normalize = (str) => str?.toLowerCase().trim(); 
 
 
-
-
   useEffect(() => {
     fetch("http://localhost:4000/api/products/get-product")
       .then((res) => res.json())
@@ -58,13 +56,15 @@ export const FilterProvider = ({ children }) => {
       );
     }
    
-  // Collection filter
-  if (selected.collection) {
-    // console.log("Filtering by collection:", selected.collection);
-      filtered = filtered.filter((item) => {
-        return normalize(item.collectionName).includes(normalize(selected.collection));
+   if (selected.collection) {
+    filtered = filtered.filter((item) => {
+      if (typeof item.collectionName === "object" && item.collectionName?.title) {
+        return normalize(item.collectionName.title) === normalize(selected.collection);
+      }
+      return normalize(item.collectionName) === normalize(selected.collection);
     });
   }
+    
   
     setFilteredProducts(filtered);
   }, [selected, products]);
