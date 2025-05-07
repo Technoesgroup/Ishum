@@ -20,10 +20,10 @@ const AddProduct = () => {
   const sizeOptions = [38, 40, 42, 44]; 
 
   const tagOptions = ['Bestseller', 'Exclusive', 'Is store'];
-  const categoryOptions = ['Day Wear', 'Occasional Wear', 'Party Wear', 'Aline Suit', 'Straight suit'];
+  const categoryOptions = ['Day Wear', 'Occasional Wear', 'Party Wear'];
   const subcategoryOptions = [
     'Anarkali', 'Sharara Suits', 'Indo Western', 'Fashion wear',
-    'Dress', 'Co-ord sets'
+    'Dress', 'Co-ord sets','Aline Suit', 'Straight suit'
   ];
 
 
