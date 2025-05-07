@@ -37,7 +37,7 @@ export default function Bestsellers() {
     <>
       <div className="bestsellers-container">
         <div className="bestseller-MainHeading">
-          <h2 className="bestsellers-title">JASH-E-RANG COLLECTION</h2>
+          <h2 className="bestsellers-title">ISHUM'S EXCLUSIVE</h2>
           <img className="UnderLine" src={UnderLine} alt="" />
         </div>
 
