@@ -10,7 +10,7 @@ const ReviewCardList = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/reviews');
+        const res = await axios.get('http://localhost:4000/api/get-reviews');
         setReviews(res.data);
       } catch (error) {
         console.error('Failed to fetch reviews', error);
