@@ -8,7 +8,7 @@ const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate(); // ✅ Initialize navigate
 
-  
+
   useEffect(() => {
     fetchCollections();
   }, []);
@@ -16,7 +16,6 @@ const CollectionSection = () => {
   const fetchCollections = async () => {
     try {
       const response = await axios.get("http://localhost:4000/api/get-collections");
-      // Skip the first 4 and take remaining
       setCollections(response.data.slice(4));
     } catch (error) {
       console.error("Error fetching collections", error);

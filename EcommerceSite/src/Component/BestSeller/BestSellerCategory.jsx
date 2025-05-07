@@ -12,7 +12,7 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
         </h2>
         {openDropdown === "category" && (
           <ul className="Catergories-dropdown">
-            {["Day Wear", "Occasional Wear", "Party Wear"].map((item, index) => (
+            {["Day Wear", "Occasional Wear", "Party Wear","Aline Suit","Straight suit"].map((item, index) => (
               <li key={item}>
                 <input
                   type="radio"

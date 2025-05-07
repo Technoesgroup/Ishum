@@ -6,6 +6,7 @@ const userRouter = require("./router/userLoginrouter");
 const ProductRouter = require("./router/Productrouter");
 const cartRouter = require("./router/Cartrouter");
 const shippingRoutes = require("./router/Shippingrouter");
+import reviewRoutes from './router/ReviewRoutes';
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 const path = require("path");
@@ -41,6 +42,7 @@ app.use("/api/products", ProductRouter);
 app.use("/api/cart", cartRouter); 
 app.use("/api/shipping", shippingRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 
 

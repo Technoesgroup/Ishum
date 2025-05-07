@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-
+import { useLocation } from "react-router-dom";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ProductList from '../BestSeller/BestSelllerProduct';
 import ColorList from '../BestSeller/BestSellerColor';
 import CategoryList from '../BestSeller/BestSellerCategory';
 import { useFilter } from "../../Component/Context-API/Fillter-Context";
 
+
 export default function Bestsellers() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
   const { selected, setSelected } = useFilter();
+  const location = useLocation();
+  const collectionName = location?.state?.collectionName || null;
 
   const handleToggle = (section) => {
     setOpenDropdown(openDropdown === section ? null : section);
@@ -70,7 +73,7 @@ export default function Bestsellers() {
             <div className="AllSize-of-bestseller">
               <p className="firstparagraph">Size  <KeyboardArrowRightIcon /></p>
               <div className="bestsellers-size-options">
-                {["XS", "S", "M", "L", "XL"].map((size) => (
+                {["38", "40", "42", "44"].map((size) => (
                   <button
                     key={size}
                     className={`bestsellers-size-button ${selected.size === size ? "active" : ""}`}
@@ -112,7 +115,7 @@ export default function Bestsellers() {
             </div>
 
             {/* product */}
-            <ProductList queryParam="isBestseller=true"/>
+            <ProductList queryParam={`isBestseller=true${collectionName ? `&collectionName=${collectionName}` : ""}`} />
           </div>
         </div>
       </div>
