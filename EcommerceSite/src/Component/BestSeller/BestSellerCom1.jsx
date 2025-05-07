@@ -3,7 +3,6 @@ import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
 import UnderLine from '../../images/Undertextline.png';
 import ProductList from './BestSelllerProduct';
 import Banner from './BestSellerBanner';
-import Sellerfillterbtn from '../BestSeller/Btn-Comp-Bestseller/Btn-Comp-Best'
 import { useFilter } from "../../Component/Context-API/Fillter-Context";
 import FilterSection from '../BestSeller/Btn-Comp-Bestseller/ReuseFillter';
 
@@ -44,11 +43,11 @@ export default function Bestsellers() {
                 <h2>73 PRODUCTS</h2>
               </div>
 
-            <Sellerfillterbtn
+            {/* <Sellerfillterbtn
                 selected={selected}
                 handleSelection={handleSelection}
                 openDropdown={openDropdown}
-                handleToggle={handleToggle} />
+                handleToggle={handleToggle} /> */}
             
             </div>
 
