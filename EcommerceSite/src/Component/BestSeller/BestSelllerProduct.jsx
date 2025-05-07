@@ -19,39 +19,50 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const { user } = useAuth(); 
   const userId = user?._id; 
   
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let query = `?${queryParam}`; // Start with default query
+        let query = "?";
   
-        // Dynamically add selected filters to the query string
+        if (queryParam.includes("isBestseller=true")) {
+          query += "isBestseller=true&";
+        }
+        if (queryParam.includes("ishumstore=true")) {
+          query += "isIshumStore=true&";
+        }
+        if (queryParam.includes("ishumexclusive=true")) {
+          query += "isExclusive=true&";
+        }
+  
         if (selected.collection) {
-          query += `&collectionName=${selected.collection}`; 
+          query += `collectionName=${selected.collection}&`;
         }
         if (selected.size) {
-          query += `&size=${selected.size}`;
+          query += `size=${selected.size}&`;
         }
         if (selected.color) {
           const colorHex = colors.find((c) => c.name === selected.color)?.hex;
-          query += `&color=${colorHex}`;
+          query += `color=${colorHex}&`;
         }
         if (selected.category) {
-          query += `&category=${selected.category}`;
+          query += `category=${selected.category}&`;
         }
         if (selected.subcategory) {
-          query += `&subcategory=${selected.subcategory}`;
+          query += `subcategory=${selected.subcategory}&`;
         }
         if (selected.tag) {
-          query += `&tag=${selected.tag}`;
+          query += `tag=${selected.tag}&`;
         }
         if (selected.availability) {
-          query += `&availability=${selected.availability === "InStock"}`;
+          query += `availability=${selected.availability === "InStock"}&`;
         }
   
-        console.log("Fetching with query:", `http://localhost:4000/api/products/get-product${query}`);
+        // Remove last &
+        if (query.endsWith("&")) {
+          query = query.slice(0, -1);
+        }
+  
         const res = await axios.get(`http://localhost:4000/api/products/get-product${query}`);
-   
         setProducts(res.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -60,6 +71,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   
     fetchProducts();
   }, [queryParam, selected]);
+  
 
    // ✅ product click handler
    const handleProductClick = (product) => {
