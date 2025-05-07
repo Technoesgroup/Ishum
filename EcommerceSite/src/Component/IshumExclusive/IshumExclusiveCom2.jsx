@@ -48,7 +48,8 @@ export default function Bestsellers() {
             </div>
 
             {/* product */}
-<ProductList queryParam={`isExclusive=true&collectionName=${selected.collection}`} />
+           
+           <ProductList queryParam={`isExclusive=true&collectionName=${selected.collection}`} />
 
           </div>
         </div>

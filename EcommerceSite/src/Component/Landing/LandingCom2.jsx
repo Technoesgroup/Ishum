@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // 👈 Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import "../../Style-CSS/Landing-css/LandingCom2.css";
 import axios from "axios";
 import UnderLine from '../../images/Undertextline.png';
 
 const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
-  const navigate = useNavigate(); // 👈 Initialize navigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetchCollections();
