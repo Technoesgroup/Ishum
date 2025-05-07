@@ -101,7 +101,7 @@ const getProducts = async (req, res) => {
       });
     
       if (collection) {
-        filters.collectionName = collection._id;
+         filters.collectionName = req.query.collection;
       } else {
         return res.status(404).json({ success: false, message: "Collection not found" });
       }
