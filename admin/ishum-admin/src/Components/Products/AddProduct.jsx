@@ -97,7 +97,7 @@ const AddProduct = () => {
     .map(size => String(size).trim()) // Convert sizes to string
     .filter(size => validSizes.includes(size));  // Filter out invalid sizes
   
-// Ensure this is an array of strings
+
   
   
     const formData = new FormData();
