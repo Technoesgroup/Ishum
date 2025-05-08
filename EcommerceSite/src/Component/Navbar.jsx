@@ -41,6 +41,20 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileLoginModal, setShowMobileLoginModal] = useState(false);
 
+  const [user, setUser] = useState({ name: '', email: '' });
+  
+  useEffect(() => {
+    // Assume you store user in localStorage after login/register
+    const userData = JSON.parse(localStorage.getItem('user'));
+
+    if (userData) {
+      setUser({
+        name: userData.name,
+        email: userData.email,
+      });
+    }
+  }, []);
+
 
   const navigate = useNavigate();
   const { cartItems } = useCart();
@@ -64,6 +78,11 @@ export default function Navbar() {
     window.addEventListener("resize", handleResize); // Update on window resize
     return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
   }, []);
+
+
+
+ 
+   
   
 
   return (
@@ -141,8 +160,8 @@ export default function Navbar() {
                 <li className="Profile-menu-item">
                   <Link><PermIdentityOutlinedIcon />
                     <div className='Name-ProfileContent'>
-                      <p>Harsh Rajput</p>
-                      <p className='email-name-profile'>harshrajput30411@gmail.com</p>
+                    <p>{user.name || 'Guest User'}</p>
+                    <p className='email-name-profile'>{user.email || 'guest@example.com'}</p>
                     </div></Link>
                 </li>
                 <li className="Profile-menu-item"><Link to={"/MyOrder"}><ShoppingBagIcon />My Order</Link></li>

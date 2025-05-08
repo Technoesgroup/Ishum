@@ -1,7 +1,7 @@
-import Review from '../models/ReviewModel';
+const Review = require('../models/ReviewModel');
 
 // GET all reviews
-export const getAllReviews = async (req, res) => {
+const getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.find().sort({ createdAt: -1 });
     res.json(reviews);
@@ -11,8 +11,9 @@ export const getAllReviews = async (req, res) => {
 };
 
 // POST a new review
-export const createReview = async (req, res) => {
-  const { rating, title, content, image, name, location, date } = req.body;
+const createReview = async (req, res) => {
+  const { rating, title, content, name, location, date } = req.body;
+  const image = req.file ? `/uploads/${req.file.filename}` : '';
 
   try {
     const newReview = new Review({
@@ -33,3 +34,9 @@ export const createReview = async (req, res) => {
     res.status(400).json({ error: 'Error creating review' });
   }
 };
+
+module.exports = {
+  getAllReviews,
+  createReview,
+};
+
