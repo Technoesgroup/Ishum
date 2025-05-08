@@ -15,7 +15,7 @@
   }
   
   .LoginUser-title {
-    font-size: 2rem;
+    font-size: 1.5vw;
     line-height: 2;
     font-weight: bold;
   }
@@ -27,7 +27,7 @@
   }
   
   .LoginUser-subtitle {
-    font-size: 2rem;
+    font-size: 1.5vw;
     font-weight: bold;
     margin-bottom: 1.5rem;
   }
@@ -35,7 +35,7 @@
   .LoginUser-input-field {
     width: 100%;
     margin: 20px 0;
-    padding: 15px;
+    padding: 1vw;
     border: none;
     border-bottom: 2px solid #ccc;
     margin-bottom: 1rem;
@@ -56,8 +56,8 @@
   .LoginUser-continue-btn {
     background-color: black;
     color: white;
-    padding: 15px;
-    width: 150px;
+    padding: 1vw;
+    width: 12vw;
     border: none;
     border-radius: 24px;
     cursor: pointer;
@@ -67,9 +67,8 @@
   }
   
   .LoginUser-sign-up-text {
-    margin: 2rem 0;
+    margin: 1vw 0;
     text-align: center;
-
     color: gray;
   }
   
@@ -77,7 +76,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 2vw;
     margin-top: 0.1rem;
   }
   
@@ -106,9 +105,9 @@
   }
 
   .SignUp-text{
-    font-size: 1rem;
+    font-size: 1vw;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 2vw;
   }
 .login-link{
   color: black !important;
