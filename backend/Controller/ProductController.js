@@ -86,7 +86,7 @@ const getProducts = async (req, res) => {
   try {
     const filters = {};
 
-    // console.log("Received collectionName:", req.query.collectionName);
+    
 
     if (req.query.isBestseller) filters.isBestseller = req.query.isBestseller === "true";
     if (req.query.isExclusive) filters.isExclusive = req.query.isExclusive === "true";
