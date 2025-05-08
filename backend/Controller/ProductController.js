@@ -19,10 +19,10 @@ const addProduct = async (req, res) => {
       isIshumStore 
     } = req.body;
 
-    // Main image
+    
     const image = req.files?.['image']?.[0]?.filename || "";
 
-    // Thumbnails
+   
     const thumbnails = req.files?.['thumbnails']?.map(file => file.filename) || [];
 
   
