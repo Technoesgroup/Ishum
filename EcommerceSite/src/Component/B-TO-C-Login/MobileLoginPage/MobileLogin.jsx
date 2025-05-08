@@ -78,7 +78,12 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
             </p>
           </>
         ) : (
-          <OtpLogin onClose={onClose} />
+          <OtpLogin
+          phone={phone}
+          mode="login"
+          onClose={onClose}
+        />
+        
         )}
       </div>
     </div>

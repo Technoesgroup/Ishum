@@ -51,13 +51,14 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
   if (showOtpStep) {
     return (
       <OtpVerification
-        phone={formData.phone}
-        name={formData.name}
-        email={formData.email}
-        mode="register"
-        onBack={() => setShowOtpStep(false)}
-        onClose={onClose}
-      />
+      phone={formData.phone}
+      name={formData.name}
+      email={formData.email}
+      mode="register"
+      onBack={() => setShowOtpStep(false)}
+      onClose={onClose}
+    />
+    
     );
   }
 
