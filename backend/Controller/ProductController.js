@@ -51,7 +51,7 @@ const addProduct = async (req, res) => {
     }
     
 
-    // Save to DB
+   
     const product = new Product({
       name,
       category,
