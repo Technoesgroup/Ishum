@@ -23,7 +23,7 @@ const AddProduct = () => {
   const categoryOptions = ['Day Wear', 'Occasional Wear', 'Party Wear'];
   const subcategoryOptions = [
     'Anarkali', 'Sharara Suits', 'Indo Western', 'Fashion wear',
-    'Dress', 'Co-ord sets','Aline Suit', 'Straight suit'
+    'Dress', 'Co-ord sets','Aline Suit', 'Straight Suit'
   ];
 
 
