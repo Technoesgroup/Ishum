@@ -65,6 +65,11 @@ export default function Navbar() {
     navigate('/Search-Bar');
   };
 
+  const handleMoblieSearchClick = () => {
+    navigate('/search');
+  };
+
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
@@ -126,7 +131,7 @@ export default function Navbar() {
            />
            
             )}
-            <SearchIcon className='mobile-search-icon' onClick={handleSearchClick} />
+            <SearchIcon className='mobile-search-icon' onClick={handleMoblieSearchClick} />
             <Badge badgeContent={totalItems} color="error">
               <LocalMallOutlinedIcon
                 className=" Ishum-iconbag"
