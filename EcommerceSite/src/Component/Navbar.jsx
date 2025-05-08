@@ -24,7 +24,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import { useAuth } from '../ContextApiCart/LoginContextApi';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-import MobileProfile from '../Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
+import AuthModal from "../Component/B-TO-C-Login/MobileLoginPage/AutoMobile"
 
 
 
@@ -39,7 +39,8 @@ export default function Navbar() {
   const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [showMobileLoginModal, setShowMobileLoginModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
 
   const [user, setUser] = useState({ name: '', email: '' });
   
@@ -80,11 +81,6 @@ export default function Navbar() {
   }, []);
 
 
-
- 
-   
-  
-
   return (
     <nav className='Ishum-navbars'>
       
@@ -122,7 +118,7 @@ export default function Navbar() {
              className="Ishum-icon"
              onClick={() => {
                if (isMobile) {
-                 setShowMobileLoginModal(true); // instead of navigate
+                setShowAuthModal(true);; // instead of navigate
                } else {
                  setShowB2UModal(true);
                }
@@ -247,9 +243,11 @@ export default function Navbar() {
         </div>
       )}
 
-{isMobile && showMobileLoginModal && (
-  <MobileProfile onClose={() => setShowMobileLoginModal(false)} />
+
+{showAuthModal && (
+  <AuthModal onClose={() => setShowAuthModal(false)} />
 )}
+
 
 
     </nav>
