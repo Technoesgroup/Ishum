@@ -420,15 +420,12 @@
   display: block !important;
 }
 
-.profile-menu-icon{
-  display: none !important;
-}
 
 .mobile-search-icon{
   cursor: pointer;
   display: block !important;
-  font-size: 2rem !important;
-  color: gray;
+  font-size: 1.7rem !important;
+  color: #4B3D1A;
 }
 
 .RECOMMENDATION,
