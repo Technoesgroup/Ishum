@@ -9,6 +9,7 @@
     /* overflow: hidden; */
     margin-top:0;
   }
+
   
   .scroll-wrapper{
     display: flex;
@@ -171,6 +172,15 @@
       margin-top: 80px;
       font-size: 1.6rem;
     }
+
+    .fullwidth-image-banner{
+      display: none !important;
+    }
+
+    /* .Image-mobileonly{
+      display: block !important;
+    }
+   */
   
     .Home-container-box {
       position: relative;
@@ -248,3 +258,6 @@
       display: none;
     }
   }
+
+
+  

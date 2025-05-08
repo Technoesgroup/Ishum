@@ -1,44 +1,90 @@
-import React from 'react';
-import './MobileLogin.css';
+import React, { useState } from "react";
+import "./MobileLogin.css";
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import AppleIcon from '@mui/icons-material/Apple';
 import CloseIcon from '@mui/icons-material/Close';
+import OtpLogin from "./MobileOtp"; // Reuse your OTP component
 
-const MobileProfile = ({ onClose }) => {
+const MobileProfile = ({ onClose, onSignupClick }) => {
+  const [phone, setPhone] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
+
+  const handleSendOTP = async () => {
+    if (!phone || phone.length < 10) {
+      alert("Please enter a valid phone number");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:4000/api/user/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setShowOtp(true);
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send OTP");
+    }
+  };
+
   return (
     <div className="mobile-login-modal-overlay">
       <div className="mobile-login-modal-content mobile-login-container">
-        <div className='login-text-button'>
-          <div>
-            <h2 className='mobile-login-title'>Log into</h2>
-            <h2 className='mobile-login-subtitle'>your account</h2>
-          </div>
-          <button className="mobile-login-close" onClick={onClose}><CloseIcon /></button>
-        </div>
+        {!showOtp ? (
+          <>
+            <div className="login-text-button">
+              <div>
+                <h2 className="mobile-login-title">Log into</h2>
+                <h2 className="mobile-login-subtitle">your account</h2>
+              </div>
+              <button className="mobile-login-close" onClick={onClose}>
+                <CloseIcon />
+              </button>
+            </div>
 
-        <label className="Phone-input-label">Phone Number</label>
-        <input type="text" className="mobile-login-input" placeholder="Enter your phone number" />
+            <label className="Phone-input-label">Phone Number</label>
+            <input
+              type="text"
+              className="mobile-login-input"
+              placeholder="Enter your phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
 
-        <div className="switch-login">Login by Email?</div>
+            <div className="switch-login">Login by Email?</div>
 
-        <button className="send-otp-button">SEND OTP</button>
+            <button className="send-otp-button" onClick={handleSendOTP}>
+              SEND OTP
+            </button>
 
-        <div className="or-divider">or log in with</div>
+            <div className="or-divider">or log in with</div>
 
-        <div className="social-login-buttons">
-          <div className="social-button"><GoogleIcon /></div>
-          <div className="social-button"><AppleIcon /></div>
-          <div className="social-button"><FacebookIcon /></div>
-        </div>
+            <div className="social-login-buttons">
+              <div className="social-button"><GoogleIcon /></div>
+              <div className="social-button"><AppleIcon /></div>
+              <div className="social-button"><FacebookIcon /></div>
+            </div>
 
-        <p className="signup-prompt">
-          Don’t have an account? <span className="signup-link">Sign Up</span>
-        </p>
+            <p className="signup-prompt">
+              Don’t have an account? <span className="signup-link" onClick={onSignupClick}>Sign Up</span>
+            </p>
+          </>
+        ) : (
+          <OtpLogin onClose={onClose} />
+        )}
       </div>
     </div>
   );
 };
 
 export default MobileProfile;
+
 
