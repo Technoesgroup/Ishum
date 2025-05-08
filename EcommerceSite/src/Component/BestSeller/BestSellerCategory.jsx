@@ -35,7 +35,7 @@ export default function BestSellerFilters({ openDropdown, handleToggle, selected
         </h2>
         {openDropdown === "subcategory" && (
           <ul className="Catergories-dropdown">
-            {["Anarkali", "Co-ord sets", "Dress", "Fusion wear", "Sharara Suits", "Indo Western","Aline Suit","Straight suit"].map((item, index) => (
+            {["Anarkali", "Co-ord sets", "Dress", "Fusion wear", "Sharara Suits", "Indo Western","Aline Suit","Straight Suit"].map((item, index) => (
               <li key={item}>
                 <input
                   type="radio"
