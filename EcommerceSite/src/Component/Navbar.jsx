@@ -138,10 +138,13 @@ export default function Navbar() {
                 onClick={() => navigate("/Cart")}
               />
             </Badge>
-            <ListOutlinedIcon className="Ishum-icon profile-menu-icon"
-              onClick={() => setIsOpen(!isOpen)}
-              onMouseEnter={() => setIsOpen(true)}
-            />
+            {isLoggedIn && (
+  <ListOutlinedIcon
+    className="Ishum-icon profile-menu-icon"
+    onClick={() => setIsOpen(!isOpen)}
+    onMouseEnter={() => setIsOpen(true)}
+  />
+)}
           </div>
           {isMenuOpen ? (
             <CloseIcon className="Ishum-menu-icon closemenu-icon" onClick={() => setIsMenuOpen(false)} />

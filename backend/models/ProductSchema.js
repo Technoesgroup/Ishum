@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   },
   subcategory: {
     type: String,
-    enum: ["Anarkali", "Sharara Suits", "Indo Western", "Fashion wear", "Dress", "Co-ord sets"],
+    enum: ["Anarkali", "Sharara Suits", "Indo Western", "Fashion wear", "Dress", "Co-ord sets", "Aline Suit", "Straight Suit"],
     required: true,
   },
   image: {

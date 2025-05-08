@@ -121,6 +121,7 @@
   }
 
   .collection-title {
+    text-align: center;
     font-size: 18px;
     padding: 2vw;
     margin-bottom: 16px;
@@ -160,7 +161,8 @@
   }
 
   .ishum-content-Com6-title{
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    text-align: center;
   }
 
 
