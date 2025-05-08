@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../Style-CSS/ProductPage/UserReview.css";
+import ReviewForm from "./ReviewForm"; 
 
 const RatingsReviews = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleRateClick = () => {
+    setShowForm(true);
+  };
+
   return (
     <div className="ratings-container">
       <h2>Ratings & Reviews</h2>
@@ -11,31 +18,13 @@ const RatingsReviews = () => {
           <p>1,813 Ratings &<br />176 Reviews</p>
         </div>
         <div className="rating-bars">
-          <div className="bar"><span>5 &#9733;</span><div className="progress" style={{ width: '80%' }}></div><span>1,342</span></div>
+        <div className="bar"><span>5 &#9733;</span><div className="progress" style={{ width: '80%' }}></div><span>1,342</span></div>
           <div className="bar"><span>4 &#9733;</span><div className="progress" style={{ width: '16%' }}></div><span>267</span></div>
           <div className="bar"><span>3 &#9733;</span><div className="progress" style={{ width: '5%' }}></div><span>70</span></div>
           <div className="bar"><span>2 &#9733;</span><div className="progress" style={{ width: '2%' }}></div><span>36</span></div>
           <div className="bar"><span>1 &#9733;</span><div className="progress red" style={{ width: '6%' }}></div><span>98</span></div>
         </div>
-      </div>
-
-      <div className="category-ratings">
-        <div className="circle-rating">
-          <span>4.6</span>
-          <p>Camera</p>
-        </div>
-        <div className="circle-rating">
-          <span>3.9</span>
-          <p>Battery</p>
-        </div>
-        <div className="circle-rating">
-          <span>4.7</span>
-          <p>Display</p>
-        </div>
-        <div className="circle-rating">
-          <span>4.7</span>
-          <p>Design</p>
-        </div>
+        <div><button onClick={handleRateClick}>Rate Us</button></div>
       </div>
 
       <div className="image-gallery">
@@ -49,8 +38,36 @@ const RatingsReviews = () => {
           <span>+94</span>
         </div>
       </div>
+
+      {showForm && (
+        <div className="Reviews-modal-overlay">
+          <div className="Reviews-modal-content">
+            <ReviewForm onClose={() => setShowForm(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default RatingsReviews;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

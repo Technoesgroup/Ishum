@@ -1,5 +1,4 @@
-// models/Review.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
@@ -13,4 +12,5 @@ const reviewSchema = new mongoose.Schema({
   dislikes: { type: Number, default: 0 },
 }, { timestamps: true });
 
-export default mongoose.model('Review', reviewSchema);
+module.exports = mongoose.model('Review', reviewSchema);
+

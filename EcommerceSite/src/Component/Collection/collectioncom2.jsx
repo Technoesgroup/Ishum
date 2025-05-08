@@ -13,7 +13,11 @@ export default function Bestsellers() {
   const [selectedSort, setSelectedSort] = useState(null);
   const { selected, setSelected } = useFilter();
   const location = useLocation();
+
+  console.log("Location object:", location);
   const collectionName = location?.state?.collectionName || null;
+
+  console.log("CollectionName in React:", collectionName);
 
   const handleToggle = (section) => {
     setOpenDropdown(openDropdown === section ? null : section);
@@ -115,7 +119,7 @@ export default function Bestsellers() {
             </div>
 
             {/* product */}
-            <ProductList queryParam={`isBestseller=true${collectionName ? `&collectionName=${collectionName}` : ""}`} />
+            <ProductList queryParam={`ishumstore=true&ishumexclusive=true&isBestseller=true${collectionName ? `&collectionName=${collectionName}` : ""}`} />
           </div>
         </div>
       </div>

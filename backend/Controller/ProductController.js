@@ -86,6 +86,8 @@ const getProducts = async (req, res) => {
   try {
     const filters = {};
 
+    // console.log("Received collectionName:", req.query.collectionName);
+
     if (req.query.isBestseller) filters.isBestseller = req.query.isBestseller === "true";
     if (req.query.isExclusive) filters.isExclusive = req.query.isExclusive === "true";
     if (req.query.isIshumStore) filters.isIshumStore = req.query.isIshumStore === "true";
@@ -95,18 +97,27 @@ const getProducts = async (req, res) => {
     if (req.query.availability) filters.availability = req.query.availability === "true";
 
     // Handle collectionName if it's a reference
-    console.log("fillteer  of  get product:", filters)
+    // console.log("fillteer  of  get product:", filters)
+
+
     if (req.query.collectionName) {
+      const titleQuery = req.query.collectionName.replace(/\s+/g, ' ').trim();
       const collection = await Collection.findOne({
-        title: { $regex: new RegExp(`^${req.query.collectionName}$`, 'i') },
+        title: new RegExp(`^${titleQuery}$`, "i"),
       });
     
       if (collection) {
         filters.collectionName = collection._id;
+        // console.log("Matched collection:", collection.title);
+        // console.log("Matched collection ID:", collection._id);
       } else {
-        filters.collectionName = null; 
+        return res.json({ products: [] });
       }
     }
+    
+    
+    
+    
 
     if (req.query.minPrice && req.query.maxPrice) {
       filters.price = {
@@ -117,6 +128,7 @@ const getProducts = async (req, res) => {
 
 
     const products = await Product.find(filters).populate("collectionName");
+    // console.log("Fetched products count:", products.length);
 
     res.status(200).json({ success: true, products });
   } catch (error) {

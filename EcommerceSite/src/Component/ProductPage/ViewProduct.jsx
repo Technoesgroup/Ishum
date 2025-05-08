@@ -13,6 +13,8 @@ const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
   const [selectedColor, setSelectedColor] = useState(""); // new
+  const [colorThumbnails, setColorThumbnails] = useState([]);
+
   const navigate = useNavigate();
 
 
@@ -30,10 +32,51 @@ const ProductPage = () => {
 
   const sizes = selectedProduct.size || [36, 30, 28, 26, 24];
   const thumbnails = selectedProduct.thumbnails?.slice(0, 4) || [];
-  const colorImages = selectedProduct.colorImages?.slice(0, 4) || [];
+
+
+  // Step: Extract unique colorName and take the first image of each
+const uniqueColorImages = [];
+
+const seenColors = new Set();
+
+for (let colorObj of selectedProduct.colorImages) {
+  if (!seenColors.has(colorObj.colorName)) {
+    seenColors.add(colorObj.colorName);
+    uniqueColorImages.push(colorObj);
+  }
+}
+
+// Then use this in render
+const colorImages = uniqueColorImages.slice(0, 4); // Optional: limit to 4 unique colors
+
   
-  
-  
+
+const handleColorSelect = (colorName, images) => {
+  setSelectedColor(colorName);
+  setMainImage(images[0]);
+  setColorThumbnails(images.slice(1));
+};
+
+
+
+const groupColorImages = (colorImages) => {
+  const grouped = {};
+
+  colorImages.forEach((item) => {
+    if (!grouped[item.colorName]) {
+      grouped[item.colorName] = [];
+    }
+    grouped[item.colorName].push(item.image);
+  });
+
+  return grouped;
+};
+
+// example use
+const groupedColorImages = groupColorImages(selectedProduct.colorImages);
+
+
+
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
@@ -47,12 +90,10 @@ const ProductPage = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
 
-  const handleColorSelect = (color) => {
-    setSelectedColor(color.colorName);
-    setMainImage(color.image);
-  };
+
 
   const handleAddToCart = async () => {
+    alert("Product add to cart")
     if (!user || !user._id) {
       alert("Please log in to add items to your cart.");
       return;
@@ -78,17 +119,22 @@ const ProductPage = () => {
   return (
     <div className="product-page">
       <div className="product-gallery">
-        <div className="thumbnail-images">
-          {thumbnails.map((thumb, idx) => (
-            <img
-              key={idx}
-              src={`http://localhost:4000/uploads/${thumb}`}
-              alt={`Thumbnail ${idx}`}
-              onClick={() => setMainImage(thumb)}
-              className="thumbnail-img"
-            />
-          ))}
-        </div>
+      <div className="thumbnail-images">
+  {(colorThumbnails.length > 0 ? colorThumbnails : thumbnails).map((img, idx) => (
+    <img
+      key={idx}
+      src={`http://localhost:4000/uploads/${img}`}
+      alt={`Thumbnail ${idx}`}
+      onClick={() => setMainImage(img)}
+      className="thumbnail-img"
+    />
+  ))}
+</div>
+
+
+       
+
+
 
         <div className="main-image">
           <img
@@ -124,20 +170,26 @@ const ProductPage = () => {
         </div>
 
         <div className="color-section">
-          <h4>Color</h4>
-          <div className="color-buttons">
-            {colorImages.map((color, idx) => (
-              <div className="color-box" key={idx} onClick={() => handleColorSelect(color)}>
-                <img
-                  src={`http://localhost:4000/uploads/${color.image}`}
-                  alt={color.colorName}
-                  className="color-img"
-                />
-                <p>{color.colorName}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+  <h4>Color</h4>
+  <div className="color-buttons">
+    {Object.entries(groupedColorImages).map(([colorName, images], idx) => (
+      <div
+        className="color-box"
+        key={idx}
+        onClick={() => handleColorSelect(colorName, images)}
+      >
+        <img
+          src={`http://localhost:4000/uploads/${images[0]}`}
+          alt={colorName}
+          className="color-img"
+        />
+        <p>{colorName}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+
 
         <div className="quantity-section">
           <button className="quantity-btn" onClick={handleQuantityDecrease}>-</button>
