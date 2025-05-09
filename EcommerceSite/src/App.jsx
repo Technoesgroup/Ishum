@@ -13,7 +13,6 @@ import Collection from './Component/Ishum-AdminPanel/CollectionPanel';
 import Review from './Component/ReviewCustomer/ReviewCustomer';
 import Tale from './Component/Tale/Tale';
 import Legacy from './Component/Legacy/Legacy';
-import SearchBar from './Component/Landing/SearchMobileView/SearchMobile';
 import MobileLogin from './Component/B-TO-C-Login/MobileLoginPage/MobileLogin';
 import UserAccount from './Pages/MyProfilePage';
 import IshumExclusive from './Pages/IshumExclusivePage';
@@ -22,6 +21,7 @@ import ViewProduct from './Pages/ViewProduct-Review';
 import CollectionPage from "./Component/Collection/CollectionCom3";
 import OrderConformation from "./Component/MyOrder/OrderConformation";
 import OrderTracking from "./Component/MyOrder/OrderTracking";
+import MobileSearch from "./Component/Landing/SearchMobileView/SearchMobile";
 
 
 
@@ -41,7 +41,6 @@ function App() {
       <Route path="/review"  element={<Review />}></Route>
       <Route path="/Tale"  element={<Tale />}></Route>
       <Route path="/Legacy"  element={<Legacy />}></Route>
-      <Route path="/Search-Bar"  element={<SearchBar />}></Route>
       <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
       <Route path="/Profile"  element={<UserAccount />}></Route>
       <Route path="/Ishum-Exclusive"  element={<IshumExclusive />}></Route>
@@ -50,6 +49,7 @@ function App() {
       <Route path="/Viewproduct" element={<ViewProduct />} />
       <Route path="/OrderConformation"  element={<OrderConformation />}></Route>
       <Route path="/OrderTracking"  element={<OrderTracking />}></Route>
+      <Route path="/search"  element={<MobileSearch/>}></Route>
      </Routes>
      <Footer />
      </Router>
