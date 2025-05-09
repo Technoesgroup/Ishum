@@ -1,8 +1,8 @@
-/* MobileLogin.css */
+/* MobilesignUp.css */
 
-.mobile-login-container {
+.mobile-signUp-container {
     width: 100vw;
-    height: 80vh;
+    height: 90vh;
     background-color: #EEEBE4;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
@@ -13,7 +13,7 @@
     position: relative;
   }
 
-  .mobile-login-close {
+  .mobile-signUp-close {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -27,13 +27,13 @@
     cursor: pointer;
   }
   
-  .mobile-login-title {
+  .mobile-signUp-title {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 15px;
   }
   
-  .mobile-login-subtitle {
+  .mobile-signUp-subtitle {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 60px;
@@ -44,9 +44,9 @@
     margin-bottom: 8px;
   }
   
-  .mobile-login-input {
+  .mobile-signUp-input {
     width: 100%;
-    padding: 12px;
+    padding: 1vw;
     font-size: 1rem;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -55,7 +55,7 @@
     background-color: #EEEBE4;
   }
   
-  .switch-login {
+  .switch-signUp {
     text-align: right;
     font-size: 0.8rem;
     color: gray;
@@ -84,7 +84,7 @@
     margin-bottom: 20px;
   }
   
-  .social-login-buttons {
+  .social-signUp-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -115,7 +115,7 @@
   }
   
 
-  .mobile-login-modal-overlay {
+  .mobile-signUp-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -128,7 +128,7 @@
     align-items: center;
   }
   
-  .mobile-login-modal-content {
+  .mobile-signUp-modal-content {
     background: #EEEBE4;
     border-radius: 10px;
     padding: 1.5rem;
@@ -138,15 +138,15 @@
   }
   
   @media(min-width:768px){
-    .mobile-login-modal-overlay{
+    .mobile-signUp-modal-overlay{
       display: none;
     }
 
-    .mobile-login-container{
+    .mobile-signUp-container{
       display: none;
     }
 
-   .mobile-login-modal-content{
+   .mobile-signUp-modal-content{
     display: none;
    }
   }

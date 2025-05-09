@@ -151,3 +151,61 @@ position: relative;
     color: red;
   }
   
+
+  @media (max-width: 768px) {
+    .orderTracking-card {
+      padding: 30px 5vw;
+      gap: 20px;
+    }
+  
+    .orderTracking-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .order-image {
+      width: 100px;
+    }
+  
+    .orderTracking-info {
+      align-items: center;
+    }
+  
+    .order-product-title {
+      font-size: 16px;
+    }
+  
+    .order-product-price {
+      font-size: 18px;
+    }
+  
+    .orderTracking-actions {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+  
+    .cancel-btn,
+    .continue-shopping-btn {
+      width: 70%;
+      padding: 10px;
+      font-size: 16px;
+    }
+  
+    .productimage-trackingOrder {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+  
+    .tracking-steps {
+      margin-left: 10px;
+    }
+  
+    .step {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+  

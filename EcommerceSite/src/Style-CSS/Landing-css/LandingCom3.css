@@ -104,7 +104,8 @@
   }
 
   .LandingCom-3-collection-image {
-    height: 45vw;
+    width: 100%;
+    height: 60vw;
   }
 
   .LandingCom-3-collection-info {
@@ -125,18 +126,14 @@
     font-size: 0.85rem;
   }
 
-  .LandingCom-3-plus-button {
-    width: 24px;
-    height: 24px;
-    bottom: 10px;
-    right: 10px;
-    font-size: 1rem;
-  }
 
   .LandingCom-3-view-all-button {
-    margin-top: 5vw;
-    padding: 3vw 6vw;
+    width: 70%;
+    margin-top: 30px;
+    padding: 3.5vw;
     font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
   }
 }
 
@@ -150,7 +147,7 @@
   } */
 
   .LandingCom-3-view-all-button {
-    width: 80%;
+    width: 60%;
     font-size: 0.85rem;
   }
 
