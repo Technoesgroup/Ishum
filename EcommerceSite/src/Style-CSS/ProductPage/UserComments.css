@@ -1,9 +1,10 @@
 /* ReviewCard.css */
 
-.review-card {
+.User-review-card {
     max-width: 400px;
     border-bottom: 1px solid #e0e0e0;
     padding: 20px;
+    box-shadow: 0 0 3px rgba(150, 150, 150, 0.495);
     margin-bottom: 10px;
     background: #EEEBE4;
     font-family: 'Segoe UI', sans-serif;

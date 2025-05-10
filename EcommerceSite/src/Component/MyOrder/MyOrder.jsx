@@ -13,7 +13,7 @@ const OrderList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/orders"); // Make sure this API endpoint is correct
+        const response = await axios.get("http://localhost:4000/api/orders/all"); // Make sure this API endpoint is correct
         setOrders(response.data); // Set the orders from the backend
       } catch (err) {
         console.error("Error fetching orders:", err);
@@ -48,13 +48,13 @@ const OrderList = () => {
         ))}
       </div>
 
-      {orders.filter(order => order.status === filter).map((order) => (
+      {orders.filter(order => order.status.toLowerCase() === filter.toLowerCase()).map((order) => (
         <div key={order._id} className="order-c-p-d-card"> {/* Use _id instead of id */}
           <div className="order-image">
-            <img src={order.items[0]?.image || img1} alt={order.items[0]?.title} className="order-images"/>
+            <img   src={`http://localhost:4000/uploads/${order.items[0]?.image}`} alt={order.items[0]?.title} className="order-images"/>
           </div>
           <div className="order-details">
-            <h2 className="order-title">Order #{order._id}</h2> {/* Use _id for order ID */}
+            <h2 className="All-order-title">Order #{order._id}</h2> 
             <p className="Ordername">{order.items[0]?.title}</p>
             <p className="Order-Size-Color">
               Size: {order.items[0]?.size} | Color: {order.items[0]?.color} | Quantity: {order.items[0]?.quantity}

@@ -10,7 +10,7 @@ import UnderLine from '../../images/Undertextline.png';
 const Collection = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
-  const collectionName = "Jashn E Rang";
+  const collectionName = "Rangrez";
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();  // context se setter
 

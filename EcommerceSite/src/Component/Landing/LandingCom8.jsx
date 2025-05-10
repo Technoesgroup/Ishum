@@ -45,62 +45,67 @@ const Collection = () => {
     navigate("/Viewproduct");
   };
 
-  return (
-    <div className="collection-container">
-      <div className="ishumCom6-content-MainHeading">
-        <h2 className="ishum-content-Com6-title">{collectionName}</h2>
-        <img className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
-      </div>
+  // ⬇ After useEffect and handlers
 
-      {loading ? (
-        <div className="loading-indicator">
-          <p>Loading products...</p>
-        </div>
-      ) : error ? (
-        <div className="error-message">
-          <p>{error}</p>
-        </div>
-      ) : (
-        <div className="collection-grid">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className="product-card"
-              onClick={() => handleProductClick(product)} // ✅ onClick added
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                src={`http://localhost:4000/uploads/${product.image}`}
-                alt={product.name}
-                onError={(e) => (e.target.src = "/fallback-image.png")}
-              />
-              <p className="product-name">{product.name}</p>
-              <div className="All-price-with-discount">
-                <p className="product-price">₹{product.price - product.discount}</p>
-                <p className="product-discount"><s>₹{product.price}</s></p>
-              </div>
-            </div>
-          ))}
+// ✅ Skip rendering if products are empty and not loading
+if (!loading && products.length === 0) return null;
 
-          <div className="Ishum-banner-card">
-            <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
-            <div className="Ishum-banner-content">
-              <button
-                className="Ishum-banner-button"
-                onClick={() => navigate("/all-products?collection=Unveli Riwayat")}
-              >
-                Explore
-              </button>
-            </div>
-            <p className="Ishum-jashn-paragraph">
-              Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.
-              <TrendingFlatIcon />
-            </p>
-          </div>
-        </div>
-      )}
+return (
+  <div className="collection-container">
+    <div className="ishumCom6-content-MainHeading">
+      <h2 className="ishum-content-Com6-title">{collectionName}</h2>
+      <img className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
     </div>
-  );
-};
+
+    {loading ? (
+      <div className="loading-indicator">
+        <p>Loading products...</p>
+      </div>
+    ) : error ? (
+      <div className="error-message">
+        <p>{error}</p>
+      </div>
+    ) : (
+      <div className="collection-grid">
+        {products.map((product, index) => (
+          <div
+            key={index}
+            className="product-card"
+            onClick={() => handleProductClick(product)}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              src={`http://localhost:4000/uploads/${product.image}`}
+              alt={product.name}
+              onError={(e) => (e.target.src = "/fallback-image.png")}
+            />
+            <p className="product-name">{product.name}</p>
+            <div className="All-price-with-discount">
+              <p className="product-price">₹{product.price - product.discount}</p>
+              <p className="product-discount"><s>₹{product.price}</s></p>
+            </div>
+          </div>
+        ))}
+
+        <div className="Ishum-banner-card">
+          <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
+          <div className="Ishum-banner-content">
+            <button
+              className="Ishum-banner-button"
+              onClick={() => navigate("/all-products?collection=Unveli Riwayat")}
+            >
+              Explore
+            </button>
+          </div>
+          <p className="Ishum-jashn-paragraph">
+            Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.
+            <TrendingFlatIcon />
+          </p>
+        </div>
+      </div>
+    )}
+  </div>
+);
+}
 
 export default Collection;
