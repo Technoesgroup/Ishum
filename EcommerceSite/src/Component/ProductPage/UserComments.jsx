@@ -8,7 +8,7 @@ const ReviewCard = ({ rating, title, content, image, name, location, date, likes
   const imageUrl = `http://localhost:4000/uploads/${image}`;
   console.log(name);
   return (
-    <div className="review-card">
+    <div className="User-review-card">
       <div className="rating-badge">
         <span>{rating}★</span>
       </div>
