@@ -107,19 +107,59 @@
   .submit-btn:hover {
     background: #967a4d;
   }
-  
-  /* Responsive */
+
+
   @media (max-width: 768px) {
-    .register-container {
+    .B-TO-B-register-container {
       flex-direction: column;
+      margin: 20px 5px;
+      box-shadow: none;
+      border-radius: 0;
+      border-radius: 8px;
     }
   
-    .image-section {
-      height: 250px;
+    .B-TO-B-image-section {
+  display: none;
+    }
+
+    .REGISTER-B2B-h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .B-TO-B-close-btn{
+      top: 0;
     }
   
-    .input-group {
+
+     .B-TO-B-login-btn {
+   display: none;
+    }
+    .B-TO-B-form-section {
+      width: 80%;
+      padding: 5px 15px;
+    }
+  
+    .B-TO-B-header {
+
+      display: none;
+      justify-content: space-between;
+      margin-right: 0;
+      font-size: 13px;
+      gap: 15px;
+    }
+  
+    .B-TO-B-input-group {
       flex-direction: column;
+      gap: 5px;
+    }
+  
+    .B-TO-B-submit-btn {
+      width: 100%;
+      font-size: 8px;
+      margin-top: 30px;
     }
   }
   
+  
+ 

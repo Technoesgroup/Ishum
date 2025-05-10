@@ -212,10 +212,10 @@
   background-color: transparent;
 }
 
-.close-btn {
+.B2B-close-btn {
   position: absolute;
-  top: 60px;
-  right: 20px;
+  top: 20px;
+  right: 10px;
   background: none;
   border: none;
   font-size: 2.3rem;
