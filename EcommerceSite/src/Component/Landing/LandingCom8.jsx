@@ -16,6 +16,8 @@ const Collection = () => {
 
   const { setSelectedProduct } = useProduct(); // ✅ context setter
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const fetchRiwayatProducts = async () => {
       try {
