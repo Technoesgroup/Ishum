@@ -218,8 +218,17 @@ export default function Navbar() {
               </ul>
             )}
           </div>
-          <Link to="/review">REVIEW</Link>
-          <button onClick={() => setShowB2BModal(true)} className="BUSINESS-TO-BUSINESS">BUSINESS TO BUSINESS</button>
+          <Link to="/review"  onClick={() => setIsMenuOpen(false)}>REVIEW</Link>
+          <button
+  onClick={() => {
+    setShowB2BModal(true);
+    setIsMenuOpen(false);
+  }}
+  className="BUSINESS-TO-BUSINESS"
+>
+  BUSINESS TO BUSINESS
+</button>
+
         </div>
             
       </div>
@@ -230,7 +239,7 @@ export default function Navbar() {
       {showB2BModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button className="close-btn" onClick={() => setShowB2BModal(false)}>×</button>
+            <button className="B2B-close-btn" onClick={() => setShowB2BModal(false)}>×</button>
             <RegBusiness />
           </div>
         </div>
