@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import axios from "axios";
 import "../../Style-CSS/SearchBar.css";
-import img1 from '../../images/Col-3.svg'
-import img2 from '../../images/Col-3.svg'
-import img3 from '../../images/Col-3.svg'
-import img4 from '../../images/Col-3.svg'
+import { useNavigate } from "react-router-dom";
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
+
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [results, setResults] = useState([]);
 
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-    setShowDropdown(e.target.value.trim().length > 0);
-  };
+  const navigate = useNavigate();
+  const { setSelectedProduct } = useProduct();
+  
 
   const suggestions = [
     "anarkali",
@@ -22,35 +22,41 @@ const SearchBar = () => {
     "peacock blue viscose anarkali",
   ];
 
-  const products = [
-    {
-      name: "Yellow Viscose Anarkali with Tulip Pant - Swara Collection",
-      price: "10,656.00",
-      image:img1 ,
-    },
-    {
-      name: "Rajwada Riwaaz: Embrace Royalty with Cobalt Blue Anarkali Suit",
-      price: "13,522.00",
-      image: img2,
-    },
-    {
-      name: "Rajwada Riwaaz: Embrace Royalty with Pink Anarkali Suit",
-      price: "13,522.00",
-      image:img3,
-    },
-    {
-      name: "Peacock Blue Viscose Anarkali with Dhoti Pant - Swara Collection",
-      price: "12,960.00",
-      image: img4,
-    },
-  ];
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    setQuery(inputValue);
+    setShowDropdown(inputValue.trim().length > 0);
+  };
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (query.trim()) {
+        axios
+          .get(`http://localhost:4000/api/products/search?q=${query}`)
+          .then((res) => {
+            if (Array.isArray(res.data)) {
+              setResults(res.data);
+            } else if (Array.isArray(res.data.products)) {
+              setResults(res.data.products);
+            } else {
+              console.error("Unexpected response format:", res.data);
+              setResults([]);
+            }
+          })
+          .catch((err) => {
+            console.error("Error fetching products:", err);
+            setResults([]);
+          });
+      } else {
+        setResults([]);
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounce);
+  }, [query]);
 
   const filteredSuggestions = suggestions.filter((item) =>
     item.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const filteredProducts = products.filter((item) =>
-    item.name.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
@@ -77,15 +83,28 @@ const SearchBar = () => {
 
           <div className="products-section">
             <strong>PRODUCTS</strong>
-            {filteredProducts.map((product, idx) => (
-              <div key={idx} className="product-result">
-                <img src={product.image} alt={product.name} />
+            {results.length === 0 ? (
+              <div className="no-results">No matching products</div>
+            ) : (
+              results.map((product, idx) => (
+                <div
+                key={idx}
+                className="product-result"
+                onClick={() => {
+                  setSelectedProduct(product); // store in context
+                  localStorage.setItem("selectedProduct", JSON.stringify(product)); // store in localStorage
+                  navigate("/Viewproduct"); // navigate to view page
+                }}
+              >
+                <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.name} />
                 <div className="product-result-details">
                   <div>{product.name}</div>
                   <div>Rs. {product.price}</div>
                 </div>
               </div>
-            ))}
+              
+              ))
+            )}
           </div>
         </div>
       )}

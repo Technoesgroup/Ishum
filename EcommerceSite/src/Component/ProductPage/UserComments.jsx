@@ -5,7 +5,8 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import OfflinePinIcon from '@mui/icons-material/OfflinePin';
 
 const ReviewCard = ({ rating, title, content, image, name, location, date, likes = 0, dislikes = 0 }) => {
-  const imageUrl = `http://localhost:4000${image}`;
+  const imageUrl = `http://localhost:4000/uploads/${image}`;
+  console.log(name);
   return (
     <div className="review-card">
       <div className="rating-badge">

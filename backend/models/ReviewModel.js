@@ -10,6 +10,16 @@ const reviewSchema = new mongoose.Schema({
   date: { type: String, required: true },
   likes: { type: Number, default: 0 },
   dislikes: { type: Number, default: 0 },
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Review', reviewSchema);

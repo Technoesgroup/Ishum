@@ -32,6 +32,42 @@
     height: 32px !important;
     color: rgb(190, 190, 190);
   }
+
+  .Ishum-mobile-search-results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 10px; /* space between items */
+    padding: 10px;
+  }
+  
+  .Ishum-mobile-search-item {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .Ishum-mobile-popular-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .Ishum-mobile-popular-info {
+    margin-top: 5px;
+  }
+  
+  .Ishum-mobile-text-muted {
+    font-size: 12px;
+    color: #888;
+  }
+  
   
   .Ishum-mobile-search-wrapper {
     position: relative;

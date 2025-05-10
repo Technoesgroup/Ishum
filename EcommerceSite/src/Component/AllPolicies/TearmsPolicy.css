@@ -1,0 +1,38 @@
+.terms-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #EEEBE4;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .terms-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .terms-container h2 {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    color: #34495e;
+  }
+  
+  .terms-container p,
+  .terms-container ul {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .terms-container ul {
+    padding-left: 20px;
+  }
+  
+  .terms-container li {
+    margin-bottom: 10px;
+  }
+  

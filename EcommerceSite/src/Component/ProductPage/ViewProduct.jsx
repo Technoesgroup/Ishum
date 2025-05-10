@@ -131,11 +131,6 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
   ))}
 </div>
 
-
-       
-
-
-
         <div className="main-image">
           <img
             src={`http://localhost:4000/uploads/${mainImage || selectedProduct.image}`}

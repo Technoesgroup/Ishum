@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../../Style-CSS/ProductPage/UserReview.css";
 import ReviewForm from "./ReviewForm"; 
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 
 const RatingsReviews = () => {
+    const { selectedProduct, setSelectedProduct } = useProduct();
   const [showForm, setShowForm] = useState(false);
 
   const handleRateClick = () => {
@@ -42,7 +44,7 @@ const RatingsReviews = () => {
       {showForm && (
         <div className="Reviews-modal-overlay">
           <div className="Reviews-modal-content">
-            <ReviewForm onClose={() => setShowForm(false)} />
+            <ReviewForm productId={selectedProduct._id} onClose={() => setShowForm(false)} />
           </div>
         </div>
       )}

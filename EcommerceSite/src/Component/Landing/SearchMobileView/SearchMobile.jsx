@@ -10,6 +10,7 @@ import Img1 from '../../../images/Col-2.svg';
 import Img2 from '../../../images/Col-3.svg';
 import Img3 from '../../../images/Col-4.svg';
 import axios from 'axios';
+import { useProduct } from "../../../ContextApiCart/ProductContextApi";
 
 const MobileView = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,8 +18,8 @@ const MobileView = () => {
   const [recent, setRecent] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+  const { setSelectedProduct } = useProduct();
 
-  // Get query from URL and set it in state
   useEffect(() => {
     const queryFromURL = new URLSearchParams(location.search).get('query');
     if (queryFromURL) {
@@ -36,7 +37,7 @@ const MobileView = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (searchQuery.trim()) {
-        axios.get(`/api/products/search?q=${searchQuery}`)
+        axios.get(`http://localhost:4000/api/products/search?q=${searchQuery}`)
           .then(res => {
             if (Array.isArray(res.data)) {
               setResults(res.data);
@@ -117,17 +118,22 @@ const MobileView = () => {
 
       {/* Search Results */}
       {searchQuery.trim() && (
-        <div className="Ishum-mobile-search-results">
-          {results.length ? results.map((item) => (
-            <div key={item._id} className="Ishum-mobile-search-item" onClick={() => handleSearch(item.name)}>
-              <img src={`http://localhost:4000/uploads/${item.image}`} alt={item.name} className="Ishum-mobile-popular-img" />
-              <div className="Ishum-mobile-popular-info">
-                <p>{item.name}</p>
-                <p className="Ishum-mobile-text-muted">starting ₹{item.price}</p>
-              </div>
-            </div>
-          )) : <p>No results found</p>}
+    <div className="Ishum-mobile-search-results">
+    {results.length ? results.map((item) => (
+      <div key={item._id} className="Ishum-mobile-search-item"    onClick={() => {
+        setSelectedProduct(item); // store in context
+        localStorage.setItem("selectedProduct", JSON.stringify(item)); // store in localStorage
+        navigate("/Viewproduct"); // navigate to view page
+      }}>
+        <img src={`http://localhost:4000/uploads/${item.image}`} alt={item.name} className="Ishum-mobile-popular-img" />
+        <div className="Ishum-mobile-popular-info">
+          <p>{item.name}</p>
+          <p className="Ishum-mobile-text-muted">starting ₹{item.price}</p>
         </div>
+      </div>
+    )) : <p>No results found</p>}
+  </div>
+  
       )}
 
       {/* Popular this week */}

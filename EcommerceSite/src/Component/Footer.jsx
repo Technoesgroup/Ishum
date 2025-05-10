@@ -5,6 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import "../Style-CSS/Footer.css";
 import Logo from '../images/Ishum Logo 1.svg';
+import { Link } from 'react-router-dom';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const Footer = () => {
@@ -69,11 +70,10 @@ const Footer = () => {
           <div>
             <h3>Legal</h3>
             <ul>
-              <li>Privacy Policy</li>
-              <li>Terms & Conditions</li>
-              <li>Cancellation Policy</li>
-              <li>Refund Policy</li>
-              <li>Exchanges & Returns</li>
+            <li><Link to="/PrivacyPolicy">Privacy Policy</Link></li>
+            <li><Link to="/TearmsServices">Terms & Conditions</Link></li>
+            <li><Link to="/PaymentServices">Refund Policy</Link></li>
+            <li><Link to="/ReturnPolicy">Exchanges & Returns</Link></li>
             </ul>
           </div>
           </div>

@@ -163,22 +163,73 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
 
       {/* Pagination */}
       <div className="pagination">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
+  <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+    Previous
+  </button>
+
+  {(() => {
+    const pages = [];
+    const siblingCount = 1;
+    const totalNumbers = siblingCount * 2 + 3; // e.g., 1 2 3 ... 10
+    const totalBlocks = totalNumbers + 2; // with first + last
+
+    const leftSiblingIndex = Math.max(currentPage - siblingCount, 2);
+    const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPages - 1);
+
+    const showLeftDots = leftSiblingIndex > 2;
+    const showRightDots = rightSiblingIndex < totalPages - 1;
+
+    // First Page
+    pages.push(
+      <button
+        key={1}
+        className={currentPage === 1 ? "active" : ""}
+        onClick={() => handlePageChange(1)}
+      >
+        1
+      </button>
+    );
+
+    if (showLeftDots) {
+      pages.push(<span key="left-dots">...</span>);
+    }
+
+    for (let i = leftSiblingIndex; i <= rightSiblingIndex; i++) {
+      pages.push(
+        <button
+          key={i}
+          className={currentPage === i ? "active" : ""}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
         </button>
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index + 1}
-            className={currentPage === index + 1 ? "active" : ""}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next
+      );
+    }
+
+    if (showRightDots) {
+      pages.push(<span key="right-dots">...</span>);
+    }
+
+    if (totalPages > 1) {
+      pages.push(
+        <button
+          key={totalPages}
+          className={currentPage === totalPages ? "active" : ""}
+          onClick={() => handlePageChange(totalPages)}
+        >
+          {totalPages}
         </button>
-      </div>
+      );
+    }
+
+    return pages;
+  })()}
+
+  <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+    Next
+  </button>
+</div>
+
     </div>
   );
 }
