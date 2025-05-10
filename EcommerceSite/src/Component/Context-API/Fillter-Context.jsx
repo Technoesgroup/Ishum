@@ -11,6 +11,7 @@ export const FilterProvider = ({ children }) => {
     color: null,
     tag: null, // for EXCLUSIVE, DHOTI, etc.
     collection: null,
+    price:null
   });
 
   const normalize = (str) => str?.toLowerCase().trim(); 
@@ -63,6 +64,10 @@ export const FilterProvider = ({ children }) => {
       }
       return normalize(item.collectionName) === normalize(selected.collection);
     });
+  }
+
+  if (selected.price) {
+    filtered = filtered.filter((item) => item.price <= selected.price); // Price filter
   }
     
   

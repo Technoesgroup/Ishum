@@ -89,10 +89,10 @@ const Footer = () => {
             <span>Cookies</span>
           </div>
           <div className="footer-social">
-            <FacebookOutlinedIcon />
-            <TwitterIcon />
-            <InstagramIcon />
-            <YouTubeIcon />
+         <a href="">   <FacebookOutlinedIcon /></a>
+          <a href="">  <TwitterIcon /></a>
+          <a href="https://www.instagram.com/ishumbykaran_official?igsh=Y3J6d3JmMDMxa2cw">  <InstagramIcon /></a>
+         <a href="">   <YouTubeIcon /></a>
           </div>
         </div>
       </div>
