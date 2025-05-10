@@ -13,7 +13,6 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCart } from "../ContextApiCart/CartContextApi";
@@ -25,6 +24,7 @@ import { useAuth } from '../ContextApiCart/LoginContextApi';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import AuthModal from "../Component/B-TO-C-Login/MobileLoginPage/AutoMobile"
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
@@ -150,7 +150,7 @@ export default function Navbar() {
           {isMenuOpen ? (
             <CloseIcon className="Ishum-menu-icon closemenu-icon" onClick={() => setIsMenuOpen(false)} />
           ) : (
-            <MenuOpenIcon className="Ishum-menu-icon menuopen-icon" onClick={() => setIsMenuOpen(true)} />
+            <MenuIcon className="Ishum-menu-icon menuopen-icon" onClick={() => setIsMenuOpen(true)} />
           )}
           {isLoggedIn && isOpen && (
             <motion.div
