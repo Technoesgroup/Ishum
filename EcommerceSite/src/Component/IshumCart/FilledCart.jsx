@@ -10,9 +10,13 @@ import EmptyCart from './EmptyCart';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useCart } from "../../ContextApiCart/CartContextApi";
 
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
 const CartItem = ({ id, image, title, price, size, color, quantity, onIncrease, onDecrease, onRemove }) => (
+
+  
   <div className="Cartitem-cart-item">
-    <img src={`http://localhost:4000/uploads/${image}`} alt={title} />
+    <img src={`${baseURL}/uploads/${image}`}  alt={title} />
     <div className="Cartitem-cart-item-details">
       <div className="Cartitem-details-tile-price">
         <h2>{title}</h2>
@@ -44,6 +48,9 @@ const Cartitem = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   console.log("User ID from Context:", userId);
 
   useEffect(() => {
@@ -51,7 +58,7 @@ const Cartitem = () => {
 
     const fetchCart = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/cart/${userId}`);
+        const res =  await axios.get(`${baseURL}/api/cart/${userId}`);
         console.log("Backend Cart Data:", res.data);
         setCartItems(res.data.cartItems || []); // Ensure cartItems are updated properly
       } catch (err) {
@@ -63,7 +70,7 @@ const Cartitem = () => {
 
     const fetchSimilarProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/products/get-product");
+        const res =await axios.get(`${baseURL}/api/products/get-product`);
         setProducts(res.data.products.slice(0, 3));
       } catch (err) {
         console.error("Error fetching similar products:", err);
@@ -76,7 +83,7 @@ const Cartitem = () => {
 
   const handleAddToCart = async (product) => {
     try {
-      const res = await axios.post("http://localhost:4000/api/cart", {
+      const res = await axios.post(`${baseURL}/api/cart`, {
         userId,
         productId: product._id,
         quantity: 1,
@@ -91,7 +98,7 @@ const Cartitem = () => {
 
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/cart/${userId}/${id}`);
+      await axios.delete(`${baseURL}/api/cart/${userId}/${id}`)
       setCartItems((prev) => prev.filter(item => item.productId.toString() !== id));
     } catch (err) {
       console.error("Error removing item:", err);
@@ -154,7 +161,7 @@ const Cartitem = () => {
           <div className="SimilarItems-products-grid">
             {products.map((product) => (
               <div key={product._id} className="SimilarItems-product-card">
-                <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.name} className="SimilarItems-product-image" />
+                <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} className="SimilarItems-product-image" />
                 <div className="SimilarItems-product-details">
                   <h3 className="SimilarItems-product-name">{product.name}</h3>
                   <div className="Original-Discount-Price">

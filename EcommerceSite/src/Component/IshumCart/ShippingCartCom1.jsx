@@ -36,6 +36,8 @@ export default function ShippingStep() {
     copyAddress: false,
   });
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
   
@@ -68,7 +70,7 @@ export default function ShippingStep() {
       // Include userId in the payload to be sent to the backend
       const payload = { ...formData, userId: user._id };
 
-      await axios.post("http://localhost:4000/api/shipping", payload);
+      await axios.post(`${baseURL}/api/shipping`, payload);
 
       setActiveStep("wallet");
       setTimeout(() => {

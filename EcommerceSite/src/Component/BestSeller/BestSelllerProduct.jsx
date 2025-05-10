@@ -18,6 +18,8 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     const { setSelectedProduct } = useProduct();
   const { user } = useAuth(); 
   const userId = user?._id; 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL; 
   
   useEffect(() => {
     const fetchProducts = async () => {
@@ -62,7 +64,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
           query = query.slice(0, -1);
         }
   
-        const res = await axios.get(`http://localhost:4000/api/products/get-product${query}`);
+        const res = await axios.get(`${baseURL}/api/products/get-product${query}`);
         setProducts(res.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -121,7 +123,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     }
 
     try {
-      const res = await axios.post("http://localhost:4000/api/cart/addtocart", {
+      const res = await axios.post(`${baseURL}/api/cart/addtocart`, {
         userId,
         productId: product._id,
         quantity: 1,
@@ -140,7 +142,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
         {displayedProducts.map((product) => (
           <div key={product._id} className="bestsellers-product-card"     onClick={() => handleProductClick(product)}>
             <img
-              src={`http://localhost:4000/uploads/${product.image}`}
+              src={`${baseURL}/uploads/${product.image}`}
               alt={product.name}
               className="bestsellers-product-image"
             />

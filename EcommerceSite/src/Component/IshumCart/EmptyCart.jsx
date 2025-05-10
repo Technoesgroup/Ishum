@@ -12,7 +12,7 @@ const EmptyCart = () => {
         <h2>Your Cart Is Empty</h2>
         <img src={Img1} alt="Empty Cart" />
         <p>Take a moment to unwind while we bring you the finest cultural attire</p>
-        <button className="Start-Shopping" onClick={() => navigate("/Allproductpage")}>Start Shopping</button>
+        <button className="Start-Shopping" onClick={() => navigate("/")}>Start Shopping</button>
       </div>
     </div>
   );

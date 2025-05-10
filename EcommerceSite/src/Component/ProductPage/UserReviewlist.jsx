@@ -10,13 +10,16 @@ const ReviewCardList = () => {
 
   const productId = selectedProduct?._id;
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 
   useEffect(() => {
     if (!productId) return; // ✅ Prevent call if undefined
 
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/get-reviews/${productId}`);
+        const res = await axios.get(`${baseURL}/api/get-reviews/${productId}`);
+
         console.log("📦 Reviews Fetched:", res.data);
         setReviews(res.data);
       } catch (error) {

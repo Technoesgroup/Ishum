@@ -14,11 +14,13 @@ const Collection = () => {
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();  // context se setter
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const fetchIshumProducts = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:4000/api/products/get-product`, {
+        const res = await axios.get(`${baseURL}/api/products/get-product`, {
           params: {
             isIshumStore: true,
             collectionName: collectionName,
@@ -63,7 +65,7 @@ const Collection = () => {
               onClick={() => handleProductClick(product)}
               style={{ cursor: "pointer" }}
             >
-              <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.name} />
+              <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
               <p className="product-name">{product.name}</p>
               <div className="All-price-with-discount">
                 <p className="product-price">₹{product.price}</p>

@@ -14,11 +14,13 @@ export const FilterProvider = ({ children }) => {
     price:null
   });
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   const normalize = (str) => str?.toLowerCase().trim(); 
 
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/products/get-product")
+    fetch(`${baseURL}/api/products/get-product`)
       .then((res) => res.json())
       .then((data) => {
         console.log("DATA:", data); // Yeh line check karni zaruri hai

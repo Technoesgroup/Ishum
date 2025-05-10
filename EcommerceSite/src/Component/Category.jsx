@@ -21,6 +21,7 @@ const Categories = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         fetchProducts();
@@ -28,7 +29,8 @@ const Categories = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/GetCards");
+            const response = await axios.get(`${baseURL}/GetCards`);
+
             if (response.data.success) {
                 setData(response.data.data);
             }
@@ -56,7 +58,8 @@ const Categories = () => {
         <div className="cards-container">
             {data.map((item, index) => (
                 <div key={index} className="card">
-                    <img src={`http://localhost:4000${item.image}`} alt={item.name} className="card-image" />
+<img src={`${baseURL}${item.image}`} alt={item.name} className="card-image" />
+
                     <h2 className="card-title">{item.name}</h2>
                     <p className="card-description">{item.description}</p>
                     <p className="card-price">Price: {item.price}</p>

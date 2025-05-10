@@ -18,3 +18,54 @@
 .ishum-legacy-container p{
     line-height: 2.2;
 }
+
+
+/* Mobile View Styles for ishum-legacy */
+@media (max-width: 768px) {
+    .ishum-legacy-container {
+      padding: 20px 5vw; /* Adjust padding for mobile */
+    }
+  
+    .ishum-legacy-content {
+      margin: 20px 0; /* Reduce margin for mobile */
+      align-items: center; /* Keep content centered */
+    }
+  
+    .ishum-legacy-container h2 {
+      font-size: 5vw; /* Adjust font size for mobile */
+      margin-bottom: 15px;
+      text-align: center; /* Ensure header is centered on mobile */
+    }
+  
+    .ishum-legacy-container p {
+      font-size: 14px; /* Adjust font size for better readability */
+      line-height: 1.8; /* Reduce line-height slightly for mobile */
+      text-align: center; /* Center text for mobile view */
+      max-width: 90%; /* Limit width for text to fit well on small screens */
+    }
+
+    .ishum-legacy-content h1{
+        font-size: 7vw;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .ishum-legacy-container {
+      padding: 15px 4vw; /* Further reduce padding on smaller screens */
+    }
+  
+    .ishum-legacy-content {
+      margin: 15px 0; /* Adjust margin for smaller screens */
+    }
+  
+    .ishum-legacy-container h2 {
+      font-size: 5vw; /* Further reduce font size */
+      margin-bottom: 12px;
+    }
+  
+    .ishum-legacy-container p {
+      font-size: 13px; /* Smaller font size for mobile */
+      line-height: 1.6; /* Adjust line-height for more compact view */
+    }
+  }
+  

@@ -10,6 +10,8 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
   const [phone, setPhone] = useState("");
   const [showOtp, setShowOtp] = useState(false);
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   const handleSendOTP = async () => {
     if (!phone || phone.length < 10) {
       alert("Please enter a valid phone number");
@@ -17,7 +19,7 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/user/send-otp", {
+      const response = await fetch(`${baseURL}/api/user/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone }),

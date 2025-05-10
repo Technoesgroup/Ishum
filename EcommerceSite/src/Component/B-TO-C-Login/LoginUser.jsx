@@ -8,6 +8,9 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [showOtp, setShowOtp] = useState(false);
   const [phone, setPhone] = useState("");
 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   useEffect(() => {
     setTimeout(() => {
       setShowAnimation(true);
@@ -21,7 +24,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/user/send-otp", {
+      const response = await fetch(`${baseURL}/api/user/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone }),
