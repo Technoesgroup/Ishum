@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../Tale/Tale.css";
 import Header from "./Header";
-import image1 from '../../images/image 6.svg';
+import image1 from '../../images/WhatsApp Image 2025-05-10 at 15.18.36_8565fbdc.jpg';
 import image2 from '../../images/image 6.svg';
 import image3 from '../../images/image 6.svg';
 import image4 from '../../images/image 6.svg';

@@ -22,7 +22,7 @@ import CollectionPage from "./Component/Collection/CollectionCom3";
 import OrderConformation from "./Component/MyOrder/OrderConformation";
 import OrderTracking from "./Component/MyOrder/OrderTracking";
 import MobileSearch from "./Component/Landing/SearchMobileView/SearchMobile";
-
+import ScrollToTop from './Component/ScrollTop';
 import ReturnPolicy from './Component/AllPolicies/ReturnPolicy';
 import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy"; 
 import TearmsServices from './Component/AllPolicies/TearmsPolicy';
@@ -34,6 +34,7 @@ function App() {
 
   return (
      <Router>
+        <ScrollToTop />
       <Navbar />
      <Routes>
      <Route path="/"  element={<Home />}></Route>

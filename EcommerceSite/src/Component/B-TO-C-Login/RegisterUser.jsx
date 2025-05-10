@@ -125,7 +125,8 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
           email={formData.email}
           mode="register"
           onBack={() => setShowOtpStep(false)}
-          setShowB2UModal={setShowB2UModal}
+          setShowB2UModal={setShowB2UModal}  
+          setShowLoginModal={setShowLoginModal}
         />
         
         )}
