@@ -62,7 +62,7 @@ export default function ShippingCartCom2({ onClose }) {
             });
         
             const options = {
-                key: "rzp_test_Tg2EHa9WfYqYt0", // Replace with your Razorpay Key ID
+                key: process.env.RAZORPAY_KEY_SECRET, // Replace with your Razorpay Key ID
                 amount: order.amount,
                 currency: order.currency,
                 name: "My Store",
@@ -111,7 +111,7 @@ export default function ShippingCartCom2({ onClose }) {
                 },
                 prefill: {
                     name: user?.name || "Ishum",
-                    email: user?.email || "harsh@example.com",
+                    email: user?.email || "marketing.ishumdesigns@gmail.com",
                     contact: user?.phone || "8130299443",
                 },
                 theme: {
