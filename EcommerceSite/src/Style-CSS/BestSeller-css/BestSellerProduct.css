@@ -28,7 +28,7 @@
   
   .bestsellers-product-name {
     font-family: 'PoppinsRegular';
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: #4B3D1A;
   }
   
@@ -159,16 +159,20 @@
   }
 
   .pagination {
-      margin-top: 40px;
-      gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 0;
+    gap: 8px;
   }
 
-  .pagination button {
-      padding: 8px 16px;
-      font-size: 1rem;
+  .pagination::-webkit-scrollbar {
+    display: none;
   }
 
-  .pagination button.active {
-      font-size: 1rem;
+  .pagination button,
+  .pagination span {
+    padding: 8px 12px;
+    font-size: 1rem;
+    flex-shrink: 0;
   }
 }

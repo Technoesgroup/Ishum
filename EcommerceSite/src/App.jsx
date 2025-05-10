@@ -23,6 +23,11 @@ import OrderConformation from "./Component/MyOrder/OrderConformation";
 import OrderTracking from "./Component/MyOrder/OrderTracking";
 import MobileSearch from "./Component/Landing/SearchMobileView/SearchMobile";
 
+import ReturnPolicy from './Component/AllPolicies/ReturnPolicy';
+import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy"; 
+import TearmsServices from './Component/AllPolicies/TearmsPolicy';
+import  PaymentServices from './Component/AllPolicies/PaymentStatement';
+
 
 
 function App() {
@@ -50,6 +55,10 @@ function App() {
       <Route path="/OrderConformation"  element={<OrderConformation />}></Route>
       <Route path="/OrderTracking"  element={<OrderTracking />}></Route>
       <Route path="/search"  element={<MobileSearch/>}></Route>
+      <Route path="/PrivacyPolicy"  element={<PrivacyPolicy/>}> </Route>
+      <Route path="/ReturnPolicy"  element={<ReturnPolicy/>}> </Route>
+      <Route path="/PaymentServices"  element={<PaymentServices/>}> </Route>
+      <Route path="/TearmsServices"  element={<TearmsServices/>}> </Route>
      </Routes>
      <Footer />
      </Router>

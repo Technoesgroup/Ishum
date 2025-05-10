@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useDropzone } from 'react-dropzone';  // Importing react-dropzone
-import '../../Style-CSS/ProductPage/ReviewForm.css'; // optional for styling
+import { useDropzone } from 'react-dropzone';
+import { useAuth } from '../../ContextApiCart/LoginContextApi'; // 🔁 Update the path if needed
+import '../../Style-CSS/ProductPage/ReviewForm.css';
 
-const ReviewForm = ({ onClose }) => {
+const ReviewForm = ({ onClose, productId }) => {
+  const { token, user, isLoggedIn } = useAuth(); // ✅ use auth context
+
   const [formData, setFormData] = useState({
     rating: 5,
     title: '',
@@ -14,28 +17,28 @@ const ReviewForm = ({ onClose }) => {
     date: new Date().toISOString().split('T')[0],
   });
 
-  // Handle form data change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Dropzone functionality for image upload
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
-      const file = acceptedFiles[0]; // Taking the first image
-      const fileUrl = URL.createObjectURL(file);  // Create an object URL for the image
-      setFormData((prev) => ({ ...prev, image: file })); // Storing the image file in the form data
+      const file = acceptedFiles[0];
+      setFormData((prev) => ({ ...prev, image: file }));
     },
-    multiple: false, // Only allowing one image at a time
-    accept: 'image/*', // Accepting only images
+    multiple: false,
+    accept: 'image/*',
   });
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create FormData instance
+
+    if (!isLoggedIn || !token) {
+      alert('You must be logged in to submit a review.');
+      return;
+    }
+
     const data = new FormData();
     data.append('rating', formData.rating);
     data.append('title', formData.title);
@@ -43,17 +46,18 @@ const ReviewForm = ({ onClose }) => {
     data.append('name', formData.name);
     data.append('location', formData.location);
     data.append('date', formData.date);
-    
+    data.append('productId', productId);
+    data.append('userId', user?._id); // ✅ Use user from context
+
     if (formData.image) {
-      // Append image as file
-      const file = formData.image;
-      data.append('image', file);
+      data.append('image', formData.image);
     }
 
     try {
       await axios.post('http://localhost:4000/api/create-reviews', data, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Ensure correct content type
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
       alert('Review submitted successfully!');
@@ -67,32 +71,71 @@ const ReviewForm = ({ onClose }) => {
   return (
     <form className="review-form" onSubmit={handleSubmit}>
       <h3>Write a Review</h3>
-      <input type="text" name="name" placeholder="Your Name" onChange={handleChange} required />
-      <input type="text" name="location" placeholder="Location" onChange={handleChange} required />
-      <input type="text" name="title" placeholder="Review Title" onChange={handleChange} required />
-      <textarea name="content" placeholder="Your Review" onChange={handleChange} required />
-      
-      {/* Dropzone for image upload */}
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        onChange={handleChange}
+        value={formData.name}
+        required
+      />
+      <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        onChange={handleChange}
+        value={formData.location}
+        required
+      />
+      <input
+        type="text"
+        name="title"
+        placeholder="Review Title"
+        onChange={handleChange}
+        value={formData.title}
+        required
+      />
+      <textarea
+        name="content"
+        placeholder="Your Review"
+        onChange={handleChange}
+        value={formData.content}
+        required
+      />
+
       <div {...getRootProps()} className="dropzone-container">
         <input {...getInputProps()} />
         <p>Drag & drop an image here, or click to select</p>
       </div>
-      
-      {/* Show selected image preview */}
-      {formData.image && <img src={URL.createObjectURL(formData.image)} alt="Review" className="image-preview" />}
-      
+
+      {formData.image && (
+        <img
+          src={URL.createObjectURL(formData.image)}
+          alt="Review"
+          className="image-preview"
+        />
+      )}
+
       <select name="rating" onChange={handleChange} value={formData.rating}>
-        {[5, 4, 3, 2, 1].map(r => <option key={r} value={r}>{r} ★</option>)}
+        {[5, 4, 3, 2, 1].map((r) => (
+          <option key={r} value={r}>
+            {r} ★
+          </option>
+        ))}
       </select>
 
       <div className="form-buttons">
         <button type="submit">Submit</button>
-        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="button" onClick={onClose}>
+          Cancel
+        </button>
       </div>
     </form>
   );
 };
 
 export default ReviewForm;
+
+
 
 

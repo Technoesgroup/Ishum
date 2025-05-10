@@ -142,17 +142,18 @@ const getProducts = async (req, res) => {
 const searchProducts = async (req, res) => {
   const { q } = req.query;
 
+  // If no query string, return an empty array
   if (!q) {
     return res.status(200).json([]);
   }
 
-
-
   try {
-    const regex = new RegExp(q, 'i'); // case-insensitive
+    // Creating the regex for case-insensitive search
+    const regex = new RegExp(q, 'i');
+
+    // Querying the products collection with a case-insensitive search on multiple fields
     const products = await Product.find({
       $or: [
-        { collectionName: { $regex: regex } },
         { name: { $regex: regex } },
         { category: { $regex: regex } },
         { subcategory: { $regex: regex } },
@@ -161,20 +162,27 @@ const searchProducts = async (req, res) => {
       ]
     });
 
-
+    // Log the details for debugging
     console.log("Search query:", q);
-console.log("Matched regex:", regex);
-console.log("Found products:", products.length);
+    console.log("Matched regex:", regex);
+    console.log("Found products:", products.length);
 
-    
+    // If no products are found, return an empty array
+    if (products.length === 0) {
+      return res.status(200).json([]);
+    }
 
-    res.status(200).json(products);
+    // Return the found products as JSON
+    return res.status(200).json(products);
+
   } catch (error) {
-    console.error('Search error:', error);
-    res.status(500).json({ message: 'Server error' });
+    // Catching any errors and logging them for debugging
+    console.error("Error during search query:", error);
+
+    // Sending a 500 Internal Server Error if something goes wrong
+    return res.status(500).json({ message: "Server error during search", error: error.message });
   }
 };
-
 
 
 

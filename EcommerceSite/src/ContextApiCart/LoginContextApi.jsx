@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
+      console.log("my token :", token)
       // Fetch user data from /api/get-user if token is available
       const fetchUser = async () => {
         try {

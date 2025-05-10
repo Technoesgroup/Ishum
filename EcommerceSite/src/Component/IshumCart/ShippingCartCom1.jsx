@@ -24,7 +24,7 @@ export default function ShippingStep() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    country: "India",
+    House: "",
     street: "",
     city: "",
     state: "",
@@ -38,11 +38,25 @@ export default function ShippingStep() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+  
+    let finalValue;
+  
+    if (type === "checkbox") {
+      finalValue = checked;
+    } else if (name === "House") {
+      // Trim karo and check karo agar value sirf number hai
+      const trimmed = value.trim();
+      finalValue = trimmed !== "" && !isNaN(trimmed) ? Number(trimmed) : trimmed;
+    } else {
+      finalValue = value;
+    }
+  
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: finalValue,
     });
   };
+  
 
   const handleContinue = async () => {
     if (!user || !user._id) {
@@ -98,9 +112,15 @@ export default function ShippingStep() {
             <input type="text" placeholder="Last Name (Required)" name="lastName" value={formData.lastName} onChange={handleChange} className="shipping-input shipping-error-border" />
           </div>
           <div className="input-wrapper">
-            <select className="shipping-input" name="country" value={formData.country} onChange={handleChange}>
-              <option value="India">India</option>
-            </select>
+          <input
+  type="text"
+  placeholder="House no.."
+  name="House"
+  value={formData.House}
+  onChange={handleChange}
+  className="shipping-input"
+/>
+
           </div>
           <div className="input-wrapper">
             <input type="text" placeholder="Street Name" name="street" value={formData.street} onChange={handleChange} className="shipping-input" />

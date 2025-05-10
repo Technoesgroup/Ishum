@@ -78,7 +78,7 @@ const OrderConfirmation = () => {
           </div>
           <p>{shipping?.street}</p>
           <p>{shipping?.city}, {shipping?.state}</p>
-          <p>{shipping?.country}</p>
+          <p>{shipping?.House}</p>
           <p>{shipping?.zipCode}</p>
           <p><strong>Phone number:</strong> {shipping?.phone}</p>
         </div>

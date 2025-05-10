@@ -3,7 +3,7 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import "./OtpVerification.css";
 import GoogleIcon from '@mui/icons-material/Google';
 
-const OtpVerification = ({ phone, name, email, mode, onBack,  setShowLoginModal, setShowB2UModal}) => {
+const OtpVerification = ({ phone, name, email, mode, onBack,  setShowLoginModal,}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
   const { setIsLoggedIn, setUser } = useAuth();
@@ -69,7 +69,7 @@ const OtpVerification = ({ phone, name, email, mode, onBack,  setShowLoginModal,
        // ✅ Store in context
         setIsLoggedIn(true);  
 
-        setShowB2UModal(false); 
+        // setShowB2UModal(false); 
         setShowLoginModal(false); // ✅ Close the login modal
 
         // Close modal or navigate...
