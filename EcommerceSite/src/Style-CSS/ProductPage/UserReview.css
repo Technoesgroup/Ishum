@@ -180,3 +180,86 @@
     width: 100%;
   }
   
+
+  @media (max-width: 768px) {
+    .ratings-container {
+      padding: 20px 5vw;
+      border-radius: 12px;
+      margin: 20px auto;
+    }
+  
+    .btn-with-rating {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .Rate-Us-btn {
+      font-size: 0.95rem;
+      padding: 10px 14px;
+    }
+  
+    .ratings-container h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+  
+    .main-rating {
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+  
+    .average-rating h1 {
+      font-size: 36px;
+    }
+  
+    .average-rating span {
+      font-size: 28px;
+    }
+  
+    .average-rating p {
+      font-size: 14px;
+    }
+  
+    .rating-bars {
+      width: 100%;
+    }
+  
+    .bar {
+      font-size: 13px;
+      gap: 8px;
+    }
+  
+    .category-ratings {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .circle-rating {
+      width: 70px;
+      height: 70px;
+      font-size: 16px;
+    }
+  
+    .circle-rating span {
+      font-size: 16px;
+    }
+  
+    .image-gallery {
+      justify-content: center;
+      gap: 8px;
+    }
+  
+    .image-gallery img,
+    .image-gallery .more-images {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .Reviews-modal-content {
+      padding: 1rem;
+      max-width: 90%;
+    }
+  }
+  
