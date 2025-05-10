@@ -184,12 +184,14 @@
     display: flex;
     align-items: center;
     margin: 2.2vw 0;
+    text-align: center;
     gap: 20px;
     background-color:#EEEBE4 ;
   }
   .two-input-minimax input{
     padding: 0.9vw 0;
     max-width: 5vw;
+    text-align: center;
     background-color:#EEEBE4 ;
     position: relative;
     border-radius: 20px;
