@@ -18,7 +18,7 @@ function Address() {
           <p>SBI Building, street 3, Software Park</p>
           </div>
 
-          <h3>Edit</h3>
+          <h3  className='profile-Edit'>Edit</h3>
         </div>
 
 
