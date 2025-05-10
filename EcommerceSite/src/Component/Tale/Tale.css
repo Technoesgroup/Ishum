@@ -130,7 +130,7 @@ body {
 
   .LabPage-text-content {
     flex: none !important;
-      width: 100%;
+      width: auto;
       text-align: left;
   }
 
