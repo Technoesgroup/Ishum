@@ -94,6 +94,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
           phone={phone} 
           mode="login" 
           onBack={() => setShowOtp(false)} 
+          setShowB2UModal={setShowB2UModal}
           setShowLoginModal={setShowLoginModal} // ✅ Pass this
         />
         
