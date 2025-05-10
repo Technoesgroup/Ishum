@@ -13,13 +13,15 @@ const Collection = () => {
   const [error, setError] = useState(null);
   const collectionName = "NOOR";
   const navigate = useNavigate();
+  
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   const { setSelectedProduct } = useProduct(); // ✅ context setter
 
   useEffect(() => {
     const fetchNoorEditProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/products/get-product", {
+        const res = await axios.get(`${baseURL}/api/products/get-product`, {
           params: {
             isIshumStore: true,
             collectionName: collectionName
@@ -72,7 +74,7 @@ const Collection = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`http://localhost:4000/uploads/${product.image}`}
+                src={`${baseURL}/uploads/${product.image}`}
                 alt={product.name}
                 onError={(e) => (e.target.src = "/fallback-image.png")}
               />

@@ -19,7 +19,7 @@ const Collection = () => {
   useEffect(() => {
     const fetchRiwayatProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/products/get-product", {
+        const res = await axios.get(`${baseURL}/api/products/get-product`, {
           params: {
             isIshumStore: true,
             collectionName: collectionName
@@ -75,7 +75,7 @@ return (
             style={{ cursor: "pointer" }}
           >
             <img
-              src={`http://localhost:4000/uploads/${product.image}`}
+              src={`${baseURL}/uploads/${product.image}`}
               alt={product.name}
               onError={(e) => (e.target.src = "/fallback-image.png")}
             />

@@ -17,6 +17,8 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
   const [loading, setLoading] = useState(false);
   const [showOtpStep, setShowOtpStep] = useState(false);
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -30,7 +32,7 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:4000/api/user/register", {
+      const response = await axios.post(`${baseURL}/api/user/register`, {
         name,
         email,
         phone,

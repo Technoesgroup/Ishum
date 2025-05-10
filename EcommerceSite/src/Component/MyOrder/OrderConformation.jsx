@@ -21,6 +21,8 @@ const OrderConfirmation = () => {
     year: "2-digit",
   });
 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
   useEffect(() => {
     const orderConfirmed = localStorage.getItem("orderConfirmed");
 
@@ -32,7 +34,7 @@ const OrderConfirmation = () => {
       // ✅ Fetch shipping info only if user is present
       if (user?._id) {
         axios
-          .get(`http://localhost:4000/api/shipping/${user._id}`)
+        .get(`${baseURL}/api/shipping/${user._id}`)
           .then((res) => setShipping(res.data))
           .catch((err) => console.error("Shipping fetch error:", err));
       }

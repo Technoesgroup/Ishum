@@ -17,6 +17,8 @@ const ReviewForm = ({ onClose, productId }) => {
     date: new Date().toISOString().split('T')[0],
   });
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -54,7 +56,7 @@ const ReviewForm = ({ onClose, productId }) => {
     }
 
     try {
-      await axios.post('http://localhost:4000/api/create-reviews', data, {
+      await axios.post(`${baseURL}/api/create-reviews`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

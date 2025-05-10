@@ -14,6 +14,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
   
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   const suggestions = [
     "anarkali",
@@ -32,7 +33,8 @@ const SearchBar = () => {
     const delayDebounce = setTimeout(() => {
       if (query.trim()) {
         axios
-          .get(`http://localhost:4000/api/products/search?q=${query}`)
+        .get(`${baseURL}/api/products/search?q=${query}`)
+
           .then((res) => {
             if (Array.isArray(res.data)) {
               setResults(res.data);
@@ -96,7 +98,8 @@ const SearchBar = () => {
                   navigate("/Viewproduct"); // navigate to view page
                 }}
               >
-                <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.name} />
+               <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
+
                 <div className="product-result-details">
                   <div>{product.name}</div>
                   <div>Rs. {product.price}</div>

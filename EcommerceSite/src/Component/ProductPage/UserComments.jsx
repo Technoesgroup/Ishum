@@ -5,7 +5,10 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import OfflinePinIcon from '@mui/icons-material/OfflinePin';
 
 const ReviewCard = ({ rating, title, content, image, name, location, date, likes = 0, dislikes = 0 }) => {
-  const imageUrl = `http://localhost:4000/uploads/${image}`;
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+  const imageUrl = `${baseURL}/uploads/${image}`;
   console.log(name);
   return (
     <div className="User-review-card">

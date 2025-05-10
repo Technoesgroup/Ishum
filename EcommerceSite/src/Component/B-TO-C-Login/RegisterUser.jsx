@@ -15,6 +15,8 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [showOtpStep, setShowOtpStep] = useState(false);
   const [phone, setPhone] = useState(""); // ✅ for OTPVerification
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -29,7 +31,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:4000/api/user/register", {
+      const response = await axios.post(`${baseURL}/api/user/register`, {
         name,
         email,
         phone,
