@@ -180,10 +180,11 @@ export default function Navbar() {
 
       {/* NAVIGATION LINKS AND SEARCH */}
       <div className='ishum-nav-li-serachbar'>
-        <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
-          <Link to="/">STORE</Link>
-          <Link to="/bestsellers">BESTSELLERS</Link>
-          <Link to="/Ishum-Exclusive">ISHUM'S EXCLUSIVE</Link>
+      <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
+  <Link to="/" onClick={() => setIsMenuOpen(false)}>STORE</Link>
+  <Link to="/bestsellers" onClick={() => setIsMenuOpen(false)}>BESTSELLERS</Link>
+  <Link to="/Ishum-Exclusive" onClick={() => setIsMenuOpen(false)}>ISHUM'S EXCLUSIVE</Link>
+
           <div className="dropdown" onMouseEnter={() => setIsRecommendationOpen(true)} onMouseLeave={() => setIsRecommendationOpen(false)}>
             <div className='RECOMMENDATION'>ISHUM'S RECOMMENDATION <KeyboardArrowDownSharpIcon /></div>
             {isRecommendationOpen && (
@@ -191,9 +192,10 @@ export default function Navbar() {
                 <span className='RECOMMENDATION-dropdown-li'>
                   <span className='Occasion'>
                     <h2>Occasion</h2>
-                    <li><Link to="/Leg ">Eid</Link></li>
-                    <li><Link to="/Tag">Diwali</Link></li>
-                    <li><Link to="/B2B-P">Karwa Chauth</Link></li>
+                    <li><Link to="/Leg " onClick={() => setIsMenuOpen(false)}>Eid</Link></li>
+<li><Link to="/Tag" onClick={() => setIsMenuOpen(false)}>Diwali</Link></li>
+<li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
+
                   </span>
                   <span className='SALE'>
                     <h2>SALE</h2>
@@ -209,9 +211,10 @@ export default function Navbar() {
             <div className='discover'>DISCOVER <KeyboardArrowDownSharpIcon /></div>
             {isDiscoverOpen && (
               <ul className="Ishum-dropdown-menu ishum-discover-dropdown">
-                <li><Link to="/Legacy">Legacy</Link></li>
-                <li><Link to="/Tale">Our Tale</Link></li>
-                <li><Link to="/B2B-Policy">B2B Policy</Link></li>
+           <li><Link to="/Legacy" onClick={() => setIsMenuOpen(false)}>Legacy</Link></li>
+<li><Link to="/Tale" onClick={() => setIsMenuOpen(false)}>Our Tale</Link></li>
+<li><Link to="/B2B-Policy" onClick={() => setIsMenuOpen(false)}>B2B Policy</Link></li>
+
               </ul>
             )}
           </div>
