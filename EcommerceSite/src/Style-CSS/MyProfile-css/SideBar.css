@@ -18,4 +18,13 @@
     color: #000;
     font-weight: bold;
   }
+
+  @media (max-width: 768px) {
+  .User-profile-sidebar {
+    width: 70%;
+    padding: 2px;
+  }
+
+}
+
   
