@@ -145,8 +145,12 @@
       margin-left: 0;
   }
 
+  .Original-Discount-Price{
+    gap: 5px;
+  }
+
   .bestsellers-product-card {
-      max-width: 100%;
+      max-width: 80%;
       margin: 0 auto;
   }
 
@@ -204,6 +208,14 @@
     color: #4B3D1A;
   }
 
-  
+  .bestsellers-product-card {
+    max-width: 65vw;
+    width: 100%;
+    text-align: center;
+    background: #EEEBE4;
+    cursor: pointer;
+    padding: 5px;
+    height: 108vw;
+  }
 
 }
