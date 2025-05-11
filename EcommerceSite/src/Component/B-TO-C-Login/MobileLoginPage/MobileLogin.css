@@ -150,3 +150,25 @@
     display: none;
    }
   }
+
+
+  .mobile-login-phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 6px;
+
+  }
+  
+  .country-code {
+    font-weight: bold;
+    font-size: 1.3em;
+  }
+  
+  .mobile-login-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+  }
+  

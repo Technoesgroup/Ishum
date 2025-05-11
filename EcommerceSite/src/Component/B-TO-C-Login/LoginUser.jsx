@@ -8,8 +8,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [showOtp, setShowOtp] = useState(false);
   const [phone, setPhone] = useState("");
 
-
-  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+  const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
   useEffect(() => {
     setTimeout(() => {
@@ -17,17 +16,24 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
     }, 10);
   }, []);
 
+  const handleChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); // only digits
+    if (value.length <= 10) setPhone(value); // max 10 digits
+  };
+
   const handleSendOtp = async () => {
-    if (!phone || phone.length < 10) {
-      alert("Please enter a valid phone number");
+    if (phone.length !== 10) {
+      alert("Please enter a valid 10-digit phone number");
       return;
     }
+
+    const fullPhone = `+91${phone}`;
 
     try {
       const response = await fetch(`${baseURL}/api/user/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone: fullPhone }),
       });
 
       const data = await response.json();
@@ -51,13 +57,18 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
             <h1 className="LoginUser-title">Login</h1>
             <h2 className="LoginUser-subtitle">your account</h2>
 
-            <input
-              type="text"
-              placeholder="Enter your Phone Number"
-              className="LoginUser-input-field"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
+            <div className="LoginUser-phone-input-wrapper">
+              <span className="LoginUser-country-code">+91</span>
+              <input
+                type="tel"
+                placeholder="Enter your 10-digit number"
+                className="LoginUser-input-field"
+                value={phone}
+                onChange={handleChange}
+                maxLength={10}
+              />
+            </div>
+
             <div className="Login-by-email">
               <a href="#">Login by Email?</a>
             </div>
@@ -84,23 +95,25 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 
             <p className="SignUp-text">
               Don’t have an account?
-              <span className="login-link" onClick={() => {
-                setShowB2UModal(true);
-                setShowLoginModal(false);
-              }}>
+              <span
+                className="login-link"
+                onClick={() => {
+                  setShowB2UModal(true);
+                  setShowLoginModal(false);
+                }}
+              >
                 &nbsp; Sign Up
               </span>
             </p>
           </>
         ) : (
-          <OtpVerification 
-          phone={phone} 
-          mode="login" 
-          onBack={() => setShowOtp(false)} 
-          setShowB2UModal={setShowB2UModal}
-          setShowLoginModal={setShowLoginModal} // ✅ Pass this
-        />
-        
+          <OtpVerification
+            phone={`+91${phone}`}
+            mode="login"
+            onBack={() => setShowOtp(false)}
+            setShowB2UModal={setShowB2UModal}
+            setShowLoginModal={setShowLoginModal}
+          />
         )}
       </div>
 
@@ -108,10 +121,13 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
         <img src={img1} alt="Fashion Model" />
       </div>
 
-      <button className="Login-close-btn" onClick={() => setShowLoginModal(false)}>×</button>
+      <button className="Login-close-btn" onClick={() => setShowLoginModal(false)}>
+        ×
+      </button>
     </div>
   );
 };
 
 export default SignupForm;
+
 
