@@ -82,7 +82,22 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
         <input type="email" name="email" value={formData.email} onChange={handleChange} className="mobile-signUp-input" placeholder="Enter your email" />
 
         <label className="Phone-input-label">Phone Number</label>
-        <input type="text" name="phone" value={formData.phone} onChange={handleChange} className="mobile-signUp-input" placeholder="Enter your phone number" />
+<div className="SignUpUser-phone-wrapper">
+  <span className="SignUpUser-phone-prefix">+91</span>
+  <input
+    type="tel"
+    name="phone"
+    placeholder="Phone Number"
+    value={formData.phone}
+    onChange={(e) => {
+      const onlyNumbers = e.target.value.replace(/\D/g, "");
+      setFormData((prev) => ({ ...prev, phone: onlyNumbers }));
+    }}
+    className="SignUpUser-phone-input"
+    maxLength={10}
+  />
+</div>
+
 
         <button className="send-otp-button" onClick={handleSubmit} disabled={loading}>
           {loading ? "Sending OTP..." : "SIGN UP"}
