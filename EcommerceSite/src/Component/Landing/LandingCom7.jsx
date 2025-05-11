@@ -80,12 +80,8 @@ const Collection = () => {
               />
               <p className="product-name">{product.name}</p>
               <div className="All-price-with-discount">
-                <p className="product-price">
-                  ₹{product.price - product.discount}
-                </p>
-                <p className="product-discount">
-                  <s>₹{product.price}</s>
-                </p>
+                <p className="product-discount">₹{product.price}</p>
+                <p className="product-price">₹{product.discount}</p>
               </div>
             </div>
           ))}

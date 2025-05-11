@@ -1,16 +1,16 @@
 import React from "react";
 import "../../Style-CSS/Landing-css/LandingCom4.css";
-import img1 from '../../images/Col-3.svg'
-import img2 from '../../images/Col-4.svg'
-import img3 from '../../images/Col-2.svg'
-import img4 from '../../images/Col-1.svg'
+import img1 from '../../images/Cord1.jpg'
+import img2 from '../../images/Cord2.jpg'
+import img3 from '../../images/Cord4.jpg'
+import img4 from '../../images/cord5.jpg'
 import UnderLine from '../../images/Undertextline.png';
 
 const collections = [
-  { title: "Floral Top With tulip Pants", image:img1 },
-  { title: "Floral Top With tulip Pants", image:img2},
-  { title: "Floral Top With tulip Pants", image:img3},
-  { title: "Floral Top With tulip", image:img4}
+  { title: "Ishum Fuchsia Bloom Embroidered Georgette Co-Ord Set", image:img1 },
+  { title: "Ishum Noor Lime Radiance Cotton Muslin Co-Ord Set", image:img2},
+  { title: "Ishum Noor Ivory Whisper Cotton Muslin Co-Ord Set", image:img3},
+  { title: "Rangreez Cot-Cotton Co-ord Set with Delicate Lace Detailing", image:img4}
 ];
 
 const CollectionSection = () => {
@@ -26,7 +26,7 @@ const CollectionSection = () => {
           <div key={index} className="LandingCom-4-collection-item">
             <img src={col.image} alt={col.title} className="LandingCom-4-collection-image" />
             <div className="LandingCom-4-collection-info">
-            <span>  <p className="LandingCom-4-collection-name">{col.title}</p></span>
+            <span >  <p className="LandingCom-4-collection-name">{col.title}</p></span>
              <span> <button className="LandingCom-4-view-more">VIEW PRODUCTS</button></span>
             </div>
           </div>
@@ -38,3 +38,27 @@ const CollectionSection = () => {
 };
 
 export default CollectionSection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Ishum Fuchsia Bloom Embroidered Georgette Co-Ord Set
+// Ishum Noor Lime Radiance Cotton Muslin Co-Ord Set
+//Ishum Noor Ivory Whisper Cotton Muslin Co-Ord Set
+// Rangreez Cot-Cotton Co-ord Set with Delicate Lace Detailing
