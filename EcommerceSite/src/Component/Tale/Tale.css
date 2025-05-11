@@ -143,17 +143,17 @@ body {
   .LabPage-text-content h2 {
     flex: none !important;
     width: 100%;
-    width: 300px;
+    width: 85vw;
       font-size: 1rem;
       margin-bottom: 10px;
   }
 
   .LabPage-text-content p {
-    width: 80vw !important;
+    width: 85vw !important;
     flex: none !important;
       width: 100%;
       font-size: 14px;
-      text-align: left;
+      /* text-align: left; */
   }
 
   .LabPage-download-btn {
@@ -232,8 +232,7 @@ body {
   }
 
   .LabPage-section-image {
-      width: 80vw;
-      height: 15vw;
-      max-width: 90%;
+      width: 85vw;
+      
   }
 }
