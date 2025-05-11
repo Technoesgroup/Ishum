@@ -4,13 +4,13 @@ import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 
 const CollectionCom1 = () => {
   const categories = [
-    'SAREE',
-    'ART SILK SAREES',
-    'PASTEL SAREES',
-    'HEAVY EMBROIDERY SAREES',
-    'SAREES UNDER 5000',
-    'BUY 2 GET 1 FREE',
-    'DIWALI SAREES'
+    'Gulzar',
+    'Anarkali',
+    'Sharara Suits',
+    'Rangrez',
+    'Jashn E Rang',
+    'NOOR',
+    'Sawariya'
   ];
 
   return (

@@ -74,14 +74,24 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
               onChange={handleChange}
               className="RegisterUser-input-field"
             />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleChange}
-              className="RegisterUser-input-field"
-            />
+           {/* PHONE NUMBER FIELD WITH +91 PREFIX */}
+           <div className="RegisterUser-phone-wrapper">
+  <span className="RegisterUser-phone-prefix">+91</span>
+  <input
+    type="tel"
+    name="phone"
+    placeholder="Phone Number"
+    value={formData.phone}
+    onChange={(e) => {
+      const onlyNumbers = e.target.value.replace(/\D/g, "");
+      setFormData({ ...formData, phone: onlyNumbers });
+    }}
+    className="RegisterUser-phone-input"
+    maxLength={10}
+  />
+</div>
+
+
 
             <button
               className="RegisterUser-continue-btn"
