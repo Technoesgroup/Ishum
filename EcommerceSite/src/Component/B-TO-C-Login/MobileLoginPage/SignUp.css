@@ -28,15 +28,15 @@
   }
   
   .mobile-signUp-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 600;
     margin-bottom: 15px;
   }
   
   .mobile-signUp-subtitle {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 600;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
   }
   
   .Phone-input-label {
@@ -71,9 +71,9 @@
     border-radius: 999px;
     font-weight: 600;
     border: none;
-    margin-bottom: 30px;
+    margin: 10px  0;
     cursor: pointer;
-    margin-left: 70px;
+    margin-left: 63px;
     font-size: 0.9rem;
   }
   
@@ -150,3 +150,34 @@
     display: none;
    }
   }
+
+
+
+  .SignUpUser-phone-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* margin-bottom: 15px; */
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #EEEBE4;
+  }
+  
+  .SignUpUser-phone-prefix {
+    padding: 10px 12px;
+    background-color: #EEEBE4;
+    font-size: 14px;
+  }
+  
+  .SignUpUser-phone-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #EEEBE4;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  
+  
+  
