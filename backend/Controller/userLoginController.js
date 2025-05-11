@@ -173,11 +173,16 @@ const resendOtp = async (req, res) => {
   }
 };
 
-// OPTIONAL: Use this in future to directly send OTP without name/email
 const sendOtp = async (req, res) => {
   const { phone } = req.body;
 
-  if (!phone) return res.status(400).json({ success: false, message: 'Phone number required' });
+  // ✅ Check: phone must start with +91 and be 13 characters total (+91 + 10 digits)
+  if (!phone || !/^\+91\d{10}$/.test(phone)) {
+    return res.status(400).json({
+      success: false,
+      message: "Phone number must be in +91XXXXXXXXXX format",
+    });
+  }
 
   const otp = generateOTP();
   OTP_STORE[phone] = { otp };
@@ -186,7 +191,7 @@ const sendOtp = async (req, res) => {
     await client.messages.create({
       body: `Your OTP is ${otp}`,
       from: process.env.TWILIO_PHONE_NUMBER,
-      to: phone,
+      to: phone, // ✅ Already includes +91
     });
 
     res.status(200).json({ success: true, message: "OTP sent successfully" });
@@ -195,6 +200,7 @@ const sendOtp = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to send OTP" });
   }
 };
+
 
 module.exports = {
   getUser,
