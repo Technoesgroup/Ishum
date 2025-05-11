@@ -152,7 +152,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
                 <p className="bestsellers-product-original-price">₹{product.discount}</p>
                 <p className="bestsellers-product-price">₹{product.price}</p>
               </div>
-              <div className="LocalMall-Buy-Now-button">
+              <div className="Product-LocalMall-Buy-Now-button">
                 <LocalMallIcon className="LocalMallIcon" onClick={() => handleAddToCart(product)} />
                 <button className="bestsellers-buy-button" onClick={() => handleAddToCart(product)}>
                   Buy Now

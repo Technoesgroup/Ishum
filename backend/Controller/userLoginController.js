@@ -49,13 +49,17 @@ const getUser = async (req, res) => {
   }
 };
 
-// 🔸 REGISTER (Step 1 - Send OTP & Store temp data)
 const registerUser = async (req, res) => {
-  const { name, email, phone } = req.body;
+  let { name, email, phone } = req.body;
 
   try {
     if (!name || !email || !phone) {
       return res.status(400).json({ success: false, message: "Name, email & phone required" });
+    }
+
+    // Always save full number with +91
+    if (!phone.startsWith("+91")) {
+      phone = "+91" + phone;
     }
 
     const exists = await userModel.findOne({ phone });
@@ -70,7 +74,7 @@ const registerUser = async (req, res) => {
     const otp = generateOTP();
     OTP_STORE[phone] = { name, email, otp };
 
-    await sendOtpViaSMS(phone, otp);
+    await sendOtpViaSMS(phone, otp); // phone already has +91
 
     res.status(200).json({ success: true, message: "OTP sent to phone" });
 
@@ -79,6 +83,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
 
 const verifyOtp = async (req, res) => {
   const { phone, otp, mode, name, email } = req.body;
