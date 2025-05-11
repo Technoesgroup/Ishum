@@ -124,7 +124,7 @@ body {
   .LabPage-section-card {
       flex-direction: column-reverse;
       width: 100%;
-      gap: 20px;
+      gap: 10px;
       text-align: left;
   }
 
@@ -159,6 +159,12 @@ body {
   .LabPage-download-btn {
       font-size: 14px;
   }
+
+  
+
+.LabPage-section-card.reverse {
+  gap: 10px;
+}
 
   .LabPage-corner-border {
       display: none;
