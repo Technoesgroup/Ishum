@@ -51,9 +51,9 @@ const Footer = () => {
           <div>
             <h3>Fresh Launches</h3>
             <ul>
-              <li>Rangrez</li>
-              <li>Sawariya</li>
-              <li>Noor Edits</li>
+              <li><a href="/co-page/Rangrez">Rangrez</a></li>
+              <li><a href="/co-page/SAWARIYA">Sawariya</a></li>
+              <li><a href="/co-page/NOOR">Noor Edits</a></li>
             </ul>
           </div>
           <div>
