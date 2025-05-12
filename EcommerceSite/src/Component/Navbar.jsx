@@ -132,12 +132,19 @@ export default function Navbar() {
             )}
             <SearchIcon className='mobile-search-icon' onClick={handleMoblieSearchClick} />
             <Badge badgeContent={totalItems} color="error">
-              <LocalMallOutlinedIcon
-                className=" Ishum-iconbag"
+  <LocalMallOutlinedIcon
+    className="Ishum-iconbag"
+    onClick={() => {
+      const isLoggedIn = localStorage.getItem("token"); // ya apna auth check
+      if (isLoggedIn) {
+        navigate("/Cart");
+      } else {
+        setShowLoginModal(true); // modal open
+      }
+    }}
+  />
+</Badge>
 
-                onClick={() => navigate("/Cart")}
-              />
-            </Badge>
             {isLoggedIn && (
               <ListOutlinedIcon
                 className="Ishum-icon profile-menu-icon"
