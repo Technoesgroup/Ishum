@@ -1,9 +1,9 @@
 import React from "react";
 import "../../Style-CSS/Landing-css/LandingCom4.css";
-import img1 from '../../images/Cord1.jpg'
-import img2 from '../../images/Cord3.jpg'
+import img1 from '../../images/WhatsApp Image 2025-05-12 at 12.49.21_a44493b6.jpg'
+import img2 from '../../images/WhatsApp Image 2025-05-12 at 12.49.19_ed1c6de7.jpg';
 import img3 from '../../images/Cord4.jpg'
-import img4 from '../../images/cord5.jpg'
+import img4 from '../../images/Cord5.jpg'
 import UnderLine from '../../images/Undertextline.png';
 
 const collections = [
@@ -23,13 +23,18 @@ const CollectionSection = () => {
   
       <div className="LandingCom-4-collection-grid">
         {collections.map((col, index) => (
-          <div key={index} className="LandingCom-4-collection-item">
-            <img src={col.image} alt={col.title} className="LandingCom-4-collection-image" />
-            <div className="LandingCom-4-collection-info">
-            <span >  <p className="LandingCom-4-collection-name">{col.title}</p></span>
-             <span> <button className="LandingCom-4-view-more">VIEW PRODUCTS</button></span>
-            </div>
-          </div>
+         <div key={index} className="LandingCom-4-collection-item">
+         <div className="LandingCom-4-image-wrapper">
+           <img src={col.image} alt={col.title} className="LandingCom-4-collection-image" />
+           <div className="LandingCom-4-overlay" />
+         </div>
+         <div className="LandingCom-4-collection-info">
+           {/* <span> */}
+             <button className="LandingCom-4-view-more">VIEW PRODUCTS</button>
+           {/* </span> */}
+         </div>
+       </div>
+       
         ))}
       </div>
       <button className="LandingCom-4-view-all-button">SEE EXCLUSIVES</button>

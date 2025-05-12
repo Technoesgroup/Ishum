@@ -4,7 +4,7 @@ import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";  // context import
-import img_b1 from '../../images/image 27.svg';
+import img_b1 from '../../images/f37e59c3c1941b14378cf406fafeb868fdda4a4e.png';
 import UnderLine from '../../images/Undertextline.png';
 
 const Collection = () => {
@@ -48,7 +48,7 @@ const Collection = () => {
   return (
     <div className="collection-container">
       <div className="ishumCom6-content-MainHeading">
-        <h2 className="ishum-content-Com6-title">{collectionName} COLLECTION</h2>
+        <h2 className="ishum-content-Com6-title">{collectionName} Collection</h2>
         <img className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
       </div>
 
@@ -65,7 +65,7 @@ const Collection = () => {
               onClick={() => handleProductClick(product)}
               style={{ cursor: "pointer" }}
             >
-              <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
+              <img   src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
               <p className="product-name">{product.name}</p>
               <div className="All-price-with-discount">
                 <p className="product-discount">₹{product.price}</p>
@@ -80,7 +80,7 @@ const Collection = () => {
               <button className="Ishum-banner-button">Explore</button>
             </div>
             <p className="Ishum-jashn-paragraph">
-              Jashn-E-Rang brings together the brightest shades of life in one breathtaking collection.
+            Rangrez brings together the brightest shades of life in one breathtaking collection.
               <TrendingFlatIcon />
             </p>
           </div>

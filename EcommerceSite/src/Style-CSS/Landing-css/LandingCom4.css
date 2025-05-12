@@ -19,7 +19,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
     background-color: #EEEBE4; /* optional */
     padding: 0;
   }
@@ -66,14 +66,13 @@
     margin-bottom: 3vw;
     margin-left: 2vw;
     color: white;
-    font-weight: 300;
+    font-weight: 400;
   }
   
 
   .LandingCom-4-collection-info span{ 
      text-align: center;
   }
-  
   
   .LandingCom-4-view-more {
     font-family: 'PoppinsRegular';
