@@ -194,6 +194,7 @@ export default function Navbar() {
                     <li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
 
                   </span>
+                  <div  className='line-occasion'></div>
                   <span className='SALE'>
                     <h2>SALE</h2>
                     <li><Link to="/Lega ">Upto 35% Off On Gulzaar Collection</Link></li>
