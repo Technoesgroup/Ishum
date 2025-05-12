@@ -1,3 +1,5 @@
+@import url('../../Style-CSS/Poppins-Font.css');
+
 .ishum-legacy-container{
     display: flex;
     flex-direction: column;
@@ -12,11 +14,22 @@
 }
 
 .ishum-legacy-container h2{
+  font-family: 'PoppinsRegular';
     margin-bottom: 20px;
 }
 
 .ishum-legacy-container p{
+  font-family: 'PoppinsRegular';
+  letter-spacing: 1.7px;
     line-height: 2.2;
+}
+
+.ishum-legacy-content h1 {
+  font-family: 'PoppinsRegular';
+}
+
+.legacy-underline-img{
+  width: 20vw;
 }
 
 
@@ -30,28 +43,36 @@
       margin: 20px 0; /* Reduce margin for mobile */
       align-items: center; /* Keep content centered */
     }
+
+    
+.legacy-underline-img{
+  width: 40vw;
+}
   
     .ishum-legacy-container h2 {
+      font-family: 'PoppinsRegular';
       font-size: 5vw; /* Adjust font size for mobile */
       margin-bottom: 15px;
+      max-width: 250rem;
       text-align: center; /* Ensure header is centered on mobile */
     }
   
     .ishum-legacy-container p {
       font-size: 14px; /* Adjust font size for better readability */
       line-height: 1.8; /* Reduce line-height slightly for mobile */
-      text-align: center; /* Center text for mobile view */
-      max-width: 90%; /* Limit width for text to fit well on small screens */
+      text-align: left; /* Center text for mobile view */
+      max-width: 100%; /* Limit width for text to fit well on small screens */
     }
 
     .ishum-legacy-content h1{
+      font-family: 'PoppinsRegular';
         font-size: 7vw;
     }
   }
   
   @media (max-width: 480px) {
     .ishum-legacy-container {
-      padding: 15px 4vw; /* Further reduce padding on smaller screens */
+      padding: 15px 3vw; /* Further reduce padding on smaller screens */
     }
   
     .ishum-legacy-content {

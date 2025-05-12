@@ -1,4 +1,5 @@
 /* Global Styles */
+@import url('../../Style-CSS/Poppins-Font.css');
 body {
   margin: 0;
   padding: 0;
@@ -13,8 +14,9 @@ body {
 }
 
 .Facilities-header h2 {
+  font-family: 'PoppinsRegular';
   font-size: 2rem;
-  color: goldenrod;
+  color: #4B3D1A;
 }
 
 .Facilities-header p {
@@ -22,11 +24,12 @@ body {
   font-size: 1rem;
   line-height: 2;
   text-align: center;
+  font-family: 'PoppinsRegular';
 }
 
 .Facilities-header h3 {
   text-align: left;
-  color: goldenrod;
+  color: #4B3D1A;
 }
 
 /* Main container */
@@ -56,6 +59,7 @@ body {
 }
 
 .LabPage-text-content h2 {
+  font-family: 'PoppinsRegular';
   font-weight: 500;
   letter-spacing: 1.5px;
   font-size: 1.2rem;
@@ -63,6 +67,7 @@ body {
 }
 
 .LabPage-text-content p {
+  font-family: 'PoppinsRegular';
   line-height: 1.5;
   color: gray;
   width: 100%;
