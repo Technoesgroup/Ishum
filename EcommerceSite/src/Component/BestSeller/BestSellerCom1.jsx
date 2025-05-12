@@ -32,15 +32,15 @@ export default function Bestsellers() {
   <FilterSection
   selected={selected}
   handleSelection={handleSelection}
-  openDropdown={openDropdown}
+  openDropdown={openDropdown} 
   handleToggle={handleToggle}
 />
 
           <div className="Bestseller-content-product">
             <div className="Allproduct-Boxes">
               <div className="store-bestseller">
-                <h3>STORE / BESTSELLERS</h3>
-                <h2>73 PRODUCTS</h2>
+                <h3><a href="/">STORE</a> / <a href="/Ishum-Exclusive">ISHUM-EXCLUSIVE</a></h3>
+                {/* <h2>73 PRODUCTS</h2> */}
               </div>
             
             </div>
@@ -54,6 +54,3 @@ export default function Bestsellers() {
     </>
   );
 }
-
-
-{/* <div  className="bestsellerFillter-button"><button  className="Filtter-button">Fillter</button></div> */}
