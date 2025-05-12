@@ -32,7 +32,7 @@ const SearchBar = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (query.trim()) {
-        axios.get(`${baseURL}/api/products/search?q=${searchQuery}`)
+        axios.get(`${baseURL}/api/products/search?q=${query}`)
 
           .then((res) => {
             if (Array.isArray(res.data)) {
