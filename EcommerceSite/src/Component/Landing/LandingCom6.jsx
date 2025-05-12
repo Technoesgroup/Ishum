@@ -80,7 +80,7 @@ const Collection = () => {
               <button className="Ishum-banner-button">Explore</button>
             </div>
             <p className="Ishum-jashn-paragraph">
-            Rangrez brings together the brightest shades of life in one breathtaking collection.
+            <a href="/co-page/Rangrez">Rangrez brings together the brightest shades of life in one breathtaking collection.</a>
               <TrendingFlatIcon />
             </p>
           </div>

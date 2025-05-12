@@ -97,8 +97,8 @@ const Collection = () => {
               </button>
             </div>
             <p className="Ishum-jashn-paragraph">
-              Every stitch tells a story, with delicate motifs and embellishments
-              creating a perfect blend of tradition and modernity.
+             <a href="/co-page/NOOR"> Every stitch tells a story, with delicate motifs and embellishments
+             creating a perfect blend of tradition and modernity.</a>
               <TrendingFlatIcon className="TrendingFlatIcon" />
             </p>
           </div>
