@@ -135,6 +135,29 @@
     background-color:  #BC8F49;;
     cursor: not-allowed;
   }
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  
   
   /* Mobile View */
 @media (max-width: 768px) {
@@ -217,7 +240,7 @@
     background: #EEEBE4;
     cursor: pointer;
     padding: 5px;
-    height: 90vw;
+    height: 100vw;
   }
 
 }
