@@ -94,12 +94,12 @@ export default function Bestsellers() {
               />
 
               {/* Color */}
-              <ColorList
+              {/* <ColorList
                 openDropdown={openDropdown}
                 handleToggle={handleToggle}
                 selected={selected}
                 handleSelection={handleSelection}
-              />
+              /> */}
             </div>
           </div>
 
