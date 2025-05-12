@@ -60,12 +60,12 @@ const FilterSection = ({ selected, handleSelection, openDropdown, handleToggle }
           selected={selected}
           handleSelection={handleSelection}
         />
-        <ColorList
+        {/* <ColorList
           openDropdown={openDropdown}
           handleToggle={handleToggle}
           selected={selected}
           handleSelection={handleSelection}
-        />
+        /> */}
       </div>
     </div>
   );
