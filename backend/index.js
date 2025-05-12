@@ -20,14 +20,15 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
-const allowedOrigins = ['https://ishum.in', 'http://localhost:5173']; // local dev origin bhi daal sakte ho
+const allowedOrigins = ['https://www.ishum.in', 'http://localhost:5173']; // Hostinger aur local dev add karo
 
+// CORS middleware
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, true); // Agar origin allowed hai, toh request ko allow karo
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('Not allowed by CORS')); // Agar origin allow nahi hai, error bhejo
     }
   },
   credentials: true
