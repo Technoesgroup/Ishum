@@ -1,6 +1,6 @@
 import React  from "react";
 import '../../Style-CSS/BestSeller-css/BestSellerBanner.css';
-import img1  from '../../images/SHREE_BLOG_BANNER 1.svg';
+import img1  from '../../images/Banner6.png';
 
 const Banner = ()=>{
 

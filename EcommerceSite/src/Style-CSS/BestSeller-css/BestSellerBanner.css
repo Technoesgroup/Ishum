@@ -1,8 +1,15 @@
-.Banner-image{
+.Banner-image {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100vh;
-    justify-content: center;
     overflow: hidden;
-}
+  }
+  
+  .Banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* or "contain" if you want full image without crop */
+  }
+  

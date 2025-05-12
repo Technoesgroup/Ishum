@@ -1,43 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom4.css";
-import img1 from '../../images/WhatsApp Image 2025-05-12 at 12.49.21_a44493b6.jpg'
-import img2 from '../../images/WhatsApp Image 2025-05-12 at 12.49.19_ed1c6de7.jpg';
-import img3 from '../../images/Cord4.jpg'
-import img4 from '../../images/Cord5.jpg'
 import UnderLine from '../../images/Undertextline.png';
-
-const collections = [
-  { title: "Ishum Fuchsia Bloom Embroidered Georgette Co-Ord Set", image:img1 },
-  { title: "Ishum Noor Lime Radiance Cotton Muslin Co-Ord Set", image:img2},
-  { title: "Ishum Noor Ivory Whisper Cotton Muslin Co-Ord Set", image:img3},
-  { title: "Rangreez Cot-Cotton Co-ord Set with Delicate Lace Detailing", image:img4}
-];
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 
 const CollectionSection = () => {
+  const [products, setProducts] = useState([]);
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+  const navigate = useNavigate();
+  const { setSelectedProduct } = useProduct();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get(`${baseURL}/api/products/get-product?tag=Co-OrdSets`);
+        setProducts(res.data.products.slice(0, 4)); // Only 4 products for now
+      } catch (err) {
+        console.error("Error fetching Co-Ord Sets:", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleViewProduct = (product) => {
+    setSelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/Viewproduct");
+  };
+
   return (
     <div className="LandingCom-4-collection-container">
-       <div className="ishum-contents-MainHeading">
-                  <h2 className="ishum-content-title">DEFINE CO-ORD SETS</h2>
-                  <img className="ishum-contents-Com4-UnderLine" src={UnderLine} alt="" />
-                </div>
-  
+      <div className="ishum-contents-MainHeading">
+        <h2 className="ishum-content-title">DEFINE CO-ORD SETS</h2>
+        <img className="ishum-contents-Com4-UnderLine" src={UnderLine} alt="" />
+      </div>
+
       <div className="LandingCom-4-collection-grid">
-        {collections.map((col, index) => (
-         <div key={index} className="LandingCom-4-collection-item">
-         <div className="LandingCom-4-image-wrapper">
-           <img src={col.image} alt={col.title} className="LandingCom-4-collection-image" />
-           <div className="LandingCom-4-overlay" />
-         </div>
-         <div className="LandingCom-4-collection-info">
-           {/* <span> */}
-             <button className="LandingCom-4-view-more">VIEW PRODUCTS</button>
-           {/* </span> */}
-         </div>
-       </div>
-       
+        {products.map((product, index) => (
+          <div key={index} className="LandingCom-4-collection-item">
+            <div className="LandingCom-4-image-wrapper">
+              <img
+                src={`${baseURL}/uploads/${product.image}`}
+                alt={product.name}
+                className="LandingCom-4-collection-image"
+              />
+              <div className="LandingCom-4-overlay" />
+            </div>
+            <div className="LandingCom-4-collection-info">
+              <button className="LandingCom-4-view-more" onClick={() => handleViewProduct(product)}>
+                VIEW PRODUCTS
+              </button>
+            </div>
+          </div>
         ))}
       </div>
-      <button className="LandingCom-4-view-all-button">SEE EXCLUSIVES</button>
+      
+      <button className="LandingCom-4-view-all-button" onClick={() => navigate("/bestsellers?tag=Co-OrdSets")}>
+        SEE EXCLUSIVES
+      </button>
     </div>
   );
 };
