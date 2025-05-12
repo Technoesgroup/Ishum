@@ -21,11 +21,19 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
+const allowedOrigins = ['https://ishum.in', 'http://localhost:5173']; // local dev origin bhi daal sakte ho
+
 app.use(cors({
-    origin: 'https://ishum.in',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true // if using cookies or sessions
-  }));
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
   
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
