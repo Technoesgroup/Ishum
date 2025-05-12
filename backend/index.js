@@ -20,7 +20,6 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
-
 const allowedOrigins = ['https://ishum.in', 'http://localhost:5173']; // local dev origin bhi daal sakte ho
 
 app.use(cors({
