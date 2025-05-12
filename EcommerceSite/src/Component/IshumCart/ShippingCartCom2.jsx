@@ -15,6 +15,10 @@ export default function ShippingCartCom2({ onClose }) {
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState("wallet");
+    
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+  const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -23,7 +27,7 @@ export default function ShippingCartCom2({ onClose }) {
                     alert("User not found. Please log in.");
                     return;
                 }
-                const res = await axios.get(`http://localhost:4000/api/cart/${user._id}`);
+                const res = await axios.get(`${baseURL}/api/cart/${user._id}`);
                 setCart(res.data);
                 console.log(res.data);
             } catch (err) {
@@ -57,12 +61,13 @@ export default function ShippingCartCom2({ onClose }) {
         const handlePayment = async () => {
             await loadScript("https://checkout.razorpay.com/v1/checkout.js");
         
-            const { data: order } = await axios.post("http://localhost:4000/create-order", {
+            const { data: order } = await axios.post(`${baseURL}/create-order`, {
                 amount: totalPrice,
             });
         
             const options = {
-                key: "rzp_test_Tg2EHa9WfYqYt0", // Replace with your Razorpay Key ID
+                key : razorpayKey,
+                // Replace with your Razorpay Key ID
                 amount: order.amount,
                 currency: order.currency,
                 name: "My Store",
@@ -70,7 +75,7 @@ export default function ShippingCartCom2({ onClose }) {
                 order_id: order.id,
                 handler: async function (response) {
                     try {
-                        const verifyRes = await axios.post("http://localhost:4000/verify-payment", {
+                        const verifyRes = await axios.post(`${baseURL}/verify-payment`, {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
@@ -78,7 +83,7 @@ export default function ShippingCartCom2({ onClose }) {
         
                         if (verifyRes.data.status === "success") {
                             // ✅ Save order in backend
-                            await axios.post("http://localhost:4000/api/orders/", {
+                            await axios.post(`${baseURL}/api/orders/`, {
                                 userId: user._id,
                                 cartItems: cart.cartItems,
                                 totalAmount: totalPrice,
@@ -111,7 +116,7 @@ export default function ShippingCartCom2({ onClose }) {
                 },
                 prefill: {
                     name: user?.name || "Ishum",
-                    email: user?.email || "harsh@example.com",
+                    email: user?.email || "marketing.ishumdesigns@gmail.com",
                     contact: user?.phone || "8130299443",
                 },
                 theme: {

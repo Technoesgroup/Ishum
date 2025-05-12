@@ -13,13 +13,15 @@ const Collection = () => {
   const [error, setError] = useState(null);
   const collectionName = "NOOR";
   const navigate = useNavigate();
+  
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   const { setSelectedProduct } = useProduct(); // ✅ context setter
 
   useEffect(() => {
     const fetchNoorEditProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/products/get-product", {
+        const res = await axios.get(`${baseURL}/api/products/get-product`, {
           params: {
             isIshumStore: true,
             collectionName: collectionName
@@ -72,18 +74,14 @@ const Collection = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`http://localhost:4000/uploads/${product.image}`}
+                src={`${baseURL}/uploads/${product.image}`}
                 alt={product.name}
                 onError={(e) => (e.target.src = "/fallback-image.png")}
               />
               <p className="product-name">{product.name}</p>
               <div className="All-price-with-discount">
-                <p className="product-price">
-                  ₹{product.price - product.discount}
-                </p>
-                <p className="product-discount">
-                  <s>₹{product.price}</s>
-                </p>
+                <p className="product-discount">₹{product.price}</p>
+                <p className="product-price">₹{product.discount}</p>
               </div>
             </div>
           ))}
@@ -99,8 +97,8 @@ const Collection = () => {
               </button>
             </div>
             <p className="Ishum-jashn-paragraph">
-              Every stitch tells a story, with delicate motifs and embellishments
-              creating a perfect blend of tradition and modernity.
+             <a href="/co-page/NOOR"> Every stitch tells a story, with delicate motifs and embellishments
+             creating a perfect blend of tradition and modernity.</a>
               <TrendingFlatIcon className="TrendingFlatIcon" />
             </p>
           </div>

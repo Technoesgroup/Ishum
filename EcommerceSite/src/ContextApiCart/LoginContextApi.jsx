@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem("token"));
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
+  const storedUser = localStorage.getItem("user");
     if (!storedUser || storedUser === "undefined") return null;
 
     try {
@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
       return null;
     }
   });
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     if (user) {
@@ -29,10 +31,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
+      console.log("my token :", token)
       // Fetch user data from /api/get-user if token is available
       const fetchUser = async () => {
         try {
-          const res = await axios.get("http://localhost:4000/api/user/get-user", {
+          const res = await axios.get(`${baseURL}/api/user/get-user`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -34,9 +34,10 @@
   
   .LoginUser-input-field {
     width: 100%;
-    margin: 20px 0;
+    margin-top: 20px;
+    /* margin: 10px 0; */
     padding: 1vw;
-    border: none;
+    /* border: none; */
     border-bottom: 2px solid #ccc;
     margin-bottom: 1rem;
     outline: none;
@@ -139,4 +140,29 @@
   cursor: pointer;
   z-index: 20;
   background-color: black;
+}
+
+
+.LoginUser-phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.LoginUser-country-code {
+  padding: 0.5rem 0.75rem;
+  background-color: #eee;
+  border-right: 1px solid #ccc;
+  font-weight: bold;
+  color: #333;
+}
+
+.LoginUser-input-field {
+  border: none;
+  outline: none;
+  /* flex: 1; */
+  padding: 0.5rem;
+  font-size: 1rem;
 }

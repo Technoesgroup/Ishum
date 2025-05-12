@@ -218,6 +218,12 @@
       font-size: 18px;
       margin-bottom: 40px;
     }
+
+    .shipping-input {
+      width: 100%;
+      background-color: #EEEBE4;
+      font-size: 14px;
+    }
   
     .shipping-title {
       font-size: 1.8rem;
@@ -246,6 +252,12 @@
     /* .Shipping-icon-line-btw {
       flex-direction: column;
     } */
+
+    .input-wrapper{
+      width: 95%;
+      position: relative;
+    }
+  
   
     .line-btw {
       margin-left:2px;

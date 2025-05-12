@@ -49,13 +49,17 @@ const getUser = async (req, res) => {
   }
 };
 
-// 🔸 REGISTER (Step 1 - Send OTP & Store temp data)
 const registerUser = async (req, res) => {
-  const { name, email, phone } = req.body;
+  let { name, email, phone } = req.body;
 
   try {
     if (!name || !email || !phone) {
       return res.status(400).json({ success: false, message: "Name, email & phone required" });
+    }
+
+    // Always save full number with +91
+    if (!phone.startsWith("+91")) {
+      phone = "+91" + phone;
     }
 
     const exists = await userModel.findOne({ phone });
@@ -70,7 +74,7 @@ const registerUser = async (req, res) => {
     const otp = generateOTP();
     OTP_STORE[phone] = { name, email, otp };
 
-    await sendOtpViaSMS(phone, otp);
+    await sendOtpViaSMS(phone, otp); // phone already has +91
 
     res.status(200).json({ success: true, message: "OTP sent to phone" });
 
@@ -79,6 +83,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
 
 const verifyOtp = async (req, res) => {
   const { phone, otp, mode, name, email } = req.body;
@@ -168,11 +173,16 @@ const resendOtp = async (req, res) => {
   }
 };
 
-// OPTIONAL: Use this in future to directly send OTP without name/email
 const sendOtp = async (req, res) => {
   const { phone } = req.body;
 
-  if (!phone) return res.status(400).json({ success: false, message: 'Phone number required' });
+  // ✅ Check: phone must start with +91 and be 13 characters total (+91 + 10 digits)
+  if (!phone || !/^\+91\d{10}$/.test(phone)) {
+    return res.status(400).json({
+      success: false,
+      message: "Phone number must be in +91XXXXXXXXXX format",
+    });
+  }
 
   const otp = generateOTP();
   OTP_STORE[phone] = { otp };
@@ -181,7 +191,7 @@ const sendOtp = async (req, res) => {
     await client.messages.create({
       body: `Your OTP is ${otp}`,
       from: process.env.TWILIO_PHONE_NUMBER,
-      to: phone,
+      to: phone, // ✅ Already includes +91
     });
 
     res.status(200).json({ success: true, message: "OTP sent successfully" });
@@ -190,6 +200,7 @@ const sendOtp = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to send OTP" });
   }
 };
+
 
 module.exports = {
   getUser,

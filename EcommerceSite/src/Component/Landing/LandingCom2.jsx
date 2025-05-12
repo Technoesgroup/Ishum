@@ -8,13 +8,15 @@ const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate(); 
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     fetchCollections();
   }, []);
   
   const fetchCollections = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/get-collections");
+      const response = await axios.get(`${baseURL}/api/get-collections`);
       // Only take first 4 collections
       setCollections(response.data.slice(0, 4));
     } catch (error) {
@@ -40,7 +42,7 @@ const CollectionSection = () => {
          style={{ cursor: "pointer" }}
        >
          <img
-            src={`http://localhost:4000${encodeURI(col.image)}`}
+            src={`${baseURL}${encodeURI(col.image)}`}
            alt={col.title}
            className="LandingCom-2-collection-image"
          />

@@ -14,9 +14,16 @@
   }
   
   .LandingCom-4-collection-item {
-    padding: 0 !important;
+    height: auto; /* ya jo bhi fixed height chahiye */
+    overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EEEBE4; /* optional */
+    padding: 0;
   }
+  
   
   .ishum-contents-MainHeading{
     display: flex;
@@ -39,7 +46,6 @@
   .LandingCom-4-collection-info {
     padding: 0 1.5vw;
     bottom: 15%;
-    left: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,25 +54,35 @@
     position: absolute;
     text-align: center;
   }
-  
   .LandingCom-4-collection-name {
-    margin-bottom: 4.9vw;
-    letter-spacing: 2px;
+    letter-spacing: 1.7px;
+    width: 70%;
     text-align: center;
-    font-size: 1.1rem;
-    font-family: 'PoppinsRegular';
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* show max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3vw;
+    margin-left: 2vw;
     color: white;
+    font-weight: 400;
   }
   
+
+  .LandingCom-4-collection-info span{ 
+     text-align: center;
+  }
   
   .LandingCom-4-view-more {
     font-family: 'PoppinsRegular';
     color: white;
     background-color:#4B3D1A;
-    padding: 1vw 1.9vw;
-    font-size: 0.9rem;
+    padding: 0.8vw 1.9vw;
+    font-size: 0.8rem;
     border: none !important;
     cursor: pointer;
+    border-radius: 5px;
   }
   
   

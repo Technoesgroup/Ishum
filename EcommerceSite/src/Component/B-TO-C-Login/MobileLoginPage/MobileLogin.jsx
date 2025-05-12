@@ -10,19 +10,22 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
   const [phone, setPhone] = useState("");
   const [showOtp, setShowOtp] = useState(false);
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
   const handleSendOTP = async () => {
-    if (!phone || phone.length < 10) {
-      alert("Please enter a valid phone number");
+    if (!phone || phone.length !== 10) {
+      alert("Please enter a valid 10-digit phone number");
       return;
     }
-
+  
+    const formattedPhone = `+91${phone}`;
+  
     try {
-      const response = await fetch("http://localhost:4000/api/user/send-otp", {
+      const response = await fetch(`${baseURL}/api/user/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone: formattedPhone }),
       });
-
+  
       const data = await response.json();
       if (data.success) {
         setShowOtp(true);
@@ -34,6 +37,7 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
       alert("Failed to send OTP");
     }
   };
+  
 
   return (
     <div className="mobile-login-modal-overlay">
@@ -50,14 +54,18 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
               </button>
             </div>
 
-            <label className="Phone-input-label">Phone Number</label>
-            <input
-              type="text"
-              className="mobile-login-input"
-              placeholder="Enter your phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
+            <div className="mobile-login-phone-input-wrapper">
+  <span className="country-code">+91</span>
+  <input
+    type="text"
+    className="mobile-login-input"
+    placeholder="Enter your phone number"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+    maxLength={10}
+  />
+</div>
+
 
             <div className="switch-login">Login by Email?</div>
 

@@ -11,13 +11,16 @@ export const FilterProvider = ({ children }) => {
     color: null,
     tag: null, // for EXCLUSIVE, DHOTI, etc.
     collection: null,
+    price:null
   });
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
   const normalize = (str) => str?.toLowerCase().trim(); 
 
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/products/get-product")
+    fetch(`${baseURL}/api/products/get-product`)
       .then((res) => res.json())
       .then((data) => {
         console.log("DATA:", data); // Yeh line check karni zaruri hai
@@ -63,6 +66,10 @@ export const FilterProvider = ({ children }) => {
       }
       return normalize(item.collectionName) === normalize(selected.collection);
     });
+  }
+
+  if (selected.price) {
+    filtered = filtered.filter((item) => item.price <= selected.price); // Price filter
   }
     
   

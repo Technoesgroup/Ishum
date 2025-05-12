@@ -1,8 +1,37 @@
-.Banner-image{
+.Banner-image {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100vh;
-    justify-content: center;
     overflow: hidden;
-}
+  }
+  
+  .Banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* or "contain" if you want full image without crop */
+  }
+
+  .banner6 {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .banner5 {
+    display: none; /* by default hidden */
+  }
+  
+  /* Mobile View - Show second image only */
+  @media (max-width: 768px) {
+    .banner6 {
+      display: none; /* Hide first image on mobile */
+    }
+  
+    .banner5 {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }

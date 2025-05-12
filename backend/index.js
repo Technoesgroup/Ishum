@@ -1,4 +1,7 @@
+
+require("dotenv").config();
 const express = require("express");
+
 const cors = require("cors");
 const mongoose = require("mongoose");
 const collectionRoutes = require("./router/collectionRoutes");
@@ -13,7 +16,8 @@ const path = require("path");
 const app = express();
 const PORT = 4000;
 const orderRoutes = require('./router/OrderRoutes');
-const MONGO_URI = "mongodb+srv://harshrajput30411:IshumDatabasebyHarsh@ishum.tlzws.mongodb.net/?retryWrites=true&w=majority&appName=Ishum";
+const MONGO_URI = process.env.MONGO_URI;
+
 
 
 
@@ -24,8 +28,8 @@ app.use("/uploads", express.static("uploads"));
 
 
 const razorpay = new Razorpay({
-    key_id: "rzp_test_Tg2EHa9WfYqYt0",           // Replace with your Razorpay key_id
-    key_secret: "FXqRgaBmdvJDjVzN28PAlgGl",   // Replace with your Razorpay key_secret
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,   // Replace with your Razorpay key_secret
 });
 
 // Database Connection

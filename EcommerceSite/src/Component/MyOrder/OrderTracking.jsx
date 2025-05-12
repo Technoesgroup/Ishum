@@ -9,10 +9,14 @@ const OrderTracking = () => {
   const [order, setOrder] = useState(null);
   const navigate = useNavigate();
 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   useEffect(() => {
     if (user?._id) {
       axios
-        .get(`http://localhost:4000/api/orders/user/${user._id}/latest`)
+      .get(`${baseURL}/api/orders/user/${user._id}/latest`)
+
         .then((res) => setOrder(res.data))
         .catch((err) => console.error("Order fetch error:", err));
     }
@@ -25,7 +29,7 @@ const OrderTracking = () => {
     if (!confirmCancel) return;
   
     try {
-      const res = await axios.put(`http://localhost:4000/api/orders/cancel/${order._id}`);
+      const res = await axios.put(`${baseURL}/api/orders/cancel/${order._id}`);
       alert("Order cancelled successfully");
       setOrder(res.data.order);
     } catch (err) {
@@ -47,11 +51,8 @@ const OrderTracking = () => {
 <div  className="AllOrders-track">
 {order.items.map((item, index) => (
           <div key={index} className="orderTracking-header">
-            <img
-              src={`http://localhost:4000/uploads/${item.image}`}
-              alt={item.title}
-              className="order-image"
-            />
+        <img  className="order-image " src={`${baseURL}/uploads/${item.image}`} alt={item.name} />
+
             <div className="orderTracking-info">
               <h2 className="order-product-title">{item.title}</h2>
               <p className="order-product-subtitle">

@@ -1,11 +1,20 @@
 // src/Component/Common/FilterSection.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CategoryList from '../BestSellerCategory';
 import ColorList from '../BestSellerColor';
 
 const FilterSection = ({ selected, handleSelection, openDropdown, handleToggle }) => {
+
+  const [price, setPrice] = useState(0); // For the range input
+  const maxPrice = 5000;
+
+  const handleRangeChange = (e) => {
+    setPrice(Number(e.target.value));
+  };
+
+
   return (
     <div className="bestsellers-filters">
       <h3>Filters</h3>
@@ -13,10 +22,17 @@ const FilterSection = ({ selected, handleSelection, openDropdown, handleToggle }
       {/* Price Range */}
       <div className="AllPrice-of-bestseller">
         <p className="firstparagraph">Price <KeyboardArrowRightIcon /></p>
-        <input type="range" min="0" max="5000" className="bestsellers-price-range" />
+        <input
+        type="range"
+        min="0"
+        max={maxPrice}
+        value={price}
+        onChange={handleRangeChange}
+        className="bestsellers-price-range"
+      />
         <div className="two-input-minimax">
-          <input type="text" placeholder="₹ 0" /> <h4>-</h4>
-          <input type="text" placeholder="₹ 500" />
+        <input type="text" value={`₹ 0`} readOnly /> <h4>-</h4>
+        <input type="text" value={`₹ ${price}`} readOnly />
         </div>
       </div>
 
@@ -44,12 +60,12 @@ const FilterSection = ({ selected, handleSelection, openDropdown, handleToggle }
           selected={selected}
           handleSelection={handleSelection}
         />
-        <ColorList
+        {/* <ColorList
           openDropdown={openDropdown}
           handleToggle={handleToggle}
           selected={selected}
           handleSelection={handleSelection}
-        />
+        /> */}
       </div>
     </div>
   );

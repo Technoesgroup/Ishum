@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../../Style-CSS/ProductPage/UserReview.css";
 import ReviewForm from "./ReviewForm"; 
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 
 const RatingsReviews = () => {
+    const { selectedProduct, setSelectedProduct } = useProduct();
   const [showForm, setShowForm] = useState(false);
 
   const handleRateClick = () => {
@@ -12,7 +14,9 @@ const RatingsReviews = () => {
   return (
     <div className="ratings-container">
       <h2>Ratings & Reviews</h2>
-      <div className="main-rating">
+    <div className="btn-with-rating">
+
+    <div className="main-rating">
         <div className="average-rating">
           <h1>4.5 <span>&#9733;</span></h1>
           <p>1,813 Ratings &<br />176 Reviews</p>
@@ -24,8 +28,11 @@ const RatingsReviews = () => {
           <div className="bar"><span>2 &#9733;</span><div className="progress" style={{ width: '2%' }}></div><span>36</span></div>
           <div className="bar"><span>1 &#9733;</span><div className="progress red" style={{ width: '6%' }}></div><span>98</span></div>
         </div>
-        <div><button onClick={handleRateClick}>Rate Us</button></div>
       </div>
+
+      <div><button  className="Rate-Us-btn" onClick={handleRateClick}>Rate Us</button></div>
+
+    </div>
 
       <div className="image-gallery">
         <img src="img1.jpg" alt="Review" />
@@ -42,7 +49,7 @@ const RatingsReviews = () => {
       {showForm && (
         <div className="Reviews-modal-overlay">
           <div className="Reviews-modal-content">
-            <ReviewForm onClose={() => setShowForm(false)} />
+            <ReviewForm productId={selectedProduct._id} onClose={() => setShowForm(false)} />
           </div>
         </div>
       )}
