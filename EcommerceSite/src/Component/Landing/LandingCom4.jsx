@@ -1,7 +1,7 @@
 import React from "react";
 import "../../Style-CSS/Landing-css/LandingCom4.css";
 import img1 from '../../images/Cord1.jpg'
-import img2 from '../../images/Cord2.jpg'
+import img2 from '../../images/Cord3.jpg'
 import img3 from '../../images/Cord4.jpg'
 import img4 from '../../images/cord5.jpg'
 import UnderLine from '../../images/Undertextline.png';
