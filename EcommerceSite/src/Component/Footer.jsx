@@ -1,8 +1,8 @@
 import React from "react";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import PinterestIcon from '@mui/icons-material/Pinterest';
 import "../Style-CSS/Footer.css";
 import Logo from '../images/Ishum Logo 1.svg';
 import { Link } from 'react-router-dom';
@@ -86,10 +86,10 @@ const Footer = () => {
             <span>Cookies</span>
           </div>
           <div className="footer-social">
-         <a href="">   <FacebookOutlinedIcon /></a>
-          {/* <a href="">  <TwitterIcon /></a> */}
+         <a href="https://www.facebook.com/Ishumbykaran/"><FacebookOutlinedIcon /></a>
           <a href="https://www.instagram.com/ishumbykaran_official?igsh=Y3J6d3JmMDMxa2cw">  <InstagramIcon /></a>
-         {/* <a href="">   <YouTubeIcon /></a> */}
+         <a href="https://www.youtube.com/@ishumdesigns1982"><YouTubeIcon /></a>
+         <a href="https://in.pinterest.com/ishumdesigns/"><PinterestIcon /></a>
           </div>
         </div>
       </div>
