@@ -106,8 +106,8 @@ export default function Bestsellers() {
           <div className="Bestseller-content-product">
             <div className="Allproduct-Boxes">
               <div className="store-bestseller">
-                <h3>STORE / BESTSELLERS</h3>
-                <h2>59 PRODUCTS</h2>
+                <h3><a href="/">STORE</a> /  <a href="/bestsellers"> BESTSELLERS</a></h3>
+                {/* <h2>59 PRODUCTS</h2> */}
               </div>
               {/* <ExclusiveNavigation showSort={true} /> */}
 

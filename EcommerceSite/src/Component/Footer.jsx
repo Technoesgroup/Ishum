@@ -52,18 +52,15 @@ const Footer = () => {
             <h3>Fresh Launches</h3>
             <ul>
               <li>Rangrez</li>
-              <li>Gulzaar</li>
+              <li>Sawariya</li>
               <li>Noor Edits</li>
             </ul>
           </div>
           <div>
             <h3>Information</h3>
             <ul>
-              <li>About Us</li>
+              <li><a href="/Tale">About Us</a></li>
               <li>Appointment / Get In Touch</li>
-              <li>Shipping & Delivery</li>
-              <li>FAQ</li>
-              <li>Blog</li>
             </ul>
           </div>
 
@@ -90,9 +87,9 @@ const Footer = () => {
           </div>
           <div className="footer-social">
          <a href="">   <FacebookOutlinedIcon /></a>
-          <a href="">  <TwitterIcon /></a>
+          {/* <a href="">  <TwitterIcon /></a> */}
           <a href="https://www.instagram.com/ishumbykaran_official?igsh=Y3J6d3JmMDMxa2cw">  <InstagramIcon /></a>
-         <a href="">   <YouTubeIcon /></a>
+         {/* <a href="">   <YouTubeIcon /></a> */}
           </div>
         </div>
       </div>

@@ -1,12 +1,12 @@
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import PinterestIcon from '@mui/icons-material/Pinterest';
 import logo from '../images/Ishum Logo 1.svg';
 import { Link, useNavigate } from "react-router-dom";
 import RegBusiness from './B-TO-B-Login/RegisterBusiness';
 import Login from '../Component/B-TO-C-Login/LoginUser'
-import RegUser from './B-TO-C-Login/RegisterUser'; 
+import RegUser from './B-TO-C-Login/RegisterUser';
 import { motion } from "framer-motion";
 import EmailIcon from '@mui/icons-material/Email';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -29,7 +29,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 
 export default function Navbar() {
-  const { setIsLoggedIn } = useAuth(); 
+  const { setIsLoggedIn } = useAuth();
   const { isLoggedIn } = useAuth();
   const [showB2BModal, setShowB2BModal] = useState(false);
   const [showB2UModal, setShowB2UModal] = useState(false);
@@ -43,7 +43,7 @@ export default function Navbar() {
 
 
   const [user, setUser] = useState({ name: '', email: '' });
-  
+
   useEffect(() => {
     // Assume you store user in localStorage after login/register
     const userData = JSON.parse(localStorage.getItem('user'));
@@ -88,22 +88,19 @@ export default function Navbar() {
 
   return (
     <nav className='Ishum-navbars'>
-      
+
       {/* TOP FIXED HEADER */}
       <div className="info-top-header">
         <div className="info-top-links">
-          <span>WISHLIST</span>
-          <span>SIZE CHART</span>
-          <span>SHIPPING & DELIVERY</span>
+          {/* <span>SHIPPING & DELIVERY</span> */}
           <span>TRACK YOUR ORDER</span>
           <span>RETURNS</span>
           <span>CONTACT US</span>
-          <span>FAQ's</span>
         </div>
         <div className="Ishum-social-icons">
-          <XIcon className='socialicon' />
           <FacebookOutlinedIcon className='socialicon' />
           <InstagramIcon className='socialicon' />
+          <PinterestIcon className='socialicon' />
           <YouTubeIcon className='socialicon' />
         </div>
       </div>
@@ -111,25 +108,25 @@ export default function Navbar() {
       {/* SOCIAL ICON + LOGO + PROFILE MENU */}
       <div className="Ishum-navbar">
         <div className="Ishum-logo-container">
-          <img src={logo} alt="Ishum Logo" className="Ishum-logo"     />
+          <img src={logo} alt="Ishum Logo" className="Ishum-logo" />
         </div>
 
 
         <div className="Ishum-right-icons">
-       <div> <SearchBar /></div>
+          <div> <SearchBar /></div>
           <div className='ishum-rightside-main-icon'>
             {!isLoggedIn && (
-             <PermIdentityOutlinedIcon
-             className="Ishum-icon"
-             onClick={() => {
-               if (isMobile) {
-                setShowAuthModal(true);; // instead of navigate
-               } else {
-                 setShowB2UModal(true);
-               }
-             }}
-           />
-           
+              <PermIdentityOutlinedIcon
+                className="Ishum-icon"
+                onClick={() => {
+                  if (isMobile) {
+                    setShowAuthModal(true);; // instead of navigate
+                  } else {
+                    setShowB2UModal(true);
+                  }
+                }}
+              />
+
             )}
             <SearchIcon className='mobile-search-icon' onClick={handleMoblieSearchClick} />
             <Badge badgeContent={totalItems} color="error">
@@ -140,12 +137,12 @@ export default function Navbar() {
               />
             </Badge>
             {isLoggedIn && (
-  <ListOutlinedIcon
-    className="Ishum-icon profile-menu-icon"
-    onClick={() => setIsOpen(!isOpen)}
-    onMouseEnter={() => setIsOpen(true)}
-  />
-)}
+              <ListOutlinedIcon
+                className="Ishum-icon profile-menu-icon"
+                onClick={() => setIsOpen(!isOpen)}
+                onMouseEnter={() => setIsOpen(true)}
+              />
+            )}
           </div>
           {isMenuOpen ? (
             <CloseIcon className="Ishum-menu-icon closemenu-icon" onClick={() => setIsMenuOpen(false)} />
@@ -164,8 +161,8 @@ export default function Navbar() {
                 <li className="Profile-menu-item">
                   <Link><PermIdentityOutlinedIcon />
                     <div className='Name-ProfileContent'>
-                    <p>{user.name || 'Guest User'}</p>
-                    <p className='email-name-profile'>{user.email || 'guest@example.com'}</p>
+                      <p>{user.name || 'Guest User'}</p>
+                      <p className='email-name-profile'>{user.email || 'guest@example.com'}</p>
                     </div></Link>
                 </li>
                 <li className="Profile-menu-item"><Link to={"/MyOrder"}><ShoppingBagIcon />My Order</Link></li>
@@ -180,10 +177,10 @@ export default function Navbar() {
 
       {/* NAVIGATION LINKS AND SEARCH */}
       <div className='ishum-nav-li-serachbar'>
-      <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
-  <Link to="/" onClick={() => setIsMenuOpen(false)}>STORE</Link>
-  <Link to="/bestsellers" onClick={() => setIsMenuOpen(false)}>BESTSELLERS</Link>
-  <Link to="/Ishum-Exclusive" onClick={() => setIsMenuOpen(false)}>ISHUM'S EXCLUSIVE</Link>
+        <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>STORE</Link>
+          <Link to="/bestsellers" onClick={() => setIsMenuOpen(false)}>BESTSELLERS</Link>
+          <Link to="/Ishum-Exclusive" onClick={() => setIsMenuOpen(false)}>ISHUM'S EXCLUSIVE</Link>
 
           <div className="dropdown" onMouseEnter={() => setIsRecommendationOpen(true)} onMouseLeave={() => setIsRecommendationOpen(false)}>
             <div className='RECOMMENDATION'>ISHUM'S RECOMMENDATION <KeyboardArrowDownSharpIcon /></div>
@@ -193,8 +190,8 @@ export default function Navbar() {
                   <span className='Occasion'>
                     <h2>Occasion</h2>
                     <li><Link to="/Leg " onClick={() => setIsMenuOpen(false)}>Eid</Link></li>
-<li><Link to="/Tag" onClick={() => setIsMenuOpen(false)}>Diwali</Link></li>
-<li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
+                    <li><Link to="/Tag" onClick={() => setIsMenuOpen(false)}>Diwali</Link></li>
+                    <li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
 
                   </span>
                   <span className='SALE'>
@@ -211,29 +208,29 @@ export default function Navbar() {
             <div className='discover'>DISCOVER <KeyboardArrowDownSharpIcon /></div>
             {isDiscoverOpen && (
               <ul className="Ishum-dropdown-menu ishum-discover-dropdown">
-           <li><Link to="/Legacy" onClick={() => setIsMenuOpen(false)}>Legacy</Link></li>
-<li><Link to="/Tale" onClick={() => setIsMenuOpen(false)}>Our Tale</Link></li>
-<li><Link to="/B2B-Policy" onClick={() => setIsMenuOpen(false)}>B2B Policy</Link></li>
+                <li><Link to="/Legacy" onClick={() => setIsMenuOpen(false)}>Legacy</Link></li>
+                <li><Link to="/Tale" onClick={() => setIsMenuOpen(false)}>Our Tale</Link></li>
+                <li><Link to="/B2B-Policy" onClick={() => setIsMenuOpen(false)}>B2B Policy</Link></li>
 
               </ul>
             )}
           </div>
-          <Link to="/review"  onClick={() => setIsMenuOpen(false)}>REVIEW</Link>
+          <Link to="/review" onClick={() => setIsMenuOpen(false)}>REVIEW</Link>
           <button
-  onClick={() => {
-    setShowB2BModal(true);
-    setIsMenuOpen(false);
-  }}
-  className="BUSINESS-TO-BUSINESS"
->
-  BUSINESS TO BUSINESS
-</button>
+            onClick={() => {
+              setShowB2BModal(true);
+              setIsMenuOpen(false);
+            }}
+            className="BUSINESS-TO-BUSINESS"
+          >
+            BUSINESS TO BUSINESS
+          </button>
 
         </div>
-            
+
       </div>
 
-  
+
 
       {/* MODALS */}
       {showB2BModal && (
@@ -261,9 +258,9 @@ export default function Navbar() {
       )}
 
 
-{showAuthModal && (
-  <AuthModal onClose={() => setShowAuthModal(false)} />
-)}
+      {showAuthModal && (
+        <AuthModal onClose={() => setShowAuthModal(false)} />
+      )}
 
 
 
