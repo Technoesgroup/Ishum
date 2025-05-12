@@ -77,9 +77,11 @@
   }
   
    .store-bestseller{
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .store-bestseller h3{
@@ -226,6 +228,19 @@
     margin: 5px 0;
     background: #0e0e0e;
   }
+
+  .Clear-Filter{
+    font-size: 1rem;
+    padding: 9px  12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4B3D1A;
+  }
+
+  .Clear-Filter a{
+    font-family: 'PoppinsRegular';
+    color: white;
+  }
   
   .Catergories-dropdown li {
     color: rgb(204, 204, 204);
@@ -325,6 +340,8 @@
     width: 42vw;
   }
 
+ 
+
    @media(max-width:768px){
     .for-all-boxes-btn {
       flex: 1 1 calc(60% - 30px);
@@ -339,6 +356,10 @@
     
     .Allproduct-Boxes{
       flex-direction: column;
+    }
+
+    .Clear-Filter{
+      display: none;
     }
 
     .bestseller-boxes{

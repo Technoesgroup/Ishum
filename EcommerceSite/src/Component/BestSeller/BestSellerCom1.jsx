@@ -40,7 +40,7 @@ export default function Bestsellers() {
             <div className="Allproduct-Boxes">
               <div className="store-bestseller">
                 <h3><a href="/">STORE</a> / <a href="/Ishum-Exclusive">ISHUM-EXCLUSIVE</a></h3>
-                {/* <h2>73 PRODUCTS</h2> */}
+        <button  className="Clear-Filter"><a href="/bestsellers">Clear Filter</a></button>
               </div>
             
             </div>
