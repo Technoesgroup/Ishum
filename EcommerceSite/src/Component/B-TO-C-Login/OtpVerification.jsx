@@ -3,11 +3,13 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import "./OtpVerification.css";
 import GoogleIcon from '@mui/icons-material/Google';
 
-const OtpVerification = ({ phone, name, email, mode, onBack,  setShowLoginModal, setShowB2UModal}) => {
+const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal,setShowLoginModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
   const { setIsLoggedIn, setUser } = useAuth();
 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -44,7 +46,7 @@ const OtpVerification = ({ phone, name, email, mode, onBack,  setShowLoginModal,
     }
   
     try {
-      const response = await fetch("http://localhost:4000/api/user/verify-otp", {
+      const response = await fetch(`${baseURL}/api/user/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -55,6 +57,10 @@ const OtpVerification = ({ phone, name, email, mode, onBack,  setShowLoginModal,
           mode
         }),
       });
+
+
+      console.log( "setshowb2modal check:",setShowB2UModal);
+      console.log( "setloginmodal check:",setShowLoginModal)
   
       const data = await response.json();
   

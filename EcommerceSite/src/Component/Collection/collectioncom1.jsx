@@ -4,18 +4,18 @@ import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 
 const CollectionCom1 = () => {
   const categories = [
-    'SAREE',
-    'ART SILK SAREES',
-    'PASTEL SAREES',
-    'HEAVY EMBROIDERY SAREES',
-    'SAREES UNDER 5000',
-    'BUY 2 GET 1 FREE',
-    'DIWALI SAREES'
+    'Gulzar',
+    'Anarkali',
+    'Sharara Suits',
+    'Rangrez',
+    'Jashn E Rang',
+    'NOOR',
+    'Sawariya'
   ];
 
   return (
     <div className="collection-wrapper">
-      <div className="breadcrumb">Store / Collection</div>
+      <div className="breadcrumb"><a href="/">Store </a>/ Collection</div>
       <h1 className="collection-title">Collections</h1>
       <p className="collection-description">
         Collection from Ishum transport you to a world of timeless elegance that redefines grace and sophistication! At Ishum, we bring you a stunning collection online designed to make every woman feel effortlessly beautiful.

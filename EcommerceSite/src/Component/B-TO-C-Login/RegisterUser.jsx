@@ -15,6 +15,8 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [showOtpStep, setShowOtpStep] = useState(false);
   const [phone, setPhone] = useState(""); // ✅ for OTPVerification
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -29,7 +31,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:4000/api/user/register", {
+      const response = await axios.post(`${baseURL}/api/user/register`, {
         name,
         email,
         phone,
@@ -72,14 +74,24 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
               onChange={handleChange}
               className="RegisterUser-input-field"
             />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleChange}
-              className="RegisterUser-input-field"
-            />
+           {/* PHONE NUMBER FIELD WITH +91 PREFIX */}
+           <div className="RegisterUser-phone-wrapper">
+  <span className="RegisterUser-phone-prefix">+91</span>
+  <input
+    type="tel"
+    name="phone"
+    placeholder="Phone Number"
+    value={formData.phone}
+    onChange={(e) => {
+      const onlyNumbers = e.target.value.replace(/\D/g, "");
+      setFormData({ ...formData, phone: onlyNumbers });
+    }}
+    className="RegisterUser-phone-input"
+    maxLength={10}
+  />
+</div>
+
+
 
             <button
               className="RegisterUser-continue-btn"
@@ -125,7 +137,8 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
           email={formData.email}
           mode="register"
           onBack={() => setShowOtpStep(false)}
-          setShowB2UModal={setShowB2UModal}
+          setShowB2UModal={setShowB2UModal}  
+          setShowLoginModal={setShowLoginModal}
         />
         
         )}

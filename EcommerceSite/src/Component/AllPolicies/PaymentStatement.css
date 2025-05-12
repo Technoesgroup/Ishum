@@ -1,0 +1,59 @@
+.payment-statement {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background: #EEEBE4;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .company-name {
+    font-size: 20px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .description {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    margin-bottom: 25px;
+  }
+  
+  .subheading {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2b2b2b;
+    margin-bottom: 10px;
+  }
+  
+  .list {
+    padding-left: 20px;
+    list-style-type: disc;
+    margin-bottom: 15px;
+  }
+  
+  .contact a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact a:hover {
+    text-decoration: underline;
+  }
+  

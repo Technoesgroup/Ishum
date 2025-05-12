@@ -7,6 +7,8 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [userId, setUserId] = useState(null);
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   // ✅ Load userId from localStorage on first render
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -25,7 +27,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     if (!userId) return;
     try {
-      const res = await axios.get(`http://localhost:4000/api/cart/${userId}`);
+      const res = await axios.get(`${baseURL}/api/cart/${userId}`);
       setCartItems(res.data.cartItems || []);
     } catch (err) {
       console.error("Error fetching cart:", err);

@@ -14,6 +14,13 @@ export default function Bestsellers() {
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
   const { selected, setSelected } = useFilter();
+  const [price, setPrice] = useState(0); // For the range input
+  const maxPrice = 5000;
+
+  const handleRangeChange = (e) => {
+    setPrice(Number(e.target.value));
+    setSelected({ ...selected, price: Number(e.target.value) });
+  };
 
   const handleToggle = (section) => {
     setOpenDropdown(openDropdown === section ? null : section);
@@ -47,10 +54,18 @@ export default function Bestsellers() {
 
             <div className="AllPrice-of-bestseller">
               <p className="firstparagraph">Price  <KeyboardArrowRightIcon /></p>
-              <input type="range" min="0" max="5000" className="bestsellers-price-range" />
+              <input
+        type="range"
+        min="0"
+        max={maxPrice}
+        value={price}
+        onChange={handleRangeChange}
+        className="bestsellers-price-range"
+      />
               <div className="two-input-minimax">
-                <input type="text" placeholder="₹ 0" /> <h4>-</h4>
-                <input type="text" placeholder="₹ 500" />
+              <input type="text" value={`₹ 0`} readOnly />
+        <h4>-</h4>
+        <input type="text" value={`₹ ${price}`} readOnly />
               </div>
             </div>
 
@@ -79,20 +94,20 @@ export default function Bestsellers() {
               />
 
               {/* Color */}
-              <ColorList
+              {/* <ColorList
                 openDropdown={openDropdown}
                 handleToggle={handleToggle}
                 selected={selected}
                 handleSelection={handleSelection}
-              />
+              /> */}
             </div>
           </div>
 
           <div className="Bestseller-content-product">
             <div className="Allproduct-Boxes">
               <div className="store-bestseller">
-                <h3>STORE / BESTSELLERS</h3>
-                <h2>59 PRODUCTS</h2>
+                <h3><a href="/">STORE</a> /  <a href="/bestsellers"> BESTSELLERS</a></h3>
+                {/* <h2>59 PRODUCTS</h2> */}
               </div>
               {/* <ExclusiveNavigation showSort={true} /> */}
 

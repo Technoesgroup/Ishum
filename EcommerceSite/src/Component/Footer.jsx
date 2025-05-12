@@ -1,10 +1,11 @@
 import React from "react";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import PinterestIcon from '@mui/icons-material/Pinterest';
 import "../Style-CSS/Footer.css";
 import Logo from '../images/Ishum Logo 1.svg';
+import { Link } from 'react-router-dom';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const Footer = () => {
@@ -50,30 +51,26 @@ const Footer = () => {
           <div>
             <h3>Fresh Launches</h3>
             <ul>
-              <li>Rangrez</li>
-              <li>Gulzaar</li>
-              <li>Noor Edits</li>
+              <li><a href="/co-page/Rangrez">Rangrez</a></li>
+              <li><a href="/co-page/SAWARIYA">Sawariya</a></li>
+              <li><a href="/co-page/NOOR">Noor Edits</a></li>
             </ul>
           </div>
           <div>
             <h3>Information</h3>
             <ul>
-              <li>About Us</li>
+              <li><a href="/Tale">About Us</a></li>
               <li>Appointment / Get In Touch</li>
-              <li>Shipping & Delivery</li>
-              <li>FAQ</li>
-              <li>Blog</li>
             </ul>
           </div>
 
           <div>
             <h3>Legal</h3>
             <ul>
-              <li>Privacy Policy</li>
-              <li>Terms & Conditions</li>
-              <li>Cancellation Policy</li>
-              <li>Refund Policy</li>
-              <li>Exchanges & Returns</li>
+            <li><Link to="/PrivacyPolicy">Privacy Policy</Link></li>
+            <li><Link to="/TearmsServices">Terms & Conditions</Link></li>
+            <li><Link to="/PaymentServices">Refund Policy</Link></li>
+            <li><Link to="/ReturnPolicy">Exchanges & Returns</Link></li>
             </ul>
           </div>
           </div>
@@ -89,10 +86,10 @@ const Footer = () => {
             <span>Cookies</span>
           </div>
           <div className="footer-social">
-            <FacebookOutlinedIcon />
-            <TwitterIcon />
-            <InstagramIcon />
-            <YouTubeIcon />
+         <a href="https://www.facebook.com/Ishumbykaran/"><FacebookOutlinedIcon /></a>
+          <a href="https://www.instagram.com/ishumbykaran_official?igsh=Y3J6d3JmMDMxa2cw">  <InstagramIcon /></a>
+         <a href="https://www.youtube.com/@ishumdesigns1982"><YouTubeIcon /></a>
+         <a href="https://in.pinterest.com/ishumdesigns/"><PinterestIcon /></a>
           </div>
         </div>
       </div>

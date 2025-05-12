@@ -4,7 +4,7 @@ const shippingSchema = new mongoose.Schema({
     userId: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: String,
-    country: String,
+    House: { type: mongoose.Schema.Types.Mixed, required:true},
     street: String,
     city:{ type: String, required: true },
     state: String,

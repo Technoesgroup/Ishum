@@ -43,3 +43,47 @@
     font-size: 1.1rem;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .user-profile-two-card {
+      flex-direction: column;
+      padding: 10px;
+      gap: 20px;
+    }
+  .address-page h2{
+    font-size: 0.8rem !important;
+  }
+    .Home-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 15px;
+    }
+  
+    .Home-content {
+      gap: 10px;
+    }
+  
+    .Home-icons-text {
+        gap: 10px;
+      align-items: center;
+    }
+  
+    .HomeIcon {
+      font-size: 2rem;
+      margin-right: 8px;
+    }
+  
+    .Home-icons-text h2 {
+      font-size: 1rem;
+    }
+  
+    .Home-content p {
+      font-size: 0.9rem;
+    }
+  
+    .profile-Edit {
+      font-size: 0.9rem;
+    }
+  }
+  

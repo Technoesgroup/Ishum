@@ -9,6 +9,8 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
   const [timer, setTimer] = useState(30);
   const { setIsLoggedIn, setUser } = useAuth(); // ✅ Destructure context
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   useEffect(() => {
     const countdown = setInterval(() => {
       setTimer((prev) => (prev > 0 ? prev - 1 : 0));
@@ -41,7 +43,7 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/user/verify-otp", {
+      const response = await fetch(`${baseURL}/api/user/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

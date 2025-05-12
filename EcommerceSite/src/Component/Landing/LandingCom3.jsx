@@ -6,8 +6,9 @@ import UnderLine from '../../images/Undertextline.png';
 
 const CollectionSection = () => {
   const [collections, setCollections] = useState([]);
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate();
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     fetchCollections();
@@ -15,14 +16,15 @@ const CollectionSection = () => {
   
   const fetchCollections = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/get-collections");
-      setCollections(response.data.slice(4));
+      const response = await axios.get(`${baseURL}/api/get-collections`);
+      setCollections(response.data.slice(4)); // Show only after slicing
     } catch (error) {
       console.error("Error fetching collections", error);
     }
   };
-  
-  
+
+  // ✅ Show nothing if collections not yet loaded
+  if (collections.length === 0) return null;
 
   return (
     <div className="LandingCom-3-collection-container">
@@ -36,11 +38,11 @@ const CollectionSection = () => {
           <div
             key={index}
             className="LandingCom-3-collection-item"
-            onClick={() => navigate(`/co-page/${col.title}`, { state: { collectionName: col.title } })} 
+            onClick={() => navigate(`/co-page/${col.title}`, { state: { collectionName: col.title } })}
             style={{ cursor: "pointer" }}
           >
             <img 
-              src={`http://localhost:4000${col.image}`} 
+              src={`${baseURL}${encodeURI(col.image)}`} 
               alt={col.title} 
               className="LandingCom-3-collection-image" 
             />
@@ -60,5 +62,6 @@ const CollectionSection = () => {
     </div>
   );
 };
+
 
 export default CollectionSection;

@@ -20,13 +20,13 @@
   }
   
   .RegisterUser-title {
-    font-size: 1.5vw;
+    font-size: 1.7vw;
     line-height: 2;
     font-weight: bold;
   }
   
   .RegisterUser-subtitle {
-    font-size: 1.5vw;
+    font-size: 1.7vw;
     font-weight: bold;
     margin-bottom: 1vw;
   }
@@ -54,7 +54,7 @@
   }
   
   .RegisterUser-sign-up-text {
-    margin: 2rem 0;
+    margin: 1rem 0;
     text-align: center;
 
     color: gray;
@@ -130,6 +130,32 @@
     cursor: pointer;
     background-color: black;
   }
+
+
+  .RegisterUser-phone-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* margin-bottom: 15px; */
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  .RegisterUser-phone-prefix {
+    padding: 10px 12px;
+    background-color: #f0f0f0;
+    font-size: 14px;
+  }
+  
+  .RegisterUser-phone-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+  
   
   
   

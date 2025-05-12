@@ -17,20 +17,20 @@ const reviews = [
 
 const ReviewCard = ({ review, onClick }) => {
   return (
-    <div className="review-card" onClick={() => onClick(review)}>
-      <div className="review-header">
-        <img src={review.image} alt={review.name} className="review-avatar" />
-        <div className="review-text-content">
-          <h3>{review.name} <span className="verified-icon"><img src={vectorimg} className="VerifiedUserIcon" /></span></h3>
-          <p className="review-text">{review.review}</p>
+    <div className="Selected-review-card" onClick={() => onClick(review)}>
+      <div className="Selected-review-header">
+        <img src={review.image} alt={review.name} className="Selected-review-avatar" />
+        <div className="Selected-review-text-content">
+          <h3>{review.name} <span className="Selected-verified-icon"><img src={vectorimg} className="Selected-VerifiedUserIcon" /></span></h3>
+          <p className="Selected-review-text">{review.review}</p>
         </div>
         <div className="stars">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</div>
       </div>
-      <div className="review-product-info">
-        <img src={review.productImage} alt="Product" className="review-product-image" />
+      <div className="Selected-review-product-info">
+        <img src={review.productImage} alt="Product" className="Selected-review-product-image" />
         <h3>It's Good Organic Material For Yoga And Meditation</h3>
-        <button className="view-product">
-          <LocalMallIcon className="review-mallicon" /> View Product
+        <button className="Selected-view-product">
+          <LocalMallIcon className="Selected-review-mallicon" /> View Product
         </button>
       </div>
     </div>
@@ -41,32 +41,32 @@ const ReviewModal = ({ review, onClose }) => {
   if (!review) return null;
 
   return (
-    <div className="review-modal-overlay" onClick={onClose}>
-      <div className="review-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}><CloseIcon /></button>
-        <div className="review-overlay-container">
-          <div className="Image-overlay-design">
-            <img src={review.image} alt="Product" className="modal-product-image" />
+    <div className="Selected-review-modal-overlay" onClick={onClose}>
+      <div className="Selected-review-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="Selected-close-button" onClick={onClose}><CloseIcon /></button>
+        <div className="Selected-review-overlay-container">
+          <div className="Selected-Image-overlay-design">
+            <img src={review.image} alt="Product" className="Selected-modal-product-image" />
           </div>
 
-          <div className="content-overlay-design">
-            <div className="name-verified-icon-overlay">
+          <div className="Selected-content-overlay-design">
+            <div className="Selected-name-verified-icon-overlay">
               <h3>{review.name}</h3>
-              <span className="verified-icon"> <p className="overlay-Verified-text ">Verified Purchase </p><img src={vectorimg} className="VerifiedUserIcon" /></span>
+              <span className="Selected-verified-icon"> <p className="Selected-overlay-Verified-text ">Verified Purchase </p><img src={vectorimg} className="VerifiedUserIcon" /></span>
             </div>
-            <div className="overlay-stars">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</div>
-            <p className="review-text-overlay">{review.review}</p>
+            <div className="Selected-overlay-stars">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</div>
+            <p className="Selected-review-text-overlay">{review.review}</p>
 
-            <div className="line-overlay"></div>
-            <div className="overlayproduct-Container">
+            <div className="Selected-line-overlay"></div>
+            <div className="Selected-overlayproduct-Container">
               <div>
-                <img src={review.productImage} alt="" className="overlay-ProductImage" />
+                <img src={review.productImage} alt="" className="Selected-overlay-ProductImage" />
               </div>
               <div>
-                <div className="overlayproduct-button-text">
+                <div className="Selected-overlayproduct-button-text">
                   {/* <h3 className="review-overlay-h3-text">{review.review}</h3> */}
-                  <h3  className="review-overlay-h3-text">It's Good Organic Material For Yoga And Meditation</h3>
-                  <button  className="overlay-View-product">  <LocalMallIcon className="review-mallicon-overlay" /> View Product</button>
+                  <h3  className="Selected-review-overlay-h3-text">It's Good Organic Material For Yoga And Meditation</h3>
+                  <button  className="Selected-overlay-View-product">  <LocalMallIcon className="Selected-review-mallicon-overlay" /> View Product</button>
                 </div>
               </div>
             </div>
@@ -84,17 +84,17 @@ const ReviewSection = () => {
   const [selectedReview, setSelectedReview] = useState(null);
 
   return (
-    <div className="review-section">
+    <div className="Selected-review-section">
       <h4>STORE / REVIEW</h4>
-      <div className="review-top-heading">
+      <div className="Selected-review-top-heading">
         <h2>REVIEWS</h2>
-        <img src={img3} className="underlinedesign" alt="" />
+        <img src={img3} className="Selected-underlinedesign" alt="" />
       </div>
-      <div className="Topreview-with-text">
-        <p className="top-review-stars">★ ★ ★ ☆ </p>
-        <p className="review-count">1500 Reviews</p>
+      <div className="Selected-Topreview-with-text">
+        <p className="Selected-top-review-stars">★ ★ ★ ☆ </p>
+        <p className="Selected-review-count">1500 Reviews</p>
       </div>
-      <div className="review-list">
+      <div className="Selected-review-list">
         {reviews.map((review) => (
           <ReviewCard key={review.id} review={review} onClick={setSelectedReview} />
         ))}

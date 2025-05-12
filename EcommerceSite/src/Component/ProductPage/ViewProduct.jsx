@@ -17,7 +17,7 @@ const ProductPage = () => {
 
   const navigate = useNavigate();
 
-
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
   
   useEffect(() => {
     const storedProduct = localStorage.getItem("selectedProduct");
@@ -100,7 +100,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
     }
   
     try {
-      const res = await axios.post("http://localhost:4000/api/cart/addtocart", {
+      const res = await axios.post(`${baseURL}/api/cart/addtocart`, {
         userId: user._id,
         productId: selectedProduct._id,
         quantity,
@@ -123,7 +123,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
   {(colorThumbnails.length > 0 ? colorThumbnails : thumbnails).map((img, idx) => (
     <img
       key={idx}
-      src={`http://localhost:4000/uploads/${img}`}
+      src={`${baseURL}/uploads/${img}`}
       alt={`Thumbnail ${idx}`}
       onClick={() => setMainImage(img)}
       className="thumbnail-img"
@@ -131,16 +131,9 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
   ))}
 </div>
 
-
-       
-
-
-
         <div className="main-image">
-          <img
-            src={`http://localhost:4000/uploads/${mainImage || selectedProduct.image}`}
-            alt={selectedProduct.name}
-          />
+        <img src={`${baseURL}/uploads/${mainImage || selectedProduct.image}`} alt="product image" />
+
         </div>
       </div>
 
@@ -179,7 +172,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
         onClick={() => handleColorSelect(colorName, images)}
       >
         <img
-          src={`http://localhost:4000/uploads/${images[0]}`}
+          src={`${baseURL}/uploads/${images[0]}`}
           alt={colorName}
           className="color-img"
         />

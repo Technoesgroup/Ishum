@@ -7,7 +7,7 @@ const Legacy = ()=>{
         <div  className="ishum-legacy-container">
            <div  className="ishum-legacy-content">
            <h1>Legacy</h1>
-           <img src={image1} alt="" />
+           <img src={image1} alt=""   className="legacy-underline-img"/>
            </div>
             <h2  >The Legacy of B. R. Kapoor & Sons: A Timeless Tradition in Ethnic Wear</h2>
             <p>
