@@ -93,9 +93,11 @@ export default function Navbar() {
       <div className="info-top-header">
         <div className="info-top-links">
           {/* <span>SHIPPING & DELIVERY</span> */}
-          <span>TRACK YOUR ORDER</span>
-          <span>RETURNS</span>
-          <span>CONTACT US</span>
+          
+
+          <span><a href="/OrderTracking">TRACK YOUR ORDER</a></span>
+          <span><a href="/ReturnPolicy">RETURNS</a></span>
+          <span  onClick={() => setShowB2BModal(true)} >CONTACT US</span>
         </div>
         <div className="Ishum-social-icons">
         <a href="https://www.facebook.com/Ishumbykaran/"><FacebookOutlinedIcon className='socialicon' /></a>
