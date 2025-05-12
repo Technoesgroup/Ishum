@@ -98,10 +98,10 @@ export default function Navbar() {
           <span>CONTACT US</span>
         </div>
         <div className="Ishum-social-icons">
-          <FacebookOutlinedIcon className='socialicon' />
-          <InstagramIcon className='socialicon' />
-          <PinterestIcon className='socialicon' />
-          <YouTubeIcon className='socialicon' />
+        <a href="https://www.facebook.com/Ishumbykaran/"><FacebookOutlinedIcon className='socialicon' /></a>
+        <a href="https://www.instagram.com/ishumbykaran_official?igsh=Y3J6d3JmMDMxa2cw"><InstagramIcon className='socialicon' /></a>
+        <a href="https://in.pinterest.com/ishumdesigns/"><PinterestIcon className='socialicon' /></a>
+        <a href="https://www.youtube.com/@ishumdesigns1982">   <YouTubeIcon className='socialicon' /></a>
         </div>
       </div>
 
