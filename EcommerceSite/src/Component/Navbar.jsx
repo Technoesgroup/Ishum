@@ -25,8 +25,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import AuthModal from "../Component/B-TO-C-Login/MobileLoginPage/AutoMobile"
 import MenuIcon from '@mui/icons-material/Menu';
-
-
+import Authmobile from '../Component/B-TO-C-Login/MobileLoginPage/AutoMobile'
 
 export default function Navbar() {
   const { setIsLoggedIn } = useAuth();
@@ -40,6 +39,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+ 
 
 
   const [user, setUser] = useState({ name: '', email: '' });
@@ -84,6 +84,21 @@ export default function Navbar() {
     window.addEventListener("resize", handleResize); // Update on window resize
     return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
   }, []);
+
+
+    const handleCartClick = () => {
+    const isLoggedIn = localStorage.getItem('token');
+
+    if (isLoggedIn) {
+      navigate('/Cart');
+    } else {
+      if (isMobile) {
+        setShowAuthModal(true); // mobile login flow
+      } else {
+        setShowLoginModal(true); // desktop login modal (if any)
+      }
+    }
+  };
 
 
   return (
@@ -134,17 +149,9 @@ export default function Navbar() {
             <Badge badgeContent={totalItems} color="error">
   <LocalMallOutlinedIcon
     className="Ishum-iconbag"
-    onClick={() => {
-      const isLoggedIn = localStorage.getItem("token"); // ya apna auth check
-      if (isLoggedIn) {
-        navigate("/Cart");
-      } else {
-        setShowLoginModal(true); // modal open
-      }
-    }}
+    onClick={handleCartClick}
   />
 </Badge>
-
             {isLoggedIn && (
               <ListOutlinedIcon
                 className="Ishum-icon profile-menu-icon"
@@ -239,8 +246,6 @@ export default function Navbar() {
         </div>
 
       </div>
-
-
 
       {/* MODALS */}
       {showB2BModal && (

@@ -60,26 +60,37 @@ export default function ShippingStep() {
   };
   
 
-  const handleContinue = async () => {
-    if (!user || !user._id) {
-      alert("User not found. Please login again.");
-      return;
-    }
+const handleContinue = async () => {
+  if (!user || !user._id) {
+    alert("User not found. Please login again.");
+    return;
+  }
 
-    try {
-      // Include userId in the payload to be sent to the backend
-      const payload = { ...formData, userId: user._id };
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Token not found. Please login again.");
+    return;
+  }
 
-      await axios.post(`${baseURL}/api/shipping`, payload);
+  try {
+    const payload = { ...formData, userId: user._id };
 
-      setActiveStep("wallet");
-      setTimeout(() => {
-        setShowOverlay(true);
-      }, 500);
-    } catch (error) {
-      console.error("Shipping data error:", error);
-    }
-  };
+    await axios.post(`${baseURL}/api/shipping`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setActiveStep("wallet");
+    setTimeout(() => {
+      setShowOverlay(true);
+    }, 500);
+  } catch (error) {
+    console.error("Shipping data error:", error);
+  }
+};
+
+
 
   return (
     <div className="shipping-container">
