@@ -20,6 +20,9 @@ const MobileView = () => {
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
 
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const queryFromURL = new URLSearchParams(location.search).get('query');
     if (queryFromURL) {
@@ -37,7 +40,7 @@ const MobileView = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (searchQuery.trim()) {
-        axios.get(`http://localhost:4000/api/products/search?q=${searchQuery}`)
+      axios.get(`${baseURL}/api/products/search?q=${searchQuery}`)
           .then(res => {
             if (Array.isArray(res.data)) {
               setResults(res.data);

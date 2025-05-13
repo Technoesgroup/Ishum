@@ -36,10 +36,6 @@ app.use(cors({
 
 
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-//   });
-  
   
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -102,6 +98,7 @@ app.post("/verify-payment", (req, res) => {
         res.status(400).json({ status: "fail", message: "Invalid signature" });
     }
 });
+
 
 
 
