@@ -34,7 +34,7 @@ const RatingsReviews = () => {
 
     </div>
 
-      <div className="image-gallery">
+      {/* <div className="image-gallery">
         <img src="img1.jpg" alt="Review" />
         <img src="img2.jpg" alt="Review" />
         <img src="img3.jpg" alt="Review" />
@@ -44,7 +44,7 @@ const RatingsReviews = () => {
         <div className="more-images">
           <span>+94</span>
         </div>
-      </div>
+      </div> */}
 
       {showForm && (
         <div className="Reviews-modal-overlay">
