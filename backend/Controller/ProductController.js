@@ -148,7 +148,7 @@ const searchProducts = async (req, res) => {
   }
 
   try {
-    // Creating the regex for case-insensitive search
+  
     const regex = new RegExp(q, 'i');
 
     // Querying the products collection with a case-insensitive search on multiple fields
