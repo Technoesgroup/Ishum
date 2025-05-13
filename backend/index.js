@@ -20,8 +20,27 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
+const allowedOrigins = ['https://www.ishum.in', 'http://localhost:5173']; // Hostinger aur local dev add karo
 
-app.use(cors());
+// CORS middleware
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Agar origin allowed hai, toh request ko allow karo
+    } else {
+      callback(new Error('Not allowed by CORS')); // Agar origin allow nahi hai, error bhejo
+    }
+  },
+  credentials: true
+}));
+
+
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+//   });
+  
+  
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/uploads", express.static("uploads"));
