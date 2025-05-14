@@ -27,8 +27,11 @@ const AddProduct = () => {
   ];
 
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
+
   useEffect(() => {
-    fetch("http://localhost:4000/api/get-collections")
+      fetch(`${baseURL}/api/get-collections`)
       .then(res => res.json())
       .then(data => setCollections(data))
       .catch(err => {
@@ -134,7 +137,7 @@ const AddProduct = () => {
     
   
     try {
-      const response = await fetch("http://localhost:4000/api/products/add", {
+      const response = await fetch(`${baseURL}/api/products/add`, {
         method: "POST",
         body: formData
       });

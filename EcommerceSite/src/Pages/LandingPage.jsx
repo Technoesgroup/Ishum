@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import "./LandingPage.css"; 
+
 import Comp1 from "../Component/Landing/LandingCom1";
 import Comp2 from "../Component/Landing/LandingCom2";
 import Comp3 from "../Component/Landing/LandingCom3";
@@ -10,57 +13,42 @@ import Comp8 from "../Component/Landing/LandingCom8";
 import Comp9 from "../Component/Landing/LandingCom9";
 
 const Landing = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500); // Simulated delay
+    return () => clearTimeout(timer);
+  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 130 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  return (
-      <div className="Landing-Components">
-       
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp1 />
-        </motion.div>
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp2 />
-        </motion.div>
-
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp3 />
-        </motion.div>
-
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp4 />
-        </motion.div>
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp5 />
-        </motion.div>
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp6 />
-        </motion.div>
-
-
-
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp9 />
-        </motion.div>
-        
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp7 />
-        </motion.div>
-
-        
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Comp8 />
-        </motion.div>
-
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
       </div>
+    );
+  }
+
+  return (
+    <div className="Landing-Components">
+      {[Comp1, Comp2, Comp3, Comp4, Comp5, Comp6, Comp9, Comp7, Comp8].map(
+        (Component, index) => (
+          <motion.div
+            key={index}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <Component />
+          </motion.div>
+        )
+      )}
+    </div>
   );
 };
 

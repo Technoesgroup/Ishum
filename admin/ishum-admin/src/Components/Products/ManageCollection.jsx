@@ -9,10 +9,14 @@ const ManageCollection = () => {
   const [imageFile, setImageFile] = useState(null);
 
 
+  // src/utils/api.js
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
+
     useEffect(() => {
       const fetchCollections = async () => {
         try {
-          const res = await axios.get("http://localhost:4000/api/get-collections");
+          const res = await axios.get(`${baseURL}/api/get-collections`);
           setCollections(res.data); // Make sure API returns array of { title, image, createdAt }
         } catch (err) {
           console.error("Error fetching collections:", err);
@@ -35,7 +39,7 @@ const ManageCollection = () => {
     formData.append("image", imageFile);
 
     try {
-      const res = await axios.post("http://localhost:4000/api/add-collections", formData, {
+      const res = await axios.post(`${baseURL}/api/add-collections`,  formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -70,13 +74,13 @@ const ManageCollection = () => {
           <div className="collection-item" key={index}>
             <div>
             <strong>{collection.title || "No Title"}</strong>
-{collection.image && (
-  <img
-    src={`http://localhost:4000${collection.image}`}
-    alt={collection.title}
-    style={{ width: "80px", marginTop: "8px" }}
-  />
-)}
+     {collection.image && (
+      <img
+        src={`${baseURL}${collection.image}`}
+        alt={collection.title}
+        style={{ width: "80px", marginTop: "8px" }}
+       />
+       )}
 
             </div>
             <button onClick={() => handleDelete(collection.title)}>Remove</button>
