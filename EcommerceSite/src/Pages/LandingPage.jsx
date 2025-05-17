@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./LandingPage.css"; 
+import Loader from "../Pages/LoaderFullpage"; // create a simple spinner component
+
+// Import components
 
 import Comp1 from "../Component/Landing/LandingCom1";
 import Comp2 from "../Component/Landing/LandingCom2";
@@ -15,17 +18,27 @@ import Comp10 from "../Component/Landing/LandingCom10";
 import Comp11 from "../Component/Landing/LandingCom11";
 
 const Landing = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // simulate loading time
+    return () => clearTimeout(timer);
+  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 130 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="Landing-Components">
-      {[Comp1, Comp2, Comp4, Comp5,Comp7,Comp10, Comp6, Comp9, Comp8, Comp11, Comp3,].map(
+      {[Comp1, Comp2, Comp4, Comp5,Comp7,Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
         (Component, index) => (
           <motion.div
             key={index}

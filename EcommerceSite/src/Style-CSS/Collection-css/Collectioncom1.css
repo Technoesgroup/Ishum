@@ -85,3 +85,50 @@
     margin-left: 0.5rem;
   }
   
+
+  @media (max-width: 768px) {
+  .collection-wrapper {
+    padding: 1.2rem;
+  }
+
+  .collection-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .collection-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: justify;
+    max-width: 100%;
+  }
+
+  .breadcrumb {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .category-scroll-container {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  .category-scroll {
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .category-pill {
+    scroll-snap-align: start;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .scroll-button {
+    display: none; /* hide arrows on mobile */
+  }
+}
