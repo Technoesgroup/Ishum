@@ -23,7 +23,7 @@ const PersonalistSection = () => {
         <button className="LandingCom10-learn-more"  onClick={() => navigate('/Collection')}>Explore Collection</button>
       </div>
       <div className="LandingCom10-right-image">
-        <img src={brideImg} alt="Ethnic Wear" />
+        <img loading="lazy" src={brideImg} alt="Ethnic Wear" />
       </div>
     </div>
   );

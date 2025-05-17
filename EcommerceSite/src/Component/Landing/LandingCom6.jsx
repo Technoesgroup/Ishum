@@ -14,7 +14,8 @@ const Collection = () => {
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();  // context se setter
 
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
 
   useEffect(() => {
     const fetchIshumProducts = async () => {
@@ -49,7 +50,7 @@ const Collection = () => {
     <div className="collection-container">
       <div className="ishumCom6-content-MainHeading">
         <h2 className="ishum-content-Com6-title">{collectionName} Collection</h2>
-        <img className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
+        <img  loading="lazy" className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
       </div>
 
       {loading ? (

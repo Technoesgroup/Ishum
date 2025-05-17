@@ -14,7 +14,8 @@ const Collection = () => {
   const collectionName = "NOOR";
   const navigate = useNavigate();
   
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
 
   const { setSelectedProduct } = useProduct(); // ✅ context setter
 
@@ -53,7 +54,7 @@ const Collection = () => {
         <h2 className="ishum-content-Com6-title">
           {collectionName} : Elegant velvet suits with rich embroidery
         </h2>
-        <img className="ishum-content-UnderLine" src={UnderLine} alt="underline" />
+        <img loading="lazy" className="ishum-content-UnderLine" src={UnderLine} alt="underline" />
       </div>
 
       {loading ? (

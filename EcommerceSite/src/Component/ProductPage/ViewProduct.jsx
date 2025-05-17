@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
+import Loader from "../../Pages/LoaderFullpage";
 
 
 const ProductPage = () => {
@@ -28,9 +29,10 @@ const ProductPage = () => {
     }
   }, []); // ✅ empty dependency => run only once on first load
 
-  if (!selectedProduct) {
-    return <div>Loading Product...</div>;
-  }
+ if (!selectedProduct) {
+  return <Loader />;
+}
+
 
   const sizes = selectedProduct.size || [36, 30, 28, 26, 24];
   const thumbnails = selectedProduct.thumbnails?.slice(0, 4) || [];

@@ -158,8 +158,7 @@ export default function Navbar() {
               <ul className="Ishum-dropdown-menu ishum-discover-dropdown">
                 <li><Link to="/Legacy" onClick={() => setIsMenuOpen(false)}>Legacy</Link></li>
                 <li><Link to="/Tale" onClick={() => setIsMenuOpen(false)}>Our Tale</Link></li>
-                <li><Link to="/B2B-Policy" onClick={() => setIsMenuOpen(false)}>B2B Policy</Link></li>
-
+                <li><Link onClick={() =>   { setShowB2BModal(true); setIsMenuOpen(false);}}>B2B Customers</Link></li>
               </ul>
             )}
           </div>

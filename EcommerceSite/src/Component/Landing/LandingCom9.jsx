@@ -55,7 +55,7 @@ const NewArrivals = () => {
         <div className="Com9-product-list">
           {products.map((product) => (
             <div key={product.id} className="Com9-product-card">
-              <img src={product.image} alt="Product" className="Com9-product-image" />
+              <img loading="lazy" src={product.image} alt="Product" className="Com9-product-image" />
               <div className="Com9-product-info">
                 <p className="Com9-product-title">{product.title}</p>
                 <div className="Com9-product-rating">

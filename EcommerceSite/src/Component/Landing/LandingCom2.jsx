@@ -8,7 +8,8 @@ const Slider = () => {
   const [loadedImages, setLoadedImages] = useState({});
   const scrollRef = useRef(null);
 
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,6 +61,7 @@ const Slider = () => {
                 <div className="image-placeholder skeleton-loader"></div>
               )}
               <img
+              loading="lazy"
                 src={`${baseURL}${collection.image}`}
                 alt={collection.name}
              

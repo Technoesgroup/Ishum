@@ -26,7 +26,7 @@ const articles = [
     title: 'Sawariya Luxe Edition: Midnight Velvet Kurti Set',
     desc: 'Indulge in the charm of timeless elegance with this deep-toned velvet ensemble, perfect for evening gatherings and festive nights.'
   }, 
-  
+
   {
     img: img4,
     title: 'Noor Classic: Pistachio Green Anarkali',
@@ -71,7 +71,7 @@ const Articles = () => {
       <div className="articles-container" ref={scrollRef}>
         {articles.map((a, i) => (
           <div className="article-card" key={i}>
-            <img src={a.img} alt="Article" className="article-image" />
+            <img loading="lazy" src={a.img} alt="Article" className="article-image" />
             <div className="article-content">
               <div className="article-title">{a.title}</div>
               <div className="article-desc">{a.desc}</div>
