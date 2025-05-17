@@ -3,9 +3,10 @@ import '../Pages/LoaderFullpage.css'
 
 const Loader = () => {
   return (
-    <div className="loader-container">
-      <div className="spinner"></div>
-    </div>
+     <div className="custom-loader-wrapper">
+    <div className="custom-spinner"></div>
+  </div>
+
   );
 };
 

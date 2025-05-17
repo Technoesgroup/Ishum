@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import EmptyCart from './EmptyCart';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useCart } from "../../ContextApiCart/CartContextApi";
+import Loader from "../../Pages/LoaderFullpage";
+
 
 const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
@@ -124,7 +126,7 @@ const Cartitem = () => {
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  if (loading) return <div>Loading your cart...</div>;
+  if (loading) return <Loader />;
 
   if (cartItems.length === 0) return <EmptyCart />;
 

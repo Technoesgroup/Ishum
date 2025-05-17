@@ -56,7 +56,7 @@ useEffect(() => {
                   </button>
                   {openSortDropdown && (
                     <ul className="SortPrice-dropdown">
-                      {["100 to 500", "1000 to 2000", "3000", "10000", "50000 to 60000"].map((range) => (
+                      {["2000 to 5000", "6000 to 8000", "8000 to 10,000", "10,000 to 15,000"].map((range) => (
                         <li key={range} onClick={() => handleSelectSortOption(range)}>
                           <input
                             type="radio"

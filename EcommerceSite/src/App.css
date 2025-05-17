@@ -41,3 +41,10 @@ a{
 .khadija-logo .letter {
   display: inline-block;
 }
+
+@media(max-width:760px){
+  .khadija-logo {
+  letter-spacing: 2px;
+  font-size: 48px;
+  }
+}
