@@ -10,7 +10,7 @@ const TrendingProducts = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/products/get-product")
+  axios.get(`${baseURL}/api/products/get-product`)
       .then((res) => {
         const filtered = res.data.products.filter(
           (product) => product.subcategory === "Co-ord sets"
@@ -52,7 +52,7 @@ const TrendingProducts = () => {
 
                   <img
                     loading="lazy"
-                    src={`http://localhost:4000/uploads/${product.image}`}
+                     src={`${baseURL}/uploads/${product.image}`} 
                     alt={product.name}
                     style={{
                       display: loadedImages[product._id] ? "block" : "none"
