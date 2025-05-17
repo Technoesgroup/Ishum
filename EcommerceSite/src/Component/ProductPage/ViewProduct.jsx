@@ -124,6 +124,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
       <div className="thumbnail-images">
   {(colorThumbnails.length > 0 ? colorThumbnails : thumbnails).map((img, idx) => (
     <img
+    loading="lazy"
       key={idx}
       src={`${baseURL}/uploads/${img}`}
       alt={`Thumbnail ${idx}`}
@@ -134,7 +135,8 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
 </div>
 
         <div className="main-image">
-        <img src={`${baseURL}/uploads/${mainImage || selectedProduct.image}`} alt="product image" />
+
+        <img    loading="lazy" src={`${baseURL}/uploads/${mainImage || selectedProduct.image}`} alt="product image" />
 
         </div>
       </div>
@@ -174,6 +176,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
         onClick={() => handleColorSelect(colorName, images)}
       >
         <img
+           loading="lazy"
           src={`${baseURL}/uploads/${images[0]}`}
           alt={colorName}
           className="color-img"

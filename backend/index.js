@@ -10,6 +10,8 @@ const ProductRouter = require("./router/Productrouter");
 const cartRouter = require("./router/Cartrouter");
 const shippingRoutes = require("./router/Shippingrouter");
 const reviewRoutes = require('./router/ReviewRoutes')
+const compression = require("compression");
+
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 const path = require("path");
@@ -20,8 +22,16 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
+
+
 const allowedOrigins = ['https://www.ishum.in','https://ishum-frontend.onrender.com', 'http://localhost:5173', 'http://localhost:5174']; // Hostinger aur local dev add karo
 
+
+app.use(compression()); // for gzip compression
+
+app.use("/uploads", express.static("uploads", {
+  maxAge: '7d' // cache images for 7 days
+}));
 
 app.use(cors({
   origin: function(origin, callback) {
