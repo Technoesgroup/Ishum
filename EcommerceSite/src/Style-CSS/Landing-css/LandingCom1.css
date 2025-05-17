@@ -152,13 +152,13 @@
   }
 
   .custom-arrow .Right-icon{
-    font-size: 2.6vw !important;
+    font-size: 2.6vw ;
     mix-blend-mode:multiply;
-    color: black !important;
+    color: black ;
   }
 
   .custom-arrow .Left-icon{
-    font-size: 2.6vw !important;
+    font-size: 2.6vw ;
     color:black!important;
   }
   
@@ -172,6 +172,11 @@
       margin-top: 80px;
       font-size: 1.6rem;
     }
+
+      .custom-arrow {
+    width: 4vw;
+    height: 4vw;
+      }
 
     .fullwidth-image-banner{
       display: none !important;
@@ -228,6 +233,17 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+
+      .custom-arrow .Right-icon{
+    font-size: 3.2vw ;
+    mix-blend-mode:multiply;
+    color: black !important;
+  }
+
+  .custom-arrow .Left-icon{
+    font-size: 3.2vw ;
+  }
   }
   
   

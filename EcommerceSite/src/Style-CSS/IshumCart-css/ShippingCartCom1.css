@@ -208,6 +208,14 @@
   }
 
 
+  input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4B3D1A; /* Modern way to set checked color */
+  cursor: pointer;
+  margin-right: 10px;
+}
+
   @media (max-width: 768px) {
     .shipping-container {
       padding: 30px 5vw;
