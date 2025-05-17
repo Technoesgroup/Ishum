@@ -132,6 +132,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
                 onClick={() => handleProductClick(product)}
               >
                 <img
+                  loading="lazy"
                   src={`${baseURL}/uploads/${product.image}`}
                   alt={product.name}
                   className="bestsellers-product-image"

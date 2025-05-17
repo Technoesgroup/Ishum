@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom6.css";
-import img_b1 from '../../images/image 27.svg';
-import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import UnderLine from '../../images/Undertextline.png';
 import axios from "axios";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../ContextApiCart/ProductContextApi"; // ✅ context import
 
@@ -28,7 +28,7 @@ const Collection = () => {
           }
         });
         const fetchedProducts = res.data.products || [];
-        setProducts(fetchedProducts.slice(0, 6)); // Limit to 6 products
+        setProducts(fetchedProducts.slice(0, 10)); // Limit to 6 products
       } catch (error) {
         console.error("Error fetching Noor Edit products:", error);
         setError("Failed to load products. Please try again later.");
@@ -57,51 +57,43 @@ const Collection = () => {
       </div>
 
       {loading ? (
-        <div className="loading-indicator">
-          <p>Loading products...</p>
-        </div>
+           <div className="custom-loader-wrapper">
+    <div className="custom-spinner"></div>
+  </div>
       ) : error ? (
         <div className="error-message">
           <p>{error}</p>
         </div>
       ) : (
         <div className="collection-grid">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className="product-card"
-              onClick={() => handleProductClick(product)} // ✅ onClick added
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                src={`${baseURL}/uploads/${product.image}`}
-                alt={product.name}
-                onError={(e) => (e.target.src = "/fallback-image.png")}
-              />
-              <p className="product-name">{product.name}</p>
-              <div className="All-price-with-discount">
-                <p className="product-discount">₹{product.price}</p>
-                <p className="product-price">₹{product.discount}</p>
-              </div>
-            </div>
-          ))}
+      {products.map((product, index) => (
+  <div
+    key={index}
+    className="product-card"
+    onClick={() => handleProductClick(product)}
+    style={{ cursor: "pointer" }}
+  >
+    <div className="product-img-wrapper">
+      <img
+      loading="lazy"
+        src={`${baseURL}/uploads/${product.image}`}
+        alt={product.name}
+        onError={(e) => (e.target.src = "/fallback-image.png")}
+      />
+      <div className="LandingpageComp-hover-icons">
+        <FavoriteBorderIcon />
+        <VisibilityIcon />
+      </div>
+    </div>
 
-          <div className="Ishum-banner-card">
-            <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
-            <div className="Ishum-banner-content">
-              <button
-                className="Ishum-banner-button"
-                onClick={() => navigate("/all-products?collection=Noor Edits")}
-              >
-                Explore
-              </button>
-            </div>
-            <p className="Ishum-jashn-paragraph">
-             <a href="/co-page/NOOR"> Every stitch tells a story, with delicate motifs and embellishments
-             creating a perfect blend of tradition and modernity.</a>
-              <TrendingFlatIcon className="TrendingFlatIcon" />
-            </p>
-          </div>
+    <p className="product-name">{product.name}</p>
+    <div className="All-price-with-discount">
+      <p className="product-discount">₹{product.price}</p>
+      <p className="product-price">₹{product.discount}</p>
+    </div>
+  </div>
+))}
+
         </div>
       )}
     </div>

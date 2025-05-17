@@ -11,31 +11,21 @@ import Comp6 from "../Component/Landing/LandingCom6";
 import Comp7 from "../Component/Landing/LandingCom7";
 import Comp8 from "../Component/Landing/LandingCom8";
 import Comp9 from "../Component/Landing/LandingCom9";
+import Comp10 from "../Component/Landing/LandingCom10";
+import Comp11 from "../Component/Landing/LandingCom11";
 
 const Landing = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500); // Simulated delay
-    return () => clearTimeout(timer);
-  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 130 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  if (loading) {
-    return (
-      <div className="loader-container">
-        <div className="loader"></div>
-      </div>
-    );
-  }
+
 
   return (
     <div className="Landing-Components">
-      {[Comp1, Comp2, Comp3, Comp4, Comp5, Comp6, Comp9, Comp7, Comp8].map(
+      {[Comp1, Comp2, Comp4, Comp5,Comp7,Comp10, Comp6, Comp9, Comp8, Comp11, Comp3,].map(
         (Component, index) => (
           <motion.div
             key={index}

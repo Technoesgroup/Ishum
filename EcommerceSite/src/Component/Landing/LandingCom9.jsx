@@ -38,11 +38,13 @@ const NewArrivals = () => {
       <div className="Com9-new-arrivals-grid">
         <div className="Com9-image-container">
           <img
+            loading="lazy"
             src={img4}
             alt="Main Product"
             className="Com9-main-image"
           />
           <img
+            loading="lazy"
             src={img5}
             alt="Close-up Detail"
             className="Com9-detail-image"

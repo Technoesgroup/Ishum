@@ -51,7 +51,7 @@ export default function Bestsellers() {
                   </button>
                   {openSortDropdown && (
                     <ul className="SortPrice-dropdown">
-                      {["100 to 500", "1000 to 2000", "3000", "10000", "50000 to 60000"].map((range) => (
+                      {["3000 to 5000", "5000 to 7000", "7000 to 10,000", "10,000 to 15,000"].map((range) => (
                         <li key={range} onClick={() => handleSelectSortOption(range)}>
                           <input
                             type="radio"
@@ -67,10 +67,10 @@ export default function Bestsellers() {
                 </div>
             <div className="AllPrice-of-bestseller">
               <p className="firstparagraph">Price  <KeyboardArrowRightIcon /></p>
-              <input type="range" min="0" max="5000" className="bestsellers-price-range" />
+              <input type="range" min="0" max="20,000" className="bestsellers-price-range" />
               <div className="two-input-minimax">
                 <input type="text" placeholder="₹ 0" /> <h4>-</h4>
-                <input type="text" placeholder="₹ 500" />
+                <input type="text" placeholder="₹ 20,000" />
               </div>
             </div>
 

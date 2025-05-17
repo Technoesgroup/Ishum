@@ -25,7 +25,7 @@ export default function Bestsellers() {
       <div className="bestsellers-container">
         <div className="bestseller-MainHeading">
           <h2 className="bestsellers-title">BESTSELLERS OF ISHUM</h2>
-          <img className="UnderLine" src={UnderLine} alt="" />
+          <img   loading="lazy" className="UnderLine" src={UnderLine} alt="" />
         </div>
 
         <div className="bestsellers-content">
