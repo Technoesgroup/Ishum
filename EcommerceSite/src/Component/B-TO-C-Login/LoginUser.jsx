@@ -3,6 +3,9 @@ import "../B-TO-C-Login/LoginUser.css";
 import img1 from "../../images/18839a14eab62a1c7d6277c6f8ba14f8.png";
 import OtpVerification from "./OtpVerification";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
@@ -23,7 +26,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 
   const handleSendOtp = async () => {
     if (phone.length !== 10) {
-      alert("Please enter a valid 10-digit phone number");
+      toast.error("Please enter a valid 10-digit phone number");
       return;
     }
 
@@ -40,17 +43,20 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 
       if (data.success) {
         setShowOtp(true);
+        toast.success("OTP sent successfully!");
       } else {
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.error(error);
-      alert("Failed to send OTP");
+      toast.error("Failed to send OTP");
     }
   };
 
   return (
     <div className={`LoginUser-container ${showAnimation ? "show" : ""}`}>
+      <ToastContainer position="top-center" autoClose={3000} />
+      
       <div className="LoginUser-form-section">
         {!showOtp ? (
           <>
@@ -85,10 +91,16 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
                   <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" />
                 </button>
                 <button className="LoginUser-social-btn">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google" />
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+                    alt="Google"
+                  />
                 </button>
                 <button className="LoginUser-social-btn">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                    alt="Facebook"
+                  />
                 </button>
               </div>
             </div>
@@ -129,5 +141,6 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 };
 
 export default SignupForm;
+
 
 

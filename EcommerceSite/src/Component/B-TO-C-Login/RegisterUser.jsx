@@ -4,6 +4,9 @@ import "../B-TO-C-Login/RegisterUser.css";
 import img1 from '../../images/18839a14eab62a1c7d6277c6f8ba14f8.png';
 import OtpVerification from "./OtpVerification";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [formData, setFormData] = useState({
     name: "",

@@ -9,6 +9,9 @@ import axios from "axios";
 import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Importing useAuth hook
 import { useNavigate } from "react-router-dom";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function ShippingCartCom2({ onClose }) {
     const navigate = useNavigate(); 
     const { user } = useAuth(); // Get user from context
@@ -16,15 +19,14 @@ export default function ShippingCartCom2({ onClose }) {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState("wallet");
     
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
-
-  const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
+    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
     useEffect(() => {
         const fetchCart = async () => {
             try {
                 if (!user || !user._id) {
-                    alert("User not found. Please log in.");
+                    toast.error("User not found. Please log in.");
                     return;
                 }
                 const res = await axios.get(`${baseURL}/api/cart/${user._id}`);
@@ -32,13 +34,14 @@ export default function ShippingCartCom2({ onClose }) {
                 console.log(res.data);
             } catch (err) {
                 console.error("Error fetching cart for shipping page", err);
+                toast.error("Failed to fetch cart data.");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchCart();
-    }, [user]); // Dependency array includes user to refetch if user changes
+    }, [user]);
 
     if (loading) return <div>Loading...</div>;
     if (!cart?.cartItems || cart.cartItems.length === 0) {
@@ -58,16 +61,16 @@ export default function ShippingCartCom2({ onClose }) {
             document.body.appendChild(script);
         });
 
-        const handlePayment = async () => {
-            await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-        
+    const handlePayment = async () => {
+        await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+
+        try {
             const { data: order } = await axios.post(`${baseURL}/create-order`, {
                 amount: totalPrice,
             });
-        
+
             const options = {
                 key : razorpayKey,
-                // Replace with your Razorpay Key ID
                 amount: order.amount,
                 currency: order.currency,
                 name: "My Store",
@@ -80,15 +83,15 @@ export default function ShippingCartCom2({ onClose }) {
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
                         });
-        
+
                         if (verifyRes.data.status === "success") {
-                            // ✅ Save order in backend
+                            // Save order in backend
                             await axios.post(`${baseURL}/api/orders/`, {
                                 userId: user._id,
                                 cartItems: cart.cartItems,
                                 totalAmount: totalPrice,
                                 shippingInfo: {
-                                    address: "Dummy Address", // Later take from user input
+                                    address: "Dummy Address",
                                     city: "Dummy City",
                                     pincode: "000000",
                                     phone: user.phone,
@@ -100,18 +103,18 @@ export default function ShippingCartCom2({ onClose }) {
                                     status: "Paid"
                                 }
                             });
-        
-                            alert("✅ Payment successful and order saved!");
+
+                            toast.success("Payment successful and order saved!");
                             localStorage.setItem("orderConfirmed", "true");
                             navigate("/OrderConformation");
 
                             onClose();
                         } else {
-                            alert("❌ Payment verification failed.");
+                            toast.error("Payment verification failed.");
                         }
                     } catch (error) {
                         console.error("Error saving order:", error);
-                        alert("❌ Something went wrong while saving your order.");
+                        toast.error("Something went wrong while saving your order.");
                     }
                 },
                 prefill: {
@@ -123,13 +126,17 @@ export default function ShippingCartCom2({ onClose }) {
                     color: "#3399cc",
                 },
             };
-        
+
             const rzp = new window.Razorpay(options);
             rzp.open();
-        };
-    
+        } catch (err) {
+            console.error("Error creating Razorpay order:", err);
+            toast.error("Failed to initiate payment.");
+        }
+    };
 
     return (
+        <>
         <div className="Payment-overlay">
             <div className="Payment-overlay-content">
                 <button className="close-button" onClick={onClose}>
@@ -186,6 +193,9 @@ export default function ShippingCartCom2({ onClose }) {
                 </div>
             </div>
         </div>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+        </>
     );
 }
+
 

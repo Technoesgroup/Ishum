@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../../Style-CSS/ProductPage/ViewProduct.css";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 
@@ -93,7 +95,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
 
 
   const handleAddToCart = async () => {
-    alert("Product add to cart")
+    toast.info("Product added to cart!");
     if (!user || !user._id) {
       alert("Please log in to add items to your cart.");
       return;
@@ -194,6 +196,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
           Add to Cart
         </button>
       </div>
+           <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

@@ -5,15 +5,18 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import AppleIcon from '@mui/icons-material/Apple';
 import CloseIcon from '@mui/icons-material/Close';
 import OtpLogin from "./MobileOtp"; // Reuse your OTP component
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MobileProfile = ({ onClose, onSignupClick }) => {
   const [phone, setPhone] = useState("");
   const [showOtp, setShowOtp] = useState(false);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   const handleSendOTP = async () => {
     if (!phone || phone.length !== 10) {
-      alert("Please enter a valid 10-digit phone number");
+      toast.error("Please enter a valid 10-digit phone number");
       return;
     }
   
@@ -29,18 +32,20 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
       const data = await response.json();
       if (data.success) {
         setShowOtp(true);
+        toast.success("OTP sent successfully");
       } else {
-        alert(data.message);
+        toast.error(data.message || "Failed to send OTP");
       }
     } catch (err) {
       console.error(err);
-      alert("Failed to send OTP");
+      toast.error("Failed to send OTP");
     }
   };
   
 
   return (
     <div className="mobile-login-modal-overlay">
+      <ToastContainer />
       <div className="mobile-login-modal-content mobile-login-container">
         {!showOtp ? (
           <>
@@ -55,17 +60,16 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
             </div>
 
             <div className="mobile-login-phone-input-wrapper">
-  <span className="country-code">+91</span>
-  <input
-    type="text"
-    className="mobile-login-input"
-    placeholder="Enter your phone number"
-    value={phone}
-    onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
-    maxLength={10}
-  />
-</div>
-
+              <span className="country-code">+91</span>
+              <input
+                type="text"
+                className="mobile-login-input"
+                placeholder="Enter your phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                maxLength={10}
+              />
+            </div>
 
             <div className="switch-login">Login by Email?</div>
 
@@ -87,11 +91,10 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
           </>
         ) : (
           <OtpLogin
-          phone={phone}
-          mode="login"
-          onClose={onClose}
-        />
-        
+            phone={phone}
+            mode="login"
+            onClose={onClose}
+          />
         )}
       </div>
     </div>
