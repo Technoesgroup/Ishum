@@ -57,9 +57,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
           >
             <div className="LandingComp2-image-container">
               {/* Skeleton loader or image */}
-              {!loadedImages[collection._id] && (
-                <div className="image-placeholder skeleton-loader"></div>
-              )}
+          
               <img
               loading="lazy"
                 src={`${baseURL}${collection.image}`}
