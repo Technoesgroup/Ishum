@@ -1,10 +1,16 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+const sharp = require('sharp');
 
-// Disk storage
+// 1. Multer Disk Storage Setup
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // make sure this folder exists
+    const uploadPath = 'uploads/';
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -12,13 +18,13 @@ const storage = multer.diskStorage({
   }
 });
 
-// Optional file filter
+// 2. Optional File Filter
 const fileFilter = (req, file, cb) => {
   console.log('Uploaded file:', file.originalname);
   cb(null, true);
 };
 
-// Remove file size limit
+// 3. Multer Upload Setup
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
@@ -28,7 +34,43 @@ const upload = multer({
   { name: "colorImages", maxCount: 20 }
 ]);
 
-module.exports = upload;
+// 4. Sharp Compression Middleware (after multer)
+const compressImages = async (req, res, next) => {
+  const compressSingleImage = async (file) => {
+    const inputPath = file.path;
+    const outputPath = inputPath.replace(path.extname(file.originalname), ".webp");
+
+    await sharp(inputPath)
+      .resize({ width: 800 }) // Resize width
+      .webp({ quality: 70 })  // Compress to webp
+      .toFile(outputPath);
+
+    fs.unlinkSync(inputPath); // Remove original file
+    file.path = outputPath;
+    file.filename = path.basename(outputPath);
+  };
+
+  try {
+    const fields = ['image', 'thumbnails', 'colorImages'];
+
+    for (let field of fields) {
+      if (req.files && req.files[field]) {
+        await Promise.all(req.files[field].map(compressSingleImage));
+      }
+    }
+
+    next();
+  } catch (err) {
+    console.error("Image compression failed:", err);
+    res.status(500).json({ error: "Image processing failed" });
+  }
+};
+
+module.exports = {
+  upload,
+  compressImages
+};
+
 
 
 

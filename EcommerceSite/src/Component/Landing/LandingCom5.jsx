@@ -7,7 +7,8 @@ import axios from "axios";
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
 
   useEffect(() => {
   axios.get(`${baseURL}/api/products/get-product`)
