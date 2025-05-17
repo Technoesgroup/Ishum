@@ -6,29 +6,23 @@ import axios from "axios";
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
+  const [loadedImages, setLoadedImages] = useState({});
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-   const baseURL = import.meta.env.VITE_API_BASE_URL;
+  useEffect(() => {
+    axios.get("http://localhost:4000/api/products/get-product")
+      .then((res) => {
+        const filtered = res.data.products.filter(
+          (product) => product.subcategory === "Co-ord sets"
+        );
 
-
-   useEffect(() => {
-  axios.get("http://localhost:4000/api/products/get-product")
-    .then((res) => {
-      const filtered = res.data.products.filter(
-        (product) => product.subcategory === "Co-ord sets"
-      );
-
-      // ❗ Limit to 12 products only
-      const limited = filtered.slice(0, 12);
-
-      // ❗ Move first half to end and second half to start
-      const half = Math.floor(limited.length / 2);
-      const rearranged = [...limited.slice(half), ...limited.slice(0, half)];
-
-      setProducts(rearranged);
-    })
-    .catch((err) => console.error(err));
-}, []);
-
+        const limited = filtered.slice(0, 12);
+        const half = Math.floor(limited.length / 2);
+        const rearranged = [...limited.slice(half), ...limited.slice(0, half)];
+        setProducts(rearranged);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const groupedByCategory = groupByCategory(products);
 
@@ -52,15 +46,30 @@ const TrendingProducts = () => {
             {groupedByCategory[categoryName].map((product) => (
               <div key={product._id} className="LandingCom4-product-card">
                 <div className="LandingCom4-product-img-wrapper">
+                  {!loadedImages[product._id] && (
+                    <div className="image-placeholder skeleton-loader"></div>
+                  )}
+
                   <img
                     loading="lazy"
                     src={`http://localhost:4000/uploads/${product.image}`}
                     alt={product.name}
+                    style={{
+                      display: loadedImages[product._id] ? "block" : "none"
+                    }}
+                    onLoad={() =>
+                      setLoadedImages((prev) => ({
+                        ...prev,
+                        [product._id]: true
+                      }))
+                    }
                   />
+
                   <div className="LandingCom4-hover-icons">
                     <FavoriteBorderIcon />
                     <VisibilityIcon />
                   </div>
+
                   {/* {!product.availability && (
                     <div className="LandingCom4-out-of-stock">OUT OF STOCK</div>
                   )} */}
@@ -69,10 +78,9 @@ const TrendingProducts = () => {
                 <div className="LandingCom4-product-info">
                   <p>{product.name}</p>
                   <p className="LandingCom4-price">
-                     ₹{product.price}
+                    ₹{product.price}
                     <span style={{ textDecoration: "line-through" }}>
-                          ₹{product.discount}{" "}
-                    
+                      ₹{product.discount}
                     </span>
                   </p>
                 </div>
@@ -86,4 +94,5 @@ const TrendingProducts = () => {
 };
 
 export default TrendingProducts;
+
 

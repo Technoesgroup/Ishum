@@ -3,85 +3,89 @@ import "../../Style-CSS/Landing-css/LandingCom4.css";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
-import { useProduct } from "../../ContextApiCart/ProductContextApi"; // adjust path if needed
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
+  const [loadedImages, setLoadedImages] = useState({});
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-
   const navigate = useNavigate();
-const { setSelectedProduct } = useProduct(); // for setting clicked product globally
+  const { setSelectedProduct } = useProduct();
 
-// Product click handler
-const handleProductClick = (product) => {
-  setSelectedProduct(product);
-  localStorage.setItem("selectedProduct", JSON.stringify(product));
-  navigate("/Viewproduct");
-};
-
-
-useEffect(() => {
-  const fetchTrendingProducts = async () => {
-    try {
-      const res = await axios.get(`${baseURL}/api/products/get-product?isBestseller=true`);
-      
-      // Get only 16 products
-      const limited = res.data.products.slice(0, 16);
-      setProducts(limited);
-
-    } catch (error) {
-      console.error("Failed to fetch trending products:", error);
-    }
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/Viewproduct");
   };
 
-  fetchTrendingProducts();
-}, []);
+  useEffect(() => {
+    const fetchTrendingProducts = async () => {
+      try {
+        const res = await axios.get(`${baseURL}/api/products/get-product?isBestseller=true`);
+        const limited = res.data.products.slice(0, 16);
+        setProducts(limited);
+      } catch (error) {
+        console.error("Failed to fetch trending products:", error);
+      }
+    };
 
+    fetchTrendingProducts();
+  }, []);
 
   return (
     <div className="LandingCom4-trending-section">
       <h2>Trending Best Selling Products</h2>
       <div className="LandingCom4-product-slider">
         {products.map((product) => (
-          <div key={product._id} className="LandingCom4-product-card" >
+          <div key={product._id} className="LandingCom4-product-card">
             {/* Badge */}
             {product.isExclusive && (
               <span className="LandingCom4-badge best">EXCLUSIVE</span>
             )}
             {product.isBestseller && (
-              <span className="LandingCom4-badge best">BEST  SELL</span>
+              <span className="LandingCom4-badge best">BEST SELL</span>
             )}
 
             {/* Image */}
             <div className="LandingCom4-product-img-wrapper">
-            
+              {/* Show placeholder if image is not yet loaded */}
+              {!loadedImages[product._id] && (
+                <div className="image-placeholder skeleton-loader"></div>
+              )}
+
               <img
                 loading="lazy"
                 src={`${baseURL}/uploads/${product.image}`}
                 alt={product.name}
+                style={{
+                  display: loadedImages[product._id] ? 'block' : 'none'
+                }}
+                onLoad={() =>
+                  setLoadedImages((prev) => ({
+                    ...prev,
+                    [product._id]: true
+                  }))
+                }
               />
+
               <div className="LandingCom4-hover-icons">
                 <FavoriteBorderIcon />
-                <VisibilityIcon   onClick={() => handleProductClick(product)} />
+                <VisibilityIcon onClick={() => handleProductClick(product)} />
               </div>
-              {/* {!product.availability && (
-                <div className="LandingCom4-out-of-stock">OUT OF STOCK</div>
-              )} */}
             </div>
 
             {/* Info */}
             <div className="LandingCom4-product-info">
-              <p   onClick={() => handleProductClick(product)}>{product.name}</p>
-                 <p className="LandingCom4-price">
-                     ₹{product.price}
-                    <span style={{ textDecoration: "line-through" }}>
-                          ₹{product.discount}{" "}
-                    
-                    </span>
-                  </p>
-              {/* Optional: show stars if rating exists */}
+              <p onClick={() => handleProductClick(product)}>{product.name}</p>
+              <p className="LandingCom4-price">
+                ₹{product.price}
+                <span style={{ textDecoration: "line-through" }}>
+                  ₹{product.discount}
+                </span>
+              </p>
+
               {product.rating && (
                 <p className="LandingCom4-stars">
                   {"★".repeat(Math.floor(product.rating))}
@@ -96,6 +100,7 @@ useEffect(() => {
 };
 
 export default TrendingProducts;
+
 
 
 
