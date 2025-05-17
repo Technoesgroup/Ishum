@@ -60,9 +60,9 @@ return (
     </div>
 
     {loading ? (
-      <div className="loading-indicator">
-        <p>Loading products...</p>
-      </div>
+         <div className="custom-loader-wrapper">
+    <div className="custom-spinner"></div>
+  </div>
     ) : error ? (
       <div className="error-message">
         <p>{error}</p>
@@ -77,6 +77,7 @@ return (
             style={{ cursor: "pointer" }}
           >
             <img
+            loading="lazy"
               src={`${baseURL}/uploads/${product.image}`}
               alt={product.name}
               onError={(e) => (e.target.src = "/fallback-image.png")}

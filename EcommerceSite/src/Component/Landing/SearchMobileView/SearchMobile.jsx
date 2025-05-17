@@ -128,7 +128,7 @@ const MobileView = () => {
         localStorage.setItem("selectedProduct", JSON.stringify(item)); // store in localStorage
         navigate("/Viewproduct"); // navigate to view page
       }}>
-        <img src={`http://localhost:4000/uploads/${item.image}`} alt={item.name} className="Ishum-mobile-popular-img" />
+        <img    loading="lazy" src={`http://localhost:4000/uploads/${item.image}`} alt={item.name} className="Ishum-mobile-popular-img" />
         <div className="Ishum-mobile-popular-info">
           <p>{item.name}</p>
           <p className="Ishum-mobile-text-muted">starting ₹{item.price}</p>

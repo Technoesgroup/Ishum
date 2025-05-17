@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CategoryList from '../BestSellerCategory';
-import ColorList from '../BestSellerColor';
 
 const FilterSection = ({ selected, handleSelection, openDropdown, handleToggle }) => {
 

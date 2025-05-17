@@ -51,7 +51,7 @@ const OrderTracking = () => {
 <div  className="AllOrders-track">
 {order.items.map((item, index) => (
           <div key={index} className="orderTracking-header">
-        <img  className="order-image " src={`${baseURL}/uploads/${item.image}`} alt={item.name} />
+        <img   loading="lazy" className="order-image " src={`${baseURL}/uploads/${item.image}`} alt={item.name} />
 
             <div className="orderTracking-info">
               <h2 className="order-product-title">{item.title}</h2>

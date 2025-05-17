@@ -54,7 +54,7 @@ const OrderList = () => {
       {orders.filter(order => order.status.toLowerCase() === filter.toLowerCase()).map((order) => (
         <div key={order._id} className="order-c-p-d-card"> {/* Use _id instead of id */}
           <div className="order-image">
-          <img src={`${baseURL}/uploads/${order.items[0]?.image}`} alt={order.items[0]?.title} className="order-images" />
+          <img   loading="lazy" src={`${baseURL}/uploads/${order.items[0]?.image}`} alt={order.items[0]?.title} className="order-images" />
 
           </div>
           <div className="order-details">

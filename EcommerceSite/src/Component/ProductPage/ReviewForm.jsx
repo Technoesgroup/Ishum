@@ -112,6 +112,7 @@ const ReviewForm = ({ onClose, productId }) => {
 
       {formData.image && (
         <img
+          loading="lazy"
           src={URL.createObjectURL(formData.image)}
           alt="Review"
           className="image-preview"

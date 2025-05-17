@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom6.css";
-import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useProduct } from "../../ContextApiCart/ProductContextApi";  // context import
-import img_b1 from '../../images/f37e59c3c1941b14378cf406fafeb868fdda4a4e.png';
 import UnderLine from '../../images/Undertextline.png';
 
 const Collection = () => {
@@ -37,7 +37,7 @@ const Collection = () => {
     fetchIshumProducts();
   }, [collectionName]);
 
-  const limitedProducts = products.slice(0, 6);
+  const limitedProducts = products.slice(0, 8);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);  
@@ -53,37 +53,36 @@ const Collection = () => {
       </div>
 
       {loading ? (
-        <div className="loading-indicator">
-          <p>Loading...</p>
-        </div>
+       <div className="custom-loader-wrapper">
+    <div className="custom-spinner"></div>
+  </div>
       ) : (
         <div className="collection-grid">
           {limitedProducts.map((product) => (
-            <div
-              key={product._id}
-              className="product-card"
-              onClick={() => handleProductClick(product)}
-              style={{ cursor: "pointer" }}
-            >
-              <img   src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
-              <p className="product-name">{product.name}</p>
-              <div className="All-price-with-discount">
-                <p className="product-discount">₹{product.price}</p>
-                <p className="product-price">₹{product.discount}</p>
-              </div>
-            </div>
+   <div
+  key={product._id}
+  className="product-card"
+  onClick={() => handleProductClick(product)}
+  style={{ cursor: "pointer" }}
+>
+  <div className="product-img-wrapper">
+    <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
+
+    <div className="LandingpageComp-hover-icons">
+      <FavoriteBorderIcon />
+      <VisibilityIcon />
+    </div>
+  </div>
+
+  <p className="product-name">{product.name}</p>
+  <div className="All-price-with-discount">
+    <p className="product-discount">₹{product.price}</p>
+    <p className="product-price">₹{product.discount}</p>
+  </div>
+</div>
+
           ))}
 
-          <div className="Ishum-banner-card">
-            <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
-            <div className="Ishum-banner-content">
-              <button className="Ishum-banner-button">Explore</button>
-            </div>
-            <p className="Ishum-jashn-paragraph">
-            <a href="/co-page/Rangrez">Rangrez brings together the brightest shades of life in one breathtaking collection.</a>
-              <TrendingFlatIcon />
-            </p>
-          </div>
         </div>
       )}
     </div>

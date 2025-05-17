@@ -108,7 +108,8 @@
 
   @media (max-width: 768px) {
     .Com9-new-arrivals-container {
-      padding: 40px 5vw; /* Mobile pe padding kam ki */
+        margin-top: 0;
+      padding: 10px 5vw; /* Mobile pe padding kam ki */
     }
   
     .Com9-section-title {

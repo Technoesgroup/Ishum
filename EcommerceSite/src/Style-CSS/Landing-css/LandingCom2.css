@@ -1,158 +1,187 @@
 @import url('../Poppins-Font.css');
+/* Slider.css */
 
-.LandingCom-2-collection-container {
-  background-color: #EEEBE4;
-  text-align: center;
-  padding: 3vw 3vw;
-}
-
-.LandingCom-2-collection-title {
-  font-size: 1.5rem;
-  font-family: 'PoppinsRegular';
-  margin-bottom: 10px;
-}
-
-.ishumCom-2-contents-MainHeading {
+.LandingComp2-grid-container {
   display: flex;
-  color: #4B3D1A;
-  font-family: 'PoppinsRegular';
-  font-size: 1.2rem;
-  flex-direction: column;
-  align-items: center;
-  margin: 18px 0 30px 0;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem  5vw;
+    overflow-x: auto;
+  scroll-behavior: smooth;
+  flex-wrap: nowrap; /* prevent wrapping */
+  scrollbar-width: none;
 }
 
-.ishum-contents-Com2-UnderLine {
-  width: 30vw;
-}
 
-.LandingCom-2-collection-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 0 40px;
-}
-
-.LandingCom-2-collection-item {
+/* 👇 NEW parent wrapper for arrow support */
+.LandingComp2-slider-wrapper {
   position: relative;
-  max-width: 100%;
-}
-
-.LandingCom-2-collection-image {
-  width: 100%;
-  height: 26vw;
-  object-fit: contain;
-}
-
-.LandingCom-2-collection-info {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.LandingCom-2-collection-name {
-  font-family: 'PoppinsRegular';
-  font-size: 1.1rem;
-  padding: 0.5vw;
-  font-weight: bold;
-}
-
-.LandingCom-2-underline {
-  width: 60px;
-  height: 2px;
-  background-color: #4B3D1A;
-  margin: 5px auto;
-}
-
-.LandingCom-2-view-more {
-  font-family: 'PoppinsRegular';
-  color:#4B3D1A;
-  font-size: 0.9rem;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2vw;
+  gap: 1rem;
 }
 
 
-.LandingCom-2-view-all-button {
-  font-family: 'PoppinsRegular';
-  margin-top: 2.6vw;
-  padding: 1.2vw 2.6vw;
-  background-color: #4B3D1A;
+.LandingComp2-grid-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* 👇 No change to card layout */
+.LandingComp2-card {
+  flex: 0 0 auto;
+  width: 350px;
+  height: 34vw; /* Fixed height for consistency */
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+/* 👇 Arrow buttons */
+.LandingComp2-scroll-arrow {
+  background-color: #222;
   color: white;
-  font-size: 1rem;
+  border: none;
+  padding: 1rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
   cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+.LandingComp2-scroll-arrow:hover {
+  background-color: #000;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .LandingCom-2-collection-container {
-    padding: 5vw 5vw;
+
+.LandingComp2-card:hover {
+  transform: translateY(-5px);
+}
+
+.LandingComp2-image-container {
+  width: 100%;
+  height: 40vw; /* Fixed height */
+  overflow: hidden;
+    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LandingComp2-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes sure the image covers the container without distortion */
+  border-radius: 5px;
+}
+
+
+.LandingComp2-hover-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.7rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.LandingComp2-image-container:hover .LandingComp2-hover-button {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+.LandingComp2-product-info {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.LandingComp2-type {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.LandingComp2-title {
+     color: #4B3D1A;
+     font-family: 'PoppinsRegular';
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.1rem 0;
+}
+
+.LandingComp2-price {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+
+/* ---------- MOBILE VIEW STYLES ---------- */
+@media screen and (max-width: 768px) {
+  .LandingComp2-slider-wrapper {
+    /* flex-direction: column; */
+    padding: 2rem 1rem;
   }
 
-  .LandingCom-2-collection-title {
-    font-size: 1.3rem;
+  .LandingComp2-scroll-arrow {
+    position: absolute;
+    top: 40%;
+    /* transform: translateY(-40%); */
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 1.2rem;
+    padding: 0.6rem;
   }
 
-  .ishumCom-2-contents-MainHeading {
-    font-size: 1rem;
-    margin: 12px 0 20px 0;
+  .LandingComp2-scroll-arrow.left {
+    left: 0.5rem;
   }
 
-  .ishum-contents-Com2-UnderLine {
+  .LandingComp2-scroll-arrow.right {
+    right: 0.5rem;
+  }
+
+  .LandingComp2-grid-container {
+  width: 100% !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    overflow-x: auto;
+  scroll-behavior: smooth;
+  flex-wrap: nowrap; /* prevent wrapping */
+    padding: 1rem 1vw;
+  }
+
+  .LandingComp2-card {
     width: 100%;
+    max-width: 90vw;
+    height: auto;
+    border-radius: 10px;
   }
 
-  .LandingCom-2-collection-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    padding: 0 10px;
-  }
-
-  .LandingCom-2-collection-image {
+  .LandingComp2-image-container {
     width: 100%;
-    height: 60vw;
+    height: 430px;
   }
 
-  .LandingCom-2-collection-info {
-    margin-top: 15px;
-  }
-
-  .LandingCom-2-collection-name {
+  .LandingComp2-title {
     font-size: 1rem;
-    padding: 1vw;
+    letter-spacing: 1px;
   }
 
-  .LandingCom-2-underline {
-    width: 45px;
-    height: 2px;
-  }
-
-  .LandingCom-2-view-more {
-    font-size: 0.85rem;
-  }
-
-
-  .LandingCom-2-view-all-button {
-    width: 70%;
-    margin-top: 30px;
-    padding: 3.5vw;
+  .LandingComp2-hover-button {
     font-size: 0.9rem;
-    border: none;
-    border-radius: 5px;
+    padding: 0.6rem;
   }
 }
-
-@media (max-width: 480px) {
-  .LandingCom-2-collection-title {
-    font-size: 1.15rem;
-  }
-
-  .LandingCom-2-view-all-button {
-    width: 60%;
-    font-size: 0.85rem;
-  }
-
-  .LandingCom-2-collection-name {
-    font-size: 0.95rem;
-  }
-}
-

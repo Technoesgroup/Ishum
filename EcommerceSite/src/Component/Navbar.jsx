@@ -108,13 +108,11 @@ export default function Navbar() {
       <div className="info-top-header">
         <div className="info-top-links">
           {/* <span>SHIPPING & DELIVERY</span> */}
-          
-
           <span><a href="/OrderTracking">TRACK YOUR ORDER</a></span>
           <span><a href="/ReturnPolicy">RETURNS</a></span>
           <span  onClick={() => setShowB2BModal(true)} >CONTACT US</span>
         </div>
-        <div className="Ishum-social-icons">
+        <div className="Ishum-top-social-icons">
         <a href="https://www.facebook.com/Ishumbykaran/"><FacebookOutlinedIcon className='socialicon' /></a>
         <a href="https://www.instagram.com/ishumbykaran_official?igsh=Y3J6d3JmMDMxa2cw"><InstagramIcon className='socialicon' /></a>
         <a href="https://in.pinterest.com/ishumdesigns/"><PinterestIcon className='socialicon' /></a>
@@ -124,6 +122,61 @@ export default function Navbar() {
 
       {/* SOCIAL ICON + LOGO + PROFILE MENU */}
       <div className="Ishum-navbar">
+
+          <div className='ishum-nav-li-serachbar'>
+        <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>STORE</Link>
+          <Link to="/bestsellers" onClick={() => setIsMenuOpen(false)}>BESTSELLERS</Link>
+          <Link to="/Ishum-Exclusive" onClick={() => setIsMenuOpen(false)}>ISHUM'S EXCLUSIVE</Link>
+
+          {/* <div className="dropdown" onMouseEnter={() => setIsRecommendationOpen(true)} onMouseLeave={() => setIsRecommendationOpen(false)}>
+            <div className='RECOMMENDATION'>ISHUM'S RECOMMENDATION <KeyboardArrowDownSharpIcon /></div>
+            {isRecommendationOpen && (
+              <ul className="Ishum-dropdown-menu">
+                <span className='RECOMMENDATION-dropdown-li'>
+                  <span className='Occasion'>
+                    <h2>Occasion</h2>
+                    <li><Link to="/Leg " onClick={() => setIsMenuOpen(false)}>Eid</Link></li>
+                    <li><Link to="/Tag" onClick={() => setIsMenuOpen(false)}>Diwali</Link></li>
+                    <li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
+
+                  </span>
+                  <div  className='line-occasion'></div>
+                  <span className='SALE'>
+                    <h2>SALE</h2>
+                    <li><Link to="/Lega ">Upto 35% Off On Gulzaar Collection</Link></li>
+                    <li><Link to="/Ta">Upto 20% Off On Jashn e Rang Collection</Link></li>
+                    <li><Link to="/B2B">Diwali Offers</Link></li>
+                  </span>
+                </span>
+              </ul>
+            )}
+          </div> */}
+          <div className="dropdown" onMouseEnter={() => setIsDiscoverOpen(true)} onMouseLeave={() => setIsDiscoverOpen(false)}>
+            <div className='discover'>DISCOVER <KeyboardArrowDownSharpIcon /></div>
+            {isDiscoverOpen && (
+              <ul className="Ishum-dropdown-menu ishum-discover-dropdown">
+                <li><Link to="/Legacy" onClick={() => setIsMenuOpen(false)}>Legacy</Link></li>
+                <li><Link to="/Tale" onClick={() => setIsMenuOpen(false)}>Our Tale</Link></li>
+                <li><Link to="/B2B-Policy" onClick={() => setIsMenuOpen(false)}>B2B Policy</Link></li>
+
+              </ul>
+            )}
+          </div>
+          <Link to="/review" onClick={() => setIsMenuOpen(false)}>REVIEW</Link>
+          {/* <button
+            onClick={() => {
+              setShowB2BModal(true);
+              setIsMenuOpen(false);
+            }}
+            className="BUSINESS-TO-BUSINESS"
+          >
+            BUSINESS TO BUSINESS
+          </button> */}
+
+        </div>
+
+      </div>
         <div className="Ishum-logo-container">
           <img src={logo} alt="Ishum Logo" className="Ishum-logo" />
         </div>
@@ -192,60 +245,7 @@ export default function Navbar() {
       </div>
 
       {/* NAVIGATION LINKS AND SEARCH */}
-      <div className='ishum-nav-li-serachbar'>
-        <div className={`Ishum-nav-links ${isMenuOpen ? "active" : ""}`}>
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>STORE</Link>
-          <Link to="/bestsellers" onClick={() => setIsMenuOpen(false)}>BESTSELLERS</Link>
-          <Link to="/Ishum-Exclusive" onClick={() => setIsMenuOpen(false)}>ISHUM'S EXCLUSIVE</Link>
-
-          <div className="dropdown" onMouseEnter={() => setIsRecommendationOpen(true)} onMouseLeave={() => setIsRecommendationOpen(false)}>
-            <div className='RECOMMENDATION'>ISHUM'S RECOMMENDATION <KeyboardArrowDownSharpIcon /></div>
-            {isRecommendationOpen && (
-              <ul className="Ishum-dropdown-menu">
-                <span className='RECOMMENDATION-dropdown-li'>
-                  <span className='Occasion'>
-                    <h2>Occasion</h2>
-                    <li><Link to="/Leg " onClick={() => setIsMenuOpen(false)}>Eid</Link></li>
-                    <li><Link to="/Tag" onClick={() => setIsMenuOpen(false)}>Diwali</Link></li>
-                    <li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
-
-                  </span>
-                  <div  className='line-occasion'></div>
-                  <span className='SALE'>
-                    <h2>SALE</h2>
-                    <li><Link to="/Lega ">Upto 35% Off On Gulzaar Collection</Link></li>
-                    <li><Link to="/Ta">Upto 20% Off On Jashn e Rang Collection</Link></li>
-                    <li><Link to="/B2B">Diwali Offers</Link></li>
-                  </span>
-                </span>
-              </ul>
-            )}
-          </div>
-          <div className="dropdown" onMouseEnter={() => setIsDiscoverOpen(true)} onMouseLeave={() => setIsDiscoverOpen(false)}>
-            <div className='discover'>DISCOVER <KeyboardArrowDownSharpIcon /></div>
-            {isDiscoverOpen && (
-              <ul className="Ishum-dropdown-menu ishum-discover-dropdown">
-                <li><Link to="/Legacy" onClick={() => setIsMenuOpen(false)}>Legacy</Link></li>
-                <li><Link to="/Tale" onClick={() => setIsMenuOpen(false)}>Our Tale</Link></li>
-                <li><Link to="/B2B-Policy" onClick={() => setIsMenuOpen(false)}>B2B Policy</Link></li>
-
-              </ul>
-            )}
-          </div>
-          <Link to="/review" onClick={() => setIsMenuOpen(false)}>REVIEW</Link>
-          <button
-            onClick={() => {
-              setShowB2BModal(true);
-              setIsMenuOpen(false);
-            }}
-            className="BUSINESS-TO-BUSINESS"
-          >
-            BUSINESS TO BUSINESS
-          </button>
-
-        </div>
-
-      </div>
+  
 
       {/* MODALS */}
       {showB2BModal && (

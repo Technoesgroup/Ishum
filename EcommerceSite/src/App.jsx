@@ -1,5 +1,6 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { motion } from "framer-motion";
 import FilledCart from './Component/IshumCart/FilledCart';
 import Navbar from './Component/Navbar';
 import Home from './Pages/LandingPage';
@@ -26,47 +27,82 @@ import ScrollToTop from './Component/ScrollTop';
 import ReturnPolicy from './Component/AllPolicies/ReturnPolicy';
 import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy"; 
 import TearmsServices from './Component/AllPolicies/TearmsPolicy';
-import  PaymentServices from './Component/AllPolicies/PaymentStatement';
-
-
+import PaymentServices from './Component/AllPolicies/PaymentStatement';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  // Simulate loading screen delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Show loader for 2 seconds
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
+
+  if (loading) {
+    const letters = "ishum".split("");
+
+    return (
+      <div className="loader-container">
+        <div className="khadija-logo">
+          {letters.map((letter, index) => (
+            <motion.span
+              key={index}
+              initial={{ y: 0 }}
+              animate={{ y: [0, -30, 0] }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                delay: index * 0.1,
+                ease: "easeInOut",
+              }}
+              className="letter"
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
-     <Router>
-        <ScrollToTop />
+    <Router>
+      <ScrollToTop />
       <Navbar />
-     <Routes>
-     <Route path="/"  element={<Home />}></Route>
-      <Route path="/login"  element={<Login />}></Route>
-      <Route path="/bestsellers"  element={<BestSeller />}></Route>
-      <Route path="/Cart"  element={<FilledCart />}></Route>
-      <Route path="/MyOrder"  element={<MyOrder />}></Route>
-      <Route path="/Shipping"  element={<Shipping />}></Route>
-      <Route path="/addcollection"  element={<Collection />}></Route>
-      <Route path="/review"  element={<Review />}></Route>
-      <Route path="/Tale"  element={<Tale />}></Route>
-      <Route path="/Legacy"  element={<Legacy />}></Route>
-      <Route path="/Login-mobile-profile"  element={<MobileLogin />}></Route>
-      <Route path="/Profile"  element={<UserAccount />}></Route>
-      <Route path="/Ishum-Exclusive"  element={<IshumExclusive />}></Route>
-      <Route path="/Collection" element={<COLLECTION />}></Route>
-      <Route path="/co-page/:title" element={<CollectionPage />} />
-      <Route path="/Viewproduct" element={<ViewProduct />} />
-      <Route path="/OrderConformation"  element={<OrderConformation />}></Route>
-      <Route path="/OrderTracking"  element={<OrderTracking />}></Route>
-      <Route path="/search"  element={<MobileSearch/>}></Route>
-      <Route path="/PrivacyPolicy"  element={<PrivacyPolicy/>}> </Route>
-      <Route path="/ReturnPolicy"  element={<ReturnPolicy/>}> </Route>
-      <Route path="/PaymentServices"  element={<PaymentServices/>}> </Route>
-      <Route path="/TearmsServices"  element={<TearmsServices/>}> </Route>
-     </Routes>
-     <Footer />
-     </Router>
-  )
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/bestsellers" element={<BestSeller />} />
+        <Route path="/Cart" element={<FilledCart />} />
+        <Route path="/MyOrder" element={<MyOrder />} />
+        <Route path="/Shipping" element={<Shipping />} />
+        <Route path="/addcollection" element={<Collection />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/Tale" element={<Tale />} />
+        <Route path="/Legacy" element={<Legacy />} />
+        <Route path="/Login-mobile-profile" element={<MobileLogin />} />
+        <Route path="/Profile" element={<UserAccount />} />
+        <Route path="/Ishum-Exclusive" element={<IshumExclusive />} />
+        <Route path="/Collection" element={<COLLECTION />} />
+        <Route path="/co-page/:title" element={<CollectionPage />} />
+        <Route path="/Viewproduct" element={<ViewProduct />} />
+        <Route path="/OrderConformation" element={<OrderConformation />} />
+        <Route path="/OrderTracking" element={<OrderTracking />} />
+        <Route path="/search" element={<MobileSearch />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/ReturnPolicy" element={<ReturnPolicy />} />
+        <Route path="/PaymentServices" element={<PaymentServices />} />
+        <Route path="/TearmsServices" element={<TearmsServices />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
 }
 
-export default App
+export default App;
 
 
 

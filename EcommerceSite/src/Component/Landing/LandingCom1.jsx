@@ -67,7 +67,7 @@ function HomeC1() {
         {imagesToRender.map((img, index) => (
           <div key={index}>
             <div className="hero-img-wrapper">
-              <img src={img} alt={`Slide ${index + 1}`} className="hero-img" />
+              <img   loading="lazy" src={img} alt={`Slide ${index + 1}`} className="hero-img" />
             </div>
           </div>
         ))}

@@ -20,3 +20,24 @@ a{
   text-decoration: none;
   color: black;
 }
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5ebe1;
+}
+
+.khadija-logo {
+  letter-spacing: 2px;
+  font-size: 78px;
+  font-family: 'Georgia', serif; /* Or your custom font */
+  color: #857b79;
+  display: flex;
+  gap: 2px;
+}
+
+.khadija-logo .letter {
+  display: inline-block;
+}
