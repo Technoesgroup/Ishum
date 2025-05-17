@@ -18,7 +18,7 @@ const CartItem = ({ id, image, title, price, size, color, quantity, onIncrease, 
 
   
   <div className="Cartitem-cart-item">
-    <img src={`${baseURL}/uploads/${image}`}  alt={title} />
+    <img    loading="lazy" src={`${baseURL}/uploads/${image}`}  alt={title} />
     <div className="Cartitem-cart-item-details">
       <div className="Cartitem-details-tile-price">
         <h2>{title}</h2>

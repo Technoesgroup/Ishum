@@ -24,7 +24,7 @@ const TrendingProducts = () => {
     const fetchTrendingProducts = async () => {
       try {
         const res = await axios.get(`${baseURL}/api/products/get-product?isBestseller=true`);
-        const limited = res.data.products.slice(0, 16);
+        const limited = res.data.products.slice(0, 12);
         setProducts(limited);
       } catch (error) {
         console.error("Failed to fetch trending products:", error);

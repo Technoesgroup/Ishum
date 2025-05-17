@@ -31,8 +31,8 @@
 /* 👇 No change to card layout */
 .LandingComp2-card {
   flex: 0 0 auto;
-  width: 350px;
-  height: 34vw; /* Fixed height for consistency */
+  width: 300px;
+  height: 30vw; /* Fixed height for consistency */
   overflow: hidden;
   border-radius: 8px;
   transition: transform 0.3s ease;
@@ -65,7 +65,7 @@
 
 .LandingComp2-image-container {
   width: 100%;
-  height: 40vw; /* Fixed height */
+  height: 35vw; /* Fixed height */
   overflow: hidden;
     position: relative;
   display: flex;

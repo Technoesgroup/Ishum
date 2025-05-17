@@ -28,7 +28,7 @@ const Collection = () => {
           }
         });
         const fetchedProducts = res.data.products || [];
-        setProducts(fetchedProducts.slice(0, 10)); // Limit to 6 products
+        setProducts(fetchedProducts.slice(0, 8)); // Limit to 6 products
       } catch (error) {
         console.error("Error fetching Noor Edit products:", error);
         setError("Failed to load products. Please try again later.");
