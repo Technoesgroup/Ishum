@@ -117,7 +117,7 @@
   .Ishum-mobile-recent-header p{
     color: gray;
     margin: 0.4rem 0;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
   }
 
   .Ishum-mobile-Search-icon{
@@ -162,9 +162,13 @@
   
   .Ishum-mobile-popular-heading {
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: gray;
     margin: 1.8rem  0;
+  }
+
+   .Name-of-product-serach{
+       font-size: 0.7rem !important;
   }
   
   .Ishum-mobile-popular-scroll {
@@ -186,7 +190,7 @@
   
   .Ishum-mobile-popular-img {
     width: 100%;
-    height: 140px;
+    height: 200px;
     object-fit: cover;
   }
   
