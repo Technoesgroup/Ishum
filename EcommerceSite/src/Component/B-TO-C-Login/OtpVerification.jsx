@@ -3,11 +3,13 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import "./OtpVerification.css";
 import GoogleIcon from '@mui/icons-material/Google';
 
-const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal,setShowLoginModal }) => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, setShowLoginModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
   const { setIsLoggedIn, setUser } = useAuth();
-
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
@@ -26,25 +28,23 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal,set
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto-focus next input
     if (value && index < 3) {
       document.getElementById(`otp-${index + 1}`).focus();
     }
   };
 
-  // Normalize phone number to include +91
   const normalizePhone = (phone) => {
     return phone.startsWith("+91") ? phone : `+91${phone}`;
   };
 
   const handleVerify = async () => {
     const enteredOtp = otp.join("");
-  
+
     if (enteredOtp.length < 4) {
-      alert("Please enter 4-digit OTP");
+      toast.error("Please enter 4-digit OTP");
       return;
     }
-  
+
     try {
       const response = await fetch(`${baseURL}/api/user/verify-otp`, {
         method: "POST",
@@ -58,39 +58,32 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal,set
         }),
       });
 
-
-      console.log( "setshowb2modal check:",setShowB2UModal);
-      console.log( "setloginmodal check:",setShowLoginModal)
-  
       const data = await response.json();
-  
+
       if (data.success) {
-        alert("OTP Verified ✅");
-  
+        toast.success("OTP Verified ✅");
+
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user)); // 🟡 Add this
-  
+        localStorage.setItem("user", JSON.stringify(data.user));
+
         setUser(data.user);  
-        // console.log("User from response:", data.user); // 👀 Is _id present?
-       // ✅ Store in context
         setIsLoggedIn(true);  
 
         setShowB2UModal(false); 
-        setShowLoginModal(false); // ✅ Close the login modal
-
-        // Close modal or navigate...
+        setShowLoginModal(false);
       } else {
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (err) {
       console.error(err);
-      alert("Verification failed");
+      toast.error("Verification failed");
     }
   };
-  
 
   return (
     <div className="otp-verification-container">
+      <ToastContainer position="top-center" autoClose={3000} />
+      
       <h2 className="otp-title">Verification code</h2>
       <p className="otp-subtitle">
         Please enter the verification code we sent to your mobile number.
@@ -111,22 +104,22 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal,set
 
       <p className="otp-resend">Resend in 00:{timer < 10 ? `0${timer}` : timer}</p>
 
- <div  className="verify-btn-login-acount">
- <button className="otp-submit-btn" onClick={handleVerify}>
-        VERIFY OTP
-      </button>
+      <div className="verify-btn-login-acount">
+        <button className="otp-submit-btn" onClick={handleVerify}>
+          VERIFY OTP
+        </button>
 
-      <p className="otp-alt-signup">or sign up with</p>
-      <div className="otp-socials">
-        <button><img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" /></button>
-        <button><GoogleIcon /></button>
-        <button><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" /></button>
+        <p className="otp-alt-signup">or sign up with</p>
+        <div className="otp-socials">
+          <button><img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" /></button>
+          <button><GoogleIcon /></button>
+          <button><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" /></button>
+        </div>
+
+        <p className="otp-login-text">
+          Already have account? <span onClick={onBack} className="otp-login-link">Log In</span>
+        </p>
       </div>
-
-      <p className="otp-login-text">
-        Already have account? <span onClick={onBack} className="otp-login-link">Log In</span>
-      </p>
- </div>
     </div>
   );
 };

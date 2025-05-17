@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem("token"));
+  const [loadingUser, setLoadingUser] = useState(false);
   const [user, setUser] = useState(() => {
   const storedUser = localStorage.getItem("user");
     if (!storedUser || storedUser === "undefined") return null;
@@ -28,33 +29,29 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  useEffect(() => {
-    if (token) {
-      localStorage.setItem("token", token);
-      console.log("my token :", token)
-      // Fetch user data from /api/get-user if token is available
-      const fetchUser = async () => {
-        try {
-          const res = await axios.get(`${baseURL}/api/user/get-user`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(res.data.user); // ✅ Extract proper user object
-          console.log("Fetched user from backend:", res.data.user);
-
-        } catch (error) {
-          console.error("Error fetching user:", error);
-          setUser(null); // If there's an error, reset the user data
-        }
-      };
-      fetchUser();
-    } else {
-      localStorage.removeItem("token");
-      setIsLoggedIn(false);
-      setUser(null);
-    }
-  }, [token]);
+ useEffect(() => {
+  if (token) {
+    setLoadingUser(true);
+    localStorage.setItem("token", token);
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(`${baseURL}/api/user/get-user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data.user);
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setLoadingUser(false);
+      }
+    };
+    fetchUser();
+  } else {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setUser(null);
+  }
+}, [token]);
 
   useEffect(() => {
     setIsLoggedIn(!!token);
@@ -67,17 +64,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn,
-        setIsLoggedIn,
-        user,
-        setUser,
-        token,
-        setToken,
-        logout,
-      }}
-    >
+  <AuthContext.Provider
+  value={{
+    isLoggedIn,
+    setIsLoggedIn,
+    user,
+    setUser,
+    token,
+    setToken,
+    logout,
+    loadingUser, // add this
+  }}
+>
+
       {children}
     </AuthContext.Provider>
   );

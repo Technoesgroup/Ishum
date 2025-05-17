@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useFilter } from "../../Component/Context-API/Fillter-Context";
 import "../../Style-CSS/BestSeller-css/BestSellerProduct.css";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { colors } from "../BestSeller/ColorSection";
 import { useNavigate } from "react-router-dom";
@@ -18,10 +20,16 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const { selected } = useFilter();
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
-  const { user } = useAuth();
+   const { user, loadingUser } = useAuth();
+
   const userId = user?._id;
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+  console.log("Logged in user:", user);
+
+
+  console.log("User ID:", userId);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -96,11 +104,19 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     }
   };
 
-  const handleAddToCart = async (product) => {
-    if (!userId) {
-      alert("Please login to add products to your cart.");
-      return;
-    }
+ const handleAddToCart = async (product) => {
+  if (loadingUser) {
+ toast.info("Please wait, loading your ID..");
+
+    return;
+  }
+
+
+    if (!user?._id) {
+  toast.error("Please login to add products to your cart.");
+
+    return;
+  }
 
     try {
       await axios.post(`${baseURL}/api/cart/addtocart`, {
@@ -110,7 +126,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
         size: product.size[0],
         color: product.color,
       });
-      alert("Product added to cart!");
+       toast.info("Product added to cart!");
     } catch (err) {
       console.error("Error adding to cart:", err);
     }
@@ -144,10 +160,34 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
                     <p className="bestsellers-product-price">₹{product.price}</p>
                   </div>
                   <div className="Product-LocalMall-Buy-Now-button">
-                    <LocalMallIcon className="LocalMallIcon" onClick={() => handleAddToCart(product)} />
-                    <button className="bestsellers-buy-button" onClick={() => handleAddToCart(product)}>
-                      Buy Now
-                    </button>
+   <LocalMallIcon
+  className="LocalMallIcon"
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!user?._id || loadingUser) {
+      alert("Please login to add products to your cart.");
+      return;
+    }
+    handleAddToCart(product);
+  }}
+/>
+
+<button
+  className="bestsellers-buy-button"
+  disabled={!user?._id || loadingUser}
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!user?._id || loadingUser) {
+      alert("Please login to add products to your cart.");
+      return;
+    }
+    handleAddToCart(product);
+  }}
+>
+  Buy Now
+</button>
+
+
                   </div>
                 </div>
               </div>
@@ -221,6 +261,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
               Next
             </button>
           </div>
+             <ToastContainer position="top-right" autoClose={3000} />
         </>
       )}
     </div>

@@ -3,6 +3,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import GoogleIcon from '@mui/icons-material/Google';
 import './MobileOtp.css';
 import { useAuth } from "../../../ContextApiCart/LoginContextApi"; // ✅ Import context
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -38,7 +40,7 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
   const handleVerify = async () => {
     const enteredOtp = otp.join("");
     if (enteredOtp.length < 4) {
-      alert("Please enter 4-digit OTP");
+      toast.error("Please enter 4-digit OTP");
       return;
     }
 
@@ -57,7 +59,7 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
 
       const data = await response.json();
       if (data.success) {
-        alert("OTP Verified ✅");
+        toast.success("OTP Verified ✅");
 
         // ✅ Set token & user in localStorage
         localStorage.setItem("token", data.token);
@@ -69,16 +71,17 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
 
         onClose(); // ✅ Close modal
       } else {
-        alert(data.message);
+        toast.error(data.message || "OTP verification failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Verification failed");
+      toast.error("Verification failed");
     }
   };
 
   return (
     <div className="mobile-login-modal-overlay">
+      <ToastContainer />
       <div className="mobile-login-modal-content Mobile-otp-container">
         <div className="login-text-button">
           <h2>Verification code</h2>
