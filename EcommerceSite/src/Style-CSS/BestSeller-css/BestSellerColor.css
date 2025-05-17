@@ -19,9 +19,8 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
-    background-color: black;
+    background-color:transparent;
     padding: 10px;
-    border-radius: 10px;
   }
   
   .bestSeller-color-circle {
