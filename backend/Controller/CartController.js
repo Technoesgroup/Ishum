@@ -63,6 +63,15 @@ exports.removeFromCart = async (req, res) => {
 };
 
 
+exports.clearCart = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    await Cart.findOneAndDelete({ userId });
+    res.status(200).json({ message: "Cart cleared successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to clear cart", error });
+  }
+};
 
 
 exports.getCart = async (req, res) => {

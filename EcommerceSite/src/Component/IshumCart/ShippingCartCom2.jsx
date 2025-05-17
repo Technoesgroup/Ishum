@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useEffect, useState } from "react";
+import {  useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Importing useAuth hook
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ export default function ShippingCartCom2({ onClose }) {
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState("wallet");
+    const [loadingAfterPayment, setLoadingAfterPayment] = useState(false);
     
     const baseURL = import.meta.env.VITE_API_BASE_URL;
     const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
@@ -43,7 +44,6 @@ export default function ShippingCartCom2({ onClose }) {
         fetchCart();
     }, [user]);
 
-    if (loading) return <div>Loading...</div>;
     if (!cart?.cartItems || cart.cartItems.length === 0) {
         return <div>No items in cart</div>;
     }
@@ -84,32 +84,39 @@ export default function ShippingCartCom2({ onClose }) {
                             razorpay_signature: response.razorpay_signature,
                         });
 
-                        if (verifyRes.data.status === "success") {
-                            // Save order in backend
-                            await axios.post(`${baseURL}/api/orders/`, {
-                                userId: user._id,
-                                cartItems: cart.cartItems,
-                                totalAmount: totalPrice,
-                                shippingInfo: {
-                                    address: "Dummy Address",
-                                    city: "Dummy City",
-                                    pincode: "000000",
-                                    phone: user.phone,
-                                },
-                                paymentInfo: {
-                                    orderId: response.razorpay_order_id,
-                                    paymentId: response.razorpay_payment_id,
-                                    signature: response.razorpay_signature,
-                                    status: "Paid"
-                                }
-                            });
+                      if (verifyRes.data.status === "success") {
+                              setLoadingAfterPayment(true); // show spinner
 
-                            toast.success("Payment successful and order saved!");
-                            localStorage.setItem("orderConfirmed", "true");
-                            navigate("/OrderConformation");
+    // Save order in backend
+    await axios.post(`${baseURL}/api/orders/`, {
+        userId: user._id,
+        cartItems: cart.cartItems,
+        totalAmount: totalPrice,
+        shippingInfo: {
+            address: "Dummy Address",
+            city: "Dummy City",
+            pincode: "000000",
+            phone: user.phone,
+        },
+        paymentInfo: {
+            orderId: response.razorpay_order_id,
+            paymentId: response.razorpay_payment_id,
+            signature: response.razorpay_signature,
+            status: "Paid"
+        }
+    });
 
-                            onClose();
-                        } else {
+    await axios.delete(`${baseURL}/api/cart/clear/${user._id}`);
+    toast.success("Payment successful and order saved!");
+    localStorage.setItem("orderConfirmed", "true");
+
+    // Delay for user experience
+    setTimeout(() => {
+        navigate("/OrderConformation");
+        onClose();
+    }, 2000); // optional delay
+}
+ else {
                             toast.error("Payment verification failed.");
                         }
                     } catch (error) {
@@ -194,6 +201,14 @@ export default function ShippingCartCom2({ onClose }) {
             </div>
         </div>
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+
+        {loadingAfterPayment && (
+    <div className="loading-overlay">
+        <div className="spinner"></div>
+        <p>Processing your order...</p>
+    </div>
+)}
+
         </>
     );
 }
