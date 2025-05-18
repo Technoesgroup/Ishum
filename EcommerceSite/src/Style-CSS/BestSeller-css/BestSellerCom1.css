@@ -226,7 +226,9 @@
     list-style: none;
     padding: 0;
     margin: 5px 0;
-    background: #0e0e0e;
+    background:transparent;
+    border: 1px  solid  black;
+    border-radius: 5px;
   }
 
   .Clear-Filter{
@@ -243,7 +245,7 @@
   }
   
   .Catergories-dropdown li {
-    color: rgb(204, 204, 204);
+    color: rgb(62, 62, 62);
     position: relative;
     padding: 10px;
     border-bottom: 1px solid #2f2f2f;
