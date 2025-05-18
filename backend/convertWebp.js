@@ -29,36 +29,44 @@
 //     }
 //   });
 // });
-
-
-
-
-
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
+
 const inputFolder = path.join(__dirname, "../EcommerceSite/src/images");
+
+function sanitizeFilename(filename) {
+  return filename.replace(/\s+/g, '_');
+}
 
 // Step 1: Read all images and overwrite them
 fs.readdirSync(inputFolder).forEach((file) => {
+  const sanitizedFile = sanitizeFilename(file);
   const inputPath = path.join(inputFolder, file);
+  const sanitizedPath = path.join(inputFolder, sanitizedFile);
 
-  // Check if file is an image (optional but safer)
-  if (/\.(jpe?g|png|webp)$/i.test(file)) {
-    sharp(inputPath)
+  // If filename contains spaces, rename the file first
+  if (file !== sanitizedFile) {
+    fs.renameSync(inputPath, sanitizedPath);
+  }
+
+  // Now optimize the sanitized file
+  if (/\.(jpe?g|png|webp)$/i.test(sanitizedFile)) {
+    sharp(sanitizedPath)
       .resize({ width: 1200 }) // Optional resize
-      .toFormat("jpeg") // Force to jpeg format (or use original file's ext)
+      .toFormat("jpeg") // Convert all to jpeg, change if needed
       .jpeg({ quality: 75 }) // Compression quality
       .toBuffer()
       .then((data) => {
-        fs.writeFileSync(inputPath, data); // Overwrite original
-        console.log(`✅ Optimized: ${file}`);
+        fs.writeFileSync(sanitizedPath, data); // Overwrite original file
+        console.log(`✅ Optimized: ${sanitizedFile}`);
       })
       .catch((err) => {
-        console.error(`❌ Error optimizing ${file}:`, err);
+        console.error(`❌ Error optimizing ${sanitizedFile}:`, err);
       });
   }
 });
+
 
 
 
