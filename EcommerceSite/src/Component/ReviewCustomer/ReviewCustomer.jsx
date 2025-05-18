@@ -3,7 +3,7 @@ import "../ReviewCustomer/ReviewCustomer.css";
 import img1 from '../../images/2bb31e35a92274a88a834fcc1e2e496d.png';
 import img2 from '../../images/b7c0458edce18027db5028842fd3cc17.png';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import vectorimg from '../../images/Vector.png';
+import vectorimg from '../../images/Vector (2).png';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
 
