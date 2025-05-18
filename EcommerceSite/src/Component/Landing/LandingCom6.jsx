@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useProduct } from "../../ContextApiCart/ProductContextApi";  // context import
-import UnderLine from '../../images/Undertextline.png';
 
 const Collection = () => {
   const [loading, setLoading] = useState(true);
@@ -50,7 +49,6 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
     <div className="collection-container">
       <div className="ishumCom6-content-MainHeading">
         <h2 className="ishum-content-Com6-title">{collectionName} Collection</h2>
-        <img  loading="lazy" className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
       </div>
 
       {loading ? (

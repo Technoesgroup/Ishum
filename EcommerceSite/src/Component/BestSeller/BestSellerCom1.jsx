@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
-import UnderLine from '../../images/Undertextline.png';
 import ProductList from './BestSelllerProduct';
 import Banner from './BestSellerBanner';
 import { useFilter } from "../../Component/Context-API/Fillter-Context";
@@ -25,7 +24,7 @@ export default function Bestsellers() {
       <div className="bestsellers-container">
         <div className="bestseller-MainHeading">
           <h2 className="bestsellers-title">BESTSELLERS OF ISHUM</h2>
-          <img   loading="lazy" className="UnderLine" src={UnderLine} alt="" />
+  
         </div>
 
         <div className="bestsellers-content">
