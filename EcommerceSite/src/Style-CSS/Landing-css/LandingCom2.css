@@ -140,10 +140,11 @@
   .LandingComp2-scroll-arrow {
     position: absolute;
     top: 40%;
+    border: 1px solid rgb(91, 91, 91);
     /* transform: translateY(-40%); */
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(120, 120, 120, 0.6);
     font-size: 1rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.57rem;
   }
 
   .LandingComp2-scroll-arrow.left {
