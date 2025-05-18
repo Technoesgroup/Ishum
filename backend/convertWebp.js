@@ -30,20 +30,51 @@
 //   });
 // });
 
-const imagemin = require('imagemin');
-const webp = require('imagemin-webp');
-const svgo = require('imagemin-svgo');
 
-(async () => {
-  await imagemin(['images/*.svg'], {
-    destination: 'output',
-    plugins: [
-      svgo(),
-      webp({ quality: 90 })
-    ]
-  });
+const fs = require('fs');
+const path = require('path');
+const sharp = require('sharp');
 
-  console.log("✅ Done with CommonJS (require)");
-})();
+const inputDir = path.join(__dirname, 'uploads');
+const outputDir = path.join(__dirname, 'converted');
+
+if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
+
+fs.readdirSync(inputDir).forEach(file => {
+  const inputPath = path.join(inputDir, file);
+  const outputFile = file.replace(/\.[^/.]+$/, ".webp");
+  const outputPath = path.join(outputDir, outputFile);
+
+  sharp(inputPath)
+    .resize({ width: 1000 })
+    .webp({ quality: 65 })
+    .toFile(outputPath)
+    .then(() => {
+      const stats = fs.statSync(outputPath);
+      const sizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
+      console.log(`✅ ${file} → ${outputFile} | Size: ${sizeInMB} MB`);
+    })
+    .catch(err => {
+      console.error(`❌ Error processing ${file}:`, err.message);
+    });
+});
+
+
+
+// const imagemin = require('imagemin');
+// const webp = require('imagemin-webp');
+// const svgo = require('imagemin-svgo');
+
+// (async () => {
+//   await imagemin(['images/*.svg'], {
+//     destination: 'output',
+//     plugins: [
+//       svgo(),
+//       webp({ quality: 90 })
+//     ]
+//   });
+
+//   console.log("✅ Done with CommonJS (require)");
+// })();
 
 

@@ -19,26 +19,28 @@ for (let p of products) {
 }
 
 
-    for (let product of products) {
-      if (product.image && !product.image.includes("cloudinary.com")) {
-        const localImagePath = path.join(__dirname, "..", "uploads", product.image);
+ for (let product of products) {
+  if (product.image && !product.image.includes("cloudinary.com")) {
+    const imageFileName = product.image.replace(/^uploads[\\/]/, "");
+    const localImagePath = path.join(__dirname, "uploads", imageFileName); // ⬅️ no ".."
 
-        if (fs.existsSync(localImagePath)) {
-          console.log("📤 Uploading:", localImagePath);
+    if (fs.existsSync(localImagePath)) {
+      console.log("📤 Uploading:", localImagePath);
 
-          const result = await cloudinary.uploader.upload(localImagePath, {
-            folder: "products",
-          });
+      const result = await cloudinary.uploader.upload(localImagePath, {
+        folder: "products",
+      });
 
-          product.image = result.secure_url;
-          await product.save();
+      product.image = result.secure_url;
+      await product.save();
 
-          console.log(`✅ Uploaded: ${product.name}`);
-        } else {
-          console.warn(`⚠️ Image not found, skipping: ${localImagePath}`);
-        }
-      }
+      console.log(`✅ Uploaded: ${product.name}`);
+    } else {
+      console.warn(`⚠️ Image not found, skipping: ${localImagePath}`);
     }
+  }
+}
+
 
     console.log("🎉 All images migrated to Cloudinary!");
     process.exit();
