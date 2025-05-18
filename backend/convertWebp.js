@@ -33,46 +33,28 @@
 
 
 
-
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const inputDir = './uploads';
-const outputDir = './uploads';
+const folderPath = './uploads';
 
-fs.readdir(inputDir, (err, files) => {
-  if (err) throw err;
+fs.readdir(folderPath, (err, files) => {
+  files.forEach((file) => {
+    const filePath = path.join(folderPath, file);
+    const compressedPath = path.join(folderPath, 'compressed-' + file);
 
-  files.forEach(file => {
-    if (path.extname(file).toLowerCase() === '.svg') {
-      const inputPath = path.join(inputDir, file);
-      const outputNamePNG = file.replace('.svg', '.png');
-      const outputNameWebP = file.replace('.svg', '.webp');
-      const outputPathPNG = path.join(outputDir, outputNamePNG);
-      const outputPathWebP = path.join(outputDir, outputNameWebP);
-
-      // PNG Conversion
-      sharp(inputPath)
-        .png({ quality: 70 })
-        .toFile(outputPathPNG)
-        .then(() => {
-          console.log(`✅ Converted ${file} → ${outputNamePNG}`);
-        })
-        .catch(err => console.error('Error PNG:', err));
-
-      // WebP Conversion
-      sharp(inputPath)
-        .webp({ quality: 70 })
-        .toFile(outputPathWebP)
-        .then(() => {
-          console.log(`✅ Converted ${file} → ${outputNameWebP}`);
-          // Delete original SVG after successful conversion
-          fs.unlinkSync(inputPath);
-          console.log(`🗑️ Deleted original ${file}`);
-        })
-        .catch(err => console.error('Error WebP:', err));
-    }
+    sharp(filePath)
+      .resize({ width: 1000 })
+      .jpeg({ quality: 65 })
+      .toFile(compressedPath)
+      .then(() => {
+        console.log(`Compressed: ${file}`);
+        // fs.unlinkSync(filePath); // Optional: delete original
+      })
+      .catch((err) => {
+        console.error('Compression error:', err);
+      });
   });
 });
 
