@@ -22,9 +22,10 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
-
-
 const allowedOrigins = ['https://www.ishum.in','https://ishum-frontend.onrender.com', 'http://localhost:5173', 'http://localhost:5174']; // Hostinger aur local dev add karo
+
+
+
 
 
 app.use(compression()); // for gzip compression
