@@ -6,7 +6,7 @@ import img2 from  '../../images/1746608536944-880351628.jpg'
 import img3 from  '../../images/1746608662829-298754532.jpg'
 import img4 from  '../../images/1746615607071-494434453.jpg'
 import img5 from  '../../images/1746685994043-507831531.jpg'
-import img6 from  '../../images/WhatsApp Image 2025-05-12 at 12.49.21_a44493b6.jpg'
+import img6 from  '../../images/WhatsAppImage2025-05-12at12.49.21a44493b6.jpg'
 
 const articles = [
 
