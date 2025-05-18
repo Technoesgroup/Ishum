@@ -5,5 +5,6 @@ const collection = require("../Controller/CollectionController");
 
 router.get("/get-collections", collection.getCollections);
 router.post("/add-collections", upload.single("image"),compressImages, collection.addCollection);
+router.put('/edit/:id', upload.single('image'), collection.updateCollection);
 
 module.exports = router;
