@@ -165,7 +165,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   onClick={(e) => {
     e.stopPropagation();
     if (!user?._id || loadingUser) {
-      alert("Please login to add products to your cart.");
+       toast.error("Please login to add products to your cart.");
       return;
     }
     handleAddToCart(product);
@@ -178,7 +178,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   onClick={(e) => {
     e.stopPropagation();
     if (!user?._id || loadingUser) {
-      alert("Please login to add products to your cart.");
+     toast.error("Please login to add products to your cart.");
       return;
     }
     handleAddToCart(product);

@@ -99,7 +99,7 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
   const handleAddToCart = async () => {
     toast.info("Product added to cart!");
     if (!user || !user._id) {
-      alert("Please log in to add items to your cart.");
+       toast.error("Please login to add products to your cart.");
       return;
     }
   
