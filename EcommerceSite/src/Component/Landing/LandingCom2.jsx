@@ -55,26 +55,29 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
             }
             style={{ cursor: 'pointer' }}
           >
-            <div className="LandingComp2-image-container">
-              {/* Skeleton loader or image */}
-          
-              <img
-              loading="lazy"
-                src={`${baseURL}${collection.image}`}
-                alt={collection.name}
-             
-                style={{
-                  display: loadedImages[collection._id] ? 'block' : 'none'
-                }}
-                onLoad={() =>
-                  setLoadedImages((prev) => ({
-                    ...prev,
-                    [collection._id]: true
-                  }))
-                }
-              />
-              <button className="LandingComp2-hover-button">Select Collection</button>
-            </div>
+  <div className="LandingComp2-image-container">
+  {/* Skeleton loader */}
+  {!loadedImages[collection._id] && (
+    <div className="LandingComp2-skeleton-loader"></div>
+  )}
+
+  <img
+    loading="lazy"
+    src={`${baseURL}${collection.image}`}
+    alt={collection.name}
+    style={{
+      display: loadedImages[collection._id] ? 'block' : 'none'
+    }}
+    onLoad={() =>
+      setLoadedImages((prev) => ({
+        ...prev,
+        [collection._id]: true
+      }))
+    }
+  />
+  <button className="LandingComp2-hover-button">Select Collection</button>
+</div>
+
             <div className="LandingComp2-product-info">
               <h3 className="LandingComp2-title">{collection.title}</h3>
             </div>
