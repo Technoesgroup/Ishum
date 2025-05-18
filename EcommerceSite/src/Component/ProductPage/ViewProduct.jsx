@@ -96,27 +96,29 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
 
 
 
-  const handleAddToCart = async () => {
-    toast.info("Product added to cart!");
-    if (!user || !user._id) {
-       toast.error("Please login to add products to your cart.");
-      return;
-    }
-  
-    try {
-      const res = await axios.post(`${baseURL}/api/cart/addtocart`, {
-        userId: user._id,
-        productId: selectedProduct._id,
-        quantity,
-        size: selectedSize,
-        color: selectedColor || "", // ✅ Use selected color state
-      });
-  
-      console.log("Added to cart:", res.data);
-    } catch (err) {
-      console.error("Error adding to cart:", err);
-    }
-  };
+const handleAddToCart = async () => {
+  if (!user || !user._id) {
+    toast.error("Please login to add products to your cart.");
+    return;
+  }
+
+  toast.info("Product added to cart!");
+
+  try {
+    const res = await axios.post(`${baseURL}/api/cart/addtocart`, {
+      userId: user._id,
+      productId: selectedProduct._id,
+      quantity,
+      size: selectedSize,
+      color: selectedColor || "",
+    });
+
+    console.log("Added to cart:", res.data);
+  } catch (err) {
+    console.error("Error adding to cart:", err);
+  }
+};
+
   
   
 
