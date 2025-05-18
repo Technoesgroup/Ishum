@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom6.css";
 import img_b1 from '../../images/image27.svg';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
-import UnderLine from '../../images/Undertextline.png';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../ContextApiCart/ProductContextApi"; // ✅ context import
@@ -57,7 +56,6 @@ return (
   <div className="collection-container">
     <div className="ishumCom6-content-MainHeading">
       <h2 className="ishum-content-Com6-title">{collectionName}</h2>
-      <img loading="lazy" className="ishum-content-UnderLine" src={UnderLine} alt="Underline" />
     </div>
 
     {loading ? (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import ExclusiveNavigation from '../IshumExclusive/IshumExclusiveBtn';
 import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import UnderLine from '../../images/Undertextline.png';
+
 import ProductList from '../../Component/BestSeller/BestSelllerProduct';
 import ColorList from '../BestSeller/BestSellerColor';
 import CategoryList from '../BestSeller/BestSellerCategory';
@@ -45,7 +45,7 @@ export default function Bestsellers() {
       <div className="bestsellers-container">
         <div className="bestseller-MainHeading">
           <h2 className="bestsellers-title">ISHUM'S EXCLUSIVE</h2>
-          <img className="UnderLine" src={UnderLine} alt="" />
+      
         </div>
 
         <div className="bestsellers-content">

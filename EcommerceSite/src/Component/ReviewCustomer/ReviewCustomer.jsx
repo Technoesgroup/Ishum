@@ -3,7 +3,6 @@ import "../ReviewCustomer/ReviewCustomer.css";
 import img1 from '../../images/2bb31e35a92274a88a834fcc1e2e496d.png';
 import img2 from '../../images/b7c0458edce18027db5028842fd3cc17.png';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import img3 from '../../images/Undertextline.png';
 import vectorimg from '../../images/Vector.png';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
@@ -88,7 +87,6 @@ const ReviewSection = () => {
       <h4>STORE / REVIEW</h4>
       <div className="Selected-review-top-heading">
         <h2>REVIEWS</h2>
-        <img src={img3} className="Selected-underlinedesign" alt="" />
       </div>
       <div className="Selected-Topreview-with-text">
         <p className="Selected-top-review-stars">★ ★ ★ ☆ </p>
