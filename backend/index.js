@@ -22,10 +22,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
-const allowedOrigins = ['https://www.ishum.in' ,  'https://ishum-frontend.onrender.com', 'http://localhost:5173', 'http://localhost:5174']; // Hostinger aur local dev add karo
-
-
-
+const allowedOrigins = ['https://www.ishum.in' ,'https://ishum-frontend.onrender.com', 'http://localhost:5173', 'http://localhost:5174']; // Hostinger aur local dev add karo
 
 
 app.use(compression()); // for gzip compression
@@ -36,6 +33,7 @@ app.use("/uploads", express.static("uploads", {
 
 app.use(cors({
   origin: function(origin, callback) {
+     console.log("Request Origin =>", origin);
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // Agar origin allowed hai, toh request ko allow karo
     } else {
