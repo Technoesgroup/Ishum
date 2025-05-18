@@ -31,32 +31,39 @@
 // });
 
 
-
-
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
 const folderPath = './uploads';
 
-fs.readdir(folderPath, (err, files) => {
-  files.forEach((file) => {
-    const filePath = path.join(folderPath, file);
-    const compressedPath = path.join(folderPath, 'compressed-' + file);
+fs.readdir(folderPath, async (err, files) => {
+  if (err) {
+    console.error('Error reading folder:', err);
+    return;
+  }
 
-    sharp(filePath)
-      .resize({ width: 1000 })
-      .jpeg({ quality: 65 })
-      .toFile(compressedPath)
-      .then(() => {
-        console.log(`Compressed: ${file}`);
-        // fs.unlinkSync(filePath); // Optional: delete original
-      })
-      .catch((err) => {
-        console.error('Compression error:', err);
-      });
-  });
+  for (const file of files) {
+    const filePath = path.join(folderPath, file);
+
+    // Skip non-image files
+    if (!/\.(jpg|jpeg|png|webp)$/i.test(file)) continue;
+
+    try {
+      const buffer = await sharp(filePath)
+        .resize({ width: 1000 })
+        .jpeg({ quality: 65 })
+        .toBuffer();
+
+      fs.writeFileSync(filePath, buffer);
+      console.log(`Compressed: ${file}`);
+    } catch (error) {
+      console.error(`Compression error (${file}):`, error.message);
+    }
+  }
 });
+
+
 
 
 
