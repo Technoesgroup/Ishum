@@ -31,33 +31,51 @@
 // });
 
 
+
+
+
+const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
-const sharp = require('sharp');
 
-const inputDir = path.join(__dirname, 'uploads');
-const outputDir = path.join(__dirname, 'converted');
+const inputDir = './uploads';   // Jahaan SVG files hain
+const outputDir = './uploads';  // Wahin save karna hai PNG/WebP mein
 
-if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
+// Agar output directory nahi hai to bana do (optional, yahan same folder mein save kar rahe hain)
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir);
+}
 
-fs.readdirSync(inputDir).forEach(file => {
-  const inputPath = path.join(inputDir, file);
-  const outputFile = file.replace(/\.[^/.]+$/, ".webp");
-  const outputPath = path.join(outputDir, outputFile);
+fs.readdir(inputDir, (err, files) => {
+  if (err) throw err;
 
-  sharp(inputPath)
-    .resize({ width: 1000 })
-    .webp({ quality: 65 })
-    .toFile(outputPath)
-    .then(() => {
-      const stats = fs.statSync(outputPath);
-      const sizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
-      console.log(`✅ ${file} → ${outputFile} | Size: ${sizeInMB} MB`);
-    })
-    .catch(err => {
-      console.error(`❌ Error processing ${file}:`, err.message);
-    });
+  files.forEach(file => {
+    if (path.extname(file).toLowerCase() === '.svg') {
+      const inputPath = path.join(inputDir, file);
+      const outputNamePNG = file.replace('.svg', '.png');
+      const outputNameWebP = file.replace('.svg', '.webp');
+      const outputPathPNG = path.join(outputDir, outputNamePNG);
+      const outputPathWebP = path.join(outputDir, outputNameWebP);
+
+      // PNG mein convert karna
+      sharp(inputPath)
+        .png({ quality: 80 })  // quality adjust kar sakte ho, 0-100
+        .toFile(outputPathPNG)
+        .then(() => console.log(`✅ Converted ${file} → ${outputNamePNG}`))
+        .catch(err => console.error('Error PNG:', err));
+
+      // WebP mein convert karna (jo zyada compression deta hai)
+      sharp(inputPath)
+        .webp({ quality: 80 })
+        .toFile(outputPathWebP)
+        .then(() => console.log(`✅ Converted ${file} → ${outputNameWebP}`))
+        .catch(err => console.error('Error WebP:', err));
+    }
+  });
 });
+
+
+
 
 
 
