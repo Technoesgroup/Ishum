@@ -33,47 +33,46 @@
 
 
 
-const sharp = require("sharp");
-const fs = require("fs");
-const path = require("path");
 
-const inputFolder = path.join(__dirname, "../EcommerceSite/src/images");
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
 
-// Function to remove underscores from filenames
-function removeUnderscores(filename) {
-  return filename.replace(/_/g, '');  // Yahan '' ki jagah ' ' bhi kar sakte ho agar space chahiye
+const inputDir = './uploads';   // Jahaan SVG files hain
+const outputDir = './uploads';  // Wahin save karna hai PNG/WebP mein
+
+// Agar output directory nahi hai to bana do (optional, yahan same folder mein save kar rahe hain)
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir);
 }
 
-// Step 1: Read all images and overwrite them
-fs.readdirSync(inputFolder).forEach((file) => {
-  const cleanFile = removeUnderscores(file);
-  const inputPath = path.join(inputFolder, file);
-  const cleanPath = path.join(inputFolder, cleanFile);
+fs.readdir(inputDir, (err, files) => {
+  if (err) throw err;
 
-  // Rename file if underscores removed
-  if (file !== cleanFile) {
-    fs.renameSync(inputPath, cleanPath);
-  }
+  files.forEach(file => {
+    if (path.extname(file).toLowerCase() === '.svg') {
+      const inputPath = path.join(inputDir, file);
+      const outputNamePNG = file.replace('.svg', '.png');
+      const outputNameWebP = file.replace('.svg', '.webp');
+      const outputPathPNG = path.join(outputDir, outputNamePNG);
+      const outputPathWebP = path.join(outputDir, outputNameWebP);
 
-  // Optimize image file
-  if (/\.(jpe?g|png|webp)$/i.test(cleanFile)) {
-    sharp(cleanPath)
-      .resize({ width: 1200 })
-      .toFormat("jpeg")
-      .jpeg({ quality: 75 })
-      .toBuffer()
-      .then((data) => {
-        fs.writeFileSync(cleanPath, data);
-        console.log(`✅ Optimized: ${cleanFile}`);
-      })
-      .catch((err) => {
-        console.error(`❌ Error optimizing ${cleanFile}:`, err);
-      });
-  }
+      // PNG mein convert karna
+      sharp(inputPath)
+        .png({ quality: 70 })  // quality adjust kar sakte ho, 0-100
+        .toFile(outputPathPNG)
+        .then(() => console.log(`✅ Converted ${file} → ${outputNamePNG}`))
+        .catch(err => console.error('Error PNG:', err));
+
+      // WebP mein convert karna (jo zyada compression deta hai)
+      sharp(inputPath)
+        .webp({ quality: 70 })
+        .toFile(outputPathWebP)
+        .then(() => console.log(`✅ Converted ${file} → ${outputNameWebP}`))
+        .catch(err => console.error('Error WebP:', err));
+    }
+  });
 });
-
-
-
 
 
 
