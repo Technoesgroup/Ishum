@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for HTTP requests
 import "../MyOrder/MyOrder.css";
-import img1 from '../../images/Col-2.svg'; // You can still use static images as fallback
+import Loader from "../../Pages/LoaderFullpage";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -27,10 +27,10 @@ const OrderList = () => {
     };
 
     fetchOrders();
-  }, []); // Empty array means this will run once when the component mounts
+  }, []); 
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading state while fetching data
+    return <Loader />; // Show loading state while fetching data
   }
 
   if (error) {

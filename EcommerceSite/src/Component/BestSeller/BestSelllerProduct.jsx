@@ -9,7 +9,7 @@ import { colors } from "../BestSeller/ColorSection";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
-
+import Loader from "../../Pages/LoaderFullpage";
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductList({ queryParam = "isBestseller=true" }) {
@@ -135,9 +135,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   return (
     <div>
       {loading ? (
-         <div className="loader-container">
-         <div className="spinner"></div>
-       </div>
+        <Loader />
       ) : (
         <>
           <div className="bestsellers-products-grid">
