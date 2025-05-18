@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Fillter from '../../../images/settings-sliders.png';
+import Fillter from '../../../images/Filltericon-removebg-preview.png';
 import Img1 from '../../../images/Col-2.svg';
 import Img2 from '../../../images/Col-3.svg';
 import Img3 from '../../../images/Col-4.svg';
