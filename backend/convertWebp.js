@@ -34,45 +34,32 @@
 
 
 
-const sharp = require('sharp');
-const fs = require('fs');
-const path = require('path');
+const sharp = require("sharp");
+const fs = require("fs");
+const path = require("path");
+const inputFolder = path.join(__dirname, "../EcommerceSite/src/images");
 
-const inputDir = './uploads';   // Jahaan SVG files hain
-const outputDir = './uploads';  // Wahin save karna hai PNG/WebP mein
+// Step 1: Read all images and overwrite them
+fs.readdirSync(inputFolder).forEach((file) => {
+  const inputPath = path.join(inputFolder, file);
 
-// Agar output directory nahi hai to bana do (optional, yahan same folder mein save kar rahe hain)
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
-}
-
-fs.readdir(inputDir, (err, files) => {
-  if (err) throw err;
-
-  files.forEach(file => {
-    if (path.extname(file).toLowerCase() === '.svg') {
-      const inputPath = path.join(inputDir, file);
-      const outputNamePNG = file.replace('.svg', '.png');
-      const outputNameWebP = file.replace('.svg', '.webp');
-      const outputPathPNG = path.join(outputDir, outputNamePNG);
-      const outputPathWebP = path.join(outputDir, outputNameWebP);
-
-      // PNG mein convert karna
-      sharp(inputPath)
-        .png({ quality: 80 })  // quality adjust kar sakte ho, 0-100
-        .toFile(outputPathPNG)
-        .then(() => console.log(`✅ Converted ${file} → ${outputNamePNG}`))
-        .catch(err => console.error('Error PNG:', err));
-
-      // WebP mein convert karna (jo zyada compression deta hai)
-      sharp(inputPath)
-        .webp({ quality: 80 })
-        .toFile(outputPathWebP)
-        .then(() => console.log(`✅ Converted ${file} → ${outputNameWebP}`))
-        .catch(err => console.error('Error WebP:', err));
-    }
-  });
+  // Check if file is an image (optional but safer)
+  if (/\.(jpe?g|png|webp)$/i.test(file)) {
+    sharp(inputPath)
+      .resize({ width: 1200 }) // Optional resize
+      .toFormat("jpeg") // Force to jpeg format (or use original file's ext)
+      .jpeg({ quality: 75 }) // Compression quality
+      .toBuffer()
+      .then((data) => {
+        fs.writeFileSync(inputPath, data); // Overwrite original
+        console.log(`✅ Optimized: ${file}`);
+      })
+      .catch((err) => {
+        console.error(`❌ Error optimizing ${file}:`, err);
+      });
+  }
 });
+
 
 
 
