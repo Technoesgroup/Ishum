@@ -44,12 +44,12 @@
 
 /* 👇 Arrow buttons */
 .LandingComp2-scroll-arrow {
-  background-color: #222;
+  background-color:rgb(201, 201, 201);
   color: white;
-  border: none;
-  padding: 1rem;
+  border: 2px solid rgb(75, 75, 75);
+  padding: 0.7rem  0.8rem;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   z-index: 10;
   transition: background 0.3s ease;

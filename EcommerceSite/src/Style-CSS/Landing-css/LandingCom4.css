@@ -56,7 +56,15 @@
 }
 
 
+.LandingCom4-product-img.loading {
+  filter: blur(10px);
+  opacity: 0.5;
+}
 
+.LandingCom4-product-img.loaded {
+  filter: blur(0);
+  opacity: 1;
+}
 
 
 .LandingCom4-hover-icons {
