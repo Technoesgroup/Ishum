@@ -2,7 +2,7 @@ import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PinterestIcon from '@mui/icons-material/Pinterest';
-import logo from '../images/Ishum Logo 1.svg';
+import logo from '../images/IshumLogo1.svg';
 import { Link, useNavigate } from "react-router-dom";
 import RegBusiness from './B-TO-B-Login/RegisterBusiness';
 import Login from '../Component/B-TO-C-Login/LoginUser'

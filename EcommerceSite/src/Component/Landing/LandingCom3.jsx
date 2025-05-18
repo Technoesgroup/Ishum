@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../Style-CSS/Landing-css/LandingCom3.css';
 import  img1  from '../../images/b8194d4ec00e58f0ef4a3e3719adae47aedfcd3d.jpg'
-import  img2  from '../../images/Screenshot 2025-05-16 170951.png'
-import  img3  from '../../images/Screenshot 2025-05-16 171015.png'
-import  img4  from '../../images/Screenshot 2025-05-16 171040.png'
-import  img5  from '../../images/Screenshot 2025-05-16 171129.png'
-import  img6  from '../../images/Screenshot 2025-05-16 171155.png'
+import  img2  from '../../images/Screenshot2025-05-16170951.png'
+import  img3  from '../../images/Screenshot2025-05-16171015.png'
+import  img4  from '../../images/Screenshot2025-05-16171040.png'
+import  img5  from '../../images/Screenshot2025-05-16171129.png'
+import  img6  from '../../images/Screenshot2025-05-16171155.png'
 
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../Tale/Tale.css";
 import Header from "./Header";
-import image1 from '../../images/WhatsApp Image 2025-05-10 at 15.18.36_8565fbdc.jpg';
+import image1 from '../../images/WhatsAppImage2025-05-10at15.18.368565fbdc.jpg';
 import image2 from '../../images/b8194d4ec00e58f0ef4a3e3719adae47aedfcd3d.jpg';
 import image3 from '../../images/0f4dc3faf9c2f1404e9f2e7a0c83f23b4ce813d9.jpg';
 import image4 from '../../images/82fbabbbffa7ea44ed2984af9bed1e72484cd306.jpg';

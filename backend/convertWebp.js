@@ -29,43 +29,49 @@
 //     }
 //   });
 // });
+
+
+
+
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
 const inputFolder = path.join(__dirname, "../EcommerceSite/src/images");
 
-function sanitizeFilename(filename) {
-  return filename.replace(/\s+/g, '_');
+// Function to remove underscores from filenames
+function removeUnderscores(filename) {
+  return filename.replace(/_/g, '');  // Yahan '' ki jagah ' ' bhi kar sakte ho agar space chahiye
 }
 
 // Step 1: Read all images and overwrite them
 fs.readdirSync(inputFolder).forEach((file) => {
-  const sanitizedFile = sanitizeFilename(file);
+  const cleanFile = removeUnderscores(file);
   const inputPath = path.join(inputFolder, file);
-  const sanitizedPath = path.join(inputFolder, sanitizedFile);
+  const cleanPath = path.join(inputFolder, cleanFile);
 
-  // If filename contains spaces, rename the file first
-  if (file !== sanitizedFile) {
-    fs.renameSync(inputPath, sanitizedPath);
+  // Rename file if underscores removed
+  if (file !== cleanFile) {
+    fs.renameSync(inputPath, cleanPath);
   }
 
-  // Now optimize the sanitized file
-  if (/\.(jpe?g|png|webp)$/i.test(sanitizedFile)) {
-    sharp(sanitizedPath)
-      .resize({ width: 1200 }) // Optional resize
-      .toFormat("jpeg") // Convert all to jpeg, change if needed
-      .jpeg({ quality: 75 }) // Compression quality
+  // Optimize image file
+  if (/\.(jpe?g|png|webp)$/i.test(cleanFile)) {
+    sharp(cleanPath)
+      .resize({ width: 1200 })
+      .toFormat("jpeg")
+      .jpeg({ quality: 75 })
       .toBuffer()
       .then((data) => {
-        fs.writeFileSync(sanitizedPath, data); // Overwrite original file
-        console.log(`✅ Optimized: ${sanitizedFile}`);
+        fs.writeFileSync(cleanPath, data);
+        console.log(`✅ Optimized: ${cleanFile}`);
       })
       .catch((err) => {
-        console.error(`❌ Error optimizing ${sanitizedFile}:`, err);
+        console.error(`❌ Error optimizing ${cleanFile}:`, err);
       });
   }
 });
+
 
 
 

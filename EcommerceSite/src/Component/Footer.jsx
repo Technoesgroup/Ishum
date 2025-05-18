@@ -4,7 +4,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import "../Style-CSS/Footer.css";
-import Logo from '../images/Ishum Logo 1.svg';
+import Logo from '../images/IshumLogo1.svg';
 import { Link } from 'react-router-dom';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 

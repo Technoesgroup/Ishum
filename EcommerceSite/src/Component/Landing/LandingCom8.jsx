@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom6.css";
-import img_b1 from '../../images/image 27.svg';
+import img_b1 from '../../images/image27.svg';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import UnderLine from '../../images/Undertextline.png';
 import axios from "axios";
