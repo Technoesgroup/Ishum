@@ -19,7 +19,7 @@
   
   .returns-policy h2 {
     font-size: 24px;
-    color: #1a73e8;
+   color: #333;
     margin-top: 30px;
     margin-bottom: 10px;
   }
@@ -35,7 +35,7 @@
   }
   
   .returns-policy a {
-    color: #1a73e8;
+    color: #333;
     text-decoration: none;
   }
   

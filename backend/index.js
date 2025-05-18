@@ -11,7 +11,6 @@ const cartRouter = require("./router/Cartrouter");
 const shippingRoutes = require("./router/Shippingrouter");
 const reviewRoutes = require('./router/ReviewRoutes')
 const compression = require("compression");
-
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 const path = require("path");
@@ -22,22 +21,21 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 
-const allowedOrigins = ['https://www.ishum.in' ,'https://ishum-frontend.onrender.com', 'http://localhost:5173', 'http://localhost:5174']; // Hostinger aur local dev add karo
-
-
-app.use(compression()); // for gzip compression
-
-app.use("/uploads", express.static("uploads", {
-  maxAge: '7d' // cache images for 7 days
-}));
+const allowedOrigins = [
+  'https://www.ishum.in',
+  // 'https://ishum.in',
+  // 'https://ishum-frontend.onrender.com',
+  'http://localhost:5173',
+  'http://localhost:5174'
+];
 
 app.use(cors({
-  origin: function(origin, callback) {
-     console.log("Request Origin =>", origin);
+  origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Agar origin allowed hai, toh request ko allow karo
+      callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS')); // Agar origin allow nahi hai, error bhejo
+      console.log("CORS Error: Not allowed =>", origin);
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true
@@ -45,6 +43,11 @@ app.use(cors({
 
 
 
+app.use(compression()); // for gzip compression
+
+app.use("/uploads", express.static("uploads", {
+  maxAge: '7d' // cache images for 7 days
+}));
   
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
