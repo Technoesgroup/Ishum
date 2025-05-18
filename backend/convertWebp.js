@@ -38,13 +38,8 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const inputDir = './uploads';   // Jahaan SVG files hain
-const outputDir = './uploads';  // Wahin save karna hai PNG/WebP mein
-
-// Agar output directory nahi hai to bana do (optional, yahan same folder mein save kar rahe hain)
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
-}
+const inputDir = './uploads';
+const outputDir = './uploads';
 
 fs.readdir(inputDir, (err, files) => {
   if (err) throw err;
@@ -57,18 +52,25 @@ fs.readdir(inputDir, (err, files) => {
       const outputPathPNG = path.join(outputDir, outputNamePNG);
       const outputPathWebP = path.join(outputDir, outputNameWebP);
 
-      // PNG mein convert karna
+      // PNG Conversion
       sharp(inputPath)
-        .png({ quality: 70 })  // quality adjust kar sakte ho, 0-100
+        .png({ quality: 70 })
         .toFile(outputPathPNG)
-        .then(() => console.log(`✅ Converted ${file} → ${outputNamePNG}`))
+        .then(() => {
+          console.log(`✅ Converted ${file} → ${outputNamePNG}`);
+        })
         .catch(err => console.error('Error PNG:', err));
 
-      // WebP mein convert karna (jo zyada compression deta hai)
+      // WebP Conversion
       sharp(inputPath)
         .webp({ quality: 70 })
         .toFile(outputPathWebP)
-        .then(() => console.log(`✅ Converted ${file} → ${outputNameWebP}`))
+        .then(() => {
+          console.log(`✅ Converted ${file} → ${outputNameWebP}`);
+          // Delete original SVG after successful conversion
+          fs.unlinkSync(inputPath);
+          console.log(`🗑️ Deleted original ${file}`);
+        })
         .catch(err => console.error('Error WebP:', err));
     }
   });
