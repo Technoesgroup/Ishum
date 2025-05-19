@@ -53,7 +53,7 @@ const Cartitem = () => {
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
-  console.log("User ID from Context:", userId);
+
 
   useEffect(() => {
     if (!userId) return; // If userId is not available, don't fetch cart

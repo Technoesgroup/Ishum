@@ -76,7 +76,7 @@ exports.clearCart = async (req, res) => {
 
 exports.getCart = async (req, res) => {
     const { userId } = req.params;
-    console.log("Fetching cart for user:", userId);  // ✅ check this shows up
+     // ✅ check this shows up
   
     try {
       const cart = await Cart.findOne({ userId });
