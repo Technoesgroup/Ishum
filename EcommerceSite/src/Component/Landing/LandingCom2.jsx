@@ -19,7 +19,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
   const fetchCollections = async () => {
     try {
       const response = await axios.get(`${baseURL}/api/get-collections`);
-      setCollections(response.data.slice(0, 3)); // Only first 3
+      setCollections(response.data.slice(0, 3));
     } catch (error) {
       console.error("Error fetching collections", error);
     }
