@@ -2,13 +2,25 @@ import React, { useEffect, useState } from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import "../../Style-CSS/Landing-css/LandingCom4.css";
+import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
+
+
+  const navigate = useNavigate();
+  const { setSelectedProduct } = useProduct();
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/Viewproduct");
+  };
 
   useEffect(() => {
   axios.get(`${baseURL}/api/products/get-product`)
@@ -68,7 +80,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
                   <div className="LandingCom4-hover-icons">
                     <FavoriteBorderIcon />
-                    <VisibilityIcon />
+                    <VisibilityIcon    onClick={() => handleProductClick(product)}  />
                   </div>
 
                   {/* {!product.availability && (
