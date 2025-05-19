@@ -25,17 +25,24 @@ const baseURL ="http://localhost:4000";
     }
   };
 
-  const scrollLeft = () => {
-    if (scrollRef.current.scrollLeft > 0) {
-      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-    }
-  };
+const scrollLeft = () => {
+  if (scrollRef.current) {
+    scrollRef.current.scrollBy({
+      left: -scrollRef.current.offsetWidth * 0.8,
+      behavior: 'smooth',
+    });
+  }
+};
 
-  const scrollRight = () => {
-    if (scrollRef.current.scrollLeft + scrollRef.current.clientWidth < scrollRef.current.scrollWidth) {
-      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-    }
-  };
+const scrollRight = () => {
+  if (scrollRef.current) {
+    scrollRef.current.scrollBy({
+      left: scrollRef.current.offsetWidth * 0.8,
+      behavior: 'smooth',
+    });
+  }
+};
+
 
   return (
     <div className="LandingComp2-slider-wrapper">

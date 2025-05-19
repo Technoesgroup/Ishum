@@ -23,10 +23,9 @@ const MONGO_URI = process.env.MONGO_URI;
 const allowedOrigins = [
   'https://www.ishum.in',
   'https://ishum.in',
-  // 'https://ishum-frontend.onrender.com',  
+  // 'https://ishum-frontend.onrender.com',   
   'http://localhost:5173',
   'http://localhost:5174',
-  'http://admin.ishum.in/'
 ];
 
 app.use(cors({
@@ -42,16 +41,14 @@ app.use(cors({
 }));
 
 
+app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(compression()); // for gzip compression
 
 app.use("/uploads", express.static("uploads", {
   maxAge: '7d' // cache images for 7 days
 }));
-  
-app.use(express.json());
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
