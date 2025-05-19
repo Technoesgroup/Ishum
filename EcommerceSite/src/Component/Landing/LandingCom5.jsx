@@ -64,7 +64,7 @@ const baseURL ="http://localhost:4000";
                   )}
 
                   <img
-                    loading="lazy"
+                    // loading="lazy"
                      src={`${baseURL}/uploads/${product.image}`} 
                     alt={product.name}
                     style={{

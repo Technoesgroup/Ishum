@@ -71,7 +71,6 @@ const scrollRight = () => {
 
 
   <img
-    loading="lazy"
     src={`${baseURL}${collection.image}`}
     alt={collection.name}
     style={{
