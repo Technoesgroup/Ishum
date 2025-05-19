@@ -6,6 +6,7 @@ import  img3  from '../../images/Screenshot2025-05-16171015.png'
 import  img4  from '../../images/Screenshot2025-05-16171040.png'
 import  img5  from '../../images/Screenshot2025-05-16171129.png'
 import  img6  from '../../images/Screenshot2025-05-16171155.png'
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 
 
@@ -29,16 +30,17 @@ const InstagramGrid = () => {
           <div className="LandingCom3-card-header">
             <img      loading="lazy" className="LandingCom3-avatar" src={img1} alt={user.name} />
             <span>{user.name}</span>
-            <img      loading="lazy" className="LandingCom3-insta-icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+            <InstagramIcon   className="LandingCom3-insta-icon"/> 
+            {/* <img      loading="lazy" className="LandingCom3-insta-icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" /> */}
           </div>
           <a href={user.link} target="_blank" rel="noopener noreferrer">
             <img className="LandingCom3-main-image" src={user.image} alt={user.name} />
           </a>
-          <div className="LandingCom3-card-footer">
+          {/* <div className="LandingCom3-card-footer">
             <img      loading="lazy" src="https://img.icons8.com/ios-glyphs/30/like--v1.png" alt="Like" />
             <img      loading="lazy" src="https://img.icons8.com/ios-glyphs/30/speech-bubble--v1.png" alt="Comment" />
             <img      loading="lazy" src="https://img.icons8.com/ios-glyphs/30/share--v1.png" alt="Share" />
-          </div>
+          </div> */}
         </div>
       ))}
     </div>
