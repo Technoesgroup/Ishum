@@ -150,7 +150,7 @@
 /* ---------- MOBILE VIEW STYLES ---------- */
 @media screen and (max-width: 768px) {
   .LandingComp2-slider-wrapper {
-    /* flex-direction: column; */
+    width: auto;
     padding: 2rem 1rem;
   }
 
@@ -173,9 +173,10 @@
   }
 
   .LandingComp2-grid-container {
-  width: 100% !important;
+  /* width: 100% !important; */
     -webkit-overflow-scrolling: touch;
     gap: 1rem;
+  width: auto;
     overflow-x: auto;
   scroll-behavior: smooth;
   flex-wrap: nowrap; /* prevent wrapping */
@@ -184,7 +185,6 @@
 
   .LandingComp2-card {
     width: 100%;
-    max-width: 90vw;
     height: auto;
     border-radius: 10px;
   }
