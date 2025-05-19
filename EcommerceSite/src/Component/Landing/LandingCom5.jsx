@@ -64,6 +64,7 @@ const baseURL ="http://localhost:4000";
                   )}
 
                   <img
+                   onClick={() => handleProductClick(product)}
                     // loading="lazy"
                      src={`${baseURL}/uploads/${product.image}`} 
                     alt={product.name}

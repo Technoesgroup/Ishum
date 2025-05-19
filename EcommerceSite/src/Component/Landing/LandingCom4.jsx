@@ -70,6 +70,7 @@ const baseURL = "http://localhost:4000";
     />
   )}
   <img
+    onClick={() => handleProductClick(product)}
     loading="lazy"
     src={`${baseURL}/uploads/${product.image}`}
     alt={product.name}
@@ -90,7 +91,7 @@ const baseURL = "http://localhost:4000";
 
             {/* Info */}
             <div className="LandingCom4-product-info">
-              <p onClick={() => handleProductClick(product)}>{product.name}</p>
+              <p>{product.name}</p>
               <p className="LandingCom4-price">
                 ₹{product.price}
                 <span style={{ textDecoration: "line-through" }}>
