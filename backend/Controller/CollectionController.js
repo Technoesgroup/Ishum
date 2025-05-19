@@ -1,4 +1,6 @@
 const Collection = require("../models/CollectionSchema1");
+const fs = require('fs');
+const path = require('path');
 
 exports.getCollections = async (req, res) => {
     try {
@@ -29,30 +31,38 @@ exports.addCollection = async (req, res) => {
 
 // ✅ New: Update/Edit Collection
 exports.updateCollection = async (req, res) => {
-    try {
-        const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-        // Find the existing collection
-        const collection = await Collection.findById(id);
-        if (!collection) {
-            return res.status(404).json({ message: "Collection not found" });
-        }
-
-        // Update title if provided
-        if (req.body.title) {
-            collection.title = req.body.title;
-        }
-
-        // Update image if new file is uploaded
-        if (req.file) {
-            collection.image = `/uploads/${req.file.filename}`;
-        }
-
-        await collection.save();
-        res.status(200).json({ message: "Collection updated successfully", collection });
-    } catch (error) {
-        console.error("Update error:", error);
-        res.status(500).json({ message: "Failed to update collection" });
+    const collection = await Collection.findById(id);
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found" });
     }
+
+    // Update title if provided
+    if (req.body.title) {
+      collection.title = req.body.title;
+    }
+
+    // Update image if new file is uploaded
+    if (req.file) {
+      // Delete old image from the server (optional)
+      if (collection.image) {
+        const oldImagePath = path.join(__dirname, '..', collection.image);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+      }
+
+      collection.image = `/uploads/${req.file.filename}`;
+    }
+
+    await collection.save();
+    res.status(200).json({ message: "Collection updated successfully", collection });
+
+  } catch (error) {
+    console.error("Update error:", error);
+    res.status(500).json({ message: "Failed to update collection" });
+  }
 };
 
