@@ -89,7 +89,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
                 </div>
 
                 <div className="LandingCom4-product-info">
-                  <p>{product.name}</p>
+                  <p  onClick={() => handleProductClick(product)} >{product.name}</p>
                   <p className="LandingCom4-price">
                     ₹{product.price}
                     <span style={{ textDecoration: "line-through" }}>
