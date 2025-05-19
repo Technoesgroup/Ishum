@@ -28,9 +28,30 @@ import ReturnPolicy from './Component/AllPolicies/ReturnPolicy';
 import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy"; 
 import TearmsServices from './Component/AllPolicies/TearmsPolicy';
 import PaymentServices from './Component/AllPolicies/PaymentStatement';
+import Register from './Component/B-TO-C-Login/RegisterUser'; // adjust path if needed
+
 
 function App() {
   const [loading, setLoading] = useState(true);
+
+const [showRegisterModal, setShowRegisterModal] = useState(false);
+const [hasScrolled, setHasScrolled] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (!hasScrolled) {
+      setHasScrolled(true);
+      setTimeout(() => {
+        setShowRegisterModal(true);
+      }, 3000); // 3 seconds after scroll
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [hasScrolled]);
+
 
   // Simulate loading screen delay
   useEffect(() => {
@@ -97,6 +118,15 @@ function App() {
         <Route path="/PaymentServices" element={<PaymentServices />} />
         <Route path="/TearmsServices" element={<TearmsServices />} />
       </Routes>
+
+        {showRegisterModal && (
+      <div className="mainpage-modal-overlay">
+        <div className="mainpage-modal-content">
+          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
+          <Register />
+        </div>
+      </div>
+    )}
       <Footer />
     </Router>
   );
