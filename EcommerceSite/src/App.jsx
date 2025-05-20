@@ -29,28 +29,29 @@ import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy";
 import TearmsServices from './Component/AllPolicies/TearmsPolicy';
 import PaymentServices from './Component/AllPolicies/PaymentStatement';
 import Register from './Component/B-TO-C-Login/RegisterUser'; // adjust path if needed
+import { useAuth } from './ContextApiCart/LoginContextApi'; // 🛠️ Update path as needed
 
 
 function App() {
   const [loading, setLoading] = useState(true);
-
+ const { isLoggedIn } = useAuth();
 const [showRegisterModal, setShowRegisterModal] = useState(false);
 const [hasScrolled, setHasScrolled] = useState(false);
 
 useEffect(() => {
   const handleScroll = () => {
-    if (!hasScrolled) {
+    if (!hasScrolled && !isLoggedIn) {
       setHasScrolled(true);
       setTimeout(() => {
         setShowRegisterModal(true);
-      }, 3000); // 3 seconds after scroll
+      }, 2000);
     }
   };
 
   window.addEventListener("scroll", handleScroll);
-
   return () => window.removeEventListener("scroll", handleScroll);
-}, [hasScrolled]);
+}, [hasScrolled, isLoggedIn]); // ✅ include isLoggedIn
+
 
 
   // Simulate loading screen delay

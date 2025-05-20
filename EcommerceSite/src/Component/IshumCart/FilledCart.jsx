@@ -61,7 +61,7 @@ const Cartitem = () => {
     const fetchCart = async () => {
       try {
         const res =  await axios.get(`${baseURL}/api/cart/${userId}`);
-        console.log("Backend Cart Data:", res.data);
+        // console.log("Backend Cart Data:", res.data);
         setCartItems(res.data.cartItems || []); // Ensure cartItems are updated properly
       } catch (err) {
         console.error("Error fetching cart:", err);
@@ -81,22 +81,25 @@ const Cartitem = () => {
 
     fetchCart();
     fetchSimilarProducts();
-  }, [userId]); // Add userId as dependency, so whenever it changes, data is fetched again
+  }, [userId]); 
+
 
   const handleAddToCart = async (product) => {
-    try {
-      const res = await axios.post(`${baseURL}/api/cart`, {
-        userId,
-        productId: product._id,
-        quantity: 1,
-        size: product.size[0],
-        color: product.color,
-      });
-      setCartItems(res.data.cartItems);
-    } catch (err) {
-      console.error("Error adding to cart:", err);
-    }
-  };
+  try {
+    await axios.post(`${baseURL}/api/cart`, {
+      userId,
+      productId: product._id,
+      quantity: 1,
+      size: product.size[0],
+      color: product.color,
+    });
+    // Refresh cart
+    fetchCart();
+  } catch (err) {
+    console.error("Error adding to cart:", err);
+  }
+};
+
 
   const handleRemove = async (id) => {
     try {

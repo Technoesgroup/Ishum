@@ -73,7 +73,9 @@ app.use("/api/shipping", shippingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', reviewRoutes);
 
-
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
 
 // Create order
 app.post("/create-order", async (req, res) => {
@@ -112,4 +114,4 @@ const expectedSignature = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_S
 
 
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT,  '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
