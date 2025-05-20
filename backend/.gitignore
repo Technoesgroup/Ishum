@@ -4,8 +4,7 @@ node_modules/
 # Build files
 dist/
 build/
-<<<<<<< HEAD
+
 .env
 .env/
-=======
->>>>>>> db796dd8d1b6310b6c2c826fd4555ed27b986bc6
+
