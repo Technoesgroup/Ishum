@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
- useEffect(() => {
-  if (token) {
+useEffect(() => {
+  if (token && !user) {
     setLoadingUser(true);
     localStorage.setItem("token", token);
     const fetchUser = async () => {
@@ -46,12 +46,13 @@ export const AuthProvider = ({ children }) => {
       }
     };
     fetchUser();
-  } else {
+  } else if (!token) {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setUser(null);
   }
 }, [token]);
+
 
   useEffect(() => {
     setIsLoggedIn(!!token);

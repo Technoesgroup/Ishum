@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, setShowLoginModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
-  const { setIsLoggedIn, setUser } = useAuth();
+  const { setIsLoggedIn, setUser,setToken } = useAuth();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
@@ -60,20 +60,18 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, se
 
       const data = await response.json();
 
-      if (data.success) {
-        toast.success("OTP Verified ✅");
+    if (data.success) {
+  toast.success("OTP Verified ✅");
 
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+  // ✅ Correct way to set token and user
+  setToken(data.token);      // triggers AuthProvider useEffect
+  setUser(data.user);        // sets user instantly, no wait
+  setIsLoggedIn(true);       // optional if context already handles this
 
-        setUser(data.user);  
-        setIsLoggedIn(true);  
+  setShowB2UModal(false);
+  setShowLoginModal(false);
+}
 
-        setShowB2UModal(false); 
-        setShowLoginModal(false);
-      } else {
-        toast.error(data.message);
-      }
     } catch (err) {
       console.error(err);
       toast.error("Verification failed");
@@ -82,7 +80,7 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, se
 
   return (
     <div className="otp-verification-container">
-      <ToastContainer position="top-center" autoClose={3000} />
+      <ToastContainer position="top-center" autoClose={2000} />
       
       <h2 className="otp-title">Verification code</h2>
       <p className="otp-subtitle">

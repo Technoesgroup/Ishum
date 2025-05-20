@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
-  const { setIsLoggedIn, setUser } = useAuth(); // ✅ Destructure context
+  const { setIsLoggedIn, setUser,setToken } = useAuth(); // ✅ Destructure context
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
@@ -62,10 +62,11 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
         toast.success("OTP Verified ✅");
 
         // ✅ Set token & user in localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+        // localStorage.setItem("token", data.token);
+        // localStorage.setItem("user", JSON.stringify(data.user));
 
         // ✅ Update global context
+          setToken(data.token); 
         setUser(data.user);
         setIsLoggedIn(true);
 

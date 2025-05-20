@@ -95,8 +95,12 @@ const groupedColorImages = groupColorImages(selectedProduct.colorImages);
   };
 
 
-
 const handleAddToCart = async () => {
+  if (user === undefined) {
+    toast.info("Please wait..."); // user is still loading
+    return;
+  }
+
   if (!user || !user._id) {
     toast.error("Please login to add products to your cart.");
     return;
@@ -118,6 +122,7 @@ const handleAddToCart = async () => {
     console.error("Error adding to cart:", err);
   }
 };
+
 
   
   
