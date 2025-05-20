@@ -11,7 +11,7 @@ const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
     const [loading, setLoading] = useState(true);
-const baseURL = "http://localhost:4000";
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 
   const navigate = useNavigate();

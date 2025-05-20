@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
-const baseURL ="http://localhost:4000";
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 
 
