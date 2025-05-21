@@ -84,3 +84,10 @@ a{
   font-size: 16px;
   cursor: pointer;
 }
+
+
+@media (max-width: 768px) {
+  .mainpage-modal-overlay {
+    display: none !important;
+  }
+}
