@@ -25,7 +25,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import AuthModal from "../Component/B-TO-C-Login/MobileLoginPage/AutoMobile"
 import MenuIcon from '@mui/icons-material/Menu';
-import Authmobile from '../Component/B-TO-C-Login/MobileLoginPage/AutoMobile'
+
 
 export default function Navbar() {
   const { setIsLoggedIn } = useAuth();

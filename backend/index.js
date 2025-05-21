@@ -50,7 +50,7 @@ app.use("/uploads", express.static("uploads", {
   maxAge: '7d' // cache images for 7 days
 }));
 
-console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID);
+// console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID);
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,

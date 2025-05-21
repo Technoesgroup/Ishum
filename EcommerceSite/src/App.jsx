@@ -30,6 +30,7 @@ import TearmsServices from './Component/AllPolicies/TearmsPolicy';
 import PaymentServices from './Component/AllPolicies/PaymentStatement';
 import Register from './Component/B-TO-C-Login/RegisterUser'; // adjust path if needed
 import { useAuth } from './ContextApiCart/LoginContextApi'; // 🛠️ Update path as needed
+import AuthModal from "./Component/B-TO-C-Login/MobileLoginPage/AutoMobile"
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
  const { isLoggedIn } = useAuth();
 const [showRegisterModal, setShowRegisterModal] = useState(false);
 const [hasScrolled, setHasScrolled] = useState(false);
+
+
+const isMobile = window.innerWidth <= 768; // Adjust breakpoint as needed
 
 useEffect(() => {
   const handleScroll = () => {
@@ -120,14 +124,19 @@ useEffect(() => {
         <Route path="/TearmsServices" element={<TearmsServices />} />
       </Routes>
 
-        {showRegisterModal && (
-      <div className="mainpage-modal-overlay">
-        <div className="mainpage-modal-content">
-          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
-          <Register />
-        </div>
-      </div>
-    )}
+   {showRegisterModal && (
+  <div className="mainpage-modal-overlay">
+    <div className="mainpage-modal-content">
+      <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
+      {isMobile ? (
+        <AuthModal closeModal={() => setShowRegisterModal(false)} />
+      ) : (
+        <Register />
+      )}
+    </div>
+  </div>
+)}
+
       <Footer />
     </Router>
   );
