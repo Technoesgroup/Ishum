@@ -19,14 +19,14 @@ const RatingsReviews = () => {
     <div className="main-rating">
         <div className="average-rating">
           <h1>4.5 <span>&#9733;</span></h1>
-          <p>1,813 Ratings &<br />176 Reviews</p>
+          {/* <p>1,813 Ratings &<br />176 Reviews</p> */}
         </div>
         <div className="rating-bars">
-        <div className="bar"><span>5 &#9733;</span><div className="progress" style={{ width: '80%' }}></div><span>1,342</span></div>
+        {/* <div className="bar"><span>5 &#9733;</span><div className="progress" style={{ width: '80%' }}></div><span>1,342</span></div>
           <div className="bar"><span>4 &#9733;</span><div className="progress" style={{ width: '16%' }}></div><span>267</span></div>
           <div className="bar"><span>3 &#9733;</span><div className="progress" style={{ width: '5%' }}></div><span>70</span></div>
           <div className="bar"><span>2 &#9733;</span><div className="progress" style={{ width: '2%' }}></div><span>36</span></div>
-          <div className="bar"><span>1 &#9733;</span><div className="progress red" style={{ width: '6%' }}></div><span>98</span></div>
+          <div className="bar"><span>1 &#9733;</span><div className="progress red" style={{ width: '6%' }}></div><span>98</span></div> */}
         </div>
       </div>
 
