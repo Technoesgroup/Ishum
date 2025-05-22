@@ -28,8 +28,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 
 export default function Navbar() {
-  const { setIsLoggedIn } = useAuth();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const [showB2BModal, setShowB2BModal] = useState(false);
   const [showB2UModal, setShowB2UModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -59,7 +58,6 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   const { cartItems } = useCart();
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleSearchClick = () => {
     navigate('/Search-Bar');
@@ -198,7 +196,7 @@ export default function Navbar() {
 
             )}
             <SearchIcon className='mobile-search-icon' onClick={handleMoblieSearchClick} />
-            <Badge badgeContent={totalItems} color="error">
+            <Badge badgeContent={cartItems.length} color="error">
   <LocalMallOutlinedIcon
     className="Ishum-iconbag"
     onClick={handleCartClick}

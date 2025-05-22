@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import Loader from "../../Pages/LoaderFullpage";
+import { useCart } from "../../ContextApiCart/CartContextApi";
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductList({ queryParam = "isBestseller=true" }) {
@@ -21,16 +22,15 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
    const { user, loadingUser } = useAuth();
+   const { fetchCart } = useCart();
+
 
   const userId = user?._id;
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-  console.log("Logged in user:", user);
-
-
-  console.log("User ID:", userId);
-
+  // console.log("Logged in user:", user);
+  // console.log("User ID:", userId);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -110,8 +110,6 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
 
     return;
   }
-
-
     if (!user?._id) {
   toast.error("Please login to add products to your cart.");
 
@@ -126,6 +124,8 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
         size: product.size[0],
         color: product.color,
       });
+
+         await fetchCart();
        toast.info("Product added to cart!");
     } catch (err) {
       console.error("Error adding to cart:", err);
