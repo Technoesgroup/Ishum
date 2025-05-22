@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
+import { useCart } from "../../ContextApiCart/CartContextApi";
 
 
 const ProductPage = () => {
@@ -17,6 +18,7 @@ const ProductPage = () => {
   const [mainImage, setMainImage] = useState("");
   const [selectedColor, setSelectedColor] = useState(""); // new
   const [colorThumbnails, setColorThumbnails] = useState([]);
+   const { fetchCart } = useCart();
 
   const navigate = useNavigate();
 
@@ -116,7 +118,7 @@ const handleAddToCart = async () => {
       size: selectedSize,
       color: selectedColor || "",
     });
-
+      await fetchCart();
     console.log("Added to cart:", res.data);
   } catch (err) {
     console.error("Error adding to cart:", err);
