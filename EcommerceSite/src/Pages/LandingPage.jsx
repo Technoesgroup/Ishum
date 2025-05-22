@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import { TawkContext } from "../Component/TawkContextApi/TawkContextApi"; // adjust path as needed
 import { motion } from "framer-motion";
-import "./LandingPage.css"; 
-import Loader from "../Pages/LoaderFullpage"; // create a simple spinner component
+import "./LandingPage.css";
+import Loader from "../Pages/LoaderFullpage";
 
 // Import components
-
 import Comp1 from "../Component/Landing/LandingCom1";
 import Comp2 from "../Component/Landing/LandingCom2";
 import Comp3 from "../Component/Landing/LandingCom3";
@@ -18,12 +18,13 @@ import Comp10 from "../Component/Landing/LandingCom10";
 import Comp11 from "../Component/Landing/LandingCom11";
 
 const Landing = () => {
+  const { } = useContext(TawkContext); // (optional: not required if you just want the script to load)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500); // simulate loading time
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -38,7 +39,7 @@ const Landing = () => {
 
   return (
     <div className="Landing-Components">
-      {[Comp1, Comp2, Comp4, Comp5,Comp7,Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
+      {[Comp1, Comp2, Comp4, Comp5, Comp7, Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
         (Component, index) => (
           <motion.div
             key={index}
@@ -56,3 +57,4 @@ const Landing = () => {
 };
 
 export default Landing;
+
