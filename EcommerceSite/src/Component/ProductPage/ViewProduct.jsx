@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
+import { useParams } from "react-router-dom";
 
 
 const ProductPage = () => {
   const { user } = useAuth();
+   const { slug } = useParams();
   const { selectedProduct, setSelectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
   const [quantity, setQuantity] = useState(1);

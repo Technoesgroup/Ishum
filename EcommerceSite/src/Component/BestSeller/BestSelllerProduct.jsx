@@ -11,6 +11,7 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
+import { useParams } from "react-router-dom";
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductList({ queryParam = "isBestseller=true" }) {
@@ -67,9 +68,15 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   }, [queryParam, selected]);
 
   const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    localStorage.setItem("selectedProduct", JSON.stringify(product));
-    navigate("/Viewproduct");
+   // slug generate kar rahe hain name/title se
+  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
+  // store + navigate
+  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
+  setSelectedProduct(updatedProduct);
+  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+
+  navigate(`/viewproduct/${slug}`);
   };
 
   const filteredProducts = Array.isArray(products)

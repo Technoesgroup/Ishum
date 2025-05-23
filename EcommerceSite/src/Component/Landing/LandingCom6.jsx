@@ -39,11 +39,18 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
   const limitedProducts = products.slice(0, 8);
 
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);  
-    localStorage.setItem("selectedProduct", JSON.stringify(product));  // context me product save
-    navigate("/Viewproduct");           // product page pe jao
-  };
+const handleProductClick = (product) => {
+
+  // slug generate kar rahe hain name/title se
+  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
+  // store + navigate
+  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
+  setSelectedProduct(updatedProduct);
+  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+
+  navigate(`/viewproduct/${slug}`);
+};
 
   return (
     <div className="collection-container">

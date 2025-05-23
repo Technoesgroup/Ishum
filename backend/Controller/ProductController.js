@@ -1,5 +1,6 @@
 const Product = require("../models/ProductSchema");
 const Collection = require("../models/CollectionSchema1");
+const mongoose = require('mongoose'); 
 
 const addProduct = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ const addProduct = async (req, res) => {
       subcategory, 
       color, 
       discount, 
-      price, 
+      price,
       description, 
       size, 
       availability, 
@@ -50,7 +51,9 @@ const addProduct = async (req, res) => {
       }
     }
     
-
+    const slugBase = slugify(name, { lower: true, strict: true });  // strict se special chars remove ho jayenge
+    const uniqueSuffix = new mongoose.Types.ObjectId().toString().slice(-6);
+    const slug = `${slugBase}-${uniqueSuffix}`;
    
     const product = new Product({
       name,
@@ -68,7 +71,7 @@ const addProduct = async (req, res) => {
       isExclusive: isExclusive === "true" || isExclusive === true,
       isIshumStore: isIshumStore === "true" || isIshumStore === true,
       thumbnails,
-      colorImages
+      colorImages,
     });
 
     await product.save();
@@ -183,7 +186,6 @@ const searchProducts = async (req, res) => {
     return res.status(500).json({ message: "Server error during search", error: error.message });
   }
 };
-
 
 
 module.exports = {

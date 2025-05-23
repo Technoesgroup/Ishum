@@ -113,7 +113,7 @@ useEffect(() => {
         <Route path="/Ishum-Exclusive" element={<IshumExclusive />} />
         <Route path="/Collection" element={<COLLECTION />} />
         <Route path="/co-page/:title" element={<CollectionPage />} />
-        <Route path="/Viewproduct" element={<ViewProduct />} />
+        <Route path="/Viewproduct/:slug" element={<ViewProduct />} />
         <Route path="/OrderConformation" element={<OrderConformation />} />
         <Route path="/OrderTracking" element={<OrderTracking />} />
         <Route path="/search" element={<MobileSearch />} />
