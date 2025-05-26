@@ -10,21 +10,25 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import Loader from "../../Pages/LoaderFullpage";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useCart } from "../../ContextApiCart/CartContextApi";
-import { useParams } from "react-router-dom";
+import { useWishlist } from "../ContextHook/WishlistHook";
+import Register from '../../Component/B-TO-C-Login/RegisterUser';
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductList({ queryParam = "isBestseller=true" }) {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true); // ✅ loading state
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const { selected } = useFilter();
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
    const { user, loadingUser } = useAuth();
    const { fetchCart } = useCart();
-
+  const { addToWishlist } = useWishlist();
 
   const userId = user?._id;
 
@@ -67,6 +71,7 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
     fetchProducts();
   }, [queryParam, selected]);
 
+
   const handleProductClick = (product) => {
    // slug generate kar rahe hain name/title se
   const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
@@ -78,6 +83,8 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
 
   navigate(`/viewproduct/${slug}`);
   };
+
+
 
   const filteredProducts = Array.isArray(products)
     ? products.filter((product) => {
@@ -117,9 +124,9 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
 
     return;
   }
-    if (!user?._id) {
-  toast.error("Please login to add products to your cart.");
-
+   if (!user?._id) {
+    // 👇 Open register modal instead of showing toast
+    setShowRegisterModal(true);
     return;
   }
 
@@ -158,6 +165,12 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
                   alt={product.name}
                   className="bestsellers-product-image"
                 />
+
+                    <div className="top-Products-hover-icons">
+                    <FavoriteBorderIcon   onClick={() => addToWishlist(product)}   style={{ cursor: "pointer" }}/>
+                    <VisibilityIcon   />
+                  </div>
+
                 <div className="bestsellers-product-details">
                   <h3 className="bestsellers-product-name">{product.name}</h3>
                   <div className="Original-Discount-Price">
@@ -169,10 +182,6 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
   className="LocalMallIcon"
   onClick={(e) => {
     e.stopPropagation();
-    if (!user?._id || loadingUser) {
-       toast.error("Please login to add products to your cart.");
-      return;
-    }
     handleAddToCart(product);
   }}
 />
@@ -267,8 +276,19 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
             </button>
           </div>
              <ToastContainer position="top-right" autoClose={3000} />
+             
         </>
       )}
+
+
+           {showRegisterModal && (
+      <div className="mainpage-modal-overlay">
+        <div className="mainpage-modal-content">
+          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
+          <Register />
+        </div>
+      </div>
+    )}
     </div>
   );
 }

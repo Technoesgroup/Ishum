@@ -11,6 +11,7 @@ const shippingRoutes = require("./router/Shippingrouter");
 const reviewRoutes = require('./router/ReviewRoutes')
 const compression = require("compression");
 const Razorpay = require("razorpay");
+const wishlistRoutes =  require("./router/WishlistRoutes");
 const crypto = require("crypto");
 const path = require("path");
 const app = express();
@@ -72,6 +73,8 @@ app.use("/api/cart", cartRouter);
 app.use("/api/shipping", shippingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', reviewRoutes);
+app.use("/api/wishlist", wishlistRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Backend is running");

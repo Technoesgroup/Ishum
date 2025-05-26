@@ -12,6 +12,7 @@
   .bestsellers-product-image {
     width: 100%;
     height: auto;
+     display: block;
   }
   
   .bestsellers-product-details {
@@ -20,6 +21,7 @@
   }
   
   .bestsellers-product-card {
+    position: relative;
     max-width: 20vw;
     width: 100%;
     text-align: center;
@@ -31,6 +33,33 @@
     flex-direction: column;
     justify-content: space-between;
   }
+
+
+  .top-Products-hover-icons {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.top-Products-hover-icons svg{
+ background: rgb(255, 255, 255);
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  color: black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.bestsellers-product-card:hover .top-Products-hover-icons {
+  opacity: 1;
+}
   
   .bestsellers-product-name {
     font-family: 'PoppinsRegular';

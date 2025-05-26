@@ -9,6 +9,7 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useParams } from "react-router-dom";
+import Register from '../../Component/B-TO-C-Login/RegisterUser';
 
 
 const ProductPage = () => {
@@ -20,6 +21,7 @@ const ProductPage = () => {
   const [mainImage, setMainImage] = useState("");
   const [selectedColor, setSelectedColor] = useState(""); // new
   const [colorThumbnails, setColorThumbnails] = useState([]);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
    const { fetchCart } = useCart();
 
   const navigate = useNavigate();
@@ -106,7 +108,7 @@ const handleAddToCart = async () => {
   }
 
   if (!user || !user._id) {
-    toast.error("Please login to add products to your cart.");
+    setShowRegisterModal(true);
     return;
   }
 
@@ -213,6 +215,16 @@ const handleAddToCart = async () => {
         </button>
       </div>
            <ToastContainer position="top-right" autoClose={3000} />
+
+           
+           {showRegisterModal && (
+      <div className="mainpage-modal-overlay">
+        <div className="mainpage-modal-content">
+          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
+          <Register />
+        </div>
+      </div>
+    )}
     </div>
   );
 };

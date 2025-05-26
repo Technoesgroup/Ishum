@@ -1,0 +1,133 @@
+/* Wishlist page container */
+.wishlist-page {
+    width: auto;
+  margin: 20px auto;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+/* Heading */
+.wishlist-page h2 {
+  text-align: center;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+}
+
+/* Loading and empty state texts */
+.wishlist-page p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Wishlist list */
+.wishlist-page ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Each wishlist item card */
+.wishlist-page li {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.wishlist-page li:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Product image */
+.wishlist-page img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Product details container */
+.wishlist-page div {
+  text-align: center;
+}
+
+/* Product name */
+.wishlist-page h4 {
+  font-size: 0.9rem;
+  margin: 5px 0;
+  color: #222;
+  font-weight: 600;
+}
+
+/* Price styling */
+.wishlist-page p {
+  font-size: 1rem;
+  color: #e63946; /* nice red color for price */
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Responsive styles for tablets and mobiles */
+@media (max-width: 768px) {
+  .wishlist-page {
+    margin: 20px 15px;
+    padding: 15px;
+  }
+
+  .wishlist-page h2 {
+    font-size: 1.8rem;
+  }
+
+  .wishlist-page ul {
+    gap: 15px;
+  }
+
+  .wishlist-page li {
+    width: 45%; /* 2 items per row on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .wishlist-page {
+    margin: 15px 10px;
+    padding: 10px;
+  }
+
+  .wishlist-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .wishlist-page ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .wishlist-page li {
+    width: 100%; /* single column on mobiles */
+    padding: 12px;
+  }
+
+  .wishlist-page img {
+    max-width: 100%;
+  }
+
+  .wishlist-page h4 {
+    font-size: 1.1rem;
+  }
+
+  .wishlist-page p {
+    font-size: 1rem;
+  }
+}
