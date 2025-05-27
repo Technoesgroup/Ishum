@@ -24,19 +24,19 @@ const MONGO_URI = process.env.MONGO_URI;
 const allowedOrigins = [
   'https://www.ishum.in',
   'https://ishum.in',
-  // 'https://ishum-frontend.onrender.com',   
   'http://localhost:5173',
   'http://localhost:5174',
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log("CORS Error: Not allowed =>", origin);
-      callback(new Error('Not allowed by CORS'));
+  origin: function(origin, callback){
+    // Allow requests with no origin (like curl, Postman)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'CORS policy: This origin is not allowed.';
+      return callback(new Error(msg), false);
     }
+    return callback(null, true);
   },
   credentials: true
 }));
