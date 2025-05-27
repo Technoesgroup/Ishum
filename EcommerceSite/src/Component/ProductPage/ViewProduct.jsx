@@ -8,13 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
-import { useParams } from "react-router-dom";
-import Register from '../../Component/B-TO-C-Login/RegisterUser';
+import { useModal } from '../ModelContext/ModelContext';
 
 
 const ProductPage = () => {
   const { user } = useAuth();
-   const { slug } = useParams();
   const { selectedProduct, setSelectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
   const [quantity, setQuantity] = useState(1);
@@ -22,6 +20,12 @@ const ProductPage = () => {
   const [selectedColor, setSelectedColor] = useState(""); // new
   const [colorThumbnails, setColorThumbnails] = useState([]);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const {
+        showB2BModal, setShowB2BModal,
+        showB2UModal, setShowB2UModal,
+        showLoginModal, setShowLoginModal,
+        showAuthModal, setShowAuthModal
+      } = useModal();
    const { fetchCart } = useCart();
 
   const navigate = useNavigate();
@@ -86,8 +90,6 @@ const groupColorImages = (colorImages) => {
 const groupedColorImages = groupColorImages(selectedProduct.colorImages);
 
 
-
-
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
   };
@@ -108,7 +110,13 @@ const handleAddToCart = async () => {
   }
 
   if (!user || !user._id) {
-    setShowRegisterModal(true);
+      const isMobile = window.innerWidth <= 768;
+     if (isMobile) {
+      setShowAuthModal(true);   // ✅ mobile → open AuthModal
+    } else {
+      setShowB2UModal(true);    // ✅ desktop → open B2U modal
+    }
+
     return;
   }
 
@@ -211,16 +219,6 @@ const handleAddToCart = async () => {
         </button>
       </div>
            <ToastContainer position="top-right" autoClose={3000} />
-
-           
-           {showRegisterModal && (
-      <div className="mainpage-modal-overlay">
-        <div className="mainpage-modal-content">
-          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
-          <Register />
-        </div>
-      </div>
-    )}
     </div>
   );
 };
