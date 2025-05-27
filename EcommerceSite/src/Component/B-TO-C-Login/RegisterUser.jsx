@@ -4,8 +4,8 @@ import "../B-TO-C-Login/RegisterUser.css";
 import img1 from '../../images/18839a14eab62a1c7d6277c6f8ba14f8.png';
 import OtpVerification from "./OtpVerification";
 import GoogleIcon from '@mui/icons-material/Google';
-
 import { ToastContainer, toast } from "react-toastify";
+import { useGoogleLogin } from "./FireBaseAuth/Handlefetch";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
@@ -18,12 +18,14 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [loading, setLoading] = useState(false);
   const [showOtpStep, setShowOtpStep] = useState(false);
   const [phone, setPhone] = useState(""); // ✅ for OTPVerification
+  const { handleGoogleLogin } = useGoogleLogin();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
 
   const handleSubmit = async () => {
     const { name, email, phone } = formData;
@@ -113,7 +115,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
               <button className="RegisterUser-social-btn">
                 <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" />
               </button>
-              <button className="RegisterUser-social-btn">
+              <button className="RegisterUser-social-btn"  onClick={handleGoogleLogin}>
                 <GoogleIcon />
               </button>
               <button className="RegisterUser-social-btn">

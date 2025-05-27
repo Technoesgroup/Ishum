@@ -5,8 +5,6 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import logo from '../images/IshumLogo1.svg';
 import { Link, useNavigate } from "react-router-dom";
 import RegBusiness from './B-TO-B-Login/RegisterBusiness';
-import Login from '../Component/B-TO-C-Login/LoginUser'
-import RegUser from './B-TO-C-Login/RegisterUser';
 import { motion } from "framer-motion";
 import EmailIcon from '@mui/icons-material/Email';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -23,23 +21,23 @@ import SearchBar from "./SearchBar/SearchBar";
 import { useAuth } from '../ContextApiCart/LoginContextApi';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-import AuthModal from "../Component/B-TO-C-Login/MobileLoginPage/AutoMobile"
 import MenuIcon from '@mui/icons-material/Menu';
+import { useModal } from '../Component/ModelContext/ModelContext';
 
 
 export default function Navbar() {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const [showB2BModal, setShowB2BModal] = useState(false);
-  const [showB2UModal, setShowB2UModal] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
-  const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
  
-
+ const {
+    showB2BModal, setShowB2BModal,
+    showB2UModal, setShowB2UModal,
+    showLoginModal, setShowLoginModal,
+    showAuthModal, setShowAuthModal
+  } = useModal();
 
   const [user, setUser] = useState({ name: '', email: '' });
 
@@ -127,29 +125,7 @@ export default function Navbar() {
           <Link to="/bestsellers" onClick={() => setIsMenuOpen(false)}>BESTSELLERS</Link>
           <Link to="/Ishum-Exclusive" onClick={() => setIsMenuOpen(false)}>ISHUM'S EXCLUSIVE</Link>
 
-          {/* <div className="dropdown" onMouseEnter={() => setIsRecommendationOpen(true)} onMouseLeave={() => setIsRecommendationOpen(false)}>
-            <div className='RECOMMENDATION'>ISHUM'S RECOMMENDATION <KeyboardArrowDownSharpIcon /></div>
-            {isRecommendationOpen && (
-              <ul className="Ishum-dropdown-menu">
-                <span className='RECOMMENDATION-dropdown-li'>
-                  <span className='Occasion'>
-                    <h2>Occasion</h2>
-                    <li><Link to="/Leg " onClick={() => setIsMenuOpen(false)}>Eid</Link></li>
-                    <li><Link to="/Tag" onClick={() => setIsMenuOpen(false)}>Diwali</Link></li>
-                    <li><Link to="/B2B-P" onClick={() => setIsMenuOpen(false)}>Karwa Chauth</Link></li>
 
-                  </span>
-                  <div  className='line-occasion'></div>
-                  <span className='SALE'>
-                    <h2>SALE</h2>
-                    <li><Link to="/Lega ">Upto 35% Off On Gulzaar Collection</Link></li>
-                    <li><Link to="/Ta">Upto 20% Off On Jashn e Rang Collection</Link></li>
-                    <li><Link to="/B2B">Diwali Offers</Link></li>
-                  </span>
-                </span>
-              </ul>
-            )}
-          </div> */}
           <div className="dropdown" onMouseEnter={() => setIsDiscoverOpen(true)} onMouseLeave={() => setIsDiscoverOpen(false)}>
             <div className='discover'>DISCOVER <KeyboardArrowDownSharpIcon /></div>
             {isDiscoverOpen && (
@@ -241,9 +217,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* NAVIGATION LINKS AND SEARCH */}
-  
-
       {/* MODALS */}
       {showB2BModal && (
         <div className="modal-overlay">
@@ -253,28 +226,7 @@ export default function Navbar() {
           </div>
         </div>
       )}
-      {showLoginModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <Login setShowB2UModal={setShowB2UModal} setShowLoginModal={setShowLoginModal} />
-          </div>
-        </div>
-      )}
-      {showB2UModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="RegisterUser-close-btn" onClick={() => setShowB2UModal(false)}>×</button>
-            <RegUser setShowB2UModal={setShowB2UModal} setShowLoginModal={setShowLoginModal} />
-          </div>
-        </div>
-      )}
-
-
-      {showAuthModal && (
-        <AuthModal onClose={() => setShowAuthModal(false)} />
-      )}
-
-
+     
 
     </nav>
   );

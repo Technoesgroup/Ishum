@@ -6,6 +6,7 @@ import AppleIcon from '@mui/icons-material/Apple';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import OtpVerification from './MobileOtp';
+import { useGoogleLogin } from "../FireBaseAuth/Handlefetch";
 
 const MobileProfile = ({ onClose, onLoginClick }) => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [showOtpStep, setShowOtpStep] = useState(false);
+    const { handleGoogleLogin } = useGoogleLogin();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
@@ -108,7 +110,7 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
         <div className="or-divider">or sign up with</div>
 
         <div className="social-signUp-buttons">
-          <div className="social-button"><GoogleIcon /></div>
+          <div className="social-button"><GoogleIcon onClick={handleGoogleLogin}/></div>
           <div className="social-button"><AppleIcon /></div>
           <div className="social-button"><FacebookIcon /></div>
         </div>

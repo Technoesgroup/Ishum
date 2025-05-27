@@ -85,6 +85,45 @@ const registerUser = async (req, res) => {
 };
 
 
+const socialLogin = async (req, res) => {
+  const { provider, socialId, email, name, profilePic } = req.body;
+
+  if (!provider || !socialId || !email) {
+    return res.status(400).json({ success: false, message: "Provider, SocialId, and Email required" });
+  }
+
+  try {
+    let user = await userModel.findOne({ $or: [{ socialId }, { email }] });
+
+    if (user) {
+      if (!user.socialId) {
+        user.socialId = socialId;
+        user.socialProvider = provider;
+        await user.save();
+      }
+    } else {
+      // New user → create entry
+      user = new userModel({
+        name,
+        email,
+        socialProvider: provider,
+        socialId,
+        profilePic,
+        isVerified: true
+      });
+      await user.save();
+    }
+
+    const token = createToken(user._id);
+    res.status(200).json({ success: true, message: "Social login successful", token, user });
+
+  } catch (err) {
+    console.error("Social Login Error:", err);
+    res.status(500).json({ success: false, message: "Social login failed", error: err.message });
+  }
+};
+
+
 const verifyOtp = async (req, res) => {
   const { phone, otp, mode, name, email } = req.body;
 
@@ -147,32 +186,6 @@ const verifyOtp = async (req, res) => {
 };
 
 
-// 🔁 RESEND OTP
-const resendOtp = async (req, res) => {
-  const { phone } = req.body;
-
-  try {
-    if (!phone) {
-      return res.status(400).json({ success: false, message: 'Please provide a phone number' });
-    }
-
-    const userData = OTP_STORE[phone];
-    if (!userData) {
-      return res.status(400).json({ success: false, message: 'User not found or phone number does not match' });
-    }
-
-    const newOtp = generateOTP();
-    userData.otp = newOtp;
-    await sendOtpViaSMS(phone, newOtp);
-
-    res.status(200).json({ success: true, message: 'OTP resent successfully' });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Server error while resending OTP' });
-  }
-};
-
 const sendOtp = async (req, res) => {
   const { phone } = req.body;
 
@@ -207,7 +220,47 @@ module.exports = {
   sendOtp,
   registerUser,
   verifyOtp,
-  resendOtp
+  socialLogin
+  // resendOtp
 };
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 🔁 RESEND OTP
+// const resendOtp = async (req, res) => {
+//   const { phone } = req.body;
+
+//   try {
+//     if (!phone) {
+//       return res.status(400).json({ success: false, message: 'Please provide a phone number' });
+//     }
+
+//     const userData = OTP_STORE[phone];
+//     if (!userData) {
+//       return res.status(400).json({ success: false, message: 'User not found or phone number does not match' });
+//     }
+
+//     const newOtp = generateOTP();
+//     userData.otp = newOtp;
+//     await sendOtpViaSMS(phone, newOtp);
+
+//     res.status(200).json({ success: true, message: 'OTP resent successfully' });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ success: false, message: 'Server error while resending OTP' });
+//   }
+// };

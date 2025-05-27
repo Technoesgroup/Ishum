@@ -28,33 +28,41 @@ import ReturnPolicy from './Component/AllPolicies/ReturnPolicy';
 import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy"; 
 import TearmsServices from './Component/AllPolicies/TearmsPolicy';
 import PaymentServices from './Component/AllPolicies/PaymentStatement';
-import Register from './Component/B-TO-C-Login/RegisterUser'; // adjust path if needed
-import { useAuth } from './ContextApiCart/LoginContextApi'; // 🛠️ Update path as needed
-
+import { useAuth } from './ContextApiCart/LoginContextApi'; // 🛠️ Update path as needed 
+import  ModalLayout  from './Component/ModelContext/ModelLayout';
+import { useModal } from './Component/ModelContext/ModelContext';
 
 function App() {
   const [loading, setLoading] = useState(true);
  const { isLoggedIn } = useAuth();
-const [showRegisterModal, setShowRegisterModal] = useState(false);
 const [hasScrolled, setHasScrolled] = useState(false);
+ const {
+      showB2BModal, setShowB2BModal,
+      showB2UModal, setShowB2UModal,
+      showLoginModal, setShowLoginModal,
+      showAuthModal, setShowAuthModal
+    } = useModal();
 
 useEffect(() => {
   const handleScroll = () => {
-    const isMobile = window.innerWidth <= 768; // you can adjust breakpoint if needed
+    const isMobile = window.innerWidth <= 768;
 
-    if (!hasScrolled && !isLoggedIn && !isMobile) {
+    if (!hasScrolled && !isLoggedIn) {
       setHasScrolled(true);
+
       setTimeout(() => {
-        setShowRegisterModal(true);
-      }, 2000);
+        if (isMobile) {
+          setShowAuthModal(true); // ✅ mobile: open auth modal
+        } else {
+          setShowB2UModal(true);  // ✅ desktop: open user registration modal
+        }
+      }, 2000); // 2-second delay
     }
   };
 
   window.addEventListener("scroll", handleScroll);
   return () => window.removeEventListener("scroll", handleScroll);
-}, [hasScrolled, isLoggedIn]);
-
-
+}, [hasScrolled, isLoggedIn, setShowAuthModal, setShowB2UModal]);
 
 
   // Simulate loading screen delay
@@ -97,6 +105,7 @@ useEffect(() => {
     <Router>
       <ScrollToTop />
       <Navbar />
+      <ModalLayout />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -122,15 +131,6 @@ useEffect(() => {
         <Route path="/PaymentServices" element={<PaymentServices />} />
         <Route path="/TearmsServices" element={<TearmsServices />} />
       </Routes>
-
-        {showRegisterModal && (
-      <div className="mainpage-modal-overlay">
-        <div className="mainpage-modal-content">
-          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
-          <Register />
-        </div>
-      </div>
-    )}
       <Footer />
     </Router>
   );

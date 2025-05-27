@@ -3,6 +3,8 @@ import "../B-TO-C-Login/LoginUser.css";
 import img1 from "../../images/18839a14eab62a1c7d6277c6f8ba14f8.png";
 import OtpVerification from "./OtpVerification";
 import GoogleIcon from '@mui/icons-material/Google';
+import { useGoogleLogin } from "./FireBaseAuth/Handlefetch";
+import { useAuth } from "../../ContextApiCart/LoginContextApi";  
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,7 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(""); 
+  const { handleGoogleLogin } = useGoogleLogin();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
@@ -24,6 +27,39 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
     const value = e.target.value.replace(/\D/g, ""); // only digits
     if (value.length <= 10) setPhone(value); // max 10 digits
   };
+
+
+  // const handleFacebookLogin = async () => {
+  //   try {
+  //     const result = await signInWithPopup(auth, facebookProvider);
+  //     console.log("Facebook User:", result.user);
+
+  //     const response = await fetch(`${baseURL}/api/user/social-login`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         email: result.user.email,
+  //         name: result.user.displayName,
+  //         provider: "facebook",
+  //         socialId: result.user.uid,
+  //       }),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (data.success) {
+  //       setToken(data.token);
+  //       setUser(data.user);
+  //       toast.success("Logged in with Facebook!");
+  //       setShowLoginModal(false);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Facebook Login Error:", error);
+  //     toast.error("Facebook login failed!");
+  //   }
+  // };
 
   const handleSendOtp = async () => {
     if (phone.length !== 10) {
@@ -91,8 +127,8 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
                 <button className="LoginUser-social-btn">
                   <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" />
                 </button>
-                <button className="LoginUser-social-btn">
-                    <GoogleIcon />
+                <button className="LoginUser-social-btn" onClick={handleGoogleLogin}>
+                  <GoogleIcon />
                 </button>
                 <button className="LoginUser-social-btn">
                   <img
@@ -139,6 +175,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 };
 
 export default SignupForm;
+
 
 
 

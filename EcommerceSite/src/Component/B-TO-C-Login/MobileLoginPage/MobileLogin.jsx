@@ -7,10 +7,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import OtpLogin from "./MobileOtp"; // Reuse your OTP component
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useGoogleLogin } from "../FireBaseAuth/Handlefetch";
 
 const MobileProfile = ({ onClose, onSignupClick }) => {
   const [phone, setPhone] = useState("");
   const [showOtp, setShowOtp] = useState(false);
+    const { handleGoogleLogin } = useGoogleLogin();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
@@ -80,7 +82,7 @@ const MobileProfile = ({ onClose, onSignupClick }) => {
             <div className="or-divider">or log in with</div>
 
             <div className="social-login-buttons">
-              <div className="social-button"><GoogleIcon /></div>
+              <div className="social-button"><GoogleIcon onClick={handleGoogleLogin} /></div>
               <div className="social-button"><AppleIcon /></div>
               <div className="social-button"><FacebookIcon /></div>
             </div>

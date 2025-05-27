@@ -127,11 +127,7 @@ const handleAddToCart = async () => {
   } catch (err) {
     console.error("Error adding to cart:", err);
   }
-};
-
-
-  
-  
+};  
 
   return (
     <div className="product-page">

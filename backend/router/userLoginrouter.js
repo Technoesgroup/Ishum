@@ -2,7 +2,8 @@ const express = require('express');
 const {
     registerUser,
     verifyOtp,
-    resendOtp,
+    socialLogin,
+    // resendOtp,
     sendOtp,
     getUser
 } = require('../Controller/userLoginController');
@@ -14,7 +15,8 @@ const userRouter = express.Router();
 userRouter.get("/get-user", authMiddleware, getUser);
 userRouter.post("/register", registerUser);
 userRouter.post("/verify-otp", verifyOtp);
-userRouter.post("/resend-otp", resendOtp);
 userRouter.post("/send-otp", sendOtp); // Optional OTP route
+userRouter.post('/social-login', socialLogin);
+
 
 module.exports = userRouter;

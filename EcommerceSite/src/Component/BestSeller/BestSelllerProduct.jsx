@@ -14,14 +14,22 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useWishlist } from "../ContextHook/WishlistHook";
-import Register from '../../Component/B-TO-C-Login/RegisterUser';
+import { useModal } from '../ModelContext/ModelContext';
 const PRODUCTS_PER_PAGE = 6;
 
-export default function ProductList({ queryParam = "isBestseller=true" }) {
+export default function ProductList({
+  queryParam = "isBestseller=true",
+
+}) {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true); // ✅ loading state
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+   const {
+      showB2BModal, setShowB2BModal,
+      showB2UModal, setShowB2UModal,
+      showLoginModal, setShowLoginModal,
+      showAuthModal, setShowAuthModal
+    } = useModal();
 
   const { selected } = useFilter();
   const navigate = useNavigate();
@@ -124,9 +132,18 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
 
     return;
   }
-   if (!user?._id) {
-    // 👇 Open register modal instead of showing toast
-    setShowRegisterModal(true);
+ 
+
+  
+  if (!user?._id) {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      setShowAuthModal(true);   // ✅ mobile → open AuthModal
+    } else {
+      setShowB2UModal(true);    // ✅ desktop → open B2U modal
+    }
+
     return;
   }
 
@@ -275,20 +292,15 @@ export default function ProductList({ queryParam = "isBestseller=true" }) {
               Next
             </button>
           </div>
+
+
              <ToastContainer position="top-right" autoClose={3000} />
              
         </>
       )}
 
 
-           {showRegisterModal && (
-      <div className="mainpage-modal-overlay">
-        <div className="mainpage-modal-content">
-          <button className="mainpage-close-btn" onClick={() => setShowRegisterModal(false)}>X</button>
-          <Register />
-        </div>
-      </div>
-    )}
+  
     </div>
   );
 }
