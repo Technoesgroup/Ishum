@@ -62,7 +62,7 @@ const scrollRight = () => {
             }
             style={{ cursor: 'pointer' }}
           >
-      {console.log("Image path:", collection.image)}
+      {/* {console.log("Image path:", collection.image)} */}
   <div className="LandingComp2-image-container">
   {/* Skeleton loader */}
   {!loadedImages[collection._id] && (
