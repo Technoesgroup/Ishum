@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
- apiKey: "AIzaSyDeSH-h6u8TipJddn5KjSqbMO4jcsM6RwA",
-  authDomain: "ishum-7feeb.firebaseapp.com",
-  projectId: "ishum-7feeb",
-  storageBucket: "ishum-7feeb.appspot.com",
-  messagingSenderId: "181947412631",
-  appId: "1:181947412631:web:715b546a945a0f1db1f9d2",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -17,6 +17,7 @@ const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
 export { auth, googleProvider, facebookProvider };
+
 
 
 
