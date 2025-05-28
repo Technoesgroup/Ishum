@@ -186,12 +186,11 @@ const verifyOtp = async (req, res) => {
 
       let existingUser = await userModel.findOne({ phone });
 
-      if (!existingUser) {
-        // If user not found, create minimal user (phone only)
+       if (!existingUser) {
         existingUser = new userModel({
-          phone,
-          isVerified: true,
-        });
+        phone,
+         isVerified: true,
+         });
         await existingUser.save();
 
         delete OTP_STORE[phone];
