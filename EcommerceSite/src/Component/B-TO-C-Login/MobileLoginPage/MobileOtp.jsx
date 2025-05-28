@@ -62,8 +62,8 @@ const OtpLogin = ({ phone = "", name = "", email = "", mode = "login", onClose }
         toast.success("OTP Verified ✅");
 
         // ✅ Set token & user in localStorage
-        // localStorage.setItem("token", data.token);
-        // localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
 
         // ✅ Update global context
           setToken(data.token); 

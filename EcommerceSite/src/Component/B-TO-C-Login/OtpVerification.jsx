@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, setShowLoginModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(30);
-  const { setIsLoggedIn, setUser,setToken } = useAuth();
+  const { setIsLoggedIn, setUser, setToken } = useAuth();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
