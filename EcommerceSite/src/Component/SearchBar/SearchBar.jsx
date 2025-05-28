@@ -29,6 +29,24 @@ const SearchBar = () => {
     setShowDropdown(inputValue.trim().length > 0);
   };
 
+  
+const handleProductClick = (product) => {
+  // slug generate kar rahe hain name/title se
+  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
+  // dropdown hide karo
+  setShowDropdown(false);
+
+  // store + navigate
+  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
+  setSelectedProduct(updatedProduct);
+  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+
+  navigate(`/viewproduct/${slug}`);
+};
+
+
+
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (query.trim()) {
@@ -94,7 +112,7 @@ const SearchBar = () => {
                 onClick={() => {
                   setSelectedProduct(product); // store in context
                   localStorage.setItem("selectedProduct", JSON.stringify(product)); // store in localStorage
-                  navigate("/Viewproduct"); // navigate to view page
+                  handleProductClick(product);
                 }}
               >
                <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
