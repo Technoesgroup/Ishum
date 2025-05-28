@@ -1,10 +1,11 @@
 import { signInWithPopup } from "firebase/auth";
 import { toast } from "react-toastify";
-import { auth, googleProvider } from "../FireBaseAuth/FireBase_auth"; // adjust path
+import { auth, googleProvider } from "../FireBaseAuth/FireBase_auth";
 import { useAuth } from "../../../ContextApiCart/LoginContextApi";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
-console.log( 'base url', baseURL);
+console.log('base url', baseURL);
+
 export const useGoogleLogin = () => {
   const { setToken, setUser } = useAuth();
 
@@ -12,7 +13,7 @@ export const useGoogleLogin = () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("Google User:", result.user);
-      
+
       const response = await fetch(`${baseURL}/api/user/social-login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -29,6 +30,8 @@ export const useGoogleLogin = () => {
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
+        localStorage.setItem("token", data.token); // ✅ save token
+        localStorage.setItem("user", JSON.stringify(data.user)); // ✅ save user
         toast.success("Logged in with Google!");
       } else {
         toast.error(data.message);
