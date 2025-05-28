@@ -17,7 +17,7 @@ const MobileProfile = ({ onClose, onLoginClick }) => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [showOtpStep, setShowOtpStep] = useState(false);
-    const { handleGoogleLogin } = useGoogleLogin();
+    const { handleGoogleLogin } = useGoogleLogin(onClose);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 

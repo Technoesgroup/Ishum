@@ -12,7 +12,7 @@ import { useGoogleLogin } from "../FireBaseAuth/Handlefetch";
 const MobileProfile = ({ onClose, onSignupClick }) => {
   const [phone, setPhone] = useState("");
   const [showOtp, setShowOtp] = useState(false);
-    const { handleGoogleLogin } = useGoogleLogin();
+    const { handleGoogleLogin } = useGoogleLogin(onClose);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 

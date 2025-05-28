@@ -6,7 +6,7 @@ import { useAuth } from "../../../ContextApiCart/LoginContextApi";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 console.log('base url', baseURL);
 
-export const useGoogleLogin = () => {
+export const useGoogleLogin = (onClose) => {
   const { setToken, setUser } = useAuth();
 
   const handleGoogleLogin = async () => {
@@ -33,6 +33,7 @@ export const useGoogleLogin = () => {
         localStorage.setItem("token", data.token); // ✅ save token
         localStorage.setItem("user", JSON.stringify(data.user)); // ✅ save user
         toast.success("Logged in with Google!");
+        onClose();
       } else {
         toast.error(data.message);
       }
