@@ -28,7 +28,7 @@ const sendOtpViaSMS = async (phone, otp) => {
       from: process.env.TWILIO_PHONE_NUMBER,
       to: phone
     });
-    console.log("OTP sent:", message.sid);
+    // console.log("OTP sent:", message.sid);
   } catch (err) {
     console.error("OTP send error:", err.message);
     throw new Error("Failed to send OTP");
@@ -163,25 +163,49 @@ const verifyOtp = async (req, res) => {
 
       delete OTP_STORE[phone];
       const token = createToken(newUser._id);
-      res.status(200).json({ success: true, message: "User registered successfully", token });
+      return res.status(200).json({ success: true, message: "User registered successfully", token });
 
     } else if (mode === "login") {
-      // 🔥 Login Flow
-      const existingUser = await userModel.findOne({ phone });
+   
+      let existingUser = await userModel.findOne({ phone });
+
       if (!existingUser) {
-        return res.status(400).json({ success: false, message: "User not found, please register first." });
+        // ❗ User not found → create minimal new user
+        existingUser = new userModel({
+          phone,
+          isVerified: true,
+        });
+        await existingUser.save();
+
+        delete OTP_STORE[phone];
+        const token = createToken(existingUser._id);
+        return res.status(200).json({
+          success: true,
+          message: "New user created and logged in",
+          token,
+          userId: existingUser._id,
+          isNewUser: true,
+        });
       }
 
+      // Agar existingUser mil gaya toh uske liye token banake response bhejna chahiye:
       delete OTP_STORE[phone];
       const token = createToken(existingUser._id);
-      res.status(200).json({ success: true, message: "Login successful", token });
-    } else {
-      res.status(400).json({ success: false, message: "Invalid mode" });
-    }
+      return res.status(200).json({
+        success: true,
+        message: "User logged in successfully",
+        token,
+        userId: existingUser._id,
+        isNewUser: false,
+      });
 
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: "Verification failed", error: err.message });
+    } else {
+      // Agar mode register ya login nahi hai
+      return res.status(400).json({ success: false, message: "Invalid mode" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -221,7 +245,6 @@ module.exports = {
   registerUser,
   verifyOtp,
   socialLogin
-  // resendOtp
 };
 
   

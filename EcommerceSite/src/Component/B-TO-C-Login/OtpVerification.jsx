@@ -37,46 +37,71 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, se
     return phone.startsWith("+91") ? phone : `+91${phone}`;
   };
 
-  const handleVerify = async () => {
-    const enteredOtp = otp.join("");
+const handleVerify = async () => {
+  const enteredOtp = otp.join("");
 
-    if (enteredOtp.length < 4) {
-      toast.error("Please enter 4-digit OTP");
+  if (enteredOtp.length < 4) {
+    toast.error("Please enter 4-digit OTP");
+    return;
+  }
+
+  const payload = {
+    phone: normalizePhone(phone),
+    otp: enteredOtp,
+    mode,
+  };
+
+  if (mode === "register") {
+    if (!name || !email) {
+      toast.error("Name and Email are required for registration");
       return;
     }
+    payload.name = name;
+    payload.email = email;
+  }
 
-    try {
-      const response = await fetch(`${baseURL}/api/user/verify-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          phone: normalizePhone(phone),
-          otp: enteredOtp,
-          name,
-          email,
-          mode
-        }),
-      });
+  try {
+    const response = await fetch(`${baseURL}/api/user/verify-otp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-    if (data.success) {
+   if (data.success) {
   toast.success("OTP Verified ✅");
 
-  // ✅ Correct way to set token and user
-  setToken(data.token);      // triggers AuthProvider useEffect
-  setUser(data.user);        // sets user instantly, no wait
-  setIsLoggedIn(true);       // optional if context already handles this
+  setToken(data.token);
 
+  // Optional: backend should send minimal user info with response,
+  // if not, you can create a user object with userId and phone:
+  const user = data.user || { _id: data.userId, phone: normalizePhone(phone) };
+  setUser(user);
+
+  setIsLoggedIn(true);
   setShowB2UModal(false);
   setShowLoginModal(false);
-}
 
-    } catch (err) {
-      console.error(err);
-      toast.error("Verification failed");
+  if (data.isNewUser) {
+    // Show a welcome message or redirect to profile setup
+    toast.info("Welcome new user! Please complete your profile.");
+    // Example: redirect or open profile setup modal
+    // navigate('/profile-setup');
+  } else {
+    
+     navigate('/');
+  }
+}
+else {
+      toast.error(data.message || "Verification failed");
     }
-  };
+  } catch (err) {
+    console.error(err);
+    toast.error("Verification failed");
+  }
+};
+
 
   return (
     <div className="otp-verification-container">
