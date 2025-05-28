@@ -29,29 +29,38 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
+  
 useEffect(() => {
-  if (token && !user) {
+  if (token) {
     setLoadingUser(true);
-    localStorage.setItem("token", token);
     const fetchUser = async () => {
       try {
         const res = await axios.get(`${baseURL}/api/user/get-user`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data.user);
+        setIsLoggedIn(true);
       } catch (error) {
         setUser(null);
+        setToken(null);
+        setIsLoggedIn(false);
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
       } finally {
         setLoadingUser(false);
       }
     };
     fetchUser();
-  } else if (!token) {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
+  } else {
     setUser(null);
+    setIsLoggedIn(false);
+    setLoadingUser(false);
   }
 }, [token]);
+
+
+
+
 
 
   useEffect(() => {

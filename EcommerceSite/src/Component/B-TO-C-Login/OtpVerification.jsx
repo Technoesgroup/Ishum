@@ -5,6 +5,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, setShowLoginModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -12,6 +13,8 @@ const OtpVerification = ({ phone, name, email, mode, onBack, setShowB2UModal, se
   const { setIsLoggedIn, setUser,setToken } = useAuth();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -72,8 +75,14 @@ const handleVerify = async () => {
    if (data.success) {
   toast.success("OTP Verified ✅");
 
-  setToken(data.token);
 
+    localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+  setToken(data.token);
+     setToken(data.token); 
+        setUser(data.user);
+        setIsLoggedIn(true);
   // Optional: backend should send minimal user info with response,
   // if not, you can create a user object with userId and phone:
   const user = data.user || { _id: data.userId, phone: normalizePhone(phone) };

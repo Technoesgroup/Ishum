@@ -7,12 +7,15 @@ dotenv.config();
 
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-// JWT Token creation
+// JWT Token creation with a check on secret
 const createToken = (id) => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not defined in environment variables");
+  }
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '4d' });
 };
 
-// OTP storage object (per phone)
+// OTP storage (in-memory, reset on server restart)
 const OTP_STORE = {};
 
 // Generate 4-digit OTP
@@ -26,7 +29,7 @@ const sendOtpViaSMS = async (phone, otp) => {
     const message = await client.messages.create({
       body: `Your OTP is ${otp}`,
       from: process.env.TWILIO_PHONE_NUMBER,
-      to: phone
+      to: phone,
     });
     // console.log("OTP sent:", message.sid);
   } catch (err) {
@@ -35,20 +38,23 @@ const sendOtpViaSMS = async (phone, otp) => {
   }
 };
 
-
+// Get user details by JWT decoded user id
 const getUser = async (req, res) => {
   try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
     const user = await userModel.findById(req.user.id).select("-otp");
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
-
     res.status(200).json({ success: true, user });
   } catch (err) {
     res.status(500).json({ success: false, message: "Error fetching user", error: err.message });
   }
 };
 
+// Registration with OTP
 const registerUser = async (req, res) => {
   let { name, email, phone } = req.body;
 
@@ -57,9 +63,13 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ success: false, message: "Name, email & phone required" });
     }
 
-    // Always save full number with +91
+    // Ensure phone starts with +91
     if (!phone.startsWith("+91")) {
       phone = "+91" + phone;
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ success: false, message: "Invalid email" });
     }
 
     const exists = await userModel.findOne({ phone });
@@ -67,14 +77,14 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ success: false, message: "User already exists" });
     }
 
-    if (!validator.isEmail(email)) {
-      return res.status(400).json({ success: false, message: "Invalid email" });
-    }
-
+    // Generate OTP for registration verification
     const otp = generateOTP();
+
+    // Store OTP and registration details to OTP_STORE
     OTP_STORE[phone] = { name, email, otp };
 
-    await sendOtpViaSMS(phone, otp); // phone already has +91
+    // Send OTP via SMS
+    await sendOtpViaSMS(phone, otp);
 
     res.status(200).json({ success: true, message: "OTP sent to phone" });
 
@@ -84,7 +94,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-
+// Social login (Google/Facebook etc)
 const socialLogin = async (req, res) => {
   const { provider, socialId, email, name, profilePic } = req.body;
 
@@ -109,7 +119,7 @@ const socialLogin = async (req, res) => {
         socialProvider: provider,
         socialId,
         profilePic,
-        isVerified: true
+        isVerified: true,
       });
       await user.save();
     }
@@ -123,13 +133,18 @@ const socialLogin = async (req, res) => {
   }
 };
 
-
+// OTP verification for login/register
 const verifyOtp = async (req, res) => {
-  const { phone, otp, mode, name, email } = req.body;
+  let { phone, otp, mode, name, email } = req.body;
 
   try {
     if (!phone || !otp || !mode) {
       return res.status(400).json({ success: false, message: "Phone, OTP and Mode required" });
+    }
+
+    // Ensure phone starts with +91
+    if (!phone.startsWith("+91")) {
+      phone = "+91" + phone;
     }
 
     const userData = OTP_STORE[phone];
@@ -142,16 +157,17 @@ const verifyOtp = async (req, res) => {
     }
 
     if (mode === "register") {
-      // 🔥 Registration Flow
       if (!name || !email) {
         return res.status(400).json({ success: false, message: "Name and Email required for registration" });
       }
 
+      // Check if user already exists
       const existingUser = await userModel.findOne({ phone });
       if (existingUser) {
         return res.status(400).json({ success: false, message: "User already exists, please login." });
       }
 
+      // Create new user with all details
       const newUser = new userModel({
         name,
         email,
@@ -161,16 +177,17 @@ const verifyOtp = async (req, res) => {
 
       await newUser.save();
 
+      // Clear OTP from store after success
       delete OTP_STORE[phone];
       const token = createToken(newUser._id);
       return res.status(200).json({ success: true, message: "User registered successfully", token });
 
     } else if (mode === "login") {
-   
+
       let existingUser = await userModel.findOne({ phone });
 
       if (!existingUser) {
-        // ❗ User not found → create minimal new user
+        // If user not found, create minimal user (phone only)
         existingUser = new userModel({
           phone,
           isVerified: true,
@@ -188,7 +205,7 @@ const verifyOtp = async (req, res) => {
         });
       }
 
-      // Agar existingUser mil gaya toh uske liye token banake response bhejna chahiye:
+      // User found - log in
       delete OTP_STORE[phone];
       const token = createToken(existingUser._id);
       return res.status(200).json({
@@ -200,21 +217,29 @@ const verifyOtp = async (req, res) => {
       });
 
     } else {
-      // Agar mode register ya login nahi hai
       return res.status(400).json({ success: false, message: "Invalid mode" });
     }
+
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
-
+// Send OTP endpoint for login or register
 const sendOtp = async (req, res) => {
-  const { phone } = req.body;
+  let { phone } = req.body;
 
-  // ✅ Check: phone must start with +91 and be 13 characters total (+91 + 10 digits)
-  if (!phone || !/^\+91\d{10}$/.test(phone)) {
+  if (!phone) {
+    return res.status(400).json({ success: false, message: "Phone number is required" });
+  }
+
+  // Validate phone number format +91XXXXXXXXXX
+  if (!phone.startsWith("+91")) {
+    phone = "+91" + phone;
+  }
+
+  if (!/^\+91\d{10}$/.test(phone)) {
     return res.status(400).json({
       success: false,
       message: "Phone number must be in +91XXXXXXXXXX format",
@@ -228,7 +253,7 @@ const sendOtp = async (req, res) => {
     await client.messages.create({
       body: `Your OTP is ${otp}`,
       from: process.env.TWILIO_PHONE_NUMBER,
-      to: phone, // ✅ Already includes +91
+      to: phone,
     });
 
     res.status(200).json({ success: true, message: "OTP sent successfully" });
@@ -238,7 +263,6 @@ const sendOtp = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getUser,
   sendOtp,
@@ -246,6 +270,7 @@ module.exports = {
   verifyOtp,
   socialLogin
 };
+
 
   
 
@@ -262,28 +287,3 @@ module.exports = {
 
 
 
-// 🔁 RESEND OTP
-// const resendOtp = async (req, res) => {
-//   const { phone } = req.body;
-
-//   try {
-//     if (!phone) {
-//       return res.status(400).json({ success: false, message: 'Please provide a phone number' });
-//     }
-
-//     const userData = OTP_STORE[phone];
-//     if (!userData) {
-//       return res.status(400).json({ success: false, message: 'User not found or phone number does not match' });
-//     }
-
-//     const newOtp = generateOTP();
-//     userData.otp = newOtp;
-//     await sendOtpViaSMS(phone, newOtp);
-
-//     res.status(200).json({ success: true, message: 'OTP resent successfully' });
-
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ success: false, message: 'Server error while resending OTP' });
-//   }
-// };

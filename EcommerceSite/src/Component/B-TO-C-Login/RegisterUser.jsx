@@ -6,6 +6,7 @@ import OtpVerification from "./OtpVerification";
 import GoogleIcon from '@mui/icons-material/Google';
 import { ToastContainer, toast } from "react-toastify";
 import { useGoogleLogin } from "./FireBaseAuth/Handlefetch";
+import { useAuth } from "../../ContextApiCart/LoginContextApi"; 
 import "react-toastify/dist/ReactToastify.css";
 
 const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
@@ -17,15 +18,17 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [showOtpStep, setShowOtpStep] = useState(false);
-  const [phone, setPhone] = useState(""); // ✅ for OTPVerification
+  const [phone, setPhone] = useState(""); // For OTPVerification
   const { handleGoogleLogin } = useGoogleLogin();
+
+  // Get auth context setters
+  const { setUser, setToken, setIsLoggedIn } = useAuth();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
 
   const handleSubmit = async () => {
     const { name, email, phone } = formData;
@@ -46,8 +49,21 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
       setMessage(response.data.message);
 
       if (response.data.success) {
-        setPhone(phone); // ✅ Set phone for OTP
-        setShowOtpStep(true); // ✅ Show OTP screen
+        // Save phone for OTP step
+        setPhone(phone);
+        setShowOtpStep(true);
+
+        // If your register API returns token and user immediately, you can do this here:
+        // (Else, you can do it inside your OTP verification success handler)
+        
+        if (response.data.token && response.data.user) {
+          setToken(response.data.token);
+          setUser(response.data.user);
+          setIsLoggedIn(true);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+        }
+        
       }
     } catch (err) {
       setMessage(err.response?.data?.message || "Something went wrong.");
@@ -80,24 +96,21 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
               onChange={handleChange}
               className="RegisterUser-input-field"
             />
-           {/* PHONE NUMBER FIELD WITH +91 PREFIX */}
-           <div className="RegisterUser-phone-wrapper">
-  <span className="RegisterUser-phone-prefix">+91</span>
-  <input
-    type="tel"
-    name="phone"
-    placeholder="Phone Number"
-    value={formData.phone}
-    onChange={(e) => {
-      const onlyNumbers = e.target.value.replace(/\D/g, "");
-      setFormData({ ...formData, phone: onlyNumbers });
-    }}
-    className="RegisterUser-phone-input"
-    maxLength={10}
-  />
-</div>
-
-
+            <div className="RegisterUser-phone-wrapper">
+              <span className="RegisterUser-phone-prefix">+91</span>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={(e) => {
+                  const onlyNumbers = e.target.value.replace(/\D/g, "");
+                  setFormData({ ...formData, phone: onlyNumbers });
+                }}
+                className="RegisterUser-phone-input"
+                maxLength={10}
+              />
+            </div>
 
             <button
               className="RegisterUser-continue-btn"
@@ -115,7 +128,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
               <button className="RegisterUser-social-btn">
                 <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" />
               </button>
-              <button className="RegisterUser-social-btn"  onClick={handleGoogleLogin}>
+              <button className="RegisterUser-social-btn" onClick={handleGoogleLogin}>
                 <GoogleIcon />
               </button>
               <button className="RegisterUser-social-btn">
@@ -138,15 +151,18 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
           </>
         ) : (
           <OtpVerification
-          phone={phone}
-          name={formData.name}
-          email={formData.email}
-          mode="register"
-          onBack={() => setShowOtpStep(false)}
-          setShowB2UModal={setShowB2UModal}  
-          setShowLoginModal={setShowLoginModal}
-        />
-        
+            phone={phone}
+            name={formData.name}
+            email={formData.email}
+            mode="register"
+            onBack={() => setShowOtpStep(false)}
+            setShowB2UModal={setShowB2UModal}  
+            setShowLoginModal={setShowLoginModal}
+            // Pass setters to OTP component to update auth context on successful OTP verification
+            setUser={setUser}
+            setToken={setToken}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         )}
       </div>
 
@@ -158,6 +174,7 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
 };
 
 export default SignupForm;
+
 
 
 
