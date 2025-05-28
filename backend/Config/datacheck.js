@@ -1,20 +1,14 @@
 const mongoose = require('mongoose');
 
-async function updateIndex() {
-  await mongoose.connect('mongodb+srv://harshrajput30411:IshumDatabasebyHarsh@ishum.tlzws.mongodb.net/?retryWrites=true&w=majority&appName=Ishum'); // apna connection string yahan
+async function checkIndexes() {
+  await mongoose.connect('mongodb+srv://harshrajput30411:IshumDatabasebyHarsh@ishum.tlzws.mongodb.net/?retryWrites=true&w=majority&appName=Ishum'); // apna connection string daalo
 
-  const collection = mongoose.connection.collection('usermodels');
-
-  // Drop index
-  await collection.dropIndex('email_1');
-  console.log('Dropped email_1 index');
-
-  // Create sparse unique index
-  await collection.createIndex({ email: 1 }, { unique: true, sparse: true });
-  console.log('Created sparse unique index on email');
+   const indexes = await mongoose.connection.collection('usermodels').indexes();
+  console.log(indexes);
 
   await mongoose.disconnect();
 }
 
-updateIndex();
+checkIndexes();
+
 
