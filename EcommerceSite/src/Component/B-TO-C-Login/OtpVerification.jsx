@@ -77,7 +77,7 @@ const handleVerify = async () => {
 
 
     localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("user", JSON.stringify(data.user));
 
   setToken(data.token);
      setToken(data.token); 

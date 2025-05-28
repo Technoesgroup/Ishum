@@ -60,7 +60,6 @@ const SignupForm = ({ setShowB2UModal, setShowLoginModal }) => {
           setToken(response.data.token);
           setUser(response.data.user);
           setIsLoggedIn(true);
-          localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data.user));
         }
         
