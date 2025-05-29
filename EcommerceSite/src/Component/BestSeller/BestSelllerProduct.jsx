@@ -15,6 +15,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useWishlist } from "../ContextHook/WishlistHook";
 import { useModal } from '../ModelContext/ModelContext';
+import { usePixel } from '../FacebookPixel/FB-Pixel';
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductList({
@@ -37,6 +38,7 @@ export default function ProductList({
    const { user, loadingUser } = useAuth();
    const { fetchCart } = useCart();
   const { addToWishlist } = useWishlist();
+     const { trackEvent } = usePixel();
 
   const userId = user?._id;
 
@@ -80,17 +82,25 @@ export default function ProductList({
   }, [queryParam, selected]);
 
 
-  const handleProductClick = (product) => {
-   // slug generate kar rahe hain name/title se
+  
+const handleProductClick = (product) => {
   const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
-  // store + navigate
-  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
+  const updatedProduct = { ...product, slug };
   setSelectedProduct(updatedProduct);
   localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
 
+  trackEvent('AddToCart', {
+            content_ids: [selectedProduct._id],
+            content_name: selectedProduct.name,
+            content_type: 'product',
+            value: selectedProduct.price,
+            currency: 'INR',
+            quantity: quantity
+        });
+
   navigate(`/viewproduct/${slug}`);
-  };
+};
+
 
 
 
@@ -217,8 +227,6 @@ export default function ProductList({
 >
   Buy Now
 </button>
-
-
                   </div>
                 </div>
               </div>

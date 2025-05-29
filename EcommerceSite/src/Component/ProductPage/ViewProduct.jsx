@@ -9,6 +9,7 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useModal } from '../ModelContext/ModelContext';
+import { usePixel } from '../FacebookPixel/FB-Pixel';
 
 
 const ProductPage = () => {
@@ -27,7 +28,7 @@ const ProductPage = () => {
         showAuthModal, setShowAuthModal
       } = useModal();
    const { fetchCart } = useCart();
-
+    const { trackEvent } = usePixel();
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -135,6 +136,15 @@ const handleAddToCart = async () => {
   } catch (err) {
     console.error("Error adding to cart:", err);
   }
+
+   trackEvent('AddToCart', {
+            content_ids: [selectedProduct._id],
+            content_name: selectedProduct.name,
+            content_type: 'product',
+            value: selectedProduct.price,
+            currency: 'INR',
+            quantity: quantity
+        });
 };  
 
   return (

@@ -18,6 +18,7 @@ const app = express();
 const PORT = 4000;
 const orderRoutes = require('./router/OrderRoutes');
 const MONGO_URI = process.env.MONGO_URI;
+const eventRoutes = require('./router/Eventrouter');
 
 
 
@@ -58,6 +59,7 @@ const razorpay = new Razorpay({
     key_secret: process.env.RAZORPAY_KEY_SECRET,   // Replace with your Razorpay key_secret
 });
 
+
 // Database Connection
 mongoose.connect(MONGO_URI)
     .then(() => console.log("MongoDB Connected"))
@@ -74,6 +76,7 @@ app.use("/api/shipping", shippingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', reviewRoutes);
 app.use("/api/wishlist", wishlistRoutes);
+app.use('/api', eventRoutes);
 
 
 app.get("/", (req, res) => {

@@ -19,6 +19,8 @@ export default function ShippingCartCom2({ onClose }) {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState("wallet");
     const [loadingAfterPayment, setLoadingAfterPayment] = useState(false);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
+
     
     const baseURL = import.meta.env.VITE_API_BASE_URL;
     const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
@@ -44,9 +46,16 @@ export default function ShippingCartCom2({ onClose }) {
         fetchCart();
     }, [user]);
 
-    if (!cart?.cartItems || cart.cartItems.length === 0) {
-        return <div>No items in cart</div>;
+ useEffect(() => {
+    if (!loading && (!cart?.cartItems || cart.cartItems.length === 0)) {
+        toast.error("No items in cart.");
+        // Optional: Navigate away or close overlay after toast
+        setTimeout(() => {
+            onClose(); // or navigate('/shop') etc.
+        }, 1000);
     }
+}, [loading]);
+
 
     const totalPrice = cart?.cartItems?.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -190,11 +199,14 @@ export default function ShippingCartCom2({ onClose }) {
                     </div>
 
                     <div className="agree-terms-condition">
-                        <input type="checkbox" />
+                        <input type="checkbox"
+                         checked={agreedToTerms} 
+                         onChange={(e) => setAgreedToTerms(e.target.checked)}  />
                         <h3>I agree to Terms and Conditions</h3>
                     </div>
 
-                    <button className="place-order-button" onClick={handlePayment}>
+                    <button className="place-order-button" onClick={handlePayment}
+    disabled={!agreedToTerms}>
                         Place my order
                     </button>
                 </div>

@@ -1,24 +1,51 @@
 const Order = require('../models/Ordermodel');
+const sendEventToMeta = require('../Config/ConversionApi');  
+const { hashData } = require('../Config/hashdata');
 
 exports.createOrder = async (req, res) => {
-
   try {
-    const { userId, cartItems, totalAmount, paymentInfo } = req.body;
+    const { userId, cartItems, totalAmount, paymentInfo, userEmail, userPhone } = req.body;
 
-    // Ensure the order structure is correct
+    // 1️⃣ Create new order
     const newOrder = new Order({
       userId,
-      items: cartItems,  // 'cartItems' from the request
-      amount: totalAmount,  // 'totalAmount' mapped to 'amount'
-      paymentId: paymentInfo.paymentId,  // 'paymentInfo.paymentId' mapped to 'paymentId'
+      items: cartItems,
+      amount: totalAmount,
+      paymentId: paymentInfo.paymentId,
     });
 
-    // Save the new order
+    // 2️⃣ Save to DB
     await newOrder.save();
+
+    // 3️⃣ Send event to Meta Pixel
+    try {
+      await sendEventToMeta({
+        pixelId: process.env.META_PIXEL_ID,
+        accessToken: process.env.META_ACCESS_TOKEN,
+        eventName: 'Purchase',
+        eventSourceUrl: 'https://ishum.in',  // ✅ Replace with your actual thank you page URL
+        userAgent: req.headers['user-agent'],
+        customData: {
+          value: totalAmount,
+          currency: 'INR'
+        },
+        userData: {
+          em: hashData(userEmail),  // ✅ Make sure email is passed from frontend
+          ph: hashData(userPhone)   // ✅ Make sure phone is passed from frontend
+        }
+      });
+
+      console.log('✅ Meta Pixel Purchase event sent successfully.');
+    } catch (pixelError) {
+      console.error('❌ Failed to send event to Meta:', pixelError.message);
+      // Optional: continue without failing the order creation
+    }
+
     res.status(201).json({ success: true, message: 'Order saved successfully' });
+
   } catch (err) {
-    console.error("Error saving order:", err);
-    res.status(500).json({ success: false, message: 'Failed to save order', error: err });
+    console.error("❌ Error saving order:", err);
+    res.status(500).json({ success: false, message: 'Failed to save order', error: err.message });
   }
 };
 

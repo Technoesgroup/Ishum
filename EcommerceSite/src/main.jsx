@@ -8,6 +8,7 @@ import App from './App.jsx'
 import { TawkProvider } from './Component/TawkContextApi/TawkContextApi.jsx';
 import { FilterProvider } from './Component/Context-API/Fillter-Context.jsx';
 import { ModalProvider } from './Component/ModelContext/ModelContext.jsx';
+import { PixelProvider } from './Component/FacebookPixel/FB-Pixel.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,7 +18,9 @@ createRoot(document.getElementById('root')).render(
     <FilterProvider>
     <TawkProvider>
         <ModalProvider>
+          <PixelProvider>
       <App />
+      </PixelProvider >
     </ModalProvider>
         </TawkProvider>
     </FilterProvider>
