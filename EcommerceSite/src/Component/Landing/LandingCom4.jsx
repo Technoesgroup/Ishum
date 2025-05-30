@@ -1,55 +1,47 @@
 import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom4.css";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 import Loader from "../../Pages/LoaderFullpage";
 import { useWishlist } from "../ContextHook/WishlistHook";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
-    const [loading, setLoading] = useState(true);
-const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
-
+  const [loading, setLoading] = useState(true);
+  const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
   const navigate = useNavigate();
-   const { addToWishlist } = useWishlist();
+  const { addToWishlist, wishlist, toggleWishlist } = useWishlist();   // ✅ make sure `wishlist` state is accessible
   const { setSelectedProduct } = useProduct();
 
-const handleProductClick = (product) => {
-
-  // slug generate kar rahe hain name/title se
-  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
-  // store + navigate
-  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
-  setSelectedProduct(updatedProduct);
-  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-
-  navigate(`/viewproduct/${slug}`);
-};
-
- useEffect(() => {
-  const fetchTrendingProducts = async () => {
-    try {
-      const res = await axios.get(`${baseURL}/api/products/get-product?isBestseller=true`);
-      const limited = res.data.products.slice(0, 12);
-      setProducts(limited);
-      setLoading(false); // ✅ Ye zaroor add kar
-    } catch (error) {
-      console.error("Failed to fetch trending products:", error);
-      setLoading(false); // ❗ Even if there's an error
-    }
+  const handleProductClick = (product) => {
+    const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    const updatedProduct = { ...product, slug };
+    setSelectedProduct(updatedProduct);
+    localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+    navigate(`/viewproduct/${slug}`);
   };
 
-  fetchTrendingProducts();
-}, []);
+  useEffect(() => {
+    const fetchTrendingProducts = async () => {
+      try {
+        const res = await axios.get(`${baseURL}/api/products/get-product?isBestseller=true`);
+        const limited = res.data.products.slice(0, 12);
+        setProducts(limited);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch trending products:", error);
+        setLoading(false);
+      }
+    };
 
+    fetchTrendingProducts();
+  }, []);
 
-  
   if (loading) {
     return <Loader />;
   }
@@ -58,64 +50,66 @@ const handleProductClick = (product) => {
     <div className="LandingCom4-trending-section">
       <h2>Trending Best Selling Products</h2>
       <div className="LandingCom4-product-slider">
-        {products.map((product) => (
-          <div key={product._id} className="LandingCom4-product-card">
-            {/* Badge */}
-            {product.isExclusive && (
-              <span className="LandingCom4-badge best">EXCLUSIVE</span>
-            )}
-            {product.isBestseller && (
-              <span className="LandingCom4-badge best">BEST SELL</span>
-            )}
+        {products.map((product) => {
+            const isInWishlist = wishlist.some((item) => item.productId === product._id); // ✅ check if in wishlist
 
-            {/* Image */}
-            <div className="LandingCom4-product-img-wrapper">
+          return (
+            <div key={product._id} className="LandingCom4-product-card">
+              {product.isExclusive && (
+                <span className="LandingCom4-badge best">EXCLUSIVE</span>
+              )}
+              {product.isBestseller && (
+                <span className="LandingCom4-badge best">BEST SELL</span>
+              )}
 
-         {!loadedImages[product._id] && (
-    <img
-      src="/placeholder.jpg" // apni placeholder image path do
-      alt="loading"
-      className="placeholder-img"
-    />
-  )}
-  <img
-    onClick={() => handleProductClick(product)}
-    loading="lazy"
-    src={`${baseURL}/uploads/${product.image}`}
-    alt={product.name}
-    className={`LandingCom4-product-img ${loadedImages[product._id] ? 'loaded' : 'loading'}`}
-    onLoad={() =>
-      setLoadedImages((prev) => ({
-        ...prev,
-        [product._id]: true
-      }))
-    }
-              />
+              <div className="LandingCom4-product-img-wrapper">
+                {!loadedImages[product._id] && (
+                  <img
+                    src="/placeholder.jpg"
+                    alt="loading"
+                    className="placeholder-img"
+                  />
+                )}
+                <img
+                  onClick={() => handleProductClick(product)}
+                  loading="lazy"
+                  src={`${baseURL}/uploads/${product.image}`}
+                  alt={product.name}
+                  className={`LandingCom4-product-img ${loadedImages[product._id] ? 'loaded' : 'loading'}`}
+                  onLoad={() =>
+                    setLoadedImages((prev) => ({
+                      ...prev,
+                      [product._id]: true
+                    }))
+                  }
+                />
 
-              <div className="LandingCom4-hover-icons">
-                <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
-                <VisibilityIcon onClick={() => handleProductClick(product)} />
+          <div className="LandingCom4-hover-icons">
+  <FavoriteIcon
+    style={{ cursor: "pointer", color: isInWishlist ? "red" : "gray" }}
+    onClick={() => toggleWishlist(product)}
+  />
+  <VisibilityIcon onClick={() => handleProductClick(product)} />
+</div>
+              </div>
+
+              <div className="LandingCom4-product-info">
+                <p>{product.name}</p>
+                <p className="LandingCom4-price">
+                  ₹{product.price}
+                  <span style={{ textDecoration: "line-through" }}>
+                    ₹{product.discount}
+                  </span>
+                </p>
+                {product.rating && (
+                  <p className="LandingCom4-stars">
+                    {"★".repeat(Math.floor(product.rating))}
+                  </p>
+                )}
               </div>
             </div>
-
-            {/* Info */}
-            <div className="LandingCom4-product-info">
-              <p>{product.name}</p>
-              <p className="LandingCom4-price">
-                ₹{product.price}
-                <span style={{ textDecoration: "line-through" }}>
-                  ₹{product.discount}
-                </span>
-              </p>
-
-              {product.rating && (
-                <p className="LandingCom4-stars">
-                  {"★".repeat(Math.floor(product.rating))}
-                </p>
-              )}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
