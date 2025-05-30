@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 import Loader from "../../Pages/LoaderFullpage";
+import { useWishlist } from "../ContextHook/WishlistHook";
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
@@ -15,6 +16,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 
   const navigate = useNavigate();
+   const { addToWishlist } = useWishlist();
   const { setSelectedProduct } = useProduct();
 
 const handleProductClick = (product) => {
@@ -91,7 +93,7 @@ const handleProductClick = (product) => {
               />
 
               <div className="LandingCom4-hover-icons">
-                <FavoriteBorderIcon />
+                <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
                 <VisibilityIcon onClick={() => handleProductClick(product)} />
               </div>
             </div>

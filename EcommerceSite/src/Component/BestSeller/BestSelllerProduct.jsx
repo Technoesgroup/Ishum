@@ -34,7 +34,7 @@ export default function ProductList({
 
   const { selected } = useFilter();
   const navigate = useNavigate();
-  const { setSelectedProduct } = useProduct();
+  const {selectedProduct, setSelectedProduct } = useProduct();
    const { user, loadingUser } = useAuth();
    const { fetchCart } = useCart();
   const { addToWishlist } = useWishlist();
@@ -89,16 +89,17 @@ const handleProductClick = (product) => {
   setSelectedProduct(updatedProduct);
   localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
 
-  trackEvent('AddToCart', {
-            content_ids: [selectedProduct._id],
-            content_name: selectedProduct.name,
-            content_type: 'product',
-            value: selectedProduct.price,
-            currency: 'INR',
-            quantity: quantity
-        });
 
   navigate(`/viewproduct/${slug}`);
+
+    // trackEvent('AddToCart', {
+    //         content_ids: [selectedProduct._id],
+    //         content_name: selectedProduct.name,
+    //         content_type: 'product',
+    //         value: selectedProduct.price,
+    //         currency: 'INR',
+    //         quantity: ''
+    //     });
 };
 
 
