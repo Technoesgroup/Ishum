@@ -5,6 +5,9 @@ import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../ContextApiCart/ProductContextApi"; // ✅ context import
+import { useWishlist } from "../ContextHook/WishlistHook";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const Collection = () => {
   const [products, setProducts] = useState([]);
@@ -12,6 +15,7 @@ const Collection = () => {
   const [error, setError] = useState(null);
   const collectionName = "Unveli Riwayat";
   const navigate = useNavigate();
+  const { addToWishlist } = useWishlist();
 
   const { setSelectedProduct } = useProduct(); // ✅ context setter
 
@@ -81,12 +85,19 @@ return (
             onClick={() => handleProductClick(product)}
             style={{ cursor: "pointer" }}
           >
-            <img
-            loading="lazy"
-              src={`${baseURL}/uploads/${product.image}`}
-              alt={product.name}
-              onError={(e) => (e.target.src = "/fallback-image.png")}
-            />
+          <div className="product-img-wrapper">
+               <img
+               loading="lazy"
+                 src={`${baseURL}/uploads/${product.image}`}
+                 alt={product.name}
+                 onError={(e) => (e.target.src = "/fallback-image.png")}
+               />
+               <div className="LandingpageComp-hover-icons">
+                 <FavoriteBorderIcon   onClick={() => addToWishlist(product)}/>
+                 <VisibilityIcon />
+               </div>
+             </div>
+
             <p className="product-name">{product.name}</p>
             <div className="All-price-with-discount">
               <p className="product-price">₹{product.price - product.discount}</p>

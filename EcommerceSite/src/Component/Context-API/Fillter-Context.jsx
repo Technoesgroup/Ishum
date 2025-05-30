@@ -23,7 +23,7 @@ export const FilterProvider = ({ children }) => {
     fetch(`${baseURL}/api/products/get-product`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("DATA:", data); // Yeh line check karni zaruri hai
+        // console.log("DATA:", data); 
         setProducts(data.products); // 👈 Yeh tabhi chalega jab 'products' key ho data me
       })
       .catch((err) => console.error(err));

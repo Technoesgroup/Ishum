@@ -5,10 +5,13 @@ import "../../Style-CSS/Landing-css/LandingCom4.css";
 import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useWishlist } from "../ContextHook/WishlistHook";
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
+
+      const { addToWishlist } = useWishlist();
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 
@@ -87,7 +90,7 @@ const handleProductClick = (product) => {
                   />
 
                   <div className="LandingCom4-hover-icons">
-                    <FavoriteBorderIcon />
+                    <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
                     <VisibilityIcon    onClick={() => handleProductClick(product)}  />
                   </div>
 

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useProduct } from "../../ContextApiCart/ProductContextApi";  // context import
+import { useWishlist } from "../ContextHook/WishlistHook";
 
 const Collection = () => {
   const [loading, setLoading] = useState(true);
@@ -12,6 +13,7 @@ const Collection = () => {
   const collectionName = "Rangrez";
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();  // context se setter
+    const { addToWishlist } = useWishlist();
 
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
@@ -75,7 +77,7 @@ const handleProductClick = (product) => {
     <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
 
     <div className="LandingpageComp-hover-icons">
-      <FavoriteBorderIcon />
+      <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
       <VisibilityIcon />
     </div>
   </div>
