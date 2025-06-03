@@ -4,7 +4,6 @@ import "../../Style-CSS/BestSeller-css/BestSellerCom1.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import ProductList from '../../Component/BestSeller/BestSelllerProduct';
-import ColorList from '../BestSeller/BestSellerColor';
 import CategoryList from '../BestSeller/BestSellerCategory';
 import Banner from '../BestSeller/BestSellerBanner';
 import { useFilter } from "../Context-API/Fillter-Context";
@@ -15,7 +14,7 @@ export default function Bestsellers() {
   const [selectedSort, setSelectedSort] = useState(null);
   const { selected, setSelected } = useFilter();
   const [price, setPrice] = useState(0); // For the range input
-  const maxPrice = 5000;
+  const maxPrice = 50000;
 
   const handleRangeChange = (e) => {
     setPrice(Number(e.target.value));
