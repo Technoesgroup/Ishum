@@ -45,7 +45,7 @@ const OrderConfirmation = () => {
             const items = res.data?.cartItems || []; // ya order items
             const total = items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
 
-            trackEvent("Purchase", {
+            trackEvent("OrderConfirmed", {
               content_ids: items.map((item) => item.productId),
               content_type: "product",
               value: total,
