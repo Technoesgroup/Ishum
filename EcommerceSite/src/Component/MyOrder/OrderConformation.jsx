@@ -37,6 +37,27 @@ const OrderConfirmation = () => {
         .get(`${baseURL}/api/shipping/${user._id}`)
           .then((res) => setShipping(res.data))
           .catch((err) => console.error("Shipping fetch error:", err));
+
+
+              axios
+          .get(`${baseURL}/api/cart/${user._id}`) // ya last order API agar available ho
+          .then((res) => {
+            const items = res.data?.cartItems || []; // ya order items
+            const total = items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+
+            trackEvent("Purchase", {
+              content_ids: items.map((item) => item.productId),
+              content_type: "product",
+              value: total,
+              currency: "INR",
+              contents: items.map((item) => ({
+                id: item.productId,
+                quantity: item.quantity,
+                item_price: item.price,
+              })),
+            });
+          })
+          .catch((err) => console.error("Track purchase error:", err));
       }
     }
 

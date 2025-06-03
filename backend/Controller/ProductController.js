@@ -106,7 +106,7 @@ const getProducts = async (req, res) => {
     if (req.query.collectionName) {
       const titleQuery = req.query.collectionName.replace(/\s+/g, ' ').trim();
       const collection = await Collection.findOne({
-        title: new RegExp(`^${titleQuery}$`, "i"),
+        title: new RegExp(titleQuery, "i"),
       });
     
       if (collection) {
