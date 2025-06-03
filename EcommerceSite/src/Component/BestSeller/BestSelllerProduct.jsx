@@ -216,13 +216,9 @@ const handleProductClick = (product) => {
 
 <button
   className="bestsellers-buy-button"
-  disabled={!user?._id || loadingUser}
+  // disabled={!user?._id || loadingUser}
   onClick={(e) => {
     e.stopPropagation();
-    if (!user?._id || loadingUser) {
-     toast.error("Please login to add products to your cart.");
-      return;
-    }
     handleAddToCart(product);
   }}
 >
