@@ -2,17 +2,19 @@ import { signInWithPopup } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth, googleProvider } from "../FireBaseAuth/FireBase_auth";
 import { useAuth } from "../../../ContextApiCart/LoginContextApi";
+import { useModal } from "../../ModelContext/ModelContext";
+  
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 // console.log('base url', baseURL);
 
-export const useGoogleLogin = (onClose) => {
-  const { setToken, setUser } = useAuth();
+export const useGoogleLogin = () => {
+  const { setToken, setUser, setIsLoggedIn } = useAuth();
+  const { setShowB2UModal, setShowLoginModal, setShowAuthModal } = useModal();
 
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      // console.log("Google User:", result.user);
 
       const response = await fetch(`${baseURL}/api/user/social-login`, {
         method: "POST",
@@ -30,10 +32,17 @@ export const useGoogleLogin = (onClose) => {
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
-        localStorage.setItem("token", data.token); // ✅ save token
-        localStorage.setItem("user", JSON.stringify(data.user)); // ✅ save user
+        setIsLoggedIn(true);
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
         toast.success("Logged in with Google!");
-        onClose();
+
+        // ✅ CLOSE THE MODALS
+        setShowB2UModal(false);
+        setShowLoginModal(false);
+        setShowAuthModal(false);
       } else {
         toast.error(data.message);
       }

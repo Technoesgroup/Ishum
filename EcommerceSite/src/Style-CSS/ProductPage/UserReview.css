@@ -16,6 +16,7 @@
   }
   
   .Rate-Us-btn{
+    cursor: pointer;
     background-color: #EEEBE4;
     padding: 0.8vw;
     letter-spacing: 2px;

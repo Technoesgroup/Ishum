@@ -185,9 +185,9 @@ const searchProducts = async (req, res) => {
     });
 
     // Log the details for debugging
-    console.log("Search query:", q);
-    console.log("Matched regex:", regex);
-    console.log("Found products:", products.length);
+    // console.log("Search query:", q);
+    // console.log("Matched regex:", regex);
+    // console.log("Found products:", products.length);
 
     // If no products are found, return an empty array
     if (products.length === 0) {

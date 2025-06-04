@@ -38,7 +38,7 @@ const ProductPage = () => {
     const fetchProductBySlug = async () => {
       try {
 
-        console.log(`${baseURL}/api/products/slug/${slug}`); 
+        // console.log(`${baseURL}/api/products/slug/${slug}`); 
 
  const res = await axios.get(`${baseURL}/api/products/slug/${slug}`);
 
@@ -150,7 +150,7 @@ const handleAddToCart = async () => {
       color: selectedColor || "",
     });
       await fetchCart();
-    console.log("Added to cart:", res.data);
+    // console.log("Added to cart:", res.data);
   } catch (err) {
     console.error("Error adding to cart:", err);
   }
