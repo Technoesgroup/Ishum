@@ -44,18 +44,14 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
     fetchRiwayatProducts();
   }, [collectionName]);
 
-const handleProductClick = (product) => {
-
-  // slug generate kar rahe hain name/title se
-  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
-  // store + navigate
-  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
-  setSelectedProduct(updatedProduct);
-  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-
-  navigate(`/viewproduct/${slug}`);
-};
+ const handleProductClick = (product, e) => {
+      e.preventDefault();
+    const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    const updatedProduct = { ...product, slug };
+    setSelectedProduct(updatedProduct);
+    localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+    navigate(`/viewproduct/${product.slug}`);
+  };
 
   // ⬇ After useEffect and handlers
 
@@ -82,7 +78,7 @@ return (
           <div
             key={index}
             className="product-card"
-            onClick={() => handleProductClick(product)}
+            onClick={(e) => handleProductClick(product, e)}
             style={{ cursor: "pointer" }}
           >
           <div className="product-img-wrapper">

@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+
+const generateSlug = (name) => {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/ /g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+};
+
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,6 +27,9 @@ const productSchema = new mongoose.Schema({
     enum: ["Anarkali", "Sharara Suits", "Indo Western", "Fashion wear", "Dress", "Co-ord sets", "Aline Suit", "Straight Suit"],
     required: true,
   },
+
+  slug: { type: String, required: true, unique: true },
+
   image: {
     type: String,
     required: true,
@@ -83,6 +98,14 @@ colorImages: {
 
   
 }, { timestamps: true });
+
+
+productSchema.pre('save', function (next) {
+  if (this.isModified('name') || !this.slug) {
+    this.slug = generateSlug(this.name);
+  }
+  next();
+});
 
 const Product = mongoose.models.Product || mongoose.model("Product", productSchema);
 module.exports = Product;

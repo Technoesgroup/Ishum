@@ -4,7 +4,7 @@ import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,  useParams } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
@@ -13,6 +13,7 @@ import { usePixel } from '../FacebookPixel/FB-Pixel';
 
 
 const ProductPage = () => {
+    const { slug } = useParams(); 
   const { user } = useAuth();
   const { selectedProduct, setSelectedProduct } = useProduct();
   const [selectedSize, setSelectedSize] = useState(36);
@@ -32,13 +33,30 @@ const ProductPage = () => {
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
-  
+ 
   useEffect(() => {
-    const storedProduct = localStorage.getItem("selectedProduct");
-    if (storedProduct) {
-      setSelectedProduct(JSON.parse(storedProduct));
+    const fetchProductBySlug = async () => {
+      try {
+
+        console.log(`${baseURL}/api/products/slug/${slug}`); 
+
+ const res = await axios.get(`${baseURL}/api/products/slug/${slug}`);
+
+
+       
+        setSelectedProduct(res.data.product);
+        setMainImage(res.data.product.image);
+      } catch (error) {
+        console.error("Failed to fetch product by slug", error);
+        toast.error("Product not found!");
+       // redirect to home or error page
+      }
+    };
+    
+    if (slug) {
+      fetchProductBySlug();
     }
-  }, []); // ✅ empty dependency => run only once on first load
+  }, [slug]); // ✅ empty dependency => run only once on first load
 
  if (!selectedProduct) {
   return <Loader />;

@@ -82,25 +82,14 @@ export default function ProductList({
   }, [queryParam, selected]);
 
 
-  
-const handleProductClick = (product) => {
-  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-  const updatedProduct = { ...product, slug };
-  setSelectedProduct(updatedProduct);
-  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-
-
-  navigate(`/viewproduct/${slug}`);
-
-    // trackEvent('AddToCart', {
-    //         content_ids: [selectedProduct._id],
-    //         content_name: selectedProduct.name,
-    //         content_type: 'product',
-    //         value: selectedProduct.price,
-    //         currency: 'INR',
-    //         quantity: ''
-    //     });
-};
+ const handleProductClick = (product, e) => {
+      e.preventDefault();
+    const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    const updatedProduct = { ...product, slug };
+    setSelectedProduct(updatedProduct);
+    localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+    navigate(`/viewproduct/${product.slug}`);
+  };
 
 
 
@@ -185,7 +174,7 @@ const handleProductClick = (product) => {
               <div
                 key={product._id}
                 className="bestsellers-product-card"
-                onClick={() => handleProductClick(product)}
+                onClick={(e) => handleProductClick(product, e)}
               >
                 <img
                   loading="lazy"

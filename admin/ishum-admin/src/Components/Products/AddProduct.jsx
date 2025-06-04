@@ -290,3 +290,14 @@ const AddProduct = () => {
 
 export default AddProduct;
 
+
+
+
+
+// const slugify = (name) => name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
+// const product = new Product({
+//   name: req.body.name,
+//   slug: slugify(req.body.name),
+//   ...
+// });

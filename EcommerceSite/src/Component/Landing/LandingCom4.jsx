@@ -18,12 +18,13 @@ const TrendingProducts = () => {
   const { addToWishlist, wishlist, toggleWishlist } = useWishlist();   // ✅ make sure `wishlist` state is accessible
   const { setSelectedProduct } = useProduct();
 
-  const handleProductClick = (product) => {
+  const handleProductClick = (product, e) => {
+      e.preventDefault();
     const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
     const updatedProduct = { ...product, slug };
     setSelectedProduct(updatedProduct);
     localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-    navigate(`/viewproduct/${slug}`);
+    navigate(`/viewproduct/${product.slug}`);
   };
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const TrendingProducts = () => {
                   />
                 )}
                 <img
-                  onClick={() => handleProductClick(product)}
+                  onClick={(e) => handleProductClick(product, e)}
                   loading="lazy"
                   src={`${baseURL}/uploads/${product.image}`}
                   alt={product.name}
@@ -89,7 +90,7 @@ const TrendingProducts = () => {
     style={{ cursor: "pointer", color: isInWishlist ? "red" : "gray" }}
     onClick={() => toggleWishlist(product)}
   />
-  <VisibilityIcon onClick={() => handleProductClick(product)} />
+  <VisibilityIcon onClick={(e) => handleProductClick(product, e)} />
 </div>
               </div>
 

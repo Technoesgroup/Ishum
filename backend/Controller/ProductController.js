@@ -1,6 +1,7 @@
 const Product = require("../models/ProductSchema");
 const Collection = require("../models/CollectionSchema1");
 const mongoose = require('mongoose'); 
+const slugify = require("slugify");
 
 const addProduct = async (req, res) => {
   try {
@@ -50,13 +51,14 @@ const addProduct = async (req, res) => {
         });
       }
     }
-    
-    const slugBase = slugify(name, { lower: true, strict: true });  // strict se special chars remove ho jayenge
+
+        const slugBase = slugify(name, { lower: true, strict: true });
     const uniqueSuffix = new mongoose.Types.ObjectId().toString().slice(-6);
     const slug = `${slugBase}-${uniqueSuffix}`;
    
     const product = new Product({
       name,
+      slug,
       category,
       subcategory,
       color,
@@ -81,6 +83,23 @@ const addProduct = async (req, res) => {
     console.error("Error in addProduct:", error.message);
     console.error(error.stack);
     res.status(500).json({ success: false, message: "Failed to add product", error: error.message });
+  }
+};
+
+
+const getProductBySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const product = await Product.findOne({ slug: req.params.slug }).populate("collectionName");
+
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    res.status(200).json({ success: true, product });
+  } catch (error) {
+    console.error("Error fetching product by slug:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -192,6 +211,7 @@ module.exports = {
   addProduct,
   searchProducts,
   getProducts,
+  getProductBySlug
 };
 
 

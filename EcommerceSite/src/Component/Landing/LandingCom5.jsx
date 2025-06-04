@@ -19,18 +19,14 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
 
-const handleProductClick = (product) => {
-
-  // slug generate kar rahe hain name/title se
-  const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
-  // store + navigate
-  const updatedProduct = { ...product, slug }; // agar baad me slug chahiye toh object me daal do
-  setSelectedProduct(updatedProduct);
-  localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-
-  navigate(`/viewproduct/${slug}`);
-};
+ const handleProductClick = (product, e) => {
+      e.preventDefault();
+    const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    const updatedProduct = { ...product, slug };
+    setSelectedProduct(updatedProduct);
+    localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+    navigate(`/viewproduct/${product.slug}`);
+  };
 
   useEffect(() => {
   axios.get(`${baseURL}/api/products/get-product`)
@@ -91,7 +87,7 @@ const handleProductClick = (product) => {
 
                   <div className="LandingCom4-hover-icons">
                     <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
-                    <VisibilityIcon    onClick={() => handleProductClick(product)}  />
+                    <VisibilityIcon    onClick={(e) => handleProductClick(product, e)}  />
                   </div>
 
                   {/* {!product.availability && (
@@ -100,7 +96,7 @@ const handleProductClick = (product) => {
                 </div>
 
                 <div className="LandingCom4-product-info">
-                  <p  onClick={() => handleProductClick(product)} >{product.name}</p>
+                  <p  onClick={(e) => handleProductClick(product, e)} >{product.name}</p>
                   <p className="LandingCom4-price">
                     ₹{product.price}
                     <span style={{ textDecoration: "line-through" }}>
