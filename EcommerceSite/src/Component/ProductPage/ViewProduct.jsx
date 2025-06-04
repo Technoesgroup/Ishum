@@ -190,6 +190,7 @@ const handleAddToCart = async () => {
 
       <div className="product-details">
         <h1 className="product-title">{selectedProduct.name}</h1>
+        <h4  className="product-des"><p>{selectedProduct.description}</p></h4>
 
         <div className="price-section">
           <span className="new-price">₹{selectedProduct.price}</span>
