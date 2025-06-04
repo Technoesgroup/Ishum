@@ -27,8 +27,8 @@
   }
   
   .bestsellers-filters h3 {
-    font-family: 'PoppinsLight';
-    margin-bottom: 3.5vw;
+      font-family: 'PoppinsRegular';
+    margin-bottom: 3vw;
     font-weight: 100 !important;
     font-size: 2vw;
     text-align: left;
@@ -85,7 +85,7 @@
   }
 
   .store-bestseller h3{
-    font-family: 'PoppinsLight';
+       font-family: 'PoppinsRegular';
      font-size: 1vw;
      font-weight: 100;
      text-align: left;
@@ -110,9 +110,7 @@
 
   .bestseller-boxes-1{
     font-family: 'PoppinsRegular';
-  display: flex;
   position: relative;
-  flex-direction: column;
   gap: 5px;
   background-color: #EEEBE4;
   }
@@ -122,8 +120,9 @@
     background-color: #EEEBE4;
     border: 1px solid #9f967f;
     cursor: pointer;
-    padding: 0.9vw;
+    padding: 0.8vw;
     font-size: 0.9rem;
+    border-radius: 12px;
   }
 
 
@@ -282,17 +281,18 @@
     padding: 5px;
     margin: 0;
     position: absolute;
-    background: #252525;
-    border: 1px solid #ccc;
+    background: #EEEBE4;
+    border: 1px solid #8b8b8b;
     border-radius: 5px;
     width: 180px;
     top: 90px;
     z-index: 10;
+    border-radius: 5px;
   }
   
   .SortPrice-dropdown li {
     padding: 8px;
-    color: rgb(204, 204, 204);
+    color: rgb(72, 72, 72);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -387,6 +387,7 @@
     }
 
     .store-bestseller h3{
+      
       display: none;
     }
 

@@ -12,32 +12,27 @@ export default function Bestsellers() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
-  const { selected, setSelected } = useFilter();
-  const [price, setPrice] = useState(0); // For the range input
+  const { selected, setSelected,  handleSelection} = useFilter();
   const maxPrice = 50000;
 
   const handleRangeChange = (e) => {
-    setPrice(Number(e.target.value));
-    setSelected({ ...selected, price: Number(e.target.value) });
+    handleSelection("price", Number(e.target.value)); 
   };
 
   const handleToggle = (section) => {
     setOpenDropdown(openDropdown === section ? null : section);
   };
 
-  const handleSelection = (section, value) => {
-    setSelected({ ...selected, [section]: value });
-  };
-
   const handleToggleSortDropdown = () => {
     setOpenSortDropdown(!openSortDropdown);
   };
 
-  const handleSelectSortOption = (option) => {
-    setSelectedSort(option);
-    // optional: setSelected({ ...selected, sort: option }); // if sorting is used in backend
-    setOpenSortDropdown(false);
-  };
+
+const handleSelectSortOption = (option) => {
+  setSelectedSort(option);
+  handleSelection("sortRange", option);  // ✅ Add this line
+  setOpenSortDropdown(false);
+};
 
   return (
     <>
@@ -51,22 +46,43 @@ export default function Bestsellers() {
           <div className="bestsellers-filters">
             <h3>Filters</h3>
 
-            <div className="AllPrice-of-bestseller">
-              <p className="firstparagraph">Price  <KeyboardArrowRightIcon /></p>
-              <input
-        type="range"
-        min="0"
-        max={maxPrice}
-        value={price}
-        onChange={handleRangeChange}
-        className="bestsellers-price-range"
-      />
-              <div className="two-input-minimax">
-              <input type="text" value={`₹ 0`} readOnly />
-        <h4>-</h4>
-        <input type="text" value={`₹ ${price}`} readOnly />
-              </div>
-            </div>
+
+               <div className="bestseller-boxes-1  for-all-boxes-btn">
+                  <button className="btn-sort" onClick={handleToggleSortDropdown}>
+                    SORT - LOW TO HIGH <KeyboardArrowRightIcon className="Sort-Right-icon" />
+                  </button>
+                  {openSortDropdown && (
+                    <ul className="SortPrice-dropdown">
+                      {["3000 to 5000", "5000 to 7000", "7000 to 10000", "10000 to 15000"].map((range) => (
+                        <li key={range} onClick={() => handleSelectSortOption(range)}>
+                          <input
+                            type="radio"
+                            name="sort"
+                            checked={selectedSort === range}
+                            onChange={() => handleSelectSortOption(range)}
+                          />
+                          {range}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                   <div className="AllPrice-of-bestseller">
+        <p className="firstparagraph">Price <KeyboardArrowRightIcon /></p>
+        <input
+          type="range"
+          min="0"
+          max={maxPrice}
+          value={selected.price || 0} 
+          onChange={handleRangeChange}
+          className="bestsellers-price-range"
+        />
+        <div className="two-input-minimax">
+          <input type="text" value={`₹ 0`} readOnly /> <h4>-</h4>
+          <input type="text" value={`₹ ${selected.price || 0}`} readOnly />
+        </div>
+      </div>
 
             <div className="AllSize-of-bestseller">
               <p className="firstparagraph">Size  <KeyboardArrowRightIcon /></p>

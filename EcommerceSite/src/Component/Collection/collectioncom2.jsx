@@ -11,8 +11,9 @@ export default function Bestsellers() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
-  const { selected, setSelected } = useFilter();
+  const { selected, setSelected,  handleSelection} = useFilter();
   const location = useLocation();
+  const maxPrice = 50000;
 
   console.log("Location object:", location);
   const collectionName = location?.state?.collectionName || null;
@@ -23,19 +24,20 @@ export default function Bestsellers() {
     setOpenDropdown(openDropdown === section ? null : section);
   };
 
-  const handleSelection = (section, value) => {
-    setSelected({ ...selected, [section]: value });
+  const handleRangeChange = (e) => {
+    handleSelection("price", Number(e.target.value)); 
   };
 
   const handleToggleSortDropdown = () => {
     setOpenSortDropdown(!openSortDropdown);
   };
 
-  const handleSelectSortOption = (option) => {
-    setSelectedSort(option);
-    // optional: setSelected({ ...selected, sort: option }); // if sorting is used in backend
-    setOpenSortDropdown(false);
-  };
+const handleSelectSortOption = (option) => {
+  setSelectedSort(option);
+  handleSelection("sortRange", option);  // ✅ Add this line
+  setOpenSortDropdown(false);
+};
+
 
   return (
     <>
@@ -51,7 +53,7 @@ export default function Bestsellers() {
                   </button>
                   {openSortDropdown && (
                     <ul className="SortPrice-dropdown">
-                      {["3000 to 5000", "5000 to 7000", "7000 to 10,000", "10,000 to 15,000"].map((range) => (
+                      {["3000 to 5000", "5000 to 7000", "7000 to 10000", "10000 to 15000"].map((range) => (
                         <li key={range} onClick={() => handleSelectSortOption(range)}>
                           <input
                             type="radio"
@@ -65,14 +67,22 @@ export default function Bestsellers() {
                     </ul>
                   )}
                 </div>
-            <div className="AllPrice-of-bestseller">
-              <p className="firstparagraph">Price  <KeyboardArrowRightIcon /></p>
-              <input type="range" min="0" max="20,000" className="bestsellers-price-range" />
-              <div className="two-input-minimax">
-                <input type="text" placeholder="₹ 0" /> <h4>-</h4>
-                <input type="text" placeholder="₹ 20,000" />
-              </div>
-            </div>
+
+          <div className="AllPrice-of-bestseller">
+        <p className="firstparagraph">Price <KeyboardArrowRightIcon /></p>
+        <input
+          type="range"
+          min="0"
+          max={maxPrice}
+          value={selected.price || 0} 
+          onChange={handleRangeChange}
+          className="bestsellers-price-range"
+        />
+        <div className="two-input-minimax">
+          <input type="text" value={`₹ 0`} readOnly /> <h4>-</h4>
+          <input type="text" value={`₹ ${selected.price || 0}`} readOnly />
+        </div>
+      </div>
 
             <div className="AllSize-of-bestseller">
               <p className="firstparagraph">Size  <KeyboardArrowRightIcon /></p>

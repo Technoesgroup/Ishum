@@ -60,7 +60,7 @@ const TrendingProducts = () => {
                 <span className="LandingCom4-badge best">EXCLUSIVE</span>
               )}
               {product.isBestseller && (
-                <span className="LandingCom4-badge best">BEST SELL</span>
+                <span className="LandingCom4-badge best">BEST SELLER</span>
               )}
 
               <div className="LandingCom4-product-img-wrapper">

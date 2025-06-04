@@ -11,8 +11,9 @@ export default function Bestsellers() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
-  const { selected, setSelected } = useFilter();
+  const { selected, setSelected, handleSelection } = useFilter();
    const [price, setPrice] = useState(0);
+   
     const maxPrice = 50000;
 
 const location = useLocation();
@@ -25,17 +26,12 @@ useEffect(() => {
 }, [location.state]);
 
 
- const handleRangeChange = (e) => {
-    setPrice(Number(e.target.value));
-    setSelected({ ...selected, price: Number(e.target.value) });
+  const handleRangeChange = (e) => {
+    handleSelection("price", Number(e.target.value)); 
   };
 
   const handleToggle = (section) => {
     setOpenDropdown(openDropdown === section ? null : section);
-  };
-
-  const handleSelection = (section, value) => {
-    setSelected({ ...selected, [section]: value });
   };
 
   const handleToggleSortDropdown = () => {
@@ -76,22 +72,7 @@ useEffect(() => {
                     </ul>
                   )}
                 </div>
-             <div className="AllPrice-of-bestseller">
-              <p className="firstparagraph">Price  <KeyboardArrowRightIcon /></p>
-              <input
-        type="range"
-        min="0"
-        max={maxPrice}
-        value={price}
-        onChange={handleRangeChange}
-        className="bestsellers-price-range"
-      />
-              <div className="two-input-minimax">
-              <input type="text" value={`₹ 0`} readOnly />
-        <h4>-</h4>
-        <input type="text" value={`₹ ${price}`} readOnly />
-              </div>
-            </div>
+         
 
             <div className="AllSize-of-bestseller">
               <p className="firstparagraph">Size  <KeyboardArrowRightIcon /></p>
@@ -118,12 +99,12 @@ useEffect(() => {
               />
 
               {/* Color */}
-              <ColorList
+              {/* <ColorList
                 openDropdown={openDropdown}
                 handleToggle={handleToggle}
                 selected={selected}
                 handleSelection={handleSelection}
-              />
+              /> */}
             </div>
           </div>
 

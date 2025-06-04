@@ -94,7 +94,7 @@ export default function ProductList({
 
 
 
-  const filteredProducts = Array.isArray(products)
+  let filteredProducts = Array.isArray(products)
     ? products.filter((product) => {
         const sizeMatch = selected.size ? product.size.includes(selected.size) : true;
         const tagMatch = selected.tag ? product.tag === selected.tag : true;
@@ -111,11 +111,21 @@ export default function ProductList({
               .replace(/\s+/g, "")
               .includes(selected.collection.toLowerCase().replace(/\s+/g, "").split(" ")[0])
           : true;
-           const priceMatch = selected.price ? product.price <= selected.price : true;
+          const priceMatch = selected.price ? product.price <= selected.price : true;
 
         return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch && collectionMatch && priceMatch;
       })
     : [];
+
+
+    // 🟢 Apply sort range if selected
+if (selected.sortRange) {
+  const [min, max] = selected.sortRange.split("to").map((val) => Number(val.trim()));
+  filteredProducts = filteredProducts
+    .filter((product) => product.price >= min && product.price <= max)
+    .sort((a, b) => a.price - b.price); // ✅ low to high sort
+}
+
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;

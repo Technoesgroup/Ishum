@@ -1,19 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CategoryList from '../BestSellerCategory';
 import { useFilter } from '../../Context-API/Fillter-Context'; // 👈 Import context
 
 const FilterSection = ({ openDropdown, handleToggle }) => {
   const { selected, handleSelection } = useFilter(); 
+   const [selectedSort, setSelectedSort] = useState(null);
+  const [openSortDropdown, setOpenSortDropdown] = useState(false);
   const maxPrice = 50000;
 
   const handleRangeChange = (e) => {
     handleSelection("price", Number(e.target.value)); 
   };
 
+   const handleToggleSortDropdown = () => {
+    setOpenSortDropdown(!openSortDropdown);
+  };
+
+  const handleSelectSortOption = (option) => {
+  setSelectedSort(option);
+  handleSelection("sortRange", option);  // ✅ Add this line
+  setOpenSortDropdown(false);
+};
+
   return (
     <div className="bestsellers-filters">
       <h3>Filters</h3>
+
+
+          <div className="bestseller-boxes-1  for-all-boxes-btn">
+                  <button className="btn-sort" onClick={handleToggleSortDropdown}>
+                    SORT - LOW TO HIGH <KeyboardArrowRightIcon className="Sort-Right-icon" />
+                  </button>
+                  {openSortDropdown && (
+                    <ul className="SortPrice-dropdown">
+                      {["3000 to 5000", "5000 to 7000", "7000 to 10000", "10000 to 15000"].map((range) => (
+                        <li key={range} onClick={() => handleSelectSortOption(range)}>
+                          <input
+                            type="radio"
+                            name="sort"
+                            checked={selectedSort === range}
+                            onChange={() => handleSelectSortOption(range)}
+                          />
+                          {range}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
 
       {/* Price Range */}
       <div className="AllPrice-of-bestseller">
