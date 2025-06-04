@@ -3,11 +3,13 @@ import "./OrderConformation.css";
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
+import { usePixel } from "../../Component/FacebookPixel/FB-Pixel"; // ✅ Pixel context
 import axios from "axios";
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { trackEvent } = usePixel(); // ✅ Pixel tracking function
   const [shipping, setShipping] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(null);
 
@@ -21,8 +23,8 @@ const OrderConfirmation = () => {
     year: "2-digit",
   });
 
-
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
   useEffect(() => {
     const orderConfirmed = localStorage.getItem("orderConfirmed");
 
@@ -34,34 +36,31 @@ const OrderConfirmation = () => {
       // ✅ Fetch shipping info only if user is present
       if (user?._id) {
         axios
-        .get(`${baseURL}/api/shipping/${user._id}`)
+          .get(`${baseURL}/api/shipping/${user._id}`)
           .then((res) => setShipping(res.data))
           .catch((err) => console.error("Shipping fetch error:", err));
+      }
 
-
-              axios
-          .get(`${baseURL}/api/cart/${user._id}`) // ya last order API agar available ho
-          .then((res) => {
-            const items = res.data?.cartItems || []; // ya order items
-            const total = items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
-
-            trackEvent("OrderConfirmed", {
-              content_ids: items.map((item) => item.productId),
-              content_type: "product",
-              value: total,
-              currency: "INR",
-              contents: items.map((item) => ({
-                id: item.productId,
-                quantity: item.quantity,
-                item_price: item.price,
-              })),
-            });
-          })
-          .catch((err) => console.error("Track purchase error:", err));
+      // ✅ Track Facebook Purchase event
+      const storedOrder = localStorage.getItem("orderData");
+      if (storedOrder) {
+        const order = JSON.parse(storedOrder);
+        if (order?.cartItems?.length > 0) {
+          trackEvent("Purchase", {
+            content_ids: order.cartItems.map(item => item.productId),
+            content_type: "product",
+            value: order.totalPrice,
+            currency: "INR",
+            contents: order.cartItems.map(item => ({
+              id: item.productId,
+              quantity: item.quantity,
+              item_price: item.price
+            }))
+          });
+        }
       }
     }
-
-  }, [user, navigate]);
+  }, [user, navigate, trackEvent]);
 
   // 🕐 Prevent rendering before confirmation
   if (isConfirmed === null) return null;
@@ -111,6 +110,7 @@ const OrderConfirmation = () => {
 };
 
 export default OrderConfirmation;
+
 
 
 
