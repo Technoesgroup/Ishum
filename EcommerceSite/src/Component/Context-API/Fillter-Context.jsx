@@ -9,7 +9,7 @@ export const FilterProvider = ({ children }) => {
     category: null,
     size: null,
     color: null,
-    tag: null, // for EXCLUSIVE, DHOTI, etc.
+    tag: null, 
     collection: null,
     price:null
   });
@@ -23,8 +23,7 @@ export const FilterProvider = ({ children }) => {
     fetch(`${baseURL}/api/products/get-product`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("DATA:", data); 
-        setProducts(data.products); // 👈 Yeh tabhi chalega jab 'products' key ho data me
+        setProducts(data.products); 
       })
       .catch((err) => console.error(err));
   }, []);
@@ -32,12 +31,7 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
 
-    // console.log("Selected Collection:", selected.collection);
-    // console.log("All Products:", products);
-
     let filtered = [...products];
-
-
 
     if (selected.category) {
       filtered = filtered.filter(
@@ -71,8 +65,7 @@ export const FilterProvider = ({ children }) => {
   if (selected.price) {
     filtered = filtered.filter((item) => item.price <= selected.price); // Price filter
   }
-    
-  
+
     setFilteredProducts(filtered);
   }, [selected, products]);
 

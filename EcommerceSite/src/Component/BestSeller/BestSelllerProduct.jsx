@@ -111,8 +111,9 @@ export default function ProductList({
               .replace(/\s+/g, "")
               .includes(selected.collection.toLowerCase().replace(/\s+/g, "").split(" ")[0])
           : true;
+           const priceMatch = selected.price ? product.price <= selected.price : true;
 
-        return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch && collectionMatch;
+        return sizeMatch && tagMatch && categoryMatch && subcategoryMatch && colorMatch && availableMatch && collectionMatch && priceMatch;
       })
     : [];
 
