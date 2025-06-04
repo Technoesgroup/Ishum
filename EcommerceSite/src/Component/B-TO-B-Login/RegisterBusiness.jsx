@@ -7,10 +7,9 @@ const Register = () => {
       <div className="B-TO-B-image-section"></div>
       <div className="B-TO-B-form-section">
         <div className="B-TO-B-header">
-          <span>Existing Customer?</span>
-          <button className="B-TO-B-login-btn">Log In</button>
+          {/* <span>Existing Customer?</span> */}
         </div>
-        <h2  className="REGISTER-B2B-h2">REGISTER AS B2B CUSTOMER</h2>
+        <h2  className="REGISTER-B2B-h2">Get In Touch B2B CUSTOMER</h2>
         <form>
           <div className="B-TO-B-input-group">
             <div className="B-TO-B-input-field">

@@ -81,9 +81,8 @@ const Footer = () => {
         <div className="footer-bottom">
           <p>© 2025 All Rights Reserved</p>
           <div className="footer-terms">
-            <span>Terms</span>
-            <span>Privacy</span>
-            <span>Cookies</span>
+            <span><Link to="/TearmsServices">Terms </Link></span>
+            <span><Link to="/PrivacyPolicy">Privacy Policy</Link></span>
           </div>
           <div className="footer-social">
          <a href="https://www.facebook.com/Ishumbykaran/"><FacebookOutlinedIcon /></a>
