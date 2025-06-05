@@ -1,30 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../CSS/OrdersDashboard.css"
-
-const generateDummyOrders = () => {
-  const statuses = ["Fulfilled", "Unfulfilled"];
-  const payments = ["Paid", "Pending"];
-  return Array.from({ length: 20 }, (_, i) => ({
-    id: `ORD-${1000 + i}`,
-    customer: `Customer ${i + 1}`,
-    date: `2024-05-${(i % 30) + 1}`,
-    fulfillmentStatus: statuses[i % 2],
-    paymentStatus: payments[i % 2],
-    total: `$${(Math.random() * 100).toFixed(2)}`,
-  }));
-};
+import axios from "axios";
+import "../../CSS/OrdersDashboard.css";
 
 const OrdersDashboard = () => {
   const navigate = useNavigate();
+  const [orders, setOrders] = useState([]);
   const [activeTab, setActiveTab] = useState("All");
-  const [orders] = useState(generateDummyOrders);
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 5;
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
+  useEffect(() => {
+    axios.get(`${baseURL}/api/orders/all`)
+      .then(res => setOrders(res.data))
+      .catch(err => console.error("Error fetching orders:", err));
+  }, []);
+
   const filteredOrders = activeTab === "All"
     ? orders
-    : orders.filter(order => order.fulfillmentStatus === activeTab);
+    : orders.filter(order => order.status === activeTab.toLowerCase());
 
   const indexOfLast = currentPage * ordersPerPage;
   const indexOfFirst = indexOfLast - ordersPerPage;
@@ -35,7 +31,7 @@ const OrdersDashboard = () => {
   return (
     <div className="main-content">
       <div className="tabs">
-        {["All", "Fulfilled", "Unfulfilled"].map(tab => (
+        {["All", "Pending", "Shipped", "Delivered"].map(tab => (
           <button
             key={tab}
             className={`tab ${activeTab === tab ? "active" : ""}`}
@@ -51,7 +47,8 @@ const OrdersDashboard = () => {
             <tr>
               <th>Order ID</th>
               <th>Customer</th>
-              <th>Date</th>
+              <th>Email</th>
+              <th>Phone</th>
               <th>Fulfillment</th>
               <th>Payment</th>
               <th>Total</th>
@@ -59,26 +56,24 @@ const OrdersDashboard = () => {
           </thead>
           <tbody>
             {currentOrders.map(order => (
-              <tr key={order.id} onClick={() => navigate(`/order/${order.id}`)}>
-                <td>{order.id}</td>
-                <td>{order.customer}</td>
-                <td>{order.date}</td>
+              <tr key={order._id} onClick={() => navigate(`/order/${order._id}`)}>
+                <td>{order._id}</td>
+                <td>{order.userId?.name || "N/A"}</td>
+                <td>{order.userId?.email || "N/A"}</td>
+                <td>{order.userId?.phone || "N/A"}</td>
                 <td>
-                  <span className={`badge ${order.fulfillmentStatus.toLowerCase()}`}>
-                    {order.fulfillmentStatus}
-                  </span>
+                  <span className={`badge ${order.status}`}>{order.status}</span>
                 </td>
                 <td>
-                  <span className={`badge ${order.paymentStatus.toLowerCase()}`}>
-                    {order.paymentStatus}
-                  </span>
+                  <span className="badge paid">Paid</span>
                 </td>
-                <td>{order.total}</td>
+                <td>₹{order.amount}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, idx) => (
           <button
@@ -95,3 +90,4 @@ const OrdersDashboard = () => {
 };
 
 export default OrdersDashboard;
+

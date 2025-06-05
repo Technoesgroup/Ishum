@@ -3,17 +3,16 @@ import "./OrderConformation.css";
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
-import { usePixel } from "../../Component/FacebookPixel/FB-Pixel"; // ✅ Pixel context
+import { usePixel } from "../../Component/FacebookPixel/FB-Pixel";
 import axios from "axios";
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { trackEvent } = usePixel(); // ✅ Pixel tracking function
+  const { trackEvent } = usePixel(); 
   const [shipping, setShipping] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(null);
 
-  // 📦 Dynamic delivery date (4 days ahead)
   const deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + 4);
   const formattedDate = deliveryDate.toLocaleDateString("en-IN", {
@@ -33,7 +32,6 @@ const OrderConfirmation = () => {
     } else {
       setIsConfirmed(true);
 
-      // ✅ Fetch shipping info only if user is present
       if (user?._id) {
         axios
           .get(`${baseURL}/api/shipping/${user._id}`)

@@ -6,7 +6,6 @@ exports.createOrder = async (req, res) => {
   try {
     const { userId, cartItems, totalAmount, paymentInfo, userEmail, userPhone } = req.body;
 
-    // 1️⃣ Create new order
     const newOrder = new Order({
       userId,
       items: cartItems,
@@ -71,9 +70,6 @@ exports.getUserLatestOrder = async (req, res) => {
 };
 
 
-
-
-// Get all delivered orders count
 exports.getDeliveredOrdersCount = async (req, res) => {
   try {
     const count = await Order.countDocuments({ status: 'delivered' });
