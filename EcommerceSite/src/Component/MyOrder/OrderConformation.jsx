@@ -25,6 +25,8 @@ const OrderConfirmation = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
   useEffect(() => {
+
+
     const orderConfirmed = localStorage.getItem("orderConfirmed");
 
     if (!orderConfirmed) {
@@ -58,6 +60,12 @@ const OrderConfirmation = () => {
         }
       }
     }
+
+
+      window.fbq('track', 'Purchase', {
+    value: 1000.00,
+    currency: 'INR',
+  });
   }, [user, navigate, trackEvent]);
 
   // 🕐 Prevent rendering before confirmation

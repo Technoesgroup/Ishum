@@ -28,7 +28,7 @@ import ReturnPolicy from './Component/AllPolicies/ReturnPolicy';
 import PrivacyPolicy from "./Component/AllPolicies/PrivacyPolicy"; 
 import TearmsServices from './Component/AllPolicies/TearmsPolicy';
 import PaymentServices from './Component/AllPolicies/PaymentStatement';
-import { useAuth } from './ContextApiCart/LoginContextApi'; // 🛠️ Update path as needed 
+import { useAuth } from './ContextApiCart/LoginContextApi'; 
 import  ModalLayout  from './Component/ModelContext/ModelLayout';
 import { useModal } from './Component/ModelContext/ModelContext';
 
