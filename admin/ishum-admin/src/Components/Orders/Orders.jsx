@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../CSS/OrdersDashboard.css";
 
 const OrdersDashboard = () => {
-  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [activeTab, setActiveTab] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,6 +25,25 @@ const OrdersDashboard = () => {
   const currentOrders = filteredOrders.slice(indexOfFirst, indexOfLast);
 
   const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+
+
+  const handleStatusChange = async (orderId, newStatus) => {
+  try {
+    const response = await axios.put(`${baseURL}/api/orders/update-status/${orderId}`, { status: newStatus });
+
+    if (response.data.success) {
+      // Update the local state to reflect the new status
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order._id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+    }
+  } catch (error) {
+    console.error("Failed to update status", error);
+  }
+};
+
 
   return (
     <div className="main-content">
@@ -56,13 +73,23 @@ const OrdersDashboard = () => {
           </thead>
           <tbody>
             {currentOrders.map(order => (
-              <tr key={order._id} onClick={() => navigate(`/order/${order._id}`)}>
+              <tr key={order._id} >
                 <td>{order._id}</td>
                 <td>{order.userId?.name || "N/A"}</td>
                 <td>{order.userId?.email || "N/A"}</td>
                 <td>{order.userId?.phone || "N/A"}</td>
                 <td>
-                  <span className={`badge ${order.status}`}>{order.status}</span>
+                 <select
+  value={order.status}
+  onChange={(e) => handleStatusChange(order._id, e.target.value)}
+  className="order-status-dropdown"
+>
+  <option value="pending">Pending</option>
+  <option value="shipped">Shipped</option>
+  <option value="delivered">Delivered</option>
+  <option value="cancelled">Cancelled</option>
+</select>
+
                 </td>
                 <td>
                   <span className="badge paid">Paid</span>

@@ -34,8 +34,9 @@ const Sidebar = () => {
           )}
         </li>
 
+        <li><Link to="/Cart-trigger">Add to Cart trigger</Link></li>
+         <li><Link  to="User-Id">All User Login Id</Link></li>
         <li><FaTags /> Vouchers</li>
-        <li><FaComments /> Live Chat</li>
         <li><FaEnvelope /> B2B Inquiries</li>
         <li><FaStar /> Reviews</li>
       </ul>

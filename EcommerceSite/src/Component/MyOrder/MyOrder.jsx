@@ -1,33 +1,44 @@
 import { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for HTTP requests
 import "../MyOrder/MyOrder.css";
+import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
+
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("Pending");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { token } = useAuth();
+
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
   // Fetch orders from the backend
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(`${baseURL}/api/orders/all`);
-        // Make sure this API endpoint is correct
-        setOrders(response.data); // Set the orders from the backend
-      } catch (err) {
-        console.error("Error fetching orders:", err);
-        setError("Failed to fetch orders");
-      } finally {
-        setLoading(false); // Hide loading state
-      }
-    };
+useEffect(() => {
+  const fetchOrders = async () => {
+    try {
+      const token = localStorage.getItem("token"); // ya jahan tu token store kar raha ho
 
-    fetchOrders();
-  }, []); 
+      const response = await axios.get(`${baseURL}/api/orders/my-orders`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // 👈 token bhejna zaroori hai
+        },
+      });
+
+      setOrders(response.data); // Set the orders from the backend
+    } catch (err) {
+      console.error("Error fetching orders:", err);
+      setError("Failed to fetch orders");
+    } finally {
+      setLoading(false); // Hide loading state
+    }
+  };
+
+  fetchOrders();
+}, []);
+
 
   if (loading) {
     return <Loader />; // Show loading state while fetching data
