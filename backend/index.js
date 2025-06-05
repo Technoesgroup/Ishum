@@ -18,7 +18,6 @@ const app = express();
 const PORT = 4000;
 const orderRoutes = require('./router/OrderRoutes');
 const MONGO_URI = process.env.MONGO_URI;
-const eventRoutes = require('./router/Eventrouter');
 
 
 
@@ -76,7 +75,6 @@ app.use("/api/shipping", shippingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', reviewRoutes);
 app.use("/api/wishlist", wishlistRoutes);
-app.use('/api', eventRoutes);
 
 
 app.get("/", (req, res) => {
