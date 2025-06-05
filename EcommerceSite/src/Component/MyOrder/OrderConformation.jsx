@@ -14,7 +14,7 @@ const OrderConfirmation = () => {
   const [isConfirmed, setIsConfirmed] = useState(null);
 
   const deliveryDate = new Date();
-  deliveryDate.setDate(deliveryDate.getDate() + 4);
+  deliveryDate.setDate(deliveryDate.getDate() + 7);
   const formattedDate = deliveryDate.toLocaleDateString("en-IN", {
     weekday: "short",
     day: "numeric",
