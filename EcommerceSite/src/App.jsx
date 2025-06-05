@@ -124,7 +124,7 @@ useEffect(() => {
         <Route path="/co-page/:title" element={<CollectionPage />} />
         <Route path="/Viewproduct/:slug" element={<ViewProduct />} />
         <Route path="/OrderConformation" element={<OrderConformation />} />
-        <Route path="/OrderTracking" element={<OrderTracking />} />
+        <Route path="/orders/:orderId" element={<OrderTracking />} />
         <Route path="/search" element={<MobileSearch />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/ReturnPolicy" element={<ReturnPolicy />} />

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for HTTP requests
 import "../MyOrder/MyOrder.css";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
+import { useNavigate } from "react-router-dom";
 import Loader from "../../Pages/LoaderFullpage";
 
 
@@ -10,6 +11,7 @@ const OrderList = () => {
   const [filter, setFilter] = useState("Pending");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const { token } = useAuth();
 
 
@@ -80,7 +82,7 @@ useEffect(() => {
             <p>Tracking number: <strong>{order.trackingNumber || "N/A"}</strong></p>
             <p>Subtotal: <strong>Rs.{order.amount}</strong></p> {/* Display total amount */}
             <p className="order-status">{order.status.toUpperCase()}</p>
-            <button className="details-button">Details</button>
+            <button className="details-button"    onClick={() => navigate(`/orders/${order._id}`)}>Details</button>
           </div>
         </div>
       ))}
