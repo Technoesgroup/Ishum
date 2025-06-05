@@ -215,7 +215,7 @@
   }
 
   .bestsellers-product-card {
-      max-width: 80%;
+      max-width: 95%;
       margin: 0 auto;
   }
 
@@ -274,7 +274,7 @@
   }
 
   .bestsellers-product-card {
-    max-width: 65vw;
+   
     width: 100%;
     text-align: center;
     background: #EEEBE4;
