@@ -202,7 +202,7 @@ if (selected.sortRange) {
                 <div className="bestsellers-product-details">
                   <h3 className="bestsellers-product-name">{product.name}</h3>
                   <div className="Original-Discount-Price">
-                    <p className="bestsellers-product-original-price">₹{product.discount}</p>
+                  
                     <p className="bestsellers-product-price">₹{product.price}</p>
                   </div>
                   <div className="Product-LocalMall-Buy-Now-button">

@@ -99,7 +99,7 @@ const TrendingProducts = () => {
                 <p className="LandingCom4-price">
                   ₹{product.price}
                   <span style={{ textDecoration: "line-through" }}>
-                    ₹{product.discount}
+                    {/* ₹{product.discount} */}
                   </span>
                 </p>
                 {product.rating && (
