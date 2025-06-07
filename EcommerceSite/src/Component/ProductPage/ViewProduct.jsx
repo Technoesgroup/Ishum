@@ -194,7 +194,7 @@ const handleAddToCart = async () => {
 
         <div className="price-section">
           <span className="new-price">₹{selectedProduct.price}</span>
-          <span className="old-price">₹{selectedProduct.discount}</span>
+          {/* <span className="old-price">₹{selectedProduct.discount}</span> */}
         </div>
 
         <p className="tax-info">Tax included. Shipping calculated at checkout.</p>

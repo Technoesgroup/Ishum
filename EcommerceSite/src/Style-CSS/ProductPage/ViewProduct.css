@@ -191,6 +191,11 @@
     padding: 40px 4vw;
   }
 
+  .product-page {
+  display: flex;
+  gap: 5px;
+  }
+
   .product-gallery {
     flex-direction: row;
     flex-wrap: wrap;

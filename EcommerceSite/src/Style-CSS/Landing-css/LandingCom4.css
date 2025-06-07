@@ -135,7 +135,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-grow: 1;
 }
 
@@ -187,6 +187,11 @@
     border: 1px solid #ddd;
   }
 
+  .LandingCom4-product-info p {
+     color: #4B3D1A;
+  margin: 4px 0;
+  }
+
   .LandingCom4-product-img-wrapper img {
     height: auto;
     object-fit: cover;
@@ -204,7 +209,7 @@
   }
 
   .LandingCom4-product-info {
-    padding: 8px;
+    padding: 5px 8px;
   }
 
   .LandingCom4-product-info p {
