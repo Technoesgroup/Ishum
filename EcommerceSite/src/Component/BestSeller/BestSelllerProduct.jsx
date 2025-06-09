@@ -241,7 +241,6 @@ if (selected.sortRange) {
 
 <button
   className="bestsellers-buy-button"
-  // disabled={!user?._id || loadingUser}
   onClick={(e) => {
     e.stopPropagation();
     handleAddToCart(product);

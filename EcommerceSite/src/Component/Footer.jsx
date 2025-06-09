@@ -6,9 +6,14 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import "../Style-CSS/Footer.css";
 import Logo from '../images/IshumLogo1.svg';
 import { Link } from 'react-router-dom';
+import { useModal } from './ModelContext/ModelContext';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const Footer = () => {
+     const {
+        showB2BModal, setShowB2BModal,
+      } = useModal();
+
   return (
     <footer className="footer-container">
       <div className="footer-content">
@@ -60,7 +65,7 @@ const Footer = () => {
             <h3>Information</h3>
             <ul>
               <li><a href="/Tale">About Us</a></li>
-              <li>Appointment / Get In Touch</li>
+              <li    onClick={() => setShowB2BModal(true)}>Appointment / Get In Touch</li>
             </ul>
           </div>
 

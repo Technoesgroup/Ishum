@@ -235,8 +235,6 @@ const handleAddToCart = async () => {
   </div>
 </div>
 
-
-
         <div className="quantity-section">
           <button className="quantity-btn" onClick={handleQuantityDecrease}>-</button>
           <div className="quantity-value">{quantity}</div>

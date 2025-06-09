@@ -114,9 +114,10 @@
       flex-direction: column;
       margin: 20px 5px;
       box-shadow: none;
-      border-radius: 0;
       border-radius: 8px;
+      max-width: 700px !important;
     }
+
   
     .B-TO-B-image-section {
   display: none;
@@ -128,7 +129,7 @@
     }
 
     .B-TO-B-close-btn{
-      top: 0;
+     margin-top: -20px;
     }
   
 
