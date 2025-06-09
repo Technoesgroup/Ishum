@@ -6,7 +6,7 @@ import { useProduct } from "../../ContextApiCart/ProductContextApi";
 import axios from "axios";
 import Loader from "../../Pages/LoaderFullpage";
 import { useWishlist } from "../ContextHook/WishlistHook";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
@@ -15,7 +15,11 @@ const TrendingProducts = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
   const navigate = useNavigate();
-  const { addToWishlist, wishlist, toggleWishlist } = useWishlist();   // ✅ make sure `wishlist` state is accessible
+  const {wishlist, toggleWishlist } = useWishlist(); 
+
+  const isInWishlist = (productId) =>
+  wishlist?.some((item) => item.productId?._id === productId);
+
   const { setSelectedProduct } = useProduct();
 
   const handleProductClick = (product, e) => {
@@ -51,8 +55,7 @@ const TrendingProducts = () => {
     <div className="LandingCom4-trending-section">
       <h2>Trending Best Selling Products</h2>
       <div className="LandingCom4-product-slider">
-        {products.map((product) => {
-            const isInWishlist = wishlist.some((item) => item.productId === product._id); // ✅ check if in wishlist
+        {products.map((product) => { // ✅ check if in wishlist
 
           return (
             <div key={product._id} className="LandingCom4-product-card">
@@ -86,10 +89,17 @@ const TrendingProducts = () => {
                 />
 
           <div className="LandingCom4-hover-icons">
-  <FavoriteIcon
-    style={{ cursor: "pointer", color: isInWishlist ? "red" : "gray" }}
-    onClick={() => toggleWishlist(product)}
-  />
+  <FavoriteBorderIcon
+  onClick={(e) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+  }}
+  style={{
+    cursor: "pointer",
+    color: isInWishlist(product._id) ? "red" : "black", 
+    transition: "color 0.2s ease",
+  }}
+/>
   <VisibilityIcon onClick={(e) => handleProductClick(product, e)} />
 </div>
               </div>

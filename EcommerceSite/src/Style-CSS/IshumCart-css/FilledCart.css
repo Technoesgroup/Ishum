@@ -367,10 +367,9 @@
   .Cartitem-quantity-control {
     width: 50% !important;
     display: flex;
-    justify-content: start;
     align-items: center;
-    padding:  3vw 6vw;
-    gap: 5px;
+    padding: 3vw;
+    gap: 4px;
   }
 
   .Cartitem-MyOderAllpara-btn button,
@@ -422,7 +421,7 @@
   }
 
   .Cartitem-cursor-pointer{
-    margin-left: 10px;
+    margin-left: 12px;
     font-size: 1rem !important;
   }
 }

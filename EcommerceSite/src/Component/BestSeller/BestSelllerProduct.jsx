@@ -47,7 +47,7 @@ const isInWishlist = (productId) =>
 
   const userId = user?._id;
 
-  console.log("WISHLIST:", wishlist);
+  // console.log("WISHLIST:", wishlist);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -209,17 +209,18 @@ if (selected.sortRange) {
                 />
 
                     <div className="top-Products-hover-icons">
-     <FavoriteBorderIcon
+   <FavoriteBorderIcon
   onClick={(e) => {
     e.stopPropagation();
     toggleWishlist(product);
   }}
   style={{
     cursor: "pointer",
-    background: isInWishlist(product._id) ? "red" : "white", // 🔴 Red if in wishlist, ⚪ White otherwise
-    transition: "background 0.2s ease",
+    color: isInWishlist(product._id) ? "red" : "black", // ✅ Only icon fill will be red
+    transition: "color 0.2s ease",
   }}
 />
+
 
                     <VisibilityIcon   />
                   </div>

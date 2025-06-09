@@ -11,13 +11,16 @@ const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
 
-      const { addToWishlist } = useWishlist();
+const { wishlist, toggleWishlist } = useWishlist();
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 
 
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();
+
+    const isInWishlist = (productId) =>
+  wishlist?.some((item) => item.productId?._id === productId);
 
  const handleProductClick = (product, e) => {
       e.preventDefault();
@@ -86,7 +89,17 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
                   />
 
                   <div className="LandingCom4-hover-icons">
-                    <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
+                    <FavoriteBorderIcon
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       toggleWishlist(product);
+                     }}
+                     style={{
+                       cursor: "pointer",
+                       color: isInWishlist(product._id) ? "red" : "black", 
+                       transition: "color 0.2s ease",
+                     }}
+                   />
                     <VisibilityIcon    onClick={(e) => handleProductClick(product, e)}  />
                   </div>
 

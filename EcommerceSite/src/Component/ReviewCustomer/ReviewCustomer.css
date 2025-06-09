@@ -196,7 +196,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1900;
+  z-index: 1800;
 }
 
 .Selected-review-modal {
@@ -233,7 +233,7 @@
 .Selected-review-overlay-container{
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 25px;
 }
 
 .Selected-name-verified-icon-overlay{
@@ -273,7 +273,7 @@
 }
 
 .Selected-overlayproduct-Container{
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   align-items: start !important;
   justify-content: end !important;
@@ -282,12 +282,14 @@
 }
 
 .Selected-review-overlay-h3-text{
-  width: 70%;
-  font-size: 0.9rem;
+  width: 50%;
+  font-size: 0.6rem;
 }
 
 .Selected-overlayproduct-button-text{
   display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
 .Selected-line-overlay{
   margin-top: 30px;
@@ -299,11 +301,13 @@
 
 .Selected-overlay-View-product{
   display: flex;
+  align-items: center;
   background-color: rgb(215, 215, 215);
   border-radius: 5px;
   border: none;
-  margin-top: 50px !important;
-  padding: 10px 30px;
+  font-size: 0.6rem;
+  margin-top: 1px !important;
+  padding: 8px 20px;
 }
 
 .Selected-review-mallicon-overlay{
@@ -403,8 +407,8 @@
   }
 
   .Selected-review-overlay-h3-text {
-    font-size: 0.6rem;
-    width: 70%;
+    font-size: 0.4rem;
+    width: 60%;
   }
 
   .Selected-overlayproduct-Container {

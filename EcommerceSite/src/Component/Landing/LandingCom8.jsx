@@ -15,7 +15,10 @@ const Collection = () => {
   const [error, setError] = useState(null);
   const collectionName = "Unveli Riwayat";
   const navigate = useNavigate();
-  const { addToWishlist } = useWishlist();
+  const { wishlist, toggleWishlist } = useWishlist();
+
+      const isInWishlist = (productId) =>
+  wishlist?.some((item) => item.productId?._id === productId);
 
   const { setSelectedProduct } = useProduct(); // ✅ context setter
 
@@ -89,7 +92,17 @@ return (
                  onError={(e) => (e.target.src = "/fallback-image.png")}
                />
                <div className="LandingpageComp-hover-icons">
-                 <FavoriteBorderIcon   onClick={() => addToWishlist(product)}/>
+                 <FavoriteBorderIcon
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleWishlist(product);
+                        }}
+                        style={{
+                          cursor: "pointer",
+                            color: isInWishlist(product._id) ? "red" : "black", 
+                          transition: "color 0.2s ease",
+                        }}
+                        />
                  <VisibilityIcon />
                </div>
              </div>

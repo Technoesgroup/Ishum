@@ -47,19 +47,17 @@
   z-index: 2;
 }
 
-.top-Products-hover-icons svg{
- background: rgb(255, 255, 255);
+.top-Products-hover-icons svg {
+  background: white;
   padding: 6px;
   border-radius: 50%;
   font-size: 19px;
   cursor: pointer;
-  color: black;
+  color: black; /* default icon color */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.bestsellers-product-card:hover .top-Products-hover-icons {
-  opacity: 1;
-}
+
   
   .bestsellers-product-name {
     font-family: 'PoppinsRegular';

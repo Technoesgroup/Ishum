@@ -14,7 +14,10 @@ const Collection = () => {
   const [error, setError] = useState(null);
   const collectionName = "NOOR";
   const navigate = useNavigate();
-   const { addToWishlist } = useWishlist();
+  const { wishlist, toggleWishlist } = useWishlist();
+
+     const isInWishlist = (productId) =>
+  wishlist?.some((item) => item.productId?._id === productId);
   
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
@@ -43,8 +46,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
     fetchNoorEditProducts();
   }, [collectionName]);
 
-  // ✅ product click handler
-// inside Collection component
+
  const handleProductClick = (product, e) => {
       e.preventDefault();
     const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
@@ -90,7 +92,17 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
         onError={(e) => (e.target.src = "/fallback-image.png")}
       />
       <div className="LandingpageComp-hover-icons">
-        <FavoriteBorderIcon   onClick={() => addToWishlist(product)}/>
+      <FavoriteBorderIcon
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleWishlist(product);
+        }}
+        style={{
+          cursor: "pointer",
+            color: isInWishlist(product._id) ? "red" : "black", 
+          transition: "color 0.2s ease",
+        }}
+        />
         <VisibilityIcon />
       </div>
     </div>

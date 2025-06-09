@@ -13,7 +13,10 @@ const Collection = () => {
   const collectionName = "Rangrez";
   const navigate = useNavigate();
   const { setSelectedProduct } = useProduct();  // context se setter
-    const { addToWishlist } = useWishlist();
+  const { wishlist, toggleWishlist } = useWishlist();
+
+  const isInWishlist = (productId) =>
+  wishlist?.some((item) => item.productId?._id === productId);
 
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
@@ -73,7 +76,17 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
     <img src={`${baseURL}/uploads/${product.image}`} alt={product.name} />
 
     <div className="LandingpageComp-hover-icons">
-      <FavoriteBorderIcon  onClick={() => addToWishlist(product)}/>
+  <FavoriteBorderIcon
+  onClick={(e) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+  }}
+  style={{
+    cursor: "pointer",
+      color: isInWishlist(product._id) ? "red" : "black", 
+    transition: "color 0.2s ease",
+  }}
+  />
       <VisibilityIcon />
     </div>
   </div>
