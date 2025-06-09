@@ -42,12 +42,8 @@ const isInWishlist = (productId) =>
   const {selectedProduct, setSelectedProduct } = useProduct();
    const { user, loadingUser } = useAuth();
    const { fetchCart } = useCart();
-  const { addToWishlist } = useWishlist();
-     const { trackEvent } = usePixel();
 
   const userId = user?._id;
-
-  // console.log("WISHLIST:", wishlist);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -89,6 +85,39 @@ const isInWishlist = (productId) =>
   }, [queryParam, selected]);
 
 
+  const handleBuyNow = async (product) => {
+  if (user === undefined) {
+    toast.info("Please wait...");
+    return;
+  }
+
+  if (!user || !user._id) {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setShowAuthModal(true);
+    } else {
+      setShowB2UModal(true);
+    }
+    return;
+  }
+
+  try {
+    await axios.post(`${baseURL}/api/cart/addtocart`, {
+      userId: user._id,
+      productId: product._id,
+      quantity: 1,
+      size: product.size[0], // assuming first size
+      color: product.color,
+    });
+    await fetchCart();
+    navigate("/shipping");
+  } catch (err) {
+    console.error("Error in Buy Now:", err);
+    toast.error("Something went wrong!");
+  }
+};
+
+
  const handleProductClick = (product, e) => {
       e.preventDefault();
     const slug = product.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
@@ -97,9 +126,6 @@ const isInWishlist = (productId) =>
     localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
     navigate(`/viewproduct/${product.slug}`);
   };
-
-
-
 
   let filteredProducts = Array.isArray(products)
     ? products.filter((product) => {
@@ -125,7 +151,6 @@ const isInWishlist = (productId) =>
     : [];
 
 
-    // 🟢 Apply sort range if selected
 if (selected.sortRange) {
   const [min, max] = selected.sortRange.split("to").map((val) => Number(val.trim()));
   filteredProducts = filteredProducts
@@ -157,9 +182,9 @@ if (selected.sortRange) {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-      setShowAuthModal(true);   // ✅ mobile → open AuthModal
+      setShowAuthModal(true);  
     } else {
-      setShowB2UModal(true);    // ✅ desktop → open B2U modal
+      setShowB2UModal(true);   
     }
 
     return;
@@ -244,11 +269,12 @@ if (selected.sortRange) {
   className="bestsellers-buy-button"
   onClick={(e) => {
     e.stopPropagation();
-    handleAddToCart(product);
+    handleBuyNow(product);
   }}
 >
   Buy Now
 </button>
+
                   </div>
                 </div>
               </div>

@@ -21,7 +21,6 @@ const ProductPage = () => {
   const [mainImage, setMainImage] = useState("");
   const [selectedColor, setSelectedColor] = useState(""); // new
   const [colorThumbnails, setColorThumbnails] = useState([]);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
     const {
         showB2BModal, setShowB2BModal,
         showB2UModal, setShowB2UModal,
@@ -49,7 +48,7 @@ const ProductPage = () => {
       } catch (error) {
         console.error("Failed to fetch product by slug", error);
         toast.error("Product not found!");
-       // redirect to home or error page
+
       }
     };
     
@@ -88,6 +87,43 @@ const handleColorSelect = (colorName, images) => {
   setSelectedColor(colorName);
   setMainImage(images[0]);
   setColorThumbnails(images.slice(1));
+};
+
+
+const handleBuyNow = async () => {
+  if (user === undefined) {
+    toast.info("Please wait...");
+    return;
+  }
+
+  if (!user || !user._id) {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setShowAuthModal(true);
+    } else {
+      setShowB2UModal(true);
+    }
+    return;
+  }
+
+  try {
+    await axios.post(`${baseURL}/api/cart/addtocart`, {
+      userId: user._id,
+      productId: selectedProduct._id,
+      quantity,
+      size: selectedSize,
+      color: selectedColor || "",
+    });
+
+    await fetchCart(); // optional: update cart context if needed
+
+    // ✅ Navigate to shipping page after adding to cart
+    navigate("/shipping");
+
+  } catch (err) {
+    console.error("Error in Buy Now:", err);
+    toast.error("Something went wrong!");
+  }
 };
 
 
@@ -155,14 +191,6 @@ const handleAddToCart = async () => {
     console.error("Error adding to cart:", err);
   }
 
-   trackEvent('AddToCart', {
-            content_ids: [selectedProduct._id],
-            content_name: selectedProduct.name,
-            content_type: 'product',
-            value: selectedProduct.price,
-            currency: 'INR',
-            quantity: quantity
-        });
 };  
 
   return (
@@ -241,9 +269,15 @@ const handleAddToCart = async () => {
           <button className="quantity-btn" onClick={handleQuantityIncrease}>+</button>
         </div>
 
+    <div  className="two-btn-cart-buy">
         <button className="add-to-cart-btn" onClick={handleAddToCart}>
           Add to Cart
         </button>
+         <button className="add-to-cart-btn  buy-now-btn"  onClick={handleBuyNow}>
+          Buy Now
+        </button>
+    </div>
+    
       </div>
            <ToastContainer position="top-right" autoClose={3000} />
     </div>
