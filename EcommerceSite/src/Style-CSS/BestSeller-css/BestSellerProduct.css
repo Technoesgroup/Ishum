@@ -164,6 +164,25 @@
     background-color:  #BC8F49;;
     cursor: not-allowed;
   }
+
+
+  .empty-product-wrapper {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-product-img {
+  margin-top: 40px;
+  max-width: 250px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.empty-product-message {
+  font-size: 18px;
+  color: #666;
+}
+
   
 
   /* Fancy loader + text styling */
@@ -207,6 +226,13 @@
       gap: 5vw;
       margin-left: 0;
   }
+
+  .empty-product-img {
+    margin-top: 0;
+  max-width: 200px;
+  height: 150px;
+  margin-bottom: 20px;
+}
 
   .Original-Discount-Price{
     display: flex !important;

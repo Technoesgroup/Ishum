@@ -16,6 +16,7 @@ import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useWishlist } from "../ContextHook/WishlistHook";
 import { useModal } from '../ModelContext/ModelContext';
 import { usePixel } from '../FacebookPixel/FB-Pixel';
+import emptyImg from '../../images/15052214-removebg-preview.png';
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductList({
@@ -26,7 +27,6 @@ export default function ProductList({
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
    const {
-      showB2BModal, setShowB2BModal,
       showB2UModal, setShowB2UModal,
       showLoginModal, setShowLoginModal,
       showAuthModal, setShowAuthModal
@@ -176,10 +176,17 @@ if (selected.sortRange) {
 
   return (
     <div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
+   {loading ? (
+  <Loader />
+) : (
+  <>
+    {displayedProducts.length === 0 ? (
+      <div className="empty-product-wrapper">
+        <img src={emptyImg} alt="No products found" className="empty-product-img" />
+        <p className="empty-product-message">No products found.</p>
+      </div>
+    ) : (
+      <>
           <div className="bestsellers-products-grid">
             {displayedProducts.map((product) => (
               <div
@@ -298,7 +305,8 @@ if (selected.sortRange) {
             </button>
           </div>
 
-
+     </>
+    )}
              <ToastContainer position="top-right" autoClose={3000} />
              
         </>
