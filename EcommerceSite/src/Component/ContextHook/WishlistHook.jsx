@@ -67,10 +67,12 @@ const removeFromWishlist = async (productId) => {
   }
 
   try {
-    await axios.delete(`${baseURL}/api/wishlist/remove/${user._id}/${productId}`);
+   await axios.delete(`${baseURL}/api/wishlist/remove/${user._id}/${productId}`);
 
     toast.success("Removed from wishlist!");
-    fetchWishlist(); // refresh list
+
+    // ✅ Refresh wishlist
+    fetchWishlist();
   } catch (error) {
     toast.error("Error removing from wishlist");
     console.error("Wishlist remove error:", error);
@@ -78,8 +80,12 @@ const removeFromWishlist = async (productId) => {
 };
 
 
+
 const toggleWishlist = (product) => {
-  const exists = wishlist.some((item) => item.productId === product._id);
+const exists = wishlist.some(
+  (item) => item.productId === product._id || item.productId._id === product._id
+);
+
 
   if (exists) {
     removeFromWishlist(product._id);

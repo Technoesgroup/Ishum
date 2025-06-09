@@ -28,22 +28,27 @@ const addToWishlist = async (req, res) => {
 };
 
 const removeFromWishlist = async (req, res) => {
-  try {
-    const { userId, productId } = req.body;
+  const { userId, productId } = req.params;
 
-    const result = await Wishlist.updateOne(
+  if (!userId || !productId) {
+    return res.status(400).json({ message: "Missing userId or productId" });
+  }
+
+  try {
+    const updatedWishlist = await Wishlist.findOneAndUpdate(
       { userId },
-      { $pull: { items: { productId: productId } } }
+      { $pull: { items: { productId } } },
+      { new: true }
     );
 
-    if (result.modifiedCount === 0) {
-      return res.status(404).json({ message: 'Product not found in wishlist' });
+    if (!updatedWishlist) {
+      return res.status(404).json({ message: "Wishlist not found" });
     }
 
-    res.status(200).json({ message: 'Removed from wishlist' });
-  } catch (err) {
-    console.error('Error removing from wishlist:', err);
-    res.status(500).json({ message: 'Server error' });
+    return res.status(200).json({ message: "Item removed from wishlist", wishlist: updatedWishlist });
+  } catch (error) {
+    console.error("Error removing from wishlist:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 

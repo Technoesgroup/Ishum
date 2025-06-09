@@ -26,6 +26,11 @@ export default function ProductList({
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const { wishlist, toggleWishlist } = useWishlist();
+const isInWishlist = (productId) =>
+  wishlist?.some((item) => item.productId?._id === productId);
+
+
    const {
       showB2UModal, setShowB2UModal,
       showLoginModal, setShowLoginModal,
@@ -41,6 +46,8 @@ export default function ProductList({
      const { trackEvent } = usePixel();
 
   const userId = user?._id;
+
+  console.log("WISHLIST:", wishlist);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -202,7 +209,18 @@ if (selected.sortRange) {
                 />
 
                     <div className="top-Products-hover-icons">
-                    <FavoriteBorderIcon   onClick={() => addToWishlist(product)}   style={{ cursor: "pointer" }}/>
+     <FavoriteBorderIcon
+  onClick={(e) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+  }}
+  style={{
+    cursor: "pointer",
+    background: isInWishlist(product._id) ? "red" : "white", // 🔴 Red if in wishlist, ⚪ White otherwise
+    transition: "background 0.2s ease",
+  }}
+/>
+
                     <VisibilityIcon   />
                   </div>
 
