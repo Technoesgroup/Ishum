@@ -392,5 +392,28 @@
     .shipping-checkbox-container  h3{
       text-align: left;
     }
+
+
+     .modal-content-address {
+    width: 80%;
+    padding: 15px;
+    max-height: 70vh;
+  }
+
+  .address-box {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .new-address-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .modal-overlay-address {
+    align-items: flex-start;
+    padding-top: 50px; /* Slight top space for mobile */
+  }
   }
   

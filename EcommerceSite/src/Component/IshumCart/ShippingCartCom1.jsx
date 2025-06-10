@@ -169,7 +169,7 @@ const handleContinue = async () => {
             setShowAddressSelector(false);
           }}
         >
-          <p><strong>{address.shippingMethod === "home" ? "🏠 Home" : "🏢 Office"}</strong></p>
+          <p><strong>{address.shippingMethod === "home" ? "Home" : "Office"}</strong></p>
           <p>{address.firstName} {address.lastName}</p>
           <p>{address.House}, {address.street}, {address.city}, {address.state} - {address.zipCode}</p>
           <p>Phone: {address.phone}</p>
