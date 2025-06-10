@@ -1,10 +1,10 @@
 const express = require("express");
-const { saveShipping, getShipping, updateShipping } = require("../Controller/ShippingController");
+const { saveShipping, getShippingByUser, updateShipping } = require("../Controller/ShippingController");
 
 const router = express.Router();
 
 router.post("/", saveShipping);
-router.get("/:userId", getShipping);
+router.get("/:userId", getShippingByUser);
 router.put("/:userId", updateShipping);
 
 module.exports = router;

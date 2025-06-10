@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
-  padding: 2rem  5vw;
+  padding: 20px  3rem;
     overflow-x: auto;
   scroll-behavior: smooth;
   flex-wrap: nowrap; /* prevent wrapping */
@@ -19,7 +19,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2vw;
+  margin: auto;
+  max-width: 1400px;
+  padding: 60px 0;
   gap: 1rem;
 }
 
@@ -32,7 +34,7 @@
 .LandingComp2-card {
   flex: 0 0 auto;
   width: 300px;
-  height: 30vw; /* Fixed height for consistency */
+  height: 460px; /* Fixed height for consistency */
   overflow: hidden;
   border-radius: 8px;
   transition: transform 0.3s ease;

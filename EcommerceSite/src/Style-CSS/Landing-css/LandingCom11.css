@@ -1,7 +1,9 @@
 @import url('../Poppins-Font.css');
 
 .articles-wrapper {
-  padding: 60px 5vw;
+  margin: auto;
+  max-width: 1420px;
+  padding: 20px;
   background: #EEEBE4;
   font-family: 'Segoe UI', sans-serif;
   position: relative;

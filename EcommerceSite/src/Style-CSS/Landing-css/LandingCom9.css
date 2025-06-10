@@ -2,7 +2,9 @@
 
 .Com9-new-arrivals-container {
   margin-top: 30px;
-    padding: 40px 6vw;
+  margin: auto;
+  max-width: 1420px;
+  padding: 20px;
     background-color: #EEEBE4;
   }
   

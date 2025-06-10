@@ -12,6 +12,7 @@ import Comp4 from "../Component/Landing/LandingCom4";
 import Comp5 from "../Component/Landing/LandingCom5";
 import Comp6 from "../Component/Landing/LandingCom6";
 import Comp7 from "../Component/Landing/LandingCom7";
+import Comp12 from "../Component/Landing/LandingCom12";
 import Comp8 from "../Component/Landing/LandingCom8";
 import Comp9 from "../Component/Landing/LandingCom9";
 import Comp10 from "../Component/Landing/LandingCom10";
@@ -39,7 +40,7 @@ const Landing = () => {
 
   return (
     <div className="Landing-Components">
-      {[Comp1, Comp2, Comp4, Comp5, Comp7, Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
+      {[Comp1, Comp2, Comp4, Comp5, Comp7,  Comp12, Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
         (Component, index) => (
           <motion.div
             key={index}

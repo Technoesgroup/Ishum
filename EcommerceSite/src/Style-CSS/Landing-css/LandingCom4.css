@@ -1,7 +1,9 @@
 @import url('../Poppins-Font.css');
 
 .LandingCom4-trending-section {
-  padding: 20px  5vw;
+  margin: auto;
+  max-width: 1420px;
+  padding: 20px;
   font-family: Arial, sans-serif;
 }
 

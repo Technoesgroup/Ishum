@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import "../../Style-CSS/IshumCart-css/ShippingCartCom1.css";
@@ -21,6 +21,9 @@ export default function ShippingStep() {
   const { user } = useAuth(); // Getting the user from context
   const [activeStep, setActiveStep] = useState("location");
   const [showOverlay, setShowOverlay] = useState(false);
+  const [savedAddresses, setSavedAddresses] = useState([]);
+const [showAddressSelector, setShowAddressSelector] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -59,6 +62,29 @@ export default function ShippingStep() {
     });
   };
   
+
+  useEffect(() => {
+  const fetchSavedAddresses = async () => {
+    if (!user || !user._id) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${baseURL}/api/shipping/${user._id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data.length > 0) {
+        setSavedAddresses(response.data);
+        setShowAddressSelector(true);
+      }
+    } catch (err) {
+      console.error("Error fetching saved addresses", err);
+    }
+  };
+
+  fetchSavedAddresses();
+}, [user]);
+
 
 const handleContinue = async () => {
   if (!user || !user._id) {
@@ -115,6 +141,47 @@ const handleContinue = async () => {
       </div>
 
       <h2 className="shipping-title">Shipping</h2>
+
+      {showAddressSelector && savedAddresses.length > 0 && (
+  <div className="modal-overlay-address">
+    <div className="modal-content-address">
+      <h3>Select a Saved Address</h3>
+      {savedAddresses.map((address, index) => (
+        <div
+          key={index}
+          className="address-box"
+          onClick={() => {
+            setFormData({
+              ...formData,
+              firstName: address.firstName,
+              lastName: address.lastName,
+              House: address.House,
+              street: address.street,
+              city: address.city,
+              state: address.state,
+              zipCode: address.zipCode,
+              phone: address.phone,
+              altPhone: address.altPhone || "",
+              shippingMethod: address.shippingMethod,
+              couponCode: "",
+              copyAddress: false,
+            });
+            setShowAddressSelector(false);
+          }}
+        >
+          <p><strong>{address.shippingMethod === "home" ? "🏠 Home" : "🏢 Office"}</strong></p>
+          <p>{address.firstName} {address.lastName}</p>
+          <p>{address.House}, {address.street}, {address.city}, {address.state} - {address.zipCode}</p>
+          <p>Phone: {address.phone}</p>
+        </div>
+      ))}
+      <button className="new-address-btn" onClick={() => setShowAddressSelector(false)}>
+      Add New Address
+      </button>
+    </div>
+  </div>
+)}
+
 
       <div className="Content-of-Shipping">
         <div className="shipping-form-grid">

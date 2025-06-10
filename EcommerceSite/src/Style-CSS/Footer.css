@@ -4,7 +4,9 @@
 .footer-container {
     background-color:#EEEBE4;
     margin-top: 80px;
-    padding: 3vw 7vw;
+  margin: auto;
+  max-width: 1420px;
+  padding: 20px;
     font-family: Arial, sans-serif;
   }
   

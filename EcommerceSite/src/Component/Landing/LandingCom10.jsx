@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Style-CSS/Landing-css/LandingCom10.css';
-import brideImg from '../../images/b7c0458edce18027db5028842fd3cc17.png'; // Keep this as is or replace with related image
+import brideImg from '../../images/b7c0458edce18027db5028842fd3cc17-removebg-preview.png'; // Keep this as is or replace with related image
 import { useNavigate } from 'react-router-dom';
 
 const PersonalistSection = () => {

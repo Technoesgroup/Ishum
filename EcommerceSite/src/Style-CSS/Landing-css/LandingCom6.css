@@ -1,8 +1,8 @@
 @import url('../Poppins-Font.css');
 .collection-container {
-  max-width: 90vw;
   margin: auto;
-  padding: 16px  3vw;
+  max-width: 1420px;
+  padding: 20px;
 }
 
 .collection-grid {

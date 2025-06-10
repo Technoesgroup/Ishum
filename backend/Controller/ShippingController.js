@@ -10,14 +10,21 @@ const saveShipping = async (req, res) => {
     }
 };
 
-const getShipping = async (req, res) => {
-    try {
-        const shipping = await Shipping.findOne({ userId: req.params.userId });
-        if (!shipping) return res.status(404).json({ message: "Not found" });
-        res.status(200).json(shipping);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+const getShippingByUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const shippingAddresses = await Shipping.find({ userId });
+
+    if (!shippingAddresses || shippingAddresses.length === 0) {
+      return res.status(404).json({ message: "No shipping addresses found" });
     }
+
+    res.status(200).json(shippingAddresses);
+  } catch (error) {
+    console.error("Error fetching shipping addresses:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 const updateShipping = async (req, res) => {
@@ -35,7 +42,7 @@ const updateShipping = async (req, res) => {
 
 module.exports = {
     saveShipping,
-    getShipping,
+    getShippingByUser,
     updateShipping,
 };
 
