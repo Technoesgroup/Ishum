@@ -12,6 +12,8 @@ const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
   const [loading, setLoading] = useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ const TrendingProducts = () => {
     <div className="LandingCom4-trending-section">
       <h2>Trending Best Selling Products</h2>
       <div className="LandingCom4-product-slider">
-        {products.map((product) => { // ✅ check if in wishlist
+        {products.map((product ,  index) => { // ✅ check if in wishlist
 
           return (
             <div key={product._id} className="LandingCom4-product-card">
@@ -66,7 +68,10 @@ const TrendingProducts = () => {
                 <span className="LandingCom4-badge best">BEST SELLER</span>
               )}
 
-              <div className="LandingCom4-product-img-wrapper">
+              <div className="LandingCom4-product-img-wrapper"  
+                onMouseEnter={() => setHoveredIndex(index)}
+  onMouseLeave={() => setHoveredIndex(null)}
+  >
                 {!loadedImages[product._id] && (
                   <img
                     src="/placeholder.jpg"
@@ -74,19 +79,32 @@ const TrendingProducts = () => {
                     className="placeholder-img"
                   />
                 )}
-                <img
-                  onClick={(e) => handleProductClick(product, e)}
-                  loading="lazy"
-                  src={`${baseURL}/uploads/${product.image}`}
-                  alt={product.name}
-                  className={`LandingCom4-product-img ${loadedImages[product._id] ? 'loaded' : 'loading'}`}
-                  onLoad={() =>
-                    setLoadedImages((prev) => ({
-                      ...prev,
-                      [product._id]: true
-                    }))
-                  }
-                />
+<img
+  onClick={(e) => handleProductClick(product, e)}
+  loading="lazy"
+  src={
+    hoveredIndex === index &&
+    product.thumbnails &&
+    product.thumbnails.length > 1
+      ? `${baseURL}/uploads/${
+          product.thumbnails[1] ||
+          product.thumbnails[2] ||
+          product.thumbnails[3] ||
+          product.thumbnails[0]
+        }`
+      : `${baseURL}/uploads/${product.image}`
+  }
+  alt={product.name}
+
+  onLoad={() =>
+    setLoadedImages((prev) => ({
+      ...prev,
+      [product._id]: true
+    }))
+  }
+  onError={(e) => (e.target.src = "/fallback-image.png")}
+/>
+
 
           <div className="LandingCom4-hover-icons">
   <FavoriteBorderIcon

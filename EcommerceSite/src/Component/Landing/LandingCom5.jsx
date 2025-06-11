@@ -10,6 +10,7 @@ import { useWishlist } from "../ContextHook/WishlistHook";
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
 const { wishlist, toggleWishlist } = useWishlist();
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
@@ -65,28 +66,41 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
       {Object.keys(groupedByCategory).map((categoryName) => (
         <div key={categoryName} className="LandingCom4-category-section">
           <div className="LandingCom4-product-slider">
-            {groupedByCategory[categoryName].map((product) => (
+            {groupedByCategory[categoryName].map((product,  index) => (
               <div key={product._id} className="LandingCom4-product-card">
-                <div className="LandingCom4-product-img-wrapper">
+                <div className="LandingCom4-product-img-wrapper" 
+  onMouseEnter={() => setHoveredIndex(index)}
+  onMouseLeave={() => setHoveredIndex(null)}
+  >
                   {!loadedImages[product._id] && (
                     <div className="image-placeholder skeleton-loader"></div>
                   )}
 
-                  <img
-                   onClick={() => handleProductClick(product)}
-                    // loading="lazy"
-                     src={`${baseURL}/uploads/${product.image}`} 
-                    alt={product.name}
-                    style={{
-                      display: loadedImages[product._id] ? "block" : "none"
-                    }}
-                    onLoad={() =>
-                      setLoadedImages((prev) => ({
-                        ...prev,
-                        [product._id]: true
-                      }))
-                    }
-                  />
+  <img
+  onClick={(e) => handleProductClick(product, e)}
+  loading="lazy"
+  src={
+    hoveredIndex === index &&
+    product.thumbnails &&
+    product.thumbnails.length > 1
+      ? `${baseURL}/uploads/${
+          product.thumbnails[1] ||
+          product.thumbnails[2] ||
+          product.thumbnails[3] ||
+          product.thumbnails[0]
+        }`
+      : `${baseURL}/uploads/${product.image}`
+  }
+  alt={product.name}
+
+  onLoad={() =>
+    setLoadedImages((prev) => ({
+      ...prev,
+      [product._id]: true
+    }))
+  }
+  onError={(e) => (e.target.src = "/fallback-image.png")}
+/>
 
                   <div className="LandingCom4-hover-icons">
                     <FavoriteBorderIcon

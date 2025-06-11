@@ -27,6 +27,8 @@ export default function ProductList({
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const { wishlist, toggleWishlist } = useWishlist();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  
 const isInWishlist = (productId) =>
   wishlist?.some((item) => item.productId?._id === productId);
 
@@ -220,18 +222,30 @@ if (selected.sortRange) {
     ) : (
       <>
           <div className="bestsellers-products-grid">
-            {displayedProducts.map((product) => (
+            {displayedProducts.map((product ,index) => (
               <div
                 key={product._id}
                 className="bestsellers-product-card"
                 onClick={(e) => handleProductClick(product, e)}
+                 onMouseEnter={() => setHoveredIndex(index)}
+                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img
-                  loading="lazy"
-                  src={`${baseURL}/uploads/${product.image}`}
-                  alt={product.name}
-                  className="bestsellers-product-image"
-                />
+  className="bestsellers-product-image"
+  loading="lazy"
+  src={
+    hoveredIndex === index &&
+    product.thumbnails &&
+    product.thumbnails.length > 1
+      ? `${baseURL}/uploads/${
+          product.thumbnails[1] || product.thumbnails[2] || product.thumbnails[3] || product.thumbnails[0]
+        }`
+      : `${baseURL}/uploads/${product.image}`
+  }
+  alt={product.name}
+  onError={(e) => (e.target.src = "/fallback-image.png")}
+/>
+          
 
                     <div className="top-Products-hover-icons">
    <FavoriteBorderIcon

@@ -12,6 +12,8 @@ const Collection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   const collectionName = "NOOR";
   const navigate = useNavigate();
   const { wishlist, toggleWishlist } = useWishlist();
@@ -78,19 +80,36 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
       ) : (
         <div className="collection-grid">
       {products.map((product, index) => (
-  <div
-    key={index}
-    className="product-card"
-    onClick={(e) => handleProductClick(product, e)}
-    style={{ cursor: "pointer" }}
-  >
+<div
+  key={index}
+  className="product-card"
+  onClick={(e) => handleProductClick(product, e)}
+  onMouseEnter={() => setHoveredIndex(index)}
+  onMouseLeave={() => setHoveredIndex(null)}
+  style={{ cursor: "pointer" }}
+>
+
     <div className="product-img-wrapper">
-      <img
-      loading="lazy"
-        src={`${baseURL}/uploads/${product.image}`}
-        alt={product.name}
-        onError={(e) => (e.target.src = "/fallback-image.png")}
-      />
+<img
+  loading="lazy"
+  src={
+    hoveredIndex === index &&
+    product.thumbnails &&
+    product.thumbnails.length > 1
+      ? `${baseURL}/uploads/${
+          product.thumbnails[1] || product.thumbnails[2] || product.thumbnails[3] || product.thumbnails[0]
+        }`
+      : `${baseURL}/uploads/${product.image}`
+  }
+  alt={product.name}
+  onError={(e) => (e.target.src = "/fallback-image.png")}
+/>
+
+
+
+
+
+
       <div className="LandingpageComp-hover-icons">
       <FavoriteBorderIcon
         onClick={(e) => {
