@@ -12,7 +12,7 @@
   font-family: "PoppinsRegular";
   font-size: 2rem;
   margin-bottom: 30px;
-  padding: 20px 0;
+  padding: 15px 0;
   letter-spacing: 1.6px;
 }
 
@@ -23,16 +23,19 @@
   position: relative;
   flex-wrap: nowrap;
   overflow: hidden;
+    scroll-snap-type: x mandatory;
 }
 
 .carousel-item {
   width: 280px;
+    flex-shrink: 0;
   height: 500px;
   margin: 0 2px;
   transition: transform 0.4s ease, opacity 0.4s ease;
   overflow: hidden;
   border-radius: 20px;
   cursor: pointer;
+    scroll-snap-align: center;
   flex-shrink: 0;
 }
 
@@ -73,8 +76,28 @@
 }
 
 .video-player {
+    position: relative;
   border-radius: 15px;
 }
+
+.mute-toggle-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: rgb(14, 14, 14);
+  font-size: 1rem;
+  padding: 5px 8px;
+  background-color: rgba(229, 229, 229, 0.893);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.carousel-item {
+  position: relative; /* necessary to position mute icon inside */
+}
+
 
 /* ----------------- Mobile Responsive ----------------- */
 @media screen and (max-width: 768px) {
@@ -102,14 +125,23 @@
     transform: scale(1);
   }
 
-  .carousel-item.side {
-    transform: scale(0.8);
-    opacity: 0.4;
-  }
-
   .arrow {
     font-size: 20px;
     padding: 6px;
   }
+
+    .carousel-item.side {
+    margin: 0 10px;
+   transform: scale(0.8);
+    opacity: 0.4;
+  }
+
+.carousel-item.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  visibility: hidden;
+}
+
 }
 
