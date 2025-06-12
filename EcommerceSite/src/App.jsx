@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import FilledCart from './Component/IshumCart/FilledCart';
 import Navbar from './Component/Navbar';
@@ -31,6 +31,7 @@ import PaymentServices from './Component/AllPolicies/PaymentStatement';
 import { useAuth } from './ContextApiCart/LoginContextApi'; 
 import  ModalLayout  from './Component/ModelContext/ModelLayout';
 import { useModal } from './Component/ModelContext/ModelContext';
+import MetaPixel from './Component/FacebookPixel/FB-Pixel';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,8 @@ const [hasScrolled, setHasScrolled] = useState(false);
       showLoginModal, setShowLoginModal,
       showAuthModal, setShowAuthModal
     } = useModal();
+
+const location = useLocation();
 
 useEffect(() => {
   const handleScroll = () => {
@@ -102,7 +105,8 @@ useEffect(() => {
   }
 
   return (
-    <Router>
+    <>
+      <MetaPixel location={location} />
       <ScrollToTop />
       <Navbar />
       <ModalLayout />
@@ -132,7 +136,7 @@ useEffect(() => {
         <Route path="/TearmsServices" element={<TearmsServices />} />
       </Routes>
       <Footer />
-    </Router>
+      </>
   );
 }
 

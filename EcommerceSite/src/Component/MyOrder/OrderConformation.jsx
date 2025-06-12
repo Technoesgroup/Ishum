@@ -3,13 +3,11 @@ import "./OrderConformation.css";
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../ContextApiCart/LoginContextApi";
-import { usePixel } from "../../Component/FacebookPixel/FB-Pixel";
 import axios from "axios";
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { trackEvent } = usePixel(); 
   const [shipping, setShipping] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(null);
 
@@ -40,33 +38,10 @@ const OrderConfirmation = () => {
           .then((res) => setShipping(res.data))
           .catch((err) => console.error("Shipping fetch error:", err));
       }
-
-      // ✅ Track Facebook Purchase event
-      const storedOrder = localStorage.getItem("orderData");
-      if (storedOrder) {
-        const order = JSON.parse(storedOrder);
-        if (order?.cartItems?.length > 0) {
-          trackEvent("Purchase", {
-            content_ids: order.cartItems.map(item => item.productId),
-            content_type: "product",
-            value: order.totalPrice,
-            currency: "INR",
-            contents: order.cartItems.map(item => ({
-              id: item.productId,
-              quantity: item.quantity,
-              item_price: item.price
-            }))
-          });
-        }
-      }
+    
     }
 
-
-      window.fbq('track', 'Purchase', {
-    value: 1000.00,
-    currency: 'INR',
-  });
-  }, [user, navigate, trackEvent]);
+  }, [user, navigate]);
 
   // 🕐 Prevent rendering before confirmation
   if (isConfirmed === null) return null;

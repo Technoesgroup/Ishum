@@ -15,7 +15,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useWishlist } from "../ContextHook/WishlistHook";
 import { useModal } from '../ModelContext/ModelContext';
-import { usePixel } from '../FacebookPixel/FB-Pixel';
 import emptyImg from '../../images/15052214-removebg-preview.png';
 const PRODUCTS_PER_PAGE = 6;
 

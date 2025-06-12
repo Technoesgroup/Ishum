@@ -8,7 +8,6 @@ import {  useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../ContextApiCart/LoginContextApi"; // Importing useAuth hook
 import { useNavigate } from "react-router-dom";
-import { usePixel } from '../FacebookPixel/FB-Pixel';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +20,6 @@ export default function ShippingCartCom2({ onClose }) {
     const [activeStep, setActiveStep] = useState("wallet");
     const [loadingAfterPayment, setLoadingAfterPayment] = useState(false);
     const [agreedToTerms, setAgreedToTerms] = useState(false);
-      const { trackEvent } = usePixel();
 
     
     const baseURL = import.meta.env.VITE_API_BASE_URL;

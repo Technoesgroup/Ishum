@@ -9,7 +9,6 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useModal } from '../ModelContext/ModelContext';
-import { usePixel } from '../FacebookPixel/FB-Pixel';
 
 
 const ProductPage = () => {
@@ -28,7 +27,6 @@ const ProductPage = () => {
         showAuthModal, setShowAuthModal
       } = useModal();
    const { fetchCart } = useCart();
-    const { trackEvent } = usePixel();
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
