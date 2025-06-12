@@ -4,7 +4,7 @@ import img_1 from '../../images/1746684364723-238174622.jpg';
 import img_2 from '../../images/1746685994043-507831531.jpg';
 import img_3 from '../../images/1746608536944-880351628.jpg';
 import img4 from '../../images/1746615607071-494434453.jpg';
-import img5 from '../../images/2bb31e35a92274a88a834fcc1e2e496d.png';
+import img5 from '../../images/WhatsApp Image 2025-06-02 at 13.42.12_97244719.jpg';
 
 const products = [
   {
