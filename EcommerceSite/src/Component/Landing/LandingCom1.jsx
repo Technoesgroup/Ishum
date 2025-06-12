@@ -8,7 +8,7 @@ import heroImg1 from "../../images/Banner1.png";
 import heroImg2 from "../../images/Banner4.png";
 import heroImg3 from "../../images/Banner9.png";
 import heroImg4 from "../../images/lace (430 x 645 px) (1).png";
-import heroImg5 from "../../images/Banner5.png";
+import heroImg5 from "../../images/emr (430 x 645 px).png";
 import heroImg6 from "../../images/Banner3.png";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
