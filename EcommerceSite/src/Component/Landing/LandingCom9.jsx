@@ -12,14 +12,15 @@ const products = [
     image: img_1, 
     title: "NOOR Collection: Graceful chikankari in pastel hues, perfect for festive elegance.",
     rating: 4,
-    link: "/viewproduct/noor-noir-embroidered-straight-suit-in-cotton-muslin"
+      link: "/viewproduct/noorani-heritage-a-line-suit-set-in-cotton-muslin"
+   
   },
   {
     id: 2,
     image: img_2,
     title: "NOOR Edition: Elegant embroidery with modern silhouettes for a timeless look.",
     rating: 4,
-    link: "/viewproduct/noorani-heritage-a-line-suit-set-in-cotton-muslin"
+   link: "/viewproduct/noor-noir-embroidered-straight-suit-in-cotton-muslin"
   },
   {
     id: 3,
