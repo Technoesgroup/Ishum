@@ -24,6 +24,9 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
+  console.log("CartItems:", cartItems);
+
+
   const fetchCart = async () => {
     if (!userId) return;
     try {

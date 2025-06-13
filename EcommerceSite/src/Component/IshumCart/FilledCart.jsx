@@ -45,8 +45,7 @@ const CartItem = ({ id, image, title, price, size, color, quantity, onIncrease, 
 
 const Cartitem = () => {
   const navigate = useNavigate();
-  const { userId } = useCart();
-  const [cartItems, setCartItems] = useState([]);
+const { userId, fetchCart, cartItems, setCartItems } = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -54,34 +53,25 @@ const Cartitem = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
 
+ useEffect(() => {
+  if (!userId) return;
 
-  useEffect(() => {
-    if (!userId) return; // If userId is not available, don't fetch cart
+  const fetchSimilarProducts = async () => {
+    try {
+      const res = await axios.get(`${baseURL}/api/products/get-product`);
+      setProducts(res.data.products.slice(0, 3));
+    } catch (err) {
+      console.error("Error fetching similar products:", err);
+    }
+  };
 
-    const fetchCart = async () => {
-      try {
-        const res =  await axios.get(`${baseURL}/api/cart/${userId}`);
-        // console.log("Backend Cart Data:", res.data);
-        setCartItems(res.data.cartItems || []); // Ensure cartItems are updated properly
-      } catch (err) {
-        console.error("Error fetching cart:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  fetchCart();
+  fetchSimilarProducts();
 
-    const fetchSimilarProducts = async () => {
-      try {
-        const res =await axios.get(`${baseURL}/api/products/get-product`);
-        setProducts(res.data.products.slice(0, 3));
-      } catch (err) {
-        console.error("Error fetching similar products:", err);
-      }
-    };
+  // ✅ Loading false after fetch
+  setLoading(false);
+}, [userId]);
 
-    fetchCart();
-    fetchSimilarProducts();
-  }, [userId]); 
 
 
   const handleAddToCart = async (product) => {
@@ -104,6 +94,7 @@ const Cartitem = () => {
   const handleRemove = async (id) => {
     try {
       await axios.delete(`${baseURL}/api/cart/${userId}/${id}`)
+         await fetchCart();
       setCartItems((prev) => prev.filter(item => item.productId.toString() !== id));
     } catch (err) {
       console.error("Error removing item:", err);
