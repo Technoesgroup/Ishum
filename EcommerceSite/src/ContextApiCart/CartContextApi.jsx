@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  console.log("CartItems:", cartItems);
+  // console.log("CartItems:", cartItems);
 
 
   const fetchCart = async () => {

@@ -20,7 +20,7 @@ const ReviewCardList = () => {
       try {
         const res = await axios.get(`${baseURL}/api/get-reviews/${productId}`);
 
-        console.log("📦 Reviews Fetched:", res.data);
+        // console.log("📦 Reviews Fetched:", res.data);
         setReviews(res.data);
       } catch (error) {
         console.error('Failed to fetch reviews', error);
