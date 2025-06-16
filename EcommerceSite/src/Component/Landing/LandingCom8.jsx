@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../Style-CSS/Landing-css/LandingCom6.css";
-import img_b1 from '../../images/image27.svg';
+// import img_b1 from '../../images/image27.svg';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -116,7 +116,7 @@ return (
         ))}
 
         <div className="Ishum-banner-card">
-          <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" />
+          {/* <img src={img_b1} alt="Banner" className="Ishum-bannner-card-img" /> */}
           <div className="Ishum-banner-content">
             <button
               className="Ishum-banner-button"

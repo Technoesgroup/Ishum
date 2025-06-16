@@ -9,13 +9,14 @@ import V2 from "../../images/SaveClip.App_AQPUmbpCy5q_gGu_6uzrO6hUd2sGAub_ACJlhI
 import V3 from "../../images/SaveClip.App_AQPxm9QIsh7Fg9tfp6EuiGeTIzHNCTkkJxOJWlNhQ-IZyS0MCXP_zhlnvFoIfSYJvtbzBZ3Qid-fhtypY5pUXu7C40999YcYx0LGJUs.mp4";
 import V4 from "../../images/SaveClip.App_AQPtpNTxbN7ibyTm_Cs7fEwVidlB6T2COnoOFP5y9ZMYtL2EstZqAnVfoYiwF0eoBesWcIv1JmEYxPZ3_AkEJaqLEjppgbOqy8SNywA.mp4";
 import V5 from "../../images/V5.mp4";
+import V6 from "../../images/top-video.mp4";
 
 const videoData = [
   { url: V1, link: "https://www.instagram.com/reel/DKPR-yCTrf0/" },
-  { url: V2, link: "https://www.instagram.com/reel/DKMqPWpzi05/" },
+  { url: V6, link: "https://www.instagram.com/reel/DKMqPWpzi05/" },
+  { url: V2, link: "https://www.instagram.com/reel/DJ3VHWYz9jN/" },
+  { url: V4, link: "https://www.instagram.com/reel/DJ3VHWYz9jN/" },
   { url: V3, link: "https://www.instagram.com/reel/DJ3VHWYz9jN/" },
-  { url: V4, link: "https://www.instagram.com/reel/DJ3VHWYz9jN/" },
-  { url: V4, link: "https://www.instagram.com/reel/DJ3VHWYz9jN/" },
   { url: V5, link: "https://www.instagram.com/reel/DJ3VHWYz9jN/" },
 ];
 
