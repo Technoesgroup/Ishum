@@ -137,9 +137,6 @@ const getProducts = async (req, res) => {
       }
     }
     
-    
-    
-    
 
     if (req.query.minPrice && req.query.maxPrice) {
       filters.price = {
@@ -158,6 +155,113 @@ const getProducts = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch products", error });
   }
 };
+
+
+const getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+    res.status(200).json({ success: true, product });
+  } catch (error) {
+    console.error("Error fetching product by ID:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
+
+const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const {
+      name,
+      category,
+      subcategory,
+      color,
+      discount,
+      price,
+      description,
+      size,
+      availability,
+      collectionName,
+      isBestseller,
+      isExclusive,
+      isIshumStore,
+    } = req.body;
+
+    const updateFields = {
+      ...(name && { name }),
+      ...(category && { category }),
+      ...(subcategory && { subcategory }),
+      ...(color && { color }),
+      ...(discount && { discount }),
+      ...(price && { price }),
+      ...(description && { description }),
+      ...(size && { size }),
+      ...(availability !== undefined && { availability: availability === "true" || availability === true }),
+      ...(isBestseller !== undefined && { isBestseller: isBestseller === "true" || isBestseller === true }),
+      ...(isExclusive !== undefined && { isExclusive: isExclusive === "true" || isExclusive === true }),
+      ...(isIshumStore !== undefined && { isIshumStore: isIshumStore === "true" || isIshumStore === true }),
+    };
+
+    // Handle collection name (if sent)
+    if (collectionName) {
+      const found = await Collection.findOne({ title: new RegExp(collectionName, "i") });
+      if (found) updateFields.collectionName = found._id;
+    }
+
+    // Main image
+    if (req.files?.['image']?.[0]) {
+      updateFields.image = req.files['image'][0].filename;
+    }
+
+    // Thumbnails
+    if (req.files?.['thumbnails']) {
+      updateFields.thumbnails = req.files['thumbnails'].map(file => file.filename);
+    }
+
+    // Color images
+    const uploadedColorImages = req.files?.['colorImages'] || [];
+    const colorNames = req.body?.['colorNames'] || [];
+    const colorImages = [];
+
+    if (Array.isArray(colorNames) && colorNames.length !== uploadedColorImages.length) {
+      return res.status(400).json({
+        success: false,
+        message: "Color names and images count mismatch.",
+      });
+    }
+
+    for (let i = 0; i < uploadedColorImages.length; i++) {
+      const file = uploadedColorImages[i];
+      const colorName = Array.isArray(colorNames) ? colorNames[i] : colorNames;
+      if (file && colorName) {
+        colorImages.push({
+          image: file.filename,
+          colorName: colorName,
+        });
+      }
+    }
+
+    if (colorImages.length > 0) {
+      updateFields.colorImages = colorImages;
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(id, updateFields, { new: true });
+
+    if (!updatedProduct) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Product updated successfully", product: updatedProduct });
+  } catch (error) {
+    console.error("Error in updateProduct:", error);
+    res.status(500).json({ success: false, message: "Failed to update product", error: error.message });
+  }
+};
+
 
 
 
@@ -211,7 +315,9 @@ module.exports = {
   addProduct,
   searchProducts,
   getProducts,
-  getProductBySlug
+  getProductBySlug,
+  updateProduct,
+  getProductById
 };
 
 

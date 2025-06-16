@@ -6,6 +6,8 @@ import Sidebar from './Components/Basics/Sidebar';
 import './CSS/Styles.css';
 import ManageCollection from './Components/Products/ManageCollection';
 import AddProduct from './Components/Products/AddProduct'; 
+import ProductList from './Components/Products/ManageProduct';
+import EditProduct from './Components/Products/EditProduct';
 
 
 const App = () => {
@@ -19,7 +21,8 @@ const App = () => {
             <Route path="/" element={<OrdersDashboard />} />
             <Route path="/manage-collection" element={<ManageCollection />} />
             <Route path="/products/add-product" element={<AddProduct />} /> 
-
+            <Route path="/manage-products" element={<ProductList />} />
+            <Route path="/edit-product/:id" element={<EditProduct />} />
 
           </Routes>
         </div>
