@@ -262,6 +262,28 @@ const updateProduct = async (req, res) => {
   }
 };
 
+const getSimilarProducts = async (req, res) => {
+  try {
+    const { subcategory, name } = req.query; // ❌ category removed
+
+    if (!subcategory || !name) {
+      return res.status(400).json({ error: "Missing parameters" });
+    }
+
+    const query = {
+      subcategory,
+      name: { $ne: name } // Exclude the current product
+    };
+
+    const products = await Product.find(query).limit(8);
+    res.status(200).json({ products });
+
+  } catch (error) {
+    console.error("Error fetching similar products:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 
 
 
@@ -317,7 +339,8 @@ module.exports = {
   getProducts,
   getProductBySlug,
   updateProduct,
-  getProductById
+  getProductById,
+  getSimilarProducts
 };
 
 
