@@ -4,7 +4,7 @@ const Product = require('../models/ProductSchema');  // Assuming you have a Prod
 
 const getAllReviews = async (req, res) => {
   const { productId } = req.params;
-  console.log("➡️ API HIT: productId =", productId);
+  // console.log("➡️ API HIT: productId =", productId);
   try {
     const reviews = await Review.find({ productId });
     res.json(reviews);
@@ -26,7 +26,7 @@ const createReview = async (req, res) => {
     // console.log("Received productId from req.body:", productId);
     // console.log("Received userId from req.body:", userId);
 
-    console.log(req.body); 
+    // console.log(req.body); 
 
     if (!productId) {
       return res.status(400).json({ message: 'Product ID is required' });
@@ -39,7 +39,7 @@ const createReview = async (req, res) => {
 
     // Step 2: Check if the product exists in the database
     const product = await Product.findById(productId);
-    console.log('Received productId from req.body:', productId);
+    // console.log('Received productId from req.body:', productId);
 
     // If product not found, return a 404 error
     if (!product) {

@@ -32,7 +32,7 @@ const TrendingProducts = () => {
     const fetchSimilarProducts = async () => {
       if (!selectedProduct) return;
 
-      console.log("selectedProduct: ", selectedProduct);
+    //   console.log("selectedProduct: ", selectedProduct);
 
       try {
         const res = await axios.get(`${baseURL}/api/products/similar`, {

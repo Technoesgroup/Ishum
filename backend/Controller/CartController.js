@@ -80,7 +80,7 @@ exports.getCart = async (req, res) => {
   
     try {
       const cart = await Cart.findOne({ userId });
-      console.log("Cart found:", cart); // ✅ log fetched cart
+      // console.log("Cart found:", cart); 
       if (!cart) return res.status(404).json({ message: 'Cart not found' });
   
       res.status(200).json({ cartItems: cart.items });
