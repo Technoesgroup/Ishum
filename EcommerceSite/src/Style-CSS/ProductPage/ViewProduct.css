@@ -216,9 +216,10 @@
   }
 
   .product-gallery {
-    flex-direction: row;
+    flex-direction: column-reverse;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: start;
+    justify-content:flex-start;
   }
 
   .thumbnail-images {

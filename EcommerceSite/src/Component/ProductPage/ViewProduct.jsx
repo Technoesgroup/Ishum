@@ -212,6 +212,8 @@ const handleAddToCart = async () => {
         <img  loading="lazy" src={`${baseURL}/uploads/${mainImage || selectedProduct.image}`} alt="product image" />
 
         </div>
+
+        
       </div>
 
       <div className="product-details">
