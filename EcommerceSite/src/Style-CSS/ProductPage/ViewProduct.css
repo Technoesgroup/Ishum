@@ -247,7 +247,7 @@
   .product-page {
     flex-direction: column;
     align-items: center;
-    padding: 40px 4vw;
+    padding: 20px 4vw;
   }
 
   .product-page {
@@ -275,7 +275,7 @@
 
   .free-del-icon{
     gap: 4px;
-  font-size: 0.5rem;
+  font-size: 0.54rem;
   align-items: start;
 }
 
@@ -284,6 +284,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .free-icon{
