@@ -161,9 +161,10 @@
 }
 
 .quantity-btn {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   background-color: white;
+  border-radius: 5px;
   border: 1px solid gray;
   cursor: pointer;
   font-size: 20px;
@@ -196,6 +197,37 @@
 .buy-now-btn:hover{
    border: 2px solid rgb(85, 85, 85) !important;
   background-color: rgb(109, 109, 109) !important;
+}
+
+.delivery-details{
+  padding: 6px 0;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+.free-del-icon{
+  display: flex;
+  text-align: justify;
+  font-size: 0.7rem;
+  align-items: start;
+  gap: 6px;
+  flex-direction: column;
+}
+
+.para-icon-text{
+  font-size: 0.7rem;
+}
+
+.free-icon{
+  border-radius: 5px;
+  font-size: 0.9rem;
+  padding: 8px;
+  width: 35px !important;
+  height: 22px !important;
+  background-color:rgba(30, 25, 25, 0.808);
+  color: white !important;
 }
 
 .two-btn-cart-buy{
@@ -238,6 +270,35 @@
     width: 100%;
     padding-top: 30px;
   }
+
+
+  .free-del-icon{
+    gap: 4px;
+  font-size: 0.5rem;
+  align-items: start;
+}
+
+.delivery-details{
+  gap:15px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.free-icon{
+  border-radius: 50%;
+  font-size: 0.8rem;
+  padding: 10px;
+  width: 18px !important;
+  height: 18px !important;
+  background-color:rgba(30, 25, 25, 0.808);
+  color: white !important;
+  text-align: left;
+}
+
+.free-icon span{
+ text-align: left !important;
+}
 
   .main-image img {
     width: 100%;

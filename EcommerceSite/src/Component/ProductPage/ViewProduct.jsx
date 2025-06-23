@@ -9,6 +9,9 @@ import { useAuth } from "../../ContextApiCart/LoginContextApi";
 import Loader from "../../Pages/LoaderFullpage";
 import { useCart } from "../../ContextApiCart/CartContextApi";
 import { useModal } from '../ModelContext/ModelContext';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
+import { FaMedal } from "react-icons/fa";
 
 
 const ProductPage = () => {
@@ -227,7 +230,7 @@ const handleAddToCart = async () => {
           {/* <span className="old-price">₹{selectedProduct.discount}</span> */}
         </div>
 
-        <p className="tax-info">Tax included. Shipping calculated at checkout.</p>
+
 
         <div className="size-section">
           <h4>Select Size</h4>
@@ -269,6 +272,13 @@ const handleAddToCart = async () => {
           <button className="quantity-btn" onClick={handleQuantityDecrease}>-</button>
           <div className="quantity-value">{quantity}</div>
           <button className="quantity-btn" onClick={handleQuantityIncrease}>+</button>
+        </div>
+
+      <div  className="delivery-details">
+         <p className="free-del-icon"> <LocalShippingIcon className="free-icon"/> <span>Enjoy free delivery on every product no extra charges</span></p>
+         <p  className="free-del-icon"><PublishedWithChangesIcon className="free-icon"/> <span>Return requests accepted within 2 days of delivery</span> </p>
+         <p  className="free-del-icon"> <FaMedal className="free-icon"/>100%Authentic(Guaranteed genuine products no replicas)</p>
+         <p></p>
         </div>
 
     <div  className="two-btn-cart-buy">
