@@ -14,8 +14,8 @@ const ReviewCard = ({ rating, title, content, image, name, location, date, likes
     <div className="User-review-card">
       <div className="rating-badge">
         <span>{rating}★</span>
-      </div>
-      <h4 className="review-title">{title}</h4>
+        <p className="review-title">{title}</p>
+  </div>
       <p className="review-content">{content}</p>
       {image && <img src={imageUrl} alt="review" className="review-img" />}
       <div className="reviewer-info">
