@@ -1,0 +1,101 @@
+/* Base bar */
+.Mobile-sort-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.Mobile-sort-section, .Mobile-filter-section {
+    position: relative;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.Mobile-applied-count {
+  background-color: #ccc;
+  border-radius: 50%;
+  padding: 2px 6px;
+  margin-left: 4px;
+}
+
+/* Overlays */
+.MobileView-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1900;
+}
+
+/* Filter Overlay */
+.Mobile-filter-overlay .Mobile-overlay-content {
+  background: #fff;
+  height: 100%;
+  padding: 20px;
+  width: 85%;
+  overflow-y: auto;
+}
+
+.Mobile-filter-overlay ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.Mobile-apply-btn {
+  background: orange;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  font-weight: bold;
+}
+
+.MobileFillter-close-btn {
+    top: 10px;
+    right: 38px;
+    position: absolute;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  width: auto;
+}
+
+/* Sort Overlay */
+.Mobile-sort-overlay .Mobile-sort-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 16px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  animation: slideUp 0.3s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  } to {
+    transform: translateY(0);
+  }
+}
+
+.Mobile-sort-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.Mobile-sort-content li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.Mobile-sort-content li.Mobile-active {
+  color: red;
+  font-weight: bold;
+}

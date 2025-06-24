@@ -12,6 +12,8 @@ import { useModal } from '../ModelContext/ModelContext';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import { FaMedal } from "react-icons/fa";
+import { FaShieldAlt } from "react-icons/fa";
+
 
 
 const ProductPage = () => {
@@ -275,12 +277,31 @@ const handleAddToCart = async () => {
         </div>
 
 
-    <div  className="delivery-details">
-         <p className="free-del-icon"> <LocalShippingIcon className="free-icon"/> <span>Enjoy free delivery on every product no extra charges</span></p>
-         <p  className="free-del-icon"><PublishedWithChangesIcon className="free-icon"/> <span>Return requests accepted within 2 days of delivery</span> </p>
-         <p  className="free-del-icon"> <FaMedal className="free-icon"/>100%Authentic(Guaranteed genuine products no replicas)</p>
-         <p></p>
-        </div>
+ <div className="delivery-details">
+ <div className="top-btn-delivery-icons">
+   <p className="free-del-icon">
+    <LocalShippingIcon className="free-icon" />
+    <span>Free delivery on all products</span>
+  </p>
+  <p className="free-del-icon">
+    <PublishedWithChangesIcon className="free-icon" />
+    <span>Return within 2 days of delivery</span>
+  </p>
+ </div>
+
+
+<div  className="top-btn-delivery-icons">
+    <p className="free-del-icon">
+    <FaMedal className="free-icon" />
+    <span>100% Genuine products</span>
+  </p>
+  <p className="free-del-icon">
+    <FaShieldAlt className="free-icon" />
+    <span>100% Purchase Protection</span>
+  </p>
+</div>
+</div>
+
 
     <div  className="two-btn-cart-buy">
         <button className="add-to-cart-btn" onClick={handleAddToCart}>
