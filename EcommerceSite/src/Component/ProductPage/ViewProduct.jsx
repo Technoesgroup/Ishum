@@ -274,7 +274,8 @@ const handleAddToCart = async () => {
           <button className="quantity-btn" onClick={handleQuantityIncrease}>+</button>
         </div>
 
-      <div  className="delivery-details">
+
+    <div  className="delivery-details">
          <p className="free-del-icon"> <LocalShippingIcon className="free-icon"/> <span>Enjoy free delivery on every product no extra charges</span></p>
          <p  className="free-del-icon"><PublishedWithChangesIcon className="free-icon"/> <span>Return requests accepted within 2 days of delivery</span> </p>
          <p  className="free-del-icon"> <FaMedal className="free-icon"/>100%Authentic(Guaranteed genuine products no replicas)</p>
@@ -289,6 +290,9 @@ const handleAddToCart = async () => {
           Buy Now
         </button>
     </div>
+
+
+  
     
       </div>
            <ToastContainer position="top-right" autoClose={3000} />

@@ -178,13 +178,14 @@
 }
 
 .add-to-cart-btn {
+  width: 80%;
   background-color:transparent;
   color: rgb(0, 0, 0);
   padding: 12px 20px;
   font-size: 16px;
   letter-spacing: 1.4px;
   border: 2px solid black;
-  border-radius: 6px;
+  border-radius: 32px;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -232,12 +233,16 @@
 }
 
 .two-btn-cart-buy{
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 30px;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .add-to-cart-btn:hover {
+
     color: white;
   background-color: #4a402b;
 }

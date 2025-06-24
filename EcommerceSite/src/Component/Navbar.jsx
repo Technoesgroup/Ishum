@@ -65,6 +65,9 @@ export default function Navbar() {
     navigate('/search');
   };
 
+  const handleHomebtn = () => {
+    navigate('/');
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -151,7 +154,7 @@ export default function Navbar() {
 
       </div>
         <div className="Ishum-logo-container">
-          <img src={logo} alt="Ishum Logo" className="Ishum-logo" />
+          <img src={logo} alt="Ishum Logo" className="Ishum-logo" onClick={()=> handleHomebtn()} />
         </div>
 
 
