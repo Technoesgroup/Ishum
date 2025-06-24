@@ -18,8 +18,9 @@ import Comp9 from "../Component/Landing/LandingCom9";
 import Comp10 from "../Component/Landing/LandingCom10";
 import Comp11 from "../Component/Landing/LandingCom11";
 
+import { TawkProvider } from "../Component/TawkContextApi/TawkContextApi";
+
 const Landing = () => {
-  const { } = useContext(TawkContext); // (optional: not required if you just want the script to load)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,23 +40,24 @@ const Landing = () => {
   }
 
   return (
-    <div className="Landing-Components">
-      {[Comp1, Comp2, Comp4, Comp5, Comp7,  Comp12, Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
-        (Component, index) => (
-          <motion.div
-            key={index}
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Component />
-          </motion.div>
-        )
-      )}
-    </div>
+    <TawkProvider>
+      <div className="Landing-Components">
+        {[Comp1, Comp2, Comp4, Comp5, Comp7, Comp12, Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
+          (Component, index) => (
+            <motion.div
+              key={index}
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <Component />
+            </motion.div>
+          )
+        )}
+      </div>
+    </TawkProvider>
   );
 };
-
 export default Landing;
 

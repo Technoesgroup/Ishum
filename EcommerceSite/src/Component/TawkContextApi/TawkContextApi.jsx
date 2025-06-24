@@ -1,5 +1,6 @@
 // src/context/TawkContext.js
 import { createContext, useEffect } from "react";
+import "../../App.css";
 
 export const TawkContext = createContext();
 

@@ -4,6 +4,7 @@ import ProductList from './BestSelllerProduct';
 import Banner from './BestSellerBanner';
 import { useFilter } from "../../Component/Context-API/Fillter-Context";
 import FilterSection from '../BestSeller/Btn-Comp-Bestseller/ReuseFillter';
+import SortFilterBar from "../FillterBarMobile/SortFillterBar";
 
 
 export default function Bestsellers() {
@@ -50,6 +51,7 @@ export default function Bestsellers() {
         </div>
       </div>
       <Banner />
+<div className="Mobile-SortFilterBar">      <SortFilterBar  /></div>
     </>
   );
 }

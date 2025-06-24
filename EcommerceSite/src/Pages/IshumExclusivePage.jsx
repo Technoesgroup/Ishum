@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 import Comp1 from "../Component/IshumExclusive/IshumExclusiveCom1";
 import Comp2 from "../Component/IshumExclusive/IshumExclusive";
-
-
-
-
 const Exclusive = () => {
 
   const fadeInUp = {

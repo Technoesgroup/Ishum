@@ -32,7 +32,6 @@ import { useAuth } from './ContextApiCart/LoginContextApi';
 import  ModalLayout  from './Component/ModelContext/ModelLayout';
 import { useModal } from './Component/ModelContext/ModelContext';
 import MetaPixel from './Component/FacebookPixel/FB-Pixel';
-import SortFilterBar from './Component/FillterBarMobile/SortFillterBar';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -137,7 +136,6 @@ useEffect(() => {
         <Route path="/TearmsServices" element={<TearmsServices />} />
       </Routes>
       <Footer />
-      <SortFilterBar />
       </>
   );
 }

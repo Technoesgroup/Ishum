@@ -7,6 +7,7 @@ import ProductList from '../../Component/BestSeller/BestSelllerProduct';
 import CategoryList from '../BestSeller/BestSellerCategory';
 import Banner from '../BestSeller/BestSellerBanner';
 import { useFilter } from "../Context-API/Fillter-Context";
+import SortFilterBar from "../FillterBarMobile/SortFillterBar";
 
 export default function Bestsellers() {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -134,6 +135,7 @@ const handleSelectSortOption = (option) => {
         </div>
       </div>
       <Banner />
+    <div  className="Mobile-SortFilterBar">  <SortFilterBar /></div>
     </>
   );
 }

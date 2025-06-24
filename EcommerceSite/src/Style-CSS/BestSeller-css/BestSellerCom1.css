@@ -342,6 +342,10 @@
     width: 42vw;
   }
 
+.Mobile-SortFilterBar{
+  display: none;
+}
+
  
 
    @media(max-width:768px){
@@ -351,6 +355,20 @@
       flex-direction: column;
       gap: 10px;
     }
+
+
+.Mobile-SortFilterBar{
+ position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1199;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+    
 
    .btn-sort{
     margin-bottom: 10px;
