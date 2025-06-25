@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CategoryList from '../BestSellerCategory';
-import { useFilter } from '../../Context-API/Fillter-Context'; // 👈 Import context
+import { useFilter } from '../../Context-API/Fillter-Context'; 
 
 const FilterSection = ({ openDropdown, handleToggle }) => {
   const { selected, handleSelection } = useFilter(); 
@@ -19,7 +19,7 @@ const FilterSection = ({ openDropdown, handleToggle }) => {
 
   const handleSelectSortOption = (option) => {
   setSelectedSort(option);
-  handleSelection("sortRange", option);  // ✅ Add this line
+  handleSelection("sortRange", option);
   setOpenSortDropdown(false);
 };
 
