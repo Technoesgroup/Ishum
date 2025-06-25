@@ -85,6 +85,116 @@
   }
 }
 
+
+.SortFillter-filter-overlay {
+  display: flex;
+  height: 100vh;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
+}
+
+.SortFillter-filter-sidebar {
+  width: 30%;
+  background-color: #f5f5f5;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.SortFillter-filter-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+
+.SortFillter-filter-sidebar-list li {
+  padding: 10px 5px;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+}
+
+.SortFillter-filter-selected {
+  font-weight: bold;
+  color: #007aff;
+}
+
+.SortFillter-count {
+  color: #007aff;
+  font-size: 12px;
+}
+
+.SortFillter-products-found {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 13px;
+  color: #555;
+}
+
+.SortFillter-filter-content {
+  width: 70%;
+  padding: 20px;
+  position: relative;
+}
+
+.SortFillter-breadcrumb {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.SortFillter-subcategory-list {
+  list-style: none;
+  padding: 0;
+}
+
+.SortFillter-subcategory-list li {
+  font-size: 14px;
+  padding: 8px 0;
+  color: #333;
+  cursor: pointer;
+}
+
+.SortFillter-apply-btn {
+  background-color: #ff6700;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.SortFillter-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 20px;
+}
+
+
+
 .Mobile-sort-content ul {
   list-style: none;
   padding: 0;
