@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from "react";
-import { TawkContext } from "../Component/TawkContextApi/TawkContextApi"; // adjust path as needed
 import { motion } from "framer-motion";
 import "./LandingPage.css";
 import Loader from "../Pages/LoaderFullpage";
@@ -18,7 +17,7 @@ import Comp9 from "../Component/Landing/LandingCom9";
 import Comp10 from "../Component/Landing/LandingCom10";
 import Comp11 from "../Component/Landing/LandingCom11";
 
-import { TawkProvider } from "../Component/TawkContextApi/TawkContextApi";
+
 
 const Landing = () => {
   const [loading, setLoading] = useState(true);
@@ -40,7 +39,7 @@ const Landing = () => {
   }
 
   return (
-    <TawkProvider>
+
       <div className="Landing-Components">
         {[Comp1, Comp2, Comp4, Comp5, Comp7, Comp12, Comp10, Comp6, Comp9, Comp8, Comp11, Comp3].map(
           (Component, index) => (
@@ -56,7 +55,7 @@ const Landing = () => {
           )
         )}
       </div>
-    </TawkProvider>
+
   );
 };
 export default Landing;
