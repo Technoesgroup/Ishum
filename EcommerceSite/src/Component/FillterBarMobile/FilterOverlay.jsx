@@ -92,7 +92,7 @@ const FilterOverlay = ({ onClose }) => {
 )}
 
         {activeFilter === 'Price' && (
-          <div className="AllPrice-of-bestseller">
+          <div className="AllPrice-of-bestseller-fillter">
             <p className="firstparagraph">
               Price <KeyboardArrowRightIcon />
             </p>
