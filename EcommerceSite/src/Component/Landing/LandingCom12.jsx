@@ -43,7 +43,7 @@ const TrendingVideos = () => {
       <h2>Trending Looks To Watch</h2>
 
       <div className="carousel">
-        <button className="arrow left" onClick={prevSlide}>
+        <button className="tech-arrow left" onClick={prevSlide}>
           &#10094;
         </button>
 
@@ -56,7 +56,7 @@ const TrendingVideos = () => {
             <div
               key={index}
               className={`carousel-item ${
-                isActive ? "active" : isPrev || isNext ? "side" : "hidden"
+                isActive ? "video-active" : isPrev || isNext ? "side" : "hidden"
               }`}
               onClick={() => isActive && window.open(video.link, "_blank")}
             >
@@ -83,7 +83,7 @@ const TrendingVideos = () => {
           );
         })}
 
-        <button className="arrow right" onClick={nextSlide}>
+        <button className="tech-arrow right" onClick={nextSlide}>
           &#10095;
         </button>
       </div>

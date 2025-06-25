@@ -1,5 +1,6 @@
 @import url('../Poppins-Font.css');
 
+
 .carousel-container {
   text-align: center;
   margin: auto;
@@ -22,24 +23,25 @@
   justify-content: center;
   position: relative;
   flex-wrap: nowrap;
-  overflow: hidden;
-    scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .carousel-item {
   width: 280px;
-    flex-shrink: 0;
+  flex-shrink: 0;
   height: 500px;
   margin: 0 2px;
   transition: transform 0.4s ease, opacity 0.4s ease;
   overflow: hidden;
   border-radius: 20px;
   cursor: pointer;
-    scroll-snap-align: center;
-  flex-shrink: 0;
+  scroll-snap-align: center;
+  position: relative;
 }
 
-.carousel-item.active {
+.carousel-item.video-active {
   transform: scale(1);
   z-index: 2;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -55,7 +57,7 @@
   display: none;
 }
 
-.arrow {
+.tech-arrow {
   background: white;
   border: none;
   font-size: 24px;
@@ -67,16 +69,16 @@
   transform: translateY(-50%);
 }
 
-.arrow.left {
+.tech-arrow.left {
   left: 0;
 }
 
-.arrow.right {
+.tech-arrow.right {
   right: 0;
 }
 
 .video-player {
-    position: relative;
+  position: relative;
   border-radius: 15px;
 }
 
@@ -94,54 +96,36 @@
   z-index: 2;
 }
 
-.carousel-item {
-  position: relative; /* necessary to position mute icon inside */
-}
-
-
-/* ----------------- Mobile Responsive ----------------- */
-@media screen and (max-width: 768px) {
+/* ------------------ Mobile Responsive ------------------ */
+@media (max-width: 768px) {
   .carousel-container {
-    padding: 10px;
+    padding: 5px;
   }
 
   .carousel-container h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     padding: 10px 0;
   }
 
   .carousel {
-    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 10px;
   }
 
   .carousel-item {
-    width: 220px;
+    width: 240px;
     height: 400px;
-    margin: 0 5px;
-    border-radius: 12px;
+    margin-right: 10px;
+    transform: scale(1) !important; /* Always full size in mobile */
+    opacity: 1 !important;
   }
 
-  .carousel-item.active {
-    transform: scale(1);
+  .tech-arrow {
+    display: none;
   }
 
-  .arrow {
-    font-size: 20px;
-    padding: 6px;
+  .mute-toggle-icon {
+    font-size: 0.85rem;
+    padding: 4px 6px;
   }
-
-    .carousel-item.side {
-    margin: 0 10px;
-   transform: scale(0.8);
-    opacity: 0.4;
-  }
-
-.carousel-item.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.5);
-  visibility: hidden;
 }
-
-}
-
