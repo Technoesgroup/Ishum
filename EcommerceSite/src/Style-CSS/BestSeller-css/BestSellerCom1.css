@@ -3,7 +3,7 @@
 
 .bestsellers-container {
   width: auto;
-    padding: 4vw;
+    padding: 20px 65px;
   }
   
   .bestsellers-title {
@@ -356,6 +356,10 @@
       gap: 10px;
     }
 
+
+    .bestsellers-container{
+      padding: 20px;
+    }
 
 .Mobile-SortFilterBar{
  position: fixed;

@@ -49,14 +49,14 @@ const FilterOverlay = ({ onClose }) => {
 
           <li>Size</li>
           <li>Customer Ratings</li>
-  <li 
+  {/* <li 
   className={activeFilter === 'Availability' ? "SortFillter-filter-selected" : ""}
   onClick={() => setActiveFilter('Availability')}
 >
   Availability
-</li>
+</li> */}
 
-          <li>Discount <span className="SortFillter-count">1</span></li>
+          {/* <li>Discount <span className="SortFillter-count">1</span></li> */}
         </ul>
       </div>
 

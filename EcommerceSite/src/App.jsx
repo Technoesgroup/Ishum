@@ -32,6 +32,7 @@ import { useAuth } from './ContextApiCart/LoginContextApi';
 import  ModalLayout  from './Component/ModelContext/ModelLayout';
 import { useModal } from './Component/ModelContext/ModelContext';
 import MetaPixel from './Component/FacebookPixel/FB-Pixel';
+import SwipeWrapper from "./Component/Swipper";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -110,6 +111,7 @@ useEffect(() => {
       <ScrollToTop />
       <Navbar />
       <ModalLayout />
+      <SwipeWrapper />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -135,6 +137,7 @@ useEffect(() => {
         <Route path="/PaymentServices" element={<PaymentServices />} />
         <Route path="/TearmsServices" element={<TearmsServices />} />
       </Routes>
+           <SwipeWrapper />
       <Footer />
       </>
   );

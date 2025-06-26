@@ -224,7 +224,7 @@ if (selected.sortRange) {
             {displayedProducts.map((product ,index) => (
               <div
                 key={product._id}
-                className="bestsellers-product-card"
+                className="bestsellers-product-cards"
                 onClick={(e) => handleProductClick(product, e)}
                  onMouseEnter={() => setHoveredIndex(index)}
                  onMouseLeave={() => setHoveredIndex(null)}
@@ -265,7 +265,7 @@ if (selected.sortRange) {
 
                 <div className="bestsellers-product-details">
                   <h3 className="bestsellers-product-name">{product.name}</h3>
-                  <div className="Original-Discount-Price">
+                  <div className="Bestsell-Original-Discount-Price">
                   
                     <p className="bestsellers-product-price">₹{product.price}</p>
                   </div>
