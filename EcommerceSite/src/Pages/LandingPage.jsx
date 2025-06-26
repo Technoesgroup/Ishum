@@ -2,6 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./LandingPage.css";
 import Loader from "../Pages/LoaderFullpage";
+import BottomNavbar from "../Component/Navbarbottom"; // Adjust the path if needed
+
 
 // Import components
 import Comp1 from "../Component/Landing/LandingCom1";
@@ -54,6 +56,8 @@ const Landing = () => {
             </motion.div>
           )
         )}
+
+            <BottomNavbar />
       </div>
 
   );
