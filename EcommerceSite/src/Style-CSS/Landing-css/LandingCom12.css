@@ -1,131 +1,124 @@
-@import url('../Poppins-Font.css');
-
-
-.carousel-container {
+.ishum-stack-container {
+  max-width: 100%;
   text-align: center;
-  margin: auto;
-  max-width: 1420px;
-  padding: 20px;
+  padding: 20px 10px;
 }
 
-.carousel-container h2 {
+.ishum-stack-container h2 {
   color: #4B3D1A;
   font-family: "PoppinsRegular";
   font-size: 2rem;
-  margin-bottom: 30px;
-  padding: 15px 0;
-  letter-spacing: 1.6px;
+  margin-bottom: 20px;
 }
 
-.carousel {
+.ishum-stack-wrapper {
+  position: relative;
+  width: 80%;
+  height: 450px;
+    margin:  0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
 }
 
-.carousel-item {
-  width: 280px;
-  flex-shrink: 0;
-  height: 500px;
-  margin: 0 2px;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  overflow: hidden;
+.ishum-stack-card {
+  position: absolute;
+  top: 0;
+  right: 40%;
+  width:270px;
+    margin:  0 auto;
+  height: auto;
   border-radius: 20px;
-  cursor: pointer;
-  scroll-snap-align: center;
-  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  background-color: transparent;
 }
 
-.carousel-item.video-active {
-  transform: scale(1);
-  z-index: 2;
+.ishum-stack-card.ishum-active {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.carousel-item.side {
-  transform: scale(0.85);
-  opacity: 0.5;
-  z-index: 1;
-}
-
-.carousel-item.hidden {
-  display: none;
-}
-
-.tech-arrow {
-  background: white;
-  border: none;
-  font-size: 24px;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 3;
+.ishum-stack-controls {
+  width: 100%;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 10;
 }
 
-.tech-arrow.left {
-  left: 0;
+
+
+.ishum-stack-controls button {
+  padding: 12px 16px;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.tech-arrow.right {
-  right: 0;
+.ishum-stack-controls button:hover {
+  background-color: #f0f0f0;
 }
 
-.video-player {
-  position: relative;
-  border-radius: 15px;
-}
-
-.mute-toggle-icon {
+.ishum-mute-toggle-icon {
   position: absolute;
   top: 15px;
   right: 15px;
-  color: rgb(14, 14, 14);
+  color: black;
   font-size: 1rem;
   padding: 5px 8px;
-  background-color: rgba(229, 229, 229, 0.893);
+  background-color: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 6px;
   cursor: pointer;
   z-index: 2;
 }
 
-/* ------------------ Mobile Responsive ------------------ */
-@media (max-width: 768px) {
-  .carousel-container {
-    padding: 5px;
+
+@media (max-width: 600px) {
+  .ishum-stack-container h2 {
+    font-size: 1.3rem;
   }
 
-  .carousel-container h2 {
-    font-size: 1.5rem;
-    padding: 10px 0;
+  .ishum-stack-wrapper {
+    width: 95%;
+    height: 440px;
+    padding: 0 10px;
   }
 
-  .carousel {
-    justify-content: flex-start;
-    padding-left: 10px;
+  .ishum-stack-card {
+    /* right: unset; */
+    left: 7%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: auto;
+    margin: auto;
   }
 
-  .carousel-item {
-    width: 240px;
-    height: 400px;
-    margin-right: 10px;
-    transform: scale(1) !important; /* Always full size in mobile */
-    opacity: 1 !important;
+  .ishum-stack-controls {
+    left: 48%;
+    bottom: 45%;
+    padding: 0;
+    margin: auto;
+    justify-content: space-between;
   }
 
-  .tech-arrow {
-    display: none;
+  .ishum-stack-controls button {
+    font-size: 1.4rem;
+    padding: 8px 10px;
   }
 
-  .mute-toggle-icon {
-    font-size: 0.85rem;
+  .ishum-mute-toggle-icon {
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
     padding: 4px 6px;
   }
 }
