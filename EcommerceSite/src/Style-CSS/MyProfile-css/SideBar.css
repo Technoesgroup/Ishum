@@ -1,13 +1,13 @@
 .User-profile-sidebar {
-    width: 320px;
+    width: 300px;
     border-right: 1px solid #eee;
-    padding: 20px;
+    padding: 10px;
   }
   
   .User-profile-sidebar-item {
-    padding: 10px;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    padding:12px  1px;
+    font-size: 1rem;
+    margin-bottom: 8px;
     cursor: pointer;
     color: #555;
     transition: 0.3s;
@@ -21,7 +21,7 @@
 
   @media (max-width: 768px) {
   .User-profile-sidebar {
-    width: 70%;
+    width: 40%;
     padding: 2px;
   }
 

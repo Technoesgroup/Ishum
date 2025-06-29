@@ -33,6 +33,7 @@ import  ModalLayout  from './Component/ModelContext/ModelLayout';
 import { useModal } from './Component/ModelContext/ModelContext';
 import MetaPixel from './Component/FacebookPixel/FB-Pixel';
 import SwipeWrapper from "./Component/Swipper";
+import Whislist from './Component/My-Profile/Whislist';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -136,6 +137,7 @@ useEffect(() => {
         <Route path="/ReturnPolicy" element={<ReturnPolicy />} />
         <Route path="/PaymentServices" element={<PaymentServices />} />
         <Route path="/TearmsServices" element={<TearmsServices />} />
+         <Route path="/Wishlist" element={<Whislist />} />
       </Routes>
            <SwipeWrapper />
       <Footer />

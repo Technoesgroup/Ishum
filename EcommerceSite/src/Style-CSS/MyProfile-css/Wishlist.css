@@ -1,10 +1,8 @@
 /* Wishlist page container */
 .wishlist-page {
-    width: auto;
+  width: auto;
   margin: 20px auto;
-
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
 }
 
 /* Heading */
@@ -23,20 +21,22 @@
   color: #666;
 }
 
-/* Wishlist list */
+/* Wishlist grid list */
 .wishlist-page ul {
-  list-style: none;
+  display: grid;
+grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  list-style: none;
+  justify-items: center;
 }
 
 /* Each wishlist item card */
 .wishlist-page li {
-  width: 150px;
+  width: 100%;
+  max-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,6 +44,7 @@
   cursor: pointer;
   padding: 10px;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .wishlist-page li:hover {
@@ -53,7 +54,6 @@
 /* Product image */
 .wishlist-page img {
   width: 100%;
-  max-width: 200px;
   height: auto;
   object-fit: contain;
 }
@@ -74,12 +74,12 @@
 /* Price styling */
 .wishlist-page p {
   font-size: 1rem;
-  color: #e63946; /* nice red color for price */
+  color: #e63946;
   font-weight: 700;
   margin: 0;
 }
 
-/* Responsive styles for tablets and mobiles */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .wishlist-page {
     margin: 20px 15px;
@@ -91,11 +91,7 @@
   }
 
   .wishlist-page ul {
-    gap: 15px;
-  }
-
-  .wishlist-page li {
-    width: 45%; /* 2 items per row on tablets */
+grid-template-columns: repeat(2, 1fr);    gap: 15px;
   }
 }
 
@@ -106,16 +102,15 @@
   }
 
   .wishlist-page h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .wishlist-page ul {
-    flex-direction: column;
-    gap: 12px;
+grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
   }
 
   .wishlist-page li {
-    width: 100%; /* single column on mobiles */
     padding: 12px;
   }
 
@@ -124,10 +119,11 @@
   }
 
   .wishlist-page h4 {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
   }
 
   .wishlist-page p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
+

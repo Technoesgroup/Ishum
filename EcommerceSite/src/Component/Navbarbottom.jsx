@@ -24,7 +24,7 @@ const BottomNavbar = () => {
         <span>Ishum Exclusive</span>
       </Link>
 
-      <Link to="/whislist" className="navbot-item">
+      <Link to="/Wishlist" className="navbot-item">
         <FaHeart className="navbot-icon" />
         <span>Wishlist</span>
       </Link>
