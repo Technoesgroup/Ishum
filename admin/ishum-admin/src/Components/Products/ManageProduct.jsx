@@ -11,16 +11,16 @@ const ProductList = () => {
     navigate(`/edit-product/${id}`);
   };
 
-  const handleRemove = async (id) => {
-    try {
-      await axios.delete(`http://localhost:4000/api/products/delete/${id}`);
-      const updated = products.filter((p) => p._id !== id);
-      setProducts(updated);
-    } catch (error) {
-      console.error("Failed to delete product:", error);
-      alert("Failed to remove product");
-    }
-  };
+const handleRemove = async (id) => {
+  try {
+    await axios.delete(`http://localhost:4000/api/products/delete/${id}`);
+    // Update your UI state here (e.g. remove product from state list)
+    console.log("Product deleted successfully");
+  } catch (error) {
+    console.error("Failed to delete product:", error);
+  }
+};
+
 
   useEffect(() => {
     const fetchProducts = async () => {

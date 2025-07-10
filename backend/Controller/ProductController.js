@@ -56,6 +56,7 @@ const addProduct = async (req, res) => {
     const uniqueSuffix = new mongoose.Types.ObjectId().toString().slice(-6);
     const slug = `${slugBase}-${uniqueSuffix}`;
    
+
     const product = new Product({
       name,
       slug,
@@ -108,8 +109,6 @@ const getProducts = async (req, res) => {
   try {
     const filters = {};
 
-    
-
     if (req.query.isBestseller) filters.isBestseller = req.query.isBestseller === "true";
     if (req.query.isExclusive) filters.isExclusive = req.query.isExclusive === "true";
     if (req.query.isIshumStore) filters.isIshumStore = req.query.isIshumStore === "true";
@@ -148,7 +147,6 @@ const getProducts = async (req, res) => {
 
     const products = await Product.find(filters).populate("collectionName");
     // console.log("Fetched products count:", products.length);
-
     res.status(200).json({ success: true, products });
   } catch (error) {
     console.error("Error in getProducts:", error);
@@ -174,7 +172,6 @@ const getProductById = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-
     const {
       name,
       category,
@@ -262,22 +259,19 @@ const updateProduct = async (req, res) => {
   }
 };
 
+
 const getSimilarProducts = async (req, res) => {
   try {
-    const { subcategory, name } = req.query; // ❌ category removed
-
+    const { subcategory, name } = req.query; 
     if (!subcategory || !name) {
       return res.status(400).json({ error: "Missing parameters" });
     }
-
     const query = {
       subcategory,
-      name: { $ne: name } // Exclude the current product
+      name: { $ne: name } 
     };
-
     const products = await Product.find(query).limit(8);
     res.status(200).json({ products });
-
   } catch (error) {
     console.error("Error fetching similar products:", error);
     res.status(500).json({ error: "Server error" });
@@ -286,20 +280,36 @@ const getSimilarProducts = async (req, res) => {
 
 
 
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check for valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: "Invalid product ID" });
+    }
+
+    const deletedProduct = await Product.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Product deleted successfully", deletedProduct });
+  } catch (error) {
+    console.error("Error deleting product:", error.message);
+    res.status(500).json({ success: false, message: "Failed to delete product", error: error.message });
+  }
+};
 
 const searchProducts = async (req, res) => {
   const { q } = req.query;
-
   // If no query string, return an empty array
   if (!q) {
     return res.status(200).json([]);
   }
-
   try {
-  
     const regex = new RegExp(q, 'i');
-
-    // Querying the products collection with a case-insensitive search on multiple fields
     const products = await Product.find({
       $or: [
         { name: { $regex: regex } },
@@ -340,6 +350,7 @@ module.exports = {
   getProductBySlug,
   updateProduct,
   getProductById,
+  deleteProduct,
   getSimilarProducts
 };
 

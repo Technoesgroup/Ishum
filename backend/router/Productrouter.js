@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { upload, compressImages } = require("../MiddleWare/MulterMiddleWare");
-const { addProduct, getProducts,getProductById, searchProducts, getProductBySlug, getSimilarProducts, updateProduct} = require("../Controller/ProductController");
+const { addProduct, getProducts,getProductById, searchProducts, getProductBySlug, getSimilarProducts, updateProduct, deleteProduct} = require("../Controller/ProductController");
 
 // ✅ POST route for adding product with file upload middleware
 router.post("/add", upload, compressImages, addProduct);
@@ -10,6 +10,8 @@ router.post("/add", upload, compressImages, addProduct);
 router.get("/get-product", getProducts);
 
 router.get('/search', searchProducts);
+
+router.get('/delete/:id', deleteProduct);
 
 router.put("/update/:id", upload, updateProduct);
 
