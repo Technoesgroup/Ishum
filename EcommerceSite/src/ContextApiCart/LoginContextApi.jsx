@@ -58,11 +58,6 @@ useEffect(() => {
   }
 }, [token]);
 
-
-
-
-
-
   useEffect(() => {
     setIsLoggedIn(!!token);
   }, [token]);
@@ -71,6 +66,8 @@ useEffect(() => {
     setUser(null);
     setToken(null);
     setIsLoggedIn(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   return (
