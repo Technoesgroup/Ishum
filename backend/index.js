@@ -26,6 +26,7 @@ const allowedOrigins = [
   'https://ishum.in',
   'http://localhost:5173',
   'http://localhost:5174',
+  'https://ishum-frontend.onrender.com',
 ];
 
 app.use(cors({
