@@ -29,7 +29,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
   useEffect(() => {
     const fetchNoorEditProducts = async () => {
       try {
-        const res = await axios.get(`${baseURL}/api/products/get-product`, {
+        const res = await axios.get(`product.image`, {
           params: {
             isIshumStore: true,
             collectionName: collectionName
@@ -95,19 +95,13 @@ const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
   src={
     hoveredIndex === index &&
     product.thumbnails &&
-    product.thumbnails.length > 1
-      ? `${baseURL}/uploads/${
-          product.thumbnails[1] || product.thumbnails[2] || product.thumbnails[3] || product.thumbnails[0]
-        }`
-      : `${baseURL}/uploads/${product.image}`
+    product.thumbnails.length > 0
+      ? product.thumbnails[0] // direct URL
+      : product.image // direct URL
   }
   alt={product.name}
   onError={(e) => (e.target.src = "/fallback-image.png")}
 />
-
-
-
-
 
 
       <div className="LandingpageComp-hover-icons">

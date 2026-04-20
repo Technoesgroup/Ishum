@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { upload, compressImages } = require("../MiddleWare/Multer-2");
+const { uploadSingle } = require("../MiddleWare/MulterMiddleWare");
 const collection = require("../Controller/CollectionController");
 
 router.get("/get-collections", collection.getCollections);
-router.post("/add-collections", upload.single("image"),compressImages, collection.addCollection);
-router.put('/edit/:id', upload.single('image'), collection.updateCollection);
+router.post("/add-collections", uploadSingle, collection.addCollection);
+router.put('/edit/:id', uploadSingle, collection.updateCollection);
 
 module.exports = router;

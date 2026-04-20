@@ -201,20 +201,23 @@ const handleAddToCart = async () => {
       <div className="product-gallery">
       <div className="thumbnail-images">
   {(colorThumbnails.length > 0 ? colorThumbnails : thumbnails).map((img, idx) => (
-    <img
-    loading="lazy"
-      key={idx}
-      src={`${baseURL}/uploads/${img}`}
-      alt={`Thumbnail ${idx}`}
-      onClick={() => setMainImage(img)}
-      className="thumbnail-img"
-    />
+<img
+  loading="lazy"
+  src={img}
+  alt={`Thumbnail ${idx}`}
+  className="thumbnail-img"
+  onClick={() => setMainImage(img)}
+/>
+      
   ))}
 </div>
 
         <div className="main-image">
-
-        <img  loading="lazy" src={`${baseURL}/uploads/${mainImage || selectedProduct.image}`} alt="product image" />
+<img
+  loading="lazy"
+  src={mainImage || selectedProduct.image}
+  alt="product"
+/>
 
         </div>
 
@@ -258,12 +261,11 @@ const handleAddToCart = async () => {
         key={idx}
         onClick={() => handleColorSelect(colorName, images)}
       >
-        <img
-           loading="lazy"
-          src={`${baseURL}/uploads/${images[0]}`}
-          alt={colorName}
-          className="color-img"
-        />
+      <img
+  loading="lazy"
+  src={images[0]}
+  alt={colorName}
+/>
         <p>{colorName}</p>
       </div>
     ))}

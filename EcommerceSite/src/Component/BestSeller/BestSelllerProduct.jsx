@@ -229,17 +229,15 @@ if (selected.sortRange) {
                  onMouseEnter={() => setHoveredIndex(index)}
                  onMouseLeave={() => setHoveredIndex(null)}
               >
-                <img
+   <img
   className="bestsellers-product-image"
   loading="lazy"
   src={
     hoveredIndex === index &&
     product.thumbnails &&
-    product.thumbnails.length > 1
-      ? `${baseURL}/uploads/${
-          product.thumbnails[1] || product.thumbnails[2] || product.thumbnails[3] || product.thumbnails[0]
-        }`
-      : `${baseURL}/uploads/${product.image}`
+    product.thumbnails.length > 0
+      ? product.thumbnails[0]
+      : product.image
   }
   alt={product.name}
   onError={(e) => (e.target.src = "/fallback-image.png")}

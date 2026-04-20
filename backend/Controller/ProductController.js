@@ -1,5 +1,6 @@
 const Product = require("../models/ProductSchema");
 const Collection = require("../models/CollectionSchema1");
+const uploadToCloudinary = require("../Until/CloudinaryUpload"); // path apne hisaab se
 const mongoose = require('mongoose'); 
 const slugify = require("slugify");
 
@@ -22,15 +23,30 @@ const addProduct = async (req, res) => {
     } = req.body;
 
     
-    const image = req.files?.['image']?.[0]?.filename || "";
+   let image = "";
+
+if (req.files?.['image']?.[0]) {
+  const result = await uploadToCloudinary(
+    req.files['image'][0].buffer,
+    "products/main"
+  );
+  image = result.secure_url;
+}
 
    
-    const thumbnails = req.files?.['thumbnails']?.map(file => file.filename) || [];
+ const thumbnails = [];
+
+if (req.files?.['thumbnails']) {
+  for (const file of req.files['thumbnails']) {
+    const result = await uploadToCloudinary(file.buffer, "products/thumbs");
+    thumbnails.push(result.secure_url);
+  }
+}
 
   
     const colorImages = [];
-    const uploadedColorImages = req.files?.['colorImages'] || [];
-    const colorNames = req.body?.['colorNames'] || [];
+const uploadedColorImages = req.files?.['colorImages'] || [];
+const colorNames = req.body?.['colorNames'] || [];
 
     if (Array.isArray(colorNames) && colorNames.length !== uploadedColorImages.length) {
       return res.status(400).json({ 
@@ -39,18 +55,16 @@ const addProduct = async (req, res) => {
       });
     }
     
-    
-    for (let i = 0; i < uploadedColorImages.length; i++) {
-      const file = uploadedColorImages[i];
-      const colorName = Array.isArray(colorNames) ? colorNames[i] : colorNames;
-    
-      if (file && colorName) {
-        colorImages.push({
-          image: file.filename,
-          colorName: colorName,
-        });
-      }
-    }
+for (let i = 0; i < uploadedColorImages.length; i++) {
+  const file = uploadedColorImages[i];
+
+  const result = await uploadToCloudinary(file.buffer, "products/colors");
+
+  colorImages.push({
+    image: result.secure_url,
+    colorName: Array.isArray(colorNames) ? colorNames[i] : colorNames,
+  });
+}
 
         const slugBase = slugify(name, { lower: true, strict: true });
     const uniqueSuffix = new mongoose.Types.ObjectId().toString().slice(-6);
